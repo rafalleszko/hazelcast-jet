@@ -53,6 +53,7 @@
             <groupId>com.hazelcast.jet</groupId>
             <artifactId>hazelcast-jet-core</artifactId>
             <version>${project.parent.version}</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
@@ -61,12 +62,17 @@
             <version>${hazelcast.version}</version>
             <classifier>jar-with-dependencies</classifier>
         </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${jackson.jr.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>com.hazelcast.jet</groupId>
             <artifactId>hazelcast-jet-avro</artifactId>
             <version>${project.parent.version}</version>
-            <optional>true</optional>
+            <scope>provided</scope>
         </dependency>
 
         <!-- KAFKA -->
@@ -74,13 +80,13 @@
             <groupId>com.hazelcast.jet</groupId>
             <artifactId>hazelcast-jet-kafka</artifactId>
             <version>${project.parent.version}</version>
-            <optional>true</optional>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.kafka</groupId>
             <artifactId>kafka_${scala.version}</artifactId>
             <version>${kafka.version}</version>
-            <optional>true</optional>
+            <scope>provided</scope>
             <exclusions>
                 <exclusion>
                     <groupId>org.slf4j</groupId>
@@ -92,33 +98,33 @@
             <groupId>org.apache.kafka</groupId>
             <artifactId>kafka-clients</artifactId>
             <version>${kafka.version}</version>
-            <optional>true</optional>
+            <scope>provided</scope>
         </dependency>
         <!-- Json -->
         <dependency>
             <groupId>org.apache.kafka</groupId>
             <artifactId>connect-json</artifactId>
             <version>${kafka.version}</version>
-            <optional>true</optional>
+            <scope>provided</scope>
         </dependency>
         <!-- Avro -->
         <dependency>
             <groupId>io.confluent</groupId>
             <artifactId>kafka-schema-registry</artifactId>
             <version>${confluent.version}</version>
-            <optional>true</optional>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>io.confluent</groupId>
             <artifactId>kafka-avro-serializer</artifactId>
             <version>${confluent.version}</version>
-            <optional>true</optional>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>1.2.17</version>
-            <optional>true</optional>
+            <scope>provided</scope>
         </dependency>
 
         <!-- FILE --> <!-- TODO: cleanup after File works -->
@@ -126,41 +132,38 @@
             <groupId>org.apache.avro</groupId>
             <artifactId>avro-mapred</artifactId>
             <version>${avro.version}</version>
-            <optional>true</optional>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.parquet</groupId>
             <artifactId>parquet-avro</artifactId>
             <version>${parquet.version}</version>
-            <optional>true</optional>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>com.hazelcast.jet</groupId>
             <artifactId>hazelcast-jet-hadoop</artifactId>
             <version>${project.parent.version}</version>
-            <optional>true</optional>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-hdfs</artifactId>
             <version>${hadoop.version}</version>
             <scope>provided</scope>
-            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-common</artifactId>
             <version>${hadoop.version}</version>
             <scope>provided</scope>
-            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-mapreduce-client-core</artifactId>
             <version>${hadoop.version}</version>
             <scope>provided</scope>
-            <optional>true</optional>
         </dependency>
         <!-- Amazon S3 -->
         <dependency>
@@ -168,14 +171,12 @@
             <artifactId>hadoop-aws</artifactId>
             <version>${hadoop.version}</version>
             <scope>provided</scope>
-            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-client</artifactId>
             <version>${hadoop.version}</version>
             <scope>provided</scope>
-            <optional>true</optional>
         </dependency>
         <!-- Google Cloud Storage -->
         <dependency>
@@ -183,7 +184,6 @@
             <artifactId>gcs-connector</artifactId>
             <version>hadoop2-2.0.0</version>
             <scope>provided</scope>
-            <optional>true</optional>
         </dependency>
         <!-- Azure Cloud Storage -->
         <dependency>
@@ -191,7 +191,6 @@
             <artifactId>hadoop-azure</artifactId>
             <version>${hadoop.version}</version>
             <scope>provided</scope>
-            <optional>true</optional>
         </dependency>
         <!-- Azure Data Lake -->
         <dependency>
@@ -199,7 +198,6 @@
             <artifactId>hadoop-azure-datalake</artifactId>
             <version>${hadoop.version}</version>
             <scope>provided</scope>
-            <optional>true</optional>
         </dependency>
 
         <!-- TEST -->
@@ -264,57 +262,6 @@
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <createSourcesJar>true</createSourcesJar>
-                    <shadeSourcesContent>true</shadeSourcesContent>
-                    <createDependencyReducedPom>true</createDependencyReducedPom>
-                    <artifactSet>
-                        <includes>
-                            <include>com.hazelcast.jet:hazelcast-jet-sql</include>
-                            <include>com.hazelcast:hazelcast-sql</include>
-                        </includes>
-                    </artifactSet>
-                    <relocations>
-                        <relocation>
-                            <pattern>com.</pattern>
-                            <shadedPattern>${relocation.root}.com.</shadedPattern>
-                            <excludes>
-                                <exclude>com.hazelcast.**</exclude>
-                            </excludes>
-                        </relocation>
-                        <relocation>
-                            <pattern>org.</pattern>
-                            <shadedPattern>${relocation.root}.org.</shadedPattern>
-                        </relocation>
-                    </relocations>
-                    <transformers>
-                        <transformer implementation="org.apache.maven.plugins.shade.resource.ApacheLicenseResourceTransformer"/>
-                        <transformer implementation="org.apache.maven.plugins.shade.resource.ApacheNoticeResourceTransformer"/>
-                        <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
-                    </transformers>
-                    <filters>
-                        <filter>
-                            <artifact>com.hazelcast:hazelcast-sql</artifact>
-                            <excludes>
-                                <exclude>codegen/**</exclude>
-                                <!-- Replace with the one from src/main/resources for correct reflection in runtime. -->
-                                <exclude>org.codehaus.commons.compiler.properties</exclude>
-                            </excludes>
-                        </filter>
-                    </filters>
-                </configuration>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
@@ -427,6 +374,25 @@
                             <lookAhead>1</lookAhead>
                             <isStatic>false</isStatic>
                             <outputDirectory>${project.build.directory}/generated-sources/java/</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>${maven.assembly.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>distro-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <descriptors>
+                                <descriptor>src/main/resources/assemblies/jar-with-dependencies.xml</descriptor>
+                            </descriptors>
+                            <tarLongFileMode>posix</tarLongFileMode>
                         </configuration>
                     </execution>
                 </executions>
