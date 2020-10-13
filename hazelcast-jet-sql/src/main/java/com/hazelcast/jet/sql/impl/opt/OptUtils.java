@@ -122,11 +122,7 @@ public final class OptUtils {
     }
 
     public static HazelcastTable extractHazelcastTable(RelNode rel) {
-        HazelcastTable table = rel.getTable().unwrap(HazelcastTable.class);
-
-        assert table != null;
-
-        return table;
+        return rel.getTable().unwrap(HazelcastTable.class);
     }
 
     public static Collection<RelNode> extractPhysicalRelsFromSubset(RelNode node) {

@@ -25,6 +25,7 @@ import org.apache.calcite.sql.SqlIdentifier;
 import org.apache.calcite.sql.SqlInsert;
 import org.apache.calcite.sql.SqlKind;
 import org.apache.calcite.sql.SqlNode;
+import org.apache.calcite.sql.SqlSelect;
 import org.apache.calcite.sql.util.SqlBasicVisitor;
 import org.apache.calcite.sql.validate.SqlConformance;
 import org.apache.calcite.sql.validate.SqlValidatorCatalogReader;
@@ -32,6 +33,7 @@ import org.apache.calcite.sql.validate.SqlValidatorTable;
 
 import static com.hazelcast.jet.sql.impl.connector.SqlConnectorUtil.getJetSqlConnector;
 import static com.hazelcast.jet.sql.impl.validate.ValidatorResource.RESOURCE;
+import static org.apache.calcite.sql.SqlKind.AGGREGATE;
 
 public class JetSqlValidator extends HazelcastSqlValidator {
 
@@ -59,18 +61,42 @@ public class JetSqlValidator extends HazelcastSqlValidator {
         SqlNode validated = super.validate(topNode);
 
         if (validated instanceof SqlInsert) {
-            if (!isCreateJob && isInsertFromStreamingSource((SqlInsert) validated)) {
+            SqlInsert insert = ((SqlInsert) validated);
+            if (!isCreateJob && containsStreamingSource(insert.getSource())) {
                 throw newValidationError(topNode, RESOURCE.mustUseCreateJob());
             }
         }
         return validated;
     }
 
+    @Override
+    protected void validateGroupClause(SqlSelect select) {
+        super.validateGroupClause(select);
+
+        if (containsGroupingOrAggregation(select) && containsStreamingSource(select)) {
+            throw newValidationError(select, RESOURCE.error("Grouping/aggregations not supported for a streaming query"));
+        }
+    }
+
+    private boolean containsGroupingOrAggregation(SqlSelect select) {
+        if (select.getGroup() != null && select.getGroup().size() > 0) {
+            return true;
+        }
+
+        for (SqlNode node : select.getSelectList()) {
+            if (node.getKind().belongsTo(AGGREGATE)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     /**
-     * Goes over all the referenced tables in the source query of the insert
-     * statement and returns true if any of it is a streaming connector.
+     * Goes over all the referenced tables in the given {@link SqlNode}
+     * and returns true if any of them uses a streaming connector.
      */
-    private boolean isInsertFromStreamingSource(SqlInsert insert) {
+    private boolean containsStreamingSource(SqlNode node) {
         class FindStreamingTablesVisitor extends SqlBasicVisitor<Void> {
             boolean found;
 
@@ -78,8 +104,8 @@ public class JetSqlValidator extends HazelcastSqlValidator {
             public Void visit(SqlIdentifier id) {
                 SqlValidatorTable table = getCatalogReader().getTable(id.names);
                 if (table != null) { // not every identifier is a table
-                    HazelcastTable unwrappedTable = table.unwrap(HazelcastTable.class);
-                    SqlConnector connector = getJetSqlConnector(unwrappedTable.getTarget());
+                    HazelcastTable hazelcastTable = table.unwrap(HazelcastTable.class);
+                    SqlConnector connector = getJetSqlConnector(hazelcastTable.getTarget());
                     if (connector.isStream()) {
                         found = true;
                     }
@@ -89,7 +115,7 @@ public class JetSqlValidator extends HazelcastSqlValidator {
         }
 
         FindStreamingTablesVisitor visitor = new FindStreamingTablesVisitor();
-        insert.getSource().accept(visitor);
+        node.accept(visitor);
         return visitor.found;
     }
 }

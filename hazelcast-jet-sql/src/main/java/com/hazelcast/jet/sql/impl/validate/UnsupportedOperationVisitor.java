@@ -38,6 +38,7 @@ import org.apache.calcite.sql.SqlNode;
 import org.apache.calcite.sql.SqlNodeList;
 import org.apache.calcite.sql.SqlOperator;
 import org.apache.calcite.sql.SqlSelect;
+import org.apache.calcite.sql.SqlSelectKeyword;
 import org.apache.calcite.sql.SqlUserDefinedTypeNameSpec;
 import org.apache.calcite.sql.SqlUtil;
 import org.apache.calcite.sql.fun.SqlStdOperatorTable;
@@ -114,6 +115,13 @@ public final class UnsupportedOperationVisitor implements SqlVisitor<Void> {
         SUPPORTED_KINDS.add(SqlKind.FLOOR);
         SUPPORTED_KINDS.add(SqlKind.LIKE);
         SUPPORTED_KINDS.add(SqlKind.TRIM);
+
+        // Aggregations
+        SUPPORTED_KINDS.add(SqlKind.COUNT);
+        SUPPORTED_KINDS.add(SqlKind.MIN);
+        SUPPORTED_KINDS.add(SqlKind.MAX);
+        SUPPORTED_KINDS.add(SqlKind.SUM);
+        SUPPORTED_KINDS.add(SqlKind.AVG);
 
         // Extensions
         SUPPORTED_KINDS.add(SqlKind.CREATE_TABLE);
@@ -273,6 +281,9 @@ public final class UnsupportedOperationVisitor implements SqlVisitor<Void> {
                 if (symbolValue instanceof SqlTrimFunction.Flag) {
                     return null;
                 }
+                if (symbolValue == SqlSelectKeyword.DISTINCT) {
+                    return null;
+                }
 
                 throw error(literal, RESOURCE.error(symbolValue + " literal is not supported"));
 
@@ -315,10 +326,6 @@ public final class UnsupportedOperationVisitor implements SqlVisitor<Void> {
     private void processSelect(SqlSelect select) {
         if (select.hasOrderBy()) {
             throw unsupported(select.getOrderList(), SqlKind.ORDER_BY);
-        }
-
-        if (select.getGroup() != null && select.getGroup().size() > 0) {
-            throw unsupported(select.getGroup(), "GROUP BY");
         }
 
         if (select.getFetch() != null) {
