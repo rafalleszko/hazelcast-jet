@@ -83,6 +83,10 @@ public class JetSqlValidator extends HazelcastSqlValidator {
             return true;
         }
 
+        if (select.isDistinct()) {
+            return true;
+        }
+
         for (SqlNode node : select.getSelectList()) {
             if (node.getKind().belongsTo(AGGREGATE)) {
                 return true;

@@ -879,6 +879,16 @@ public class SqlAggregateTest extends SqlTestSupport {
     }
 
     @Test
+    public void test_distinctStreamingSource() {
+        String name = randomName();
+        sqlService.execute("CREATE MAPPING " + name + " TYPE " + TestStreamSqlConnector.TYPE_NAME);
+
+        assertThatThrownBy(() -> sqlService.execute("SELECT DISTINCT v FROM " + name))
+                .isInstanceOf(HazelcastSqlException.class)
+                .hasMessageContaining("not supported");
+    }
+
+    @Test
     public void test_rollup() {
         String name = createTable();
         assertThatThrownBy(
