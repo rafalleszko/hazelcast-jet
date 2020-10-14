@@ -61,15 +61,15 @@ public class SqlCreateMapping extends SqlCreate {
     ) {
         super(OPERATOR, pos, replace, ifNotExists);
 
-        if (name.names.size() == 2 && !SCHEMA_NAME_PUBLIC.equals(name.names.get(0)) || name.names.size() > 2) {
-            throw QueryException.error(SqlErrorCode.PARSING,
-                    "The mapping must be created in the \"public\" (the default) schema");
-        }
-
         this.name = requireNonNull(name, "Name should not be null");
         this.columns = requireNonNull(columns, "Columns should not be null");
         this.type = requireNonNull(type, "Type should not be null");
         this.options = requireNonNull(options, "Options should not be null");
+
+        if (name.names.size() == 2 && !SCHEMA_NAME_PUBLIC.equals(name.names.get(0)) || name.names.size() > 2) {
+            throw QueryException.error(SqlErrorCode.PARSING,
+                    "The mapping must be created in the \"public\" (the default) schema");
+        }
     }
 
     public String name() {
