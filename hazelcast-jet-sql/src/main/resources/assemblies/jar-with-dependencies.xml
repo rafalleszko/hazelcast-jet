@@ -28,9 +28,6 @@
             <useProjectArtifact>true</useProjectArtifact>
             <unpack>true</unpack>
             <scope>runtime</scope>
-            <excludes>
-                <exclude>com.hazelcast:hazelcast</exclude>
-            </excludes>
             <unpackOptions>
                 <excludes>
                     <exclude>codegen/**</exclude>
@@ -39,4 +36,16 @@
             </unpackOptions>
         </dependencySet>
     </dependencySets>
+    <containerDescriptorHandlers>
+        <containerDescriptorHandler>
+            <handlerName>metaInf-services</handlerName>
+        </containerDescriptorHandler>
+        <containerDescriptorHandler>
+            <handlerName>file-aggregator</handlerName>
+            <configuration>
+                <filePattern>META-INF/NOTICE</filePattern>
+                <outputPath>META-INF/NOTICE</outputPath>
+            </configuration>
+        </containerDescriptorHandler>
+    </containerDescriptorHandlers>
 </assembly>
