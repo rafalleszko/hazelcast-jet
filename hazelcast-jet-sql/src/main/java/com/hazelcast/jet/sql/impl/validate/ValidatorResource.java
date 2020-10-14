@@ -31,6 +31,9 @@ interface ValidatorResource {
     @BaseMessage("{0} not supported")
     ExInst<SqlValidatorException> notSupported(String name);
 
+    @BaseMessage("Grouping/aggregations not supported for a streaming query")
+    ExInst<SqlValidatorException> streamingAggregationsNotSupported();
+
     @BaseMessage("You must use CREATE JOB statement for a streaming DML query")
     ExInst<SqlValidatorException> mustUseCreateJob();
 }

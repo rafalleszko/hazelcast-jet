@@ -58,15 +58,16 @@ public class JetSqlValidator extends HazelcastSqlValidator {
             return topNode;
         }
 
-        SqlNode validated = super.validate(topNode);
+        return super.validate(topNode);
+    }
 
-        if (validated instanceof SqlInsert) {
-            SqlInsert insert = ((SqlInsert) validated);
-            if (!isCreateJob && containsStreamingSource(insert.getSource())) {
-                throw newValidationError(topNode, RESOURCE.mustUseCreateJob());
-            }
+    @Override
+    public void validateInsert(SqlInsert insert) {
+        super.validateInsert(insert);
+
+        if (!isCreateJob && containsStreamingSource(insert.getSource())) {
+            throw newValidationError(insert, RESOURCE.mustUseCreateJob());
         }
-        return validated;
     }
 
     @Override
@@ -74,7 +75,7 @@ public class JetSqlValidator extends HazelcastSqlValidator {
         super.validateGroupClause(select);
 
         if (containsGroupingOrAggregation(select) && containsStreamingSource(select)) {
-            throw newValidationError(select, RESOURCE.error("Grouping/aggregations not supported for a streaming query"));
+            throw newValidationError(select, RESOURCE.streamingAggregationsNotSupported());
         }
     }
 
