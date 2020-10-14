@@ -19,8 +19,8 @@ package com.hazelcast.jet.sql.impl.connector.kafka;
 import com.hazelcast.jet.core.DAG;
 import com.hazelcast.jet.core.Vertex;
 import com.hazelcast.jet.kafka.KafkaProcessors;
-import com.hazelcast.jet.sql.impl.connector.EntryMetadata;
-import com.hazelcast.jet.sql.impl.connector.EntryProcessors;
+import com.hazelcast.jet.sql.impl.connector.keyvalue.KvMetadata;
+import com.hazelcast.jet.sql.impl.connector.keyvalue.KvProcessors;
 import com.hazelcast.jet.sql.impl.connector.SqlConnector;
 import com.hazelcast.jet.sql.impl.connector.keyvalue.KvMetadataAvroResolver;
 import com.hazelcast.jet.sql.impl.connector.keyvalue.KvMetadataJavaResolver;
@@ -101,8 +101,8 @@ public class KafkaSqlConnector implements SqlConnector {
     ) {
         String topicName = options.getOrDefault(OPTION_OBJECT_NAME, tableName);
 
-        EntryMetadata keyMetadata = metadataResolvers.resolveMetadata(true, resolvedFields, options, null);
-        EntryMetadata valueMetadata = metadataResolvers.resolveMetadata(false, resolvedFields, options, null);
+        KvMetadata keyMetadata = metadataResolvers.resolveMetadata(true, resolvedFields, options, null);
+        KvMetadata valueMetadata = metadataResolvers.resolveMetadata(false, resolvedFields, options, null);
         List<TableField> fields = concat(keyMetadata.getFields().stream(), valueMetadata.getFields().stream())
                 .collect(toList());
 
@@ -152,7 +152,7 @@ public class KafkaSqlConnector implements SqlConnector {
 
         Vertex vEnd = dag.newVertex(
                 "Project(" + table.toString() + ")",
-                EntryProcessors.rowProjector(
+                KvProcessors.rowProjector(
                         table.paths(),
                         table.types(),
                         table.keyQueryDescriptor(),
@@ -186,7 +186,7 @@ public class KafkaSqlConnector implements SqlConnector {
 
         Vertex vStart = dag.newVertex(
                 "Project(" + table.toString() + ")",
-                EntryProcessors.entryProjector(
+                KvProcessors.entryProjector(
                         table.paths(),
                         table.types(),
                         table.hiddenFields(),

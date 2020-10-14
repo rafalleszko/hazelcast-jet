@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.hazelcast.jet.sql.impl.connector;
+package com.hazelcast.jet.sql.impl.connector.keyvalue;
 
 import com.hazelcast.jet.sql.impl.inject.UpsertTargetDescriptor;
 import com.hazelcast.sql.impl.extract.QueryTargetDescriptor;
@@ -22,13 +22,13 @@ import com.hazelcast.sql.impl.schema.TableField;
 
 import java.util.List;
 
-public class EntryMetadata {
+public class KvMetadata {
 
     private final List<TableField> fields;
     private final QueryTargetDescriptor queryTargetDescriptor;
     private final UpsertTargetDescriptor upsertTargetDescriptor;
 
-    public EntryMetadata(
+    public KvMetadata(
             List<TableField> fields,
             QueryTargetDescriptor queryTargetDescriptor,
             UpsertTargetDescriptor upsertTargetDescriptor

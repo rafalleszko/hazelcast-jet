@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.hazelcast.jet.sql.impl.connector;
+package com.hazelcast.jet.sql.impl.connector.keyvalue;
 
 import com.hazelcast.internal.serialization.InternalSerializationService;
 import com.hazelcast.internal.serialization.impl.DefaultSerializationServiceBuilder;
@@ -31,7 +31,7 @@ import org.junit.Test;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class EntryProcessorsTest {
+public class KvProcessorsTest {
 
     private static final InternalSerializationService SERIALIZATION_SERVICE =
             new DefaultSerializationServiceBuilder().build();
@@ -39,7 +39,7 @@ public class EntryProcessorsTest {
     @Test
     @SuppressWarnings("unchecked")
     public void test_rowProjectorSerialization() {
-        ProcessorSupplier original = EntryProcessors.rowProjector(
+        ProcessorSupplier original = KvProcessors.rowProjector(
                 new QueryPath[]{QueryPath.KEY_PATH, QueryPath.VALUE_PATH},
                 new QueryDataType[]{QueryDataType.INT, QueryDataType.INT},
                 GenericQueryTargetDescriptor.DEFAULT,
@@ -55,7 +55,7 @@ public class EntryProcessorsTest {
 
     @Test
     public void test_entryRowProjectorSerialization() {
-        ProcessorSupplier original = EntryProcessors.entryProjector(
+        ProcessorSupplier original = KvProcessors.entryProjector(
                 new QueryPath[]{QueryPath.KEY_PATH, QueryPath.VALUE_PATH},
                 new QueryDataType[]{QueryDataType.INT, QueryDataType.VARCHAR},
                 new Boolean[]{false, true},

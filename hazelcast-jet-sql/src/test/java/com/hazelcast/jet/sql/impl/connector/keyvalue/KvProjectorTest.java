@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.hazelcast.jet.sql.impl.connector;
+package com.hazelcast.jet.sql.impl.connector.keyvalue;
 
 import com.hazelcast.jet.sql.impl.inject.UpsertInjector;
 import com.hazelcast.jet.sql.impl.inject.UpsertTarget;
@@ -26,11 +26,11 @@ import java.util.Map.Entry;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class EntryProjectorTest {
+public class KvProjectorTest {
 
     @Test
     public void test_project() {
-        EntryProjector projector = new EntryProjector(
+        KvProjector projector = new KvProjector(
                 new QueryPath[]{QueryPath.KEY_PATH, QueryPath.VALUE_PATH},
                 new QueryDataType[]{QueryDataType.INT, QueryDataType.INT},
                 new Boolean[]{false, false},
@@ -46,7 +46,7 @@ public class EntryProjectorTest {
 
     @Test
     public void when_fieldIsHidden_then_itIsSkipped() {
-        EntryProjector projector = new EntryProjector(
+        KvProjector projector = new KvProjector(
                 new QueryPath[]{
                         QueryPath.KEY_PATH,
                         QueryPath.create(QueryPath.VALUE_PREFIX + "field1"),

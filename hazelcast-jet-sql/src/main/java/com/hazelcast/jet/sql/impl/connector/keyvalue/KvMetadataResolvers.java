@@ -18,7 +18,6 @@ package com.hazelcast.jet.sql.impl.connector.keyvalue;
 
 import com.hazelcast.function.FunctionEx;
 import com.hazelcast.internal.serialization.InternalSerializationService;
-import com.hazelcast.jet.sql.impl.connector.EntryMetadata;
 import com.hazelcast.jet.sql.impl.connector.SqlConnector;
 import com.hazelcast.jet.sql.impl.schema.MappingField;
 import com.hazelcast.spi.impl.NodeEngine;
@@ -107,7 +106,7 @@ public class KvMetadataResolvers {
      * A utility to implement {@link SqlConnector#createTable} in the
      * connector.
      */
-    public EntryMetadata resolveMetadata(
+    public KvMetadata resolveMetadata(
             boolean isKey,
             List<MappingField> resolvedFields,
             Map<String, String> options,

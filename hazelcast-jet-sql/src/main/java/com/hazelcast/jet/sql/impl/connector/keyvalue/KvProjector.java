@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.hazelcast.jet.sql.impl.connector;
+package com.hazelcast.jet.sql.impl.connector.keyvalue;
 
 import com.hazelcast.jet.sql.impl.inject.UpsertInjector;
 import com.hazelcast.jet.sql.impl.inject.UpsertTarget;
@@ -26,7 +26,7 @@ import java.util.Map.Entry;
 import static com.hazelcast.jet.Util.entry;
 import static com.hazelcast.jet.sql.impl.type.converter.ToConverters.getToConverter;
 
-class EntryProjector {
+class KvProjector {
 
     private static final UpsertInjector DISCARDING_INJECTOR = value -> { };
 
@@ -37,7 +37,7 @@ class EntryProjector {
 
     private final UpsertInjector[] injectors;
 
-    EntryProjector(
+    KvProjector(
             QueryPath[] paths,
             QueryDataType[] types,
             Boolean[] hiddenFields,

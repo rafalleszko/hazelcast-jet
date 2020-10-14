@@ -16,7 +16,7 @@
 
 package com.hazelcast.jet.sql.impl.connector.map;
 
-import com.hazelcast.jet.sql.impl.connector.EntryMetadata;
+import com.hazelcast.jet.sql.impl.connector.keyvalue.KvMetadata;
 import com.hazelcast.jet.sql.impl.extract.HazelcastJsonQueryTargetDescriptor;
 import com.hazelcast.jet.sql.impl.inject.HazelcastJsonUpsertTargetDescriptor;
 import com.hazelcast.jet.sql.impl.schema.MappingField;
@@ -63,7 +63,7 @@ public class MetadataJsonResolverTest {
             "false"
     })
     public void when_noKeyOrThisPrefixInExternalName_then_usesValue(boolean key) {
-        EntryMetadata metadata = INSTANCE.resolveMetadata(
+        KvMetadata metadata = INSTANCE.resolveMetadata(
                 key,
                 singletonList(field("field", QueryDataType.INT, "extField")),
                 emptyMap(),
@@ -99,7 +99,7 @@ public class MetadataJsonResolverTest {
             "false, this"
     })
     public void test_resolveMetadata(boolean key, String prefix) {
-        EntryMetadata metadata = INSTANCE.resolveMetadata(
+        KvMetadata metadata = INSTANCE.resolveMetadata(
                 key,
                 singletonList(field("field", QueryDataType.INT, prefix + ".field")),
                 emptyMap(),

@@ -17,7 +17,6 @@
 package com.hazelcast.jet.sql.impl.connector.keyvalue;
 
 import com.hazelcast.internal.serialization.InternalSerializationService;
-import com.hazelcast.jet.sql.impl.connector.EntryMetadata;
 import com.hazelcast.jet.sql.impl.extract.JsonQueryTargetDescriptor;
 import com.hazelcast.jet.sql.impl.inject.JsonUpsertTargetDescriptor;
 import com.hazelcast.jet.sql.impl.schema.MappingField;
@@ -71,7 +70,7 @@ public final class KvMetadataJsonResolver implements KvMetadataResolver {
     }
 
     @Override
-    public EntryMetadata resolveMetadata(
+    public KvMetadata resolveMetadata(
             boolean isKey,
             List<MappingField> resolvedFields,
             Map<String, String> options,
@@ -88,7 +87,7 @@ public final class KvMetadataJsonResolver implements KvMetadataResolver {
             TableField field = new MapTableField(name, type, false, path);
             fields.add(field);
         }
-        return new EntryMetadata(
+        return new KvMetadata(
                 fields,
                 JsonQueryTargetDescriptor.INSTANCE,
                 JsonUpsertTargetDescriptor.INSTANCE

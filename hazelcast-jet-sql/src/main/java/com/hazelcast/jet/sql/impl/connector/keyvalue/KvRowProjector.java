@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.hazelcast.jet.sql.impl.connector;
+package com.hazelcast.jet.sql.impl.connector.keyvalue;
 
 import com.hazelcast.sql.impl.expression.ConstantExpression;
 import com.hazelcast.sql.impl.expression.Expression;
@@ -29,7 +29,7 @@ import java.util.Map.Entry;
 
 import static com.hazelcast.jet.sql.impl.expression.ExpressionUtil.evaluate;
 
-class EntryRowProjector implements Row {
+class KvRowProjector implements Row {
 
     private final QueryTarget keyTarget;
     private final QueryTarget valueTarget;
@@ -39,7 +39,7 @@ class EntryRowProjector implements Row {
     private final List<Expression<?>> projection;
 
     @SuppressWarnings("unchecked")
-    EntryRowProjector(
+    KvRowProjector(
             QueryPath[] paths,
             QueryDataType[] types,
             QueryTarget keyTarget,

@@ -19,7 +19,7 @@ package com.hazelcast.jet.sql.impl.connector.map;
 import com.google.common.collect.ImmutableMap;
 import com.hazelcast.internal.serialization.InternalSerializationService;
 import com.hazelcast.internal.serialization.impl.DefaultSerializationServiceBuilder;
-import com.hazelcast.jet.sql.impl.connector.EntryMetadata;
+import com.hazelcast.jet.sql.impl.connector.keyvalue.KvMetadata;
 import com.hazelcast.jet.sql.impl.inject.PortableUpsertTargetDescriptor;
 import com.hazelcast.jet.sql.impl.schema.MappingField;
 import com.hazelcast.nio.serialization.ClassDefinition;
@@ -230,7 +230,7 @@ public class MetadataPortableResolverTest {
                 (key ? OPTION_KEY_CLASS_VERSION : OPTION_VALUE_CLASS_VERSION), String.valueOf(classDefinition.getVersion())
         );
 
-        EntryMetadata metadata = INSTANCE.resolveMetadata(
+        KvMetadata metadata = INSTANCE.resolveMetadata(
                 key,
                 singletonList(field("field", QueryDataType.INT, prefix + ".field")),
                 options,

@@ -35,7 +35,6 @@
     <properties>
         <confluent.version>4.1.0</confluent.version>
         <parquet.version>1.10.1</parquet.version>
-        <relocation.root>com.hazelcast</relocation.root>
     </properties>
 
     <repositories>

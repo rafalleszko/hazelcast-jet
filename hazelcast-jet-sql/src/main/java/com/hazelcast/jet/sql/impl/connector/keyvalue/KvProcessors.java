@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.hazelcast.jet.sql.impl.connector;
+package com.hazelcast.jet.sql.impl.connector.keyvalue;
 
 import com.hazelcast.internal.serialization.InternalSerializationService;
 import com.hazelcast.jet.core.Processor;
@@ -42,9 +42,9 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.Objects;
 
-public final class EntryProcessors {
+public final class KvProcessors {
 
-    private EntryProcessors() {
+    private KvProcessors() {
     }
 
     public static ProcessorSupplier rowProjector(
@@ -120,7 +120,7 @@ public final class EntryProcessors {
             List<Processor> processors = new ArrayList<>(count);
             for (int i = 0; i < count; i++) {
                 ResettableSingletonTraverser<Object[]> traverser = new ResettableSingletonTraverser<>();
-                EntryRowProjector projector = new EntryRowProjector(
+                KvRowProjector projector = new KvRowProjector(
                         paths,
                         types,
                         keyDescriptor.create(serializationService, extractors, true),
@@ -240,7 +240,7 @@ public final class EntryProcessors {
             List<Processor> processors = new ArrayList<>(count);
             for (int i = 0; i < count; i++) {
                 ResettableSingletonTraverser<Object> traverser = new ResettableSingletonTraverser<>();
-                EntryProjector projector = new EntryProjector(
+                KvProjector projector = new KvProjector(
                         paths,
                         types,
                         hiddenFields,

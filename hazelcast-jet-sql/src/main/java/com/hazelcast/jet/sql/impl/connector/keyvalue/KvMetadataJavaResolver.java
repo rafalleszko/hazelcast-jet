@@ -18,7 +18,6 @@ package com.hazelcast.jet.sql.impl.connector.keyvalue;
 
 import com.hazelcast.internal.serialization.InternalSerializationService;
 import com.hazelcast.jet.impl.util.ReflectionUtils;
-import com.hazelcast.jet.sql.impl.connector.EntryMetadata;
 import com.hazelcast.jet.sql.impl.inject.PojoUpsertTargetDescriptor;
 import com.hazelcast.jet.sql.impl.inject.PrimitiveUpsertTargetDescriptor;
 import com.hazelcast.jet.sql.impl.schema.MappingField;
@@ -147,7 +146,7 @@ public final class KvMetadataJavaResolver implements KvMetadataResolver {
     }
 
     @Override
-    public EntryMetadata resolveMetadata(
+    public KvMetadata resolveMetadata(
             boolean isKey,
             List<MappingField> resolvedFields,
             Map<String, String> options,
@@ -157,7 +156,7 @@ public final class KvMetadataJavaResolver implements KvMetadataResolver {
         return resolveMetadata(isKey, resolvedFields, clazz);
     }
 
-    public EntryMetadata resolveMetadata(
+    public KvMetadata resolveMetadata(
             boolean isKey,
             List<MappingField> resolvedFields,
             Class<?> clazz
@@ -170,7 +169,7 @@ public final class KvMetadataJavaResolver implements KvMetadataResolver {
         }
     }
 
-    private EntryMetadata resolvePrimitiveMetadata(boolean isKey, List<MappingField> resolvedFields) {
+    private KvMetadata resolvePrimitiveMetadata(boolean isKey, List<MappingField> resolvedFields) {
         Map<QueryPath, MappingField> externalFieldsByPath = extractFields(resolvedFields, isKey);
 
         QueryPath path = isKey ? QueryPath.KEY_PATH : QueryPath.VALUE_PATH;
@@ -178,14 +177,14 @@ public final class KvMetadataJavaResolver implements KvMetadataResolver {
 
         TableField field = new MapTableField(mappingField.name(), mappingField.type(), false, path);
 
-        return new EntryMetadata(
+        return new KvMetadata(
                 singletonList(field),
                 GenericQueryTargetDescriptor.DEFAULT,
                 PrimitiveUpsertTargetDescriptor.INSTANCE
         );
     }
 
-    private EntryMetadata resolveObjectMetadata(
+    private KvMetadata resolveObjectMetadata(
             boolean isKey,
             List<MappingField> resolvedFields,
             Class<?> clazz
@@ -207,7 +206,7 @@ public final class KvMetadataJavaResolver implements KvMetadataResolver {
                 typeNamesByPaths.put(path.getPath(), typesByNames.get(path.getPath()).getName());
             }
         }
-        return new EntryMetadata(
+        return new KvMetadata(
                 fields,
                 GenericQueryTargetDescriptor.DEFAULT,
                 new PojoUpsertTargetDescriptor(clazz.getName(), typeNamesByPaths)

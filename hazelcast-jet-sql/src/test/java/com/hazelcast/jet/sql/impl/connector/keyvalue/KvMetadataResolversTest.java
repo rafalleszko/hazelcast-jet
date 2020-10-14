@@ -18,7 +18,6 @@ package com.hazelcast.jet.sql.impl.connector.keyvalue;
 
 import com.google.common.collect.ImmutableMap;
 import com.hazelcast.internal.serialization.InternalSerializationService;
-import com.hazelcast.jet.sql.impl.connector.EntryMetadata;
 import com.hazelcast.jet.sql.impl.schema.MappingField;
 import com.hazelcast.spi.impl.NodeEngine;
 import com.hazelcast.sql.impl.QueryException;
@@ -168,9 +167,9 @@ public class KvMetadataResolversTest {
         Map<String, String> options = ImmutableMap.of(
                 (key ? OPTION_KEY_FORMAT : OPTION_VALUE_FORMAT), JAVA_FORMAT
         );
-        given(resolver.resolveMetadata(key, emptyList(), options, ss)).willReturn(mock(EntryMetadata.class));
+        given(resolver.resolveMetadata(key, emptyList(), options, ss)).willReturn(mock(KvMetadata.class));
 
-        EntryMetadata metadata = resolvers.resolveMetadata(key, emptyList(), options, ss);
+        KvMetadata metadata = resolvers.resolveMetadata(key, emptyList(), options, ss);
 
         assertThat(metadata).isNotNull();
     }

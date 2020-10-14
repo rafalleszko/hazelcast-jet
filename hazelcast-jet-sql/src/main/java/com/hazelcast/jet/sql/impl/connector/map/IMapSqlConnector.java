@@ -21,8 +21,8 @@ import com.hazelcast.internal.serialization.InternalSerializationService;
 import com.hazelcast.jet.core.DAG;
 import com.hazelcast.jet.core.Vertex;
 import com.hazelcast.jet.core.processor.SinkProcessors;
-import com.hazelcast.jet.sql.impl.connector.EntryMetadata;
-import com.hazelcast.jet.sql.impl.connector.EntryProcessors;
+import com.hazelcast.jet.sql.impl.connector.keyvalue.KvMetadata;
+import com.hazelcast.jet.sql.impl.connector.keyvalue.KvProcessors;
 import com.hazelcast.jet.sql.impl.connector.SqlConnector;
 import com.hazelcast.jet.sql.impl.connector.keyvalue.KvMetadataJavaResolver;
 import com.hazelcast.jet.sql.impl.connector.keyvalue.KvMetadataResolvers;
@@ -95,8 +95,8 @@ public class IMapSqlConnector implements SqlConnector {
 
         InternalSerializationService ss = (InternalSerializationService) nodeEngine.getSerializationService();
 
-        EntryMetadata keyMetadata = metadataResolvers.resolveMetadata(true, resolvedFields, options, ss);
-        EntryMetadata valueMetadata = metadataResolvers.resolveMetadata(false, resolvedFields, options, ss);
+        KvMetadata keyMetadata = metadataResolvers.resolveMetadata(true, resolvedFields, options, ss);
+        KvMetadata valueMetadata = metadataResolvers.resolveMetadata(false, resolvedFields, options, ss);
         List<TableField> fields = concat(keyMetadata.getFields().stream(), valueMetadata.getFields().stream())
                 .collect(toList());
 
@@ -146,7 +146,7 @@ public class IMapSqlConnector implements SqlConnector {
 
         Vertex vStart = dag.newVertex(
                 "Project(IMap" + "[" + table.getSchemaName() + "." + table.getSqlName() + "])",
-                EntryProcessors.entryProjector(
+                KvProcessors.entryProjector(
                         paths,
                         types,
                         hiddenFields,

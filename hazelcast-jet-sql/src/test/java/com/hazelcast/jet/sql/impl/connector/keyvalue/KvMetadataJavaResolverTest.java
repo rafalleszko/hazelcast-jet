@@ -17,7 +17,6 @@
 package com.hazelcast.jet.sql.impl.connector.keyvalue;
 
 import com.google.common.collect.ImmutableMap;
-import com.hazelcast.jet.sql.impl.connector.EntryMetadata;
 import com.hazelcast.jet.sql.impl.inject.PojoUpsertTargetDescriptor;
 import com.hazelcast.jet.sql.impl.inject.PrimitiveUpsertTargetDescriptor;
 import com.hazelcast.jet.sql.impl.schema.MappingField;
@@ -136,7 +135,7 @@ public class KvMetadataJavaResolverTest {
     public void test_resolvePrimitiveMetadata(boolean key, String path) {
         Map<String, String> options = ImmutableMap.of((key ? OPTION_KEY_CLASS : OPTION_VALUE_CLASS), int.class.getName());
 
-        EntryMetadata metadata = INSTANCE.resolveMetadata(
+        KvMetadata metadata = INSTANCE.resolveMetadata(
                 key,
                 singletonList(field(path, QueryDataType.INT, path)),
                 options,
@@ -229,7 +228,7 @@ public class KvMetadataJavaResolverTest {
         Map<String, String> options =
                 ImmutableMap.of((key ? OPTION_KEY_CLASS : OPTION_VALUE_CLASS), Object.class.getName());
 
-        EntryMetadata metadata = INSTANCE.resolveMetadata(
+        KvMetadata metadata = INSTANCE.resolveMetadata(
                 key,
                 singletonList(field("field", QueryDataType.INT, "extField")),
                 options,
@@ -270,7 +269,7 @@ public class KvMetadataJavaResolverTest {
     public void test_resolveMetadata(boolean key, String prefix) {
         Map<String, String> options = ImmutableMap.of((key ? OPTION_KEY_CLASS : OPTION_VALUE_CLASS), Type.class.getName());
 
-        EntryMetadata metadata = INSTANCE.resolveMetadata(
+        KvMetadata metadata = INSTANCE.resolveMetadata(
                 key,
                 singletonList(field("field", QueryDataType.INT, prefix + ".field")),
                 options,

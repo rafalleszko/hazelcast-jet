@@ -17,7 +17,6 @@
 package com.hazelcast.jet.sql.impl.connector.keyvalue;
 
 import com.hazelcast.internal.serialization.InternalSerializationService;
-import com.hazelcast.jet.sql.impl.connector.EntryMetadata;
 import com.hazelcast.jet.sql.impl.schema.MappingField;
 
 import java.util.List;
@@ -38,7 +37,7 @@ public interface KvMetadataResolver {
             InternalSerializationService serializationService
     );
 
-    EntryMetadata resolveMetadata(
+    KvMetadata resolveMetadata(
             boolean isKey,
             List<MappingField> resolvedFields,
             Map<String, String> options,

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.hazelcast.jet.sql.impl.connector;
+package com.hazelcast.jet.sql.impl.connector.keyvalue;
 
 import com.hazelcast.sql.impl.expression.ColumnExpression;
 import com.hazelcast.sql.impl.expression.ConstantExpression;
@@ -34,11 +34,11 @@ import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class EntryRowProjectorTest {
+public class KvRowProjectorTest {
 
     @Test
     public void test_project() {
-        EntryRowProjector projector = new EntryRowProjector(
+        KvRowProjector projector = new KvRowProjector(
                 new QueryPath[]{QueryPath.KEY_PATH, QueryPath.VALUE_PATH},
                 new QueryDataType[]{INT, INT},
                 new IdentityTarget(),
@@ -58,7 +58,7 @@ public class EntryRowProjectorTest {
     @Test
     @SuppressWarnings("unchecked")
     public void when_filteredByPredicate_then_returnsNull() {
-        EntryRowProjector projector = new EntryRowProjector(
+        KvRowProjector projector = new KvRowProjector(
                 new QueryPath[]{QueryPath.KEY_PATH, QueryPath.VALUE_PATH},
                 new QueryDataType[]{INT, INT},
                 new IdentityTarget(),
