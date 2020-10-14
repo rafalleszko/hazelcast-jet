@@ -127,15 +127,15 @@ public class CreateDagVisitor {
     }
 
     public Vertex onGroupByKey(AggregateGroupByKeyPhysicalRel rel) {
-        FunctionEx<Object[], Object> partitionKeyFn = rel.partitionKeyFn();
+        FunctionEx<Object[], Object> groupKeyFn = rel.groupKeyFn();
         AggregateOperation<?, Object[]> aggregateOperation = rel.aggregateOperation();
 
         Vertex vertex = dag.newVertex(
                 name("Aggregate-Accumulate"),
-                Processors.accumulateByKeyP(singletonList(partitionKeyFn), aggregateOperation)
+                Processors.accumulateByKeyP(singletonList(groupKeyFn), aggregateOperation)
         );
         connectInput(rel.getInput(), vertex, edge -> {
-            edge.partitioned(partitionKeyFn);
+            edge.partitioned(groupKeyFn);
             if (rel.distributed()) {
                 edge.distributed();
             }
@@ -144,7 +144,7 @@ public class CreateDagVisitor {
     }
 
     public Vertex onCombine(AggregateCombinePhysicalRel rel) {
-        FunctionEx<Object, Object> partitionKeyFn = rel.partitionKeyFn();
+        FunctionEx<Object, Object> groupKeyFn = rel.groupKeyFn();
         AggregateOperation<SqlAggregations, Object[]> aggregateOperation = rel.aggregateOperation();
 
         Vertex vertex = dag.newVertex(
@@ -152,7 +152,7 @@ public class CreateDagVisitor {
                 ProcessorMetaSupplier.forceTotalParallelismOne(
                         ProcessorSupplier.of(
                                 Processors.aggregateByKeyP(
-                                        singletonList(partitionKeyFn),
+                                        singletonList(groupKeyFn),
                                         aggregateOperation,
                                         (key, value) -> value
                                 )

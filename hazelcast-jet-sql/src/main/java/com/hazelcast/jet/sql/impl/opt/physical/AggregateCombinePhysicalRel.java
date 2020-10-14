@@ -35,7 +35,7 @@ import java.util.List;
 
 public class AggregateCombinePhysicalRel extends Aggregate implements PhysicalRel {
 
-    private final FunctionEx<Object, Object> partitionKeyFn;
+    private final FunctionEx<Object, Object> groupKeyFn;
     private final AggregateOperation<SqlAggregations, Object[]> aggregateOperation;
 
     AggregateCombinePhysicalRel(
@@ -45,17 +45,17 @@ public class AggregateCombinePhysicalRel extends Aggregate implements PhysicalRe
             ImmutableBitSet groupSet,
             List<ImmutableBitSet> groupSets,
             List<AggregateCall> aggCalls,
-            FunctionEx<Object, Object> partitionKeyFn,
+            FunctionEx<Object, Object> groupKeyFn,
             AggregateOperation<SqlAggregations, Object[]> aggregateOperation
     ) {
         super(cluster, traits, new ArrayList<>(), input, groupSet, groupSets, aggCalls);
 
-        this.partitionKeyFn = partitionKeyFn;
+        this.groupKeyFn = groupKeyFn;
         this.aggregateOperation = aggregateOperation;
     }
 
-    public FunctionEx<Object, Object> partitionKeyFn() {
-        return partitionKeyFn;
+    public FunctionEx<Object, Object> groupKeyFn() {
+        return groupKeyFn;
     }
 
     public AggregateOperation<SqlAggregations, Object[]> aggregateOperation() {
@@ -87,7 +87,7 @@ public class AggregateCombinePhysicalRel extends Aggregate implements PhysicalRe
                 groupSet,
                 groupSets,
                 aggCalls,
-                partitionKeyFn,
+                groupKeyFn,
                 aggregateOperation
         );
     }
