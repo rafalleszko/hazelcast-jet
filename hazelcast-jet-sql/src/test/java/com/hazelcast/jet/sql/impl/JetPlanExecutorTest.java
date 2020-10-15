@@ -41,6 +41,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 
 import static java.util.Collections.emptyList;
 import static java.util.Collections.emptyMap;
@@ -66,7 +67,7 @@ public class JetPlanExecutorTest {
     private JetInstance jetInstance;
 
     @Mock
-    private Map<QueryId, QueryResultProducer> resultConsumerRegistry;
+    private Map<String, QueryResultProducer> resultConsumerRegistry;
 
     @Mock
     private DAG dag;
@@ -77,6 +78,7 @@ public class JetPlanExecutorTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        given(job.getFuture()).willReturn(new CompletableFuture<>());
     }
 
     @Test
@@ -130,8 +132,7 @@ public class JetPlanExecutorTest {
         // then
         assertThat(result.updateCount()).isEqualTo(-1);
         assertThat(result.getRowMetadata()).isEqualTo(rowMetadata);
-        verify(resultConsumerRegistry).put(eq(queryId), isA(QueryResultProducer.class));
-        verifyZeroInteractions(job);
+        verify(resultConsumerRegistry).put(eq(queryId.toString()), isA(QueryResultProducer.class));
     }
 
     @Test

@@ -18,39 +18,36 @@ package com.hazelcast.jet.sql.impl.processors;
 
 import com.hazelcast.cluster.Address;
 import com.hazelcast.instance.impl.HazelcastInstanceImpl;
-import com.hazelcast.jet.core.AbstractProcessor;
 import com.hazelcast.jet.core.Inbox;
+import com.hazelcast.jet.core.Outbox;
 import com.hazelcast.jet.core.Processor;
 import com.hazelcast.jet.core.ProcessorMetaSupplier;
 import com.hazelcast.jet.core.ProcessorSupplier;
 import com.hazelcast.jet.core.Watermark;
 import com.hazelcast.jet.sql.impl.JetQueryResultProducer;
 import com.hazelcast.jet.sql.impl.JetSqlCoreBackendImpl;
-import com.hazelcast.nio.ObjectDataInput;
-import com.hazelcast.nio.ObjectDataOutput;
-import com.hazelcast.nio.serialization.DataSerializable;
 import com.hazelcast.sql.impl.JetSqlCoreBackend;
-import com.hazelcast.sql.impl.QueryException;
 import com.hazelcast.sql.impl.QueryId;
-import com.hazelcast.sql.impl.QueryResultProducer;
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import java.io.IOException;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
 
-import static java.util.Collections.singleton;
+import static com.hazelcast.jet.core.ProcessorMetaSupplier.forceTotalParallelismOne;
 
 public final class RootResultConsumerSink implements Processor {
 
-    private final JetQueryResultProducer rootResultConsumer;
+    private final String queryId;
+    private JetQueryResultProducer rootResultConsumer;
 
-    private RootResultConsumerSink(QueryResultProducer rootResultConsumer) {
-        this.rootResultConsumer = (JetQueryResultProducer) rootResultConsumer;
+    private RootResultConsumerSink(String queryId) {
+        this.queryId = queryId;
+    }
+
+    @Override
+    public void init(@Nonnull Outbox outbox, @Nonnull Context context) {
+        HazelcastInstanceImpl hzInst = (HazelcastInstanceImpl) context.jetInstance().getHazelcastInstance();
+        JetSqlCoreBackendImpl jetSqlCoreBackend = hzInst.node.nodeEngine.getService(JetSqlCoreBackend.SERVICE_NAME);
+        rootResultConsumer = jetSqlCoreBackend.getResultConsumerRegistry().remove(queryId);
+        assert rootResultConsumer != null;
     }
 
     @Override
@@ -70,124 +67,8 @@ public final class RootResultConsumerSink implements Processor {
     }
 
     public static ProcessorMetaSupplier rootResultConsumerSink(Address initiatorAddress, QueryId queryId) {
-        return new MetaSupplier(initiatorAddress, queryId);
-    }
-
-    @SuppressFBWarnings(
-            value = {"SE_BAD_FIELD", "SE_NO_SERIALVERSIONID"},
-            justification = "the class is never java-serialized"
-    )
-    private static final class MetaSupplier implements ProcessorMetaSupplier, DataSerializable {
-        private Address initiatorAddress;
-        private QueryId queryId;
-
-        @SuppressWarnings("unused") // for deserialization
-        private MetaSupplier() {
-        }
-
-        MetaSupplier(Address initiatorAddress, QueryId queryId) {
-            this.initiatorAddress = initiatorAddress;
-            this.queryId = queryId;
-        }
-
-        @Override
-        public int preferredLocalParallelism() {
-            return 1;
-        }
-
-        @Override
-        public void init(@Nonnull Context context) throws Exception {
-            if (context.localParallelism() != 1) {
-                throw new Exception("Unexpected local parallelism: " + context.localParallelism());
-            }
-        }
-
-        @Nonnull
-        @Override
-        public Function<? super Address, ? extends ProcessorSupplier> get(@Nonnull List<Address> addresses) {
-            return address -> initiatorAddress.equals(address)
-                    ? new Supplier(queryId)
-                    : ProcessorSupplier.of(NoInputProcessor::new);
-        }
-
-        @Override
-        public void writeData(ObjectDataOutput out) throws IOException {
-            out.writeObject(initiatorAddress);
-            out.writeObject(queryId);
-        }
-
-        @Override
-        public void readData(ObjectDataInput in) throws IOException {
-            initiatorAddress = in.readObject();
-            queryId = in.readObject();
-        }
-    }
-
-    @SuppressFBWarnings(
-            value = {"SE_BAD_FIELD", "SE_NO_SERIALVERSIONID"},
-            justification = "the class is never java-serialized"
-    )
-    private static final class Supplier implements ProcessorSupplier, DataSerializable {
-
-        private QueryId queryId;
-
-        private transient Map<QueryId, QueryResultProducer> resultConsumerRegistry;
-        private transient QueryResultProducer rootResultConsumer;
-
-        @SuppressWarnings("unused") // for deserialization
-        private Supplier() {
-        }
-
-        private Supplier(QueryId queryId) {
-            this.queryId = queryId;
-        }
-
-        @Override
-        public void init(@Nonnull Context context) {
-            HazelcastInstanceImpl hzInst = (HazelcastInstanceImpl) context.jetInstance().getHazelcastInstance();
-            JetSqlCoreBackendImpl jetSqlCoreBackend = hzInst.node.nodeEngine.getService(JetSqlCoreBackend.SERVICE_NAME);
-            resultConsumerRegistry = jetSqlCoreBackend.getResultConsumerRegistry();
-            rootResultConsumer = resultConsumerRegistry.get(queryId);
-            assert rootResultConsumer != null;
-        }
-
-        @Nonnull @Override
-        public Collection<? extends Processor> get(int count) {
-            assert count == 1;
-            return singleton(new RootResultConsumerSink(rootResultConsumer));
-        }
-
-        @Override
-        public void close(@Nullable Throwable error) {
-            if (rootResultConsumer != null) {
-                // make sure the consumer is closed. Most likely it already is done normally or already has an error
-                if (error != null) {
-                    rootResultConsumer.onError(QueryException.error(error.toString(), error));
-                } else {
-                    // The rootResultConsumer should be done now in complete() method above, setting an error should
-                    // have no effect. We try to set an error just to make it apparent if it's broken.
-                    rootResultConsumer.onError(QueryException.error("Processor closed prematurely"));
-                }
-            }
-            if (resultConsumerRegistry != null) {
-                resultConsumerRegistry.remove(queryId);
-            }
-        }
-
-        @Override
-        public void writeData(ObjectDataOutput out) throws IOException {
-            out.writeObject(queryId);
-        }
-
-        @Override
-        public void readData(ObjectDataInput in) throws IOException {
-            queryId = in.readObject();
-        }
-    }
-
-    /**
-     * A processor that throws if it receives any input.
-     */
-    private static class NoInputProcessor extends AbstractProcessor {
+        String queryIdStr = queryId.toString();
+        ProcessorSupplier pSupplier = ProcessorSupplier.of(() -> new RootResultConsumerSink(queryIdStr));
+        return forceTotalParallelismOne(pSupplier, initiatorAddress);
     }
 }

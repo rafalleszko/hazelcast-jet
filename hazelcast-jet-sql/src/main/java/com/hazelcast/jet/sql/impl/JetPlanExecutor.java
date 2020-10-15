@@ -30,8 +30,6 @@ import com.hazelcast.jet.sql.impl.JetPlan.ExecutionPlan;
 import com.hazelcast.jet.sql.impl.schema.MappingCatalog;
 import com.hazelcast.sql.SqlResult;
 import com.hazelcast.sql.impl.QueryException;
-import com.hazelcast.sql.impl.QueryId;
-import com.hazelcast.sql.impl.QueryResultProducer;
 import com.hazelcast.sql.impl.SqlResultImpl;
 
 import java.util.Map;
@@ -40,12 +38,12 @@ class JetPlanExecutor {
 
     private final MappingCatalog catalog;
     private final JetInstance jetInstance;
-    private final Map<QueryId, QueryResultProducer> resultConsumerRegistry;
+    private final Map<String, JetQueryResultProducer> resultConsumerRegistry;
 
     JetPlanExecutor(
             MappingCatalog catalog,
             JetInstance jetInstance,
-            Map<QueryId, QueryResultProducer> resultConsumerRegistry
+            Map<String, JetQueryResultProducer> resultConsumerRegistry
     ) {
         this.catalog = catalog;
         this.jetInstance = jetInstance;
@@ -143,11 +141,22 @@ class JetPlanExecutor {
 
             return SqlResultImpl.createUpdateCountResult(0);
         } else {
-            QueryResultProducer queryResultProducer = new JetQueryResultProducer();
-            Object oldValue = resultConsumerRegistry.put(plan.getQueryId(), queryResultProducer);
+            JetQueryResultProducer queryResultProducer = new JetQueryResultProducer();
+            String queryIdStr = plan.getQueryId().toString();
+            Object oldValue = resultConsumerRegistry.put(queryIdStr, queryResultProducer);
             assert oldValue == null : oldValue;
 
-            jetInstance.newJob(plan.getDag());
+            try {
+                Job job = jetInstance.newJob(plan.getDag());
+                job.getFuture().whenComplete((r, t) -> {
+                    if (t != null) {
+                        queryResultProducer.onError(QueryException.error(t.toString()));
+                    }
+                });
+            } catch (Throwable e) {
+                resultConsumerRegistry.remove(queryIdStr);
+                throw e;
+            }
 
             return new JetSqlResultImpl(plan.getQueryId(), queryResultProducer, plan.getRowMetadata());
         }

@@ -27,8 +27,6 @@ import com.hazelcast.jet.sql.impl.schema.MappingStorage;
 import com.hazelcast.spi.impl.NodeEngine;
 import com.hazelcast.sql.SqlResult;
 import com.hazelcast.sql.impl.JetSqlCoreBackend;
-import com.hazelcast.sql.impl.QueryId;
-import com.hazelcast.sql.impl.QueryResultProducer;
 import com.hazelcast.sql.impl.optimizer.SqlPlan;
 import com.hazelcast.sql.impl.schema.TableResolver;
 import com.hazelcast.sql.impl.schema.map.JetMapMetadataResolver;
@@ -44,7 +42,7 @@ public class JetSqlCoreBackendImpl implements JetSqlCoreBackend, ManagedService 
 
     private MappingCatalog catalog;
     private JetSqlBackend sqlBackend;
-    private Map<QueryId, QueryResultProducer> resultConsumerRegistry;
+    private Map<String, JetQueryResultProducer> resultConsumerRegistry;
 
     @SuppressWarnings("unused") // used through reflection
     public void init(@Nonnull JetInstance jetInstance) {
@@ -54,12 +52,11 @@ public class JetSqlCoreBackendImpl implements JetSqlCoreBackend, ManagedService 
         MappingStorage mappingStorage = new MappingStorage(nodeEngine);
         SqlConnectorCache connectorCache = new SqlConnectorCache(nodeEngine);
         MappingCatalog mappingCatalog = new MappingCatalog(nodeEngine, mappingStorage, connectorCache);
-        Map<QueryId, QueryResultProducer> resultConsumerRegistry = new ConcurrentHashMap<>();
-        JetPlanExecutor planExecutor = new JetPlanExecutor(mappingCatalog, jetInstance, resultConsumerRegistry);
 
+        this.resultConsumerRegistry = new ConcurrentHashMap<>();
+        JetPlanExecutor planExecutor = new JetPlanExecutor(mappingCatalog, jetInstance, resultConsumerRegistry);
         this.catalog = mappingCatalog;
         this.sqlBackend = new JetSqlBackend(nodeEngine, planExecutor);
-        this.resultConsumerRegistry = resultConsumerRegistry;
     }
 
     @Override
@@ -94,7 +91,7 @@ public class JetSqlCoreBackendImpl implements JetSqlCoreBackend, ManagedService 
         return ((JetPlan) plan).execute();
     }
 
-    public Map<QueryId, QueryResultProducer> getResultConsumerRegistry() {
+    public Map<String, JetQueryResultProducer> getResultConsumerRegistry() {
         return resultConsumerRegistry;
     }
 
