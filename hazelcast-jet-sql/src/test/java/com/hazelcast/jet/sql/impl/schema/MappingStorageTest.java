@@ -16,10 +16,7 @@
 
 package com.hazelcast.jet.sql.impl.schema;
 
-import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.jet.SimpleTestInClusterSupport;
-import com.hazelcast.test.TestHazelcastInstanceFactory;
-import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -31,25 +28,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class MappingStorageTest extends SimpleTestInClusterSupport {
 
-    private static final TestHazelcastInstanceFactory FACTORY = new TestHazelcastInstanceFactory();
-
-    private static HazelcastInstance instance;
-
     private MappingStorage storage;
 
     @BeforeClass
-    public static void beforeClass() {
-        instance = FACTORY.newHazelcastInstance();
+    public static void setUpClass() {
+        initialize(1, null);
     }
 
     @Before
     public void before() {
-        storage = new MappingStorage(nodeEngine(instance));
-    }
-
-    @AfterClass
-    public static void afterClass() {
-        FACTORY.shutdownAll();
+        storage = new MappingStorage(nodeEngine(instances()[0].getHazelcastInstance()));
     }
 
     @Test
