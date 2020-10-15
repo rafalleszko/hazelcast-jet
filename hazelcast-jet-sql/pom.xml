@@ -73,6 +73,9 @@
             <version>${jackson.jr.version}</version>
         </dependency>
 
+        <!-- TODO: json & json libs part of sql by default ??? -->
+        <!-- TODO: how to package i.e. Kafka ??? -->
+
         <dependency>
             <groupId>com.hazelcast.jet</groupId>
             <artifactId>hazelcast-jet-avro</artifactId>
