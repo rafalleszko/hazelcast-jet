@@ -33,14 +33,14 @@ import java.util.Map;
 
 import static com.hazelcast.sql.impl.QueryUtils.CATALOG;
 import static java.util.Arrays.asList;
+import static java.util.Collections.singletonList;
 
 public class MappingCatalog implements TableResolver {
 
     public static final String SCHEMA_NAME_PUBLIC = "public";
     public static final String SCHEMA_NAME_INFORMATION_SCHEMA = "information_schema";
 
-    private static final List<List<String>> SEARCH_PATHS = asList(
-            asList(CATALOG, SCHEMA_NAME_INFORMATION_SCHEMA),
+    private static final List<List<String>> SEARCH_PATHS = singletonList(
             asList(CATALOG, SCHEMA_NAME_PUBLIC)
     );
 

@@ -82,7 +82,7 @@ public class SqlInfoSchemaTest extends SqlTestSupport {
     public void when_predicateAndProjectionIsUsed_then_correctRowsAndColumnsAreReturned() {
         assertRowsAnyOrder(
                 "SELECT mapping_name, UPPER(mapping_catalog), column_name, data_type "
-                        + "FROM columns "
+                        + "FROM information_schema.columns "
                         + "WHERE column_name = 'this'",
                 singletonList(
                         new Row(name, "HAZELCAST", "this", "VARCHAR")
