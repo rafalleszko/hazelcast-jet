@@ -65,10 +65,8 @@ class KvProjector {
                 injectors[i] = DISCARDING_INJECTOR;
             } else {
                 QueryPath path = paths[i];
-                QueryDataType type = types[i];
-                injectors[i] = path.isKey()
-                        ? keyTarget.createInjector(path.getPath(), type)
-                        : valueTarget.createInjector(path.getPath(), type);
+                UpsertTarget target = path.isKey() ? keyTarget : valueTarget;
+                injectors[i] = target.createInjector(path.getPath(), types[i]);
             }
         }
         return injectors;

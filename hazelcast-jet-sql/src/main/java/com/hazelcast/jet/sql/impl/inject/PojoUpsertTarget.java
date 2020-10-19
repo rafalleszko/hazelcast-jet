@@ -63,13 +63,12 @@ class PojoUpsertTarget implements UpsertTarget {
     private UpsertInjector createMethodInjector(@Nonnull Method method) {
         return value -> {
             if (value == null && method.getParameterTypes()[0].isPrimitive()) {
-                throw QueryException.error("Cannot pass NULL to a method with a primitive argument");
+                throw QueryException.error("Cannot pass NULL to a method with a primitive argument: " + method);
             }
             try {
                 method.invoke(pojo, value);
             } catch (IllegalAccessException | InvocationTargetException e) {
-                throw QueryException.error("Invocation of " + method.getClass().getName() + "." + method.getName()
-                        + "() failed: " + e, e);
+                throw QueryException.error("Invocation of '" + method + "' failed: " + e, e);
             }
         };
     }
@@ -77,13 +76,12 @@ class PojoUpsertTarget implements UpsertTarget {
     private UpsertInjector createFieldInjector(@Nonnull Field field) {
         return value -> {
             if (value == null && field.getType().isPrimitive()) {
-                throw QueryException.error("Cannot set NULL to a primitive field");
+                throw QueryException.error("Cannot set NULL to a primitive field: " + field);
             }
             try {
                 field.set(pojo, value);
             } catch (IllegalAccessException e) {
-                throw QueryException.error("Failed to set field " + field.getClass().getName() + "." + field.getName()
-                        + ": " + e, e);
+                throw QueryException.error("Failed to set field " + field + ": " + e, e);
             }
         };
     }
@@ -92,7 +90,7 @@ class PojoUpsertTarget implements UpsertTarget {
     private UpsertInjector createFailingInjector(String path) {
         return value -> {
             if (value != null) {
-                throw QueryException.error("Cannot set field \"" + path + "\" of class " + clazz.getName()
+                throw QueryException.error("Cannot set property \"" + path + "\" to class " + clazz.getName()
                         + ": no set-method or public field available");
             }
         };
