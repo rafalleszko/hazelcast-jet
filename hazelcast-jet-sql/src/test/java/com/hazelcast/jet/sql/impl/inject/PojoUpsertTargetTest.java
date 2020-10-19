@@ -90,7 +90,7 @@ public class PojoUpsertTargetTest {
         target.init();
         assertThatThrownBy(() -> injector.set(1))
                 .isInstanceOf(QueryException.class)
-                .hasMessageContaining("Cannot set field \"field\" of class java.lang.Object: " +
+                .hasMessageContaining("Cannot set property \"field\" to class java.lang.Object: " +
                         "no set-method or public field available");
     }
 
