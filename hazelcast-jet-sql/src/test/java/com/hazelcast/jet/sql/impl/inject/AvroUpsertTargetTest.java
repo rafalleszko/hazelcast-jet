@@ -16,6 +16,7 @@
 
 package com.hazelcast.jet.sql.impl.inject;
 
+import com.hazelcast.sql.impl.type.QueryDataType;
 import org.apache.avro.Schema;
 import org.apache.avro.SchemaBuilder;
 import org.apache.avro.generic.GenericRecordBuilder;
@@ -35,38 +36,39 @@ public class AvroUpsertTargetTest {
     @Test
     public void test_set() {
         Schema schema = SchemaBuilder.record("name")
-                                     .fields()
-                                     .name("null").type().nullable().record("nested").fields().endRecord().noDefault()
-                                     .name("string").type().stringType().noDefault()
-                                     .name("boolean").type().booleanType().noDefault()
-                                     .name("byte").type().intType().noDefault()
-                                     .name("short").type().intType().noDefault()
-                                     .name("int").type().intType().noDefault()
-                                     .name("long").type().longType().noDefault()
-                                     .name("float").type().floatType().noDefault()
-                                     .name("double").type().doubleType().noDefault()
-                                     .name("decimal").type().stringType().noDefault()
-                                     .name("time").type().stringType().noDefault()
-                                     .name("date").type().stringType().noDefault()
-                                     .name("timestamp").type().stringType().noDefault()
-                                     .name("timestampTz").type().stringType().noDefault()
-                                     .endRecord();
+                .fields()
+                .name("null").type().nullType().noDefault()
+                .name("string").type().stringType().noDefault()
+                .name("boolean").type().booleanType().noDefault()
+                .name("byte").type().intType().noDefault()
+                .name("short").type().intType().noDefault()
+                .name("int").type().intType().noDefault()
+                .name("long").type().longType().noDefault()
+                .name("float").type().floatType().noDefault()
+                .name("double").type().doubleType().noDefault()
+                .name("decimal").type().stringType().noDefault()
+                .name("time").type().stringType().noDefault()
+                .name("date").type().stringType().noDefault()
+                .name("timestamp").type().stringType().noDefault()
+                .name("timestampTz").type().stringType().noDefault()
+                .endRecord();
 
         UpsertTarget target = new AvroUpsertTarget(schema.toString());
-        UpsertInjector nullInjector = target.createInjector("null");
-        UpsertInjector stringInjector = target.createInjector("string");
-        UpsertInjector booleanInjector = target.createInjector("boolean");
-        UpsertInjector byteInjector = target.createInjector("byte");
-        UpsertInjector shortInjector = target.createInjector("short");
-        UpsertInjector intInjector = target.createInjector("int");
-        UpsertInjector longInjector = target.createInjector("long");
-        UpsertInjector floatInjector = target.createInjector("float");
-        UpsertInjector doubleInjector = target.createInjector("double");
-        UpsertInjector decimalInjector = target.createInjector("decimal");
-        UpsertInjector timeInjector = target.createInjector("time");
-        UpsertInjector dateInjector = target.createInjector("date");
-        UpsertInjector timestampInjector = target.createInjector("timestamp");
-        UpsertInjector timestampTzInjector = target.createInjector("timestampTz");
+        UpsertInjector nullInjector = target.createInjector("null", QueryDataType.OBJECT);
+        UpsertInjector stringInjector = target.createInjector("string", QueryDataType.VARCHAR);
+        UpsertInjector booleanInjector = target.createInjector("boolean", QueryDataType.BOOLEAN);
+        UpsertInjector byteInjector = target.createInjector("byte", QueryDataType.TINYINT);
+        UpsertInjector shortInjector = target.createInjector("short", QueryDataType.SMALLINT);
+        UpsertInjector intInjector = target.createInjector("int", QueryDataType.INT);
+        UpsertInjector longInjector = target.createInjector("long", QueryDataType.BIGINT);
+        UpsertInjector floatInjector = target.createInjector("float", QueryDataType.REAL);
+        UpsertInjector doubleInjector = target.createInjector("double", QueryDataType.DOUBLE);
+        UpsertInjector decimalInjector = target.createInjector("decimal", QueryDataType.DECIMAL);
+        UpsertInjector timeInjector = target.createInjector("time", QueryDataType.TIME);
+        UpsertInjector dateInjector = target.createInjector("date", QueryDataType.DATE);
+        UpsertInjector timestampInjector = target.createInjector("timestamp", QueryDataType.TIMESTAMP);
+        UpsertInjector timestampTzInjector =
+                target.createInjector("timestampTz", QueryDataType.TIMESTAMP_WITH_TZ_OFFSET_DATE_TIME);
 
         target.init();
         nullInjector.set(null);

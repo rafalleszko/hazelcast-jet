@@ -16,6 +16,9 @@
 
 package com.hazelcast.jet.sql.impl.inject;
 
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.hazelcast.sql.impl.type.QueryDataType;
 import org.junit.Test;
 
 import java.math.BigDecimal;
@@ -32,23 +35,26 @@ public class JsonUpsertTargetTest {
     @Test
     public void test_set() {
         UpsertTarget target = new JsonUpsertTarget();
-        UpsertInjector nullInjector = target.createInjector("null");
-        UpsertInjector stringInjector = target.createInjector("string");
-        UpsertInjector booleanInjector = target.createInjector("boolean");
-        UpsertInjector byteInjector = target.createInjector("byte");
-        UpsertInjector shortInjector = target.createInjector("short");
-        UpsertInjector intInjector = target.createInjector("int");
-        UpsertInjector longInjector = target.createInjector("long");
-        UpsertInjector floatInjector = target.createInjector("float");
-        UpsertInjector doubleInjector = target.createInjector("double");
-        UpsertInjector decimalInjector = target.createInjector("decimal");
-        UpsertInjector timeInjector = target.createInjector("time");
-        UpsertInjector dateInjector = target.createInjector("date");
-        UpsertInjector timestampInjector = target.createInjector("timestamp");
-        UpsertInjector timestampTzInjector = target.createInjector("timestampTz");
+        UpsertInjector nullInjector = target.createInjector("null", QueryDataType.OBJECT);
+        UpsertInjector objectInjector = target.createInjector("object", QueryDataType.OBJECT);
+        UpsertInjector stringInjector = target.createInjector("string", QueryDataType.VARCHAR);
+        UpsertInjector booleanInjector = target.createInjector("boolean", QueryDataType.BOOLEAN);
+        UpsertInjector byteInjector = target.createInjector("byte", QueryDataType.TINYINT);
+        UpsertInjector shortInjector = target.createInjector("short", QueryDataType.SMALLINT);
+        UpsertInjector intInjector = target.createInjector("int", QueryDataType.INT);
+        UpsertInjector longInjector = target.createInjector("long", QueryDataType.BIGINT);
+        UpsertInjector floatInjector = target.createInjector("float", QueryDataType.REAL);
+        UpsertInjector doubleInjector = target.createInjector("double", QueryDataType.DOUBLE);
+        UpsertInjector decimalInjector = target.createInjector("decimal", QueryDataType.DECIMAL);
+        UpsertInjector timeInjector = target.createInjector("time", QueryDataType.TIME);
+        UpsertInjector dateInjector = target.createInjector("date", QueryDataType.DATE);
+        UpsertInjector timestampInjector = target.createInjector("timestamp", QueryDataType.TIMESTAMP);
+        UpsertInjector timestampTzInjector =
+                target.createInjector("timestampTz", QueryDataType.TIMESTAMP_WITH_TZ_OFFSET_DATE_TIME);
 
         target.init();
         nullInjector.set(null);
+        objectInjector.set(new ObjectNode(JsonNodeFactory.instance));
         stringInjector.set("string");
         booleanInjector.set(true);
         byteInjector.set((byte) 127);
@@ -66,6 +72,7 @@ public class JsonUpsertTargetTest {
 
         assertThat(json.toString()).isEqualTo("{"
                 + "\"null\":null"
+                + ",\"object\":{}"
                 + ",\"string\":\"string\""
                 + ",\"boolean\":true"
                 + ",\"byte\":127"

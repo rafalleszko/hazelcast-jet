@@ -98,6 +98,7 @@ final class MetadataPortableResolver implements KvMetadataResolver {
                 QueryPath path = new QueryPath(classField.getKey(), isKey);
                 QueryDataType type = resolvePortableType(classField.getValue());
                 String name = classField.getKey();
+
                 fields.add(new MappingField(name, type, path.toString()));
             }
             return fields;
@@ -163,8 +164,7 @@ final class MetadataPortableResolver implements KvMetadataResolver {
             QueryDataType type = entry.getValue().type();
             String name = entry.getValue().name();
 
-            TableField field = new MapTableField(name, type, false, path);
-            fields.add(field);
+            fields.add(new MapTableField(name, type, false, path));
         }
         return new KvMetadata(
                 fields,

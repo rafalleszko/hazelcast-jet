@@ -18,6 +18,7 @@ package com.hazelcast.jet.sql.impl.inject;
 
 import com.google.common.collect.ImmutableMap;
 import com.hazelcast.sql.impl.QueryException;
+import com.hazelcast.sql.impl.type.QueryDataType;
 import org.junit.Test;
 
 import java.util.Objects;
@@ -37,9 +38,9 @@ public class PojoUpsertTargetTest {
                         "stringField", String.class.getName()
                 )
         );
-        UpsertInjector intFieldInjector = target.createInjector("intField");
-        UpsertInjector longFieldInjector = target.createInjector("longField");
-        UpsertInjector stringFieldInjector = target.createInjector("stringField");
+        UpsertInjector intFieldInjector = target.createInjector("intField", QueryDataType.INT);
+        UpsertInjector longFieldInjector = target.createInjector("longField", QueryDataType.BIGINT);
+        UpsertInjector stringFieldInjector = target.createInjector("stringField", QueryDataType.VARCHAR);
 
         target.init();
         intFieldInjector.set(1);
@@ -56,7 +57,7 @@ public class PojoUpsertTargetTest {
                 Pojo.class.getName(),
                 ImmutableMap.of("intField", int.class.getName())
         );
-        UpsertInjector injector = target.createInjector("intField");
+        UpsertInjector injector = target.createInjector("intField", QueryDataType.INT);
 
         target.init();
         assertThatThrownBy(() -> injector.set(null))
@@ -70,7 +71,7 @@ public class PojoUpsertTargetTest {
                 Pojo.class.getName(),
                 ImmutableMap.of("longField", long.class.getName())
         );
-        UpsertInjector injector = target.createInjector("longField");
+        UpsertInjector injector = target.createInjector("longField", QueryDataType.BIGINT);
 
         target.init();
         assertThatThrownBy(() -> injector.set(null))
@@ -84,7 +85,7 @@ public class PojoUpsertTargetTest {
                 Object.class.getName(),
                 ImmutableMap.of("field", int.class.getName())
         );
-        UpsertInjector injector = target.createInjector("field");
+        UpsertInjector injector = target.createInjector("field", QueryDataType.INT);
 
         target.init();
         assertThatThrownBy(() -> injector.set(1))
@@ -99,7 +100,7 @@ public class PojoUpsertTargetTest {
                 Object.class.getName(),
                 ImmutableMap.of("field", int.class.getName())
         );
-        UpsertInjector injector = target.createInjector("field");
+        UpsertInjector injector = target.createInjector("field", QueryDataType.INT);
 
         target.init();
         injector.set(null);

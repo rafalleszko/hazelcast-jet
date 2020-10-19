@@ -157,6 +157,7 @@ public class SqlJsonTest extends SqlTestSupport {
                 + ", \"date\" DATE"
                 + ", \"timestamp\" TIMESTAMP"
                 + ", timestampTz TIMESTAMP WITH TIME ZONE"
+                + ", object OBJECT"
                 + ") TYPE " + IMapSqlConnector.TYPE_NAME + ' '
                 + "OPTIONS ("
                 + '"' + OPTION_KEY_FORMAT + "\" '" + JSON_FORMAT + '\''
@@ -182,7 +183,8 @@ public class SqlJsonTest extends SqlTestSupport {
                         LocalDate.of(2020, 4, 15),
                         LocalDateTime.of(2020, 4, 15, 12, 23, 34, 1_000_000),
                         ZonedDateTime.of(2020, 4, 15, 12, 23, 34, 200_000_000, UTC)
-                                     .withZoneSameInstant(systemDefault()).toOffsetDateTime()
+                                     .withZoneSameInstant(systemDefault()).toOffsetDateTime(),
+                        null
                 ))
         );
     }

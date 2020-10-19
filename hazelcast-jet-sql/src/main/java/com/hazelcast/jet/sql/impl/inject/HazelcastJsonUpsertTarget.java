@@ -19,12 +19,14 @@ package com.hazelcast.jet.sql.impl.inject;
 import com.hazelcast.core.HazelcastJsonValue;
 import com.hazelcast.internal.json.Json;
 import com.hazelcast.internal.json.JsonObject;
+import com.hazelcast.internal.json.JsonValue;
+import com.hazelcast.sql.impl.QueryException;
 import com.hazelcast.sql.impl.type.QueryDataType;
 
 import javax.annotation.concurrent.NotThreadSafe;
 
 @NotThreadSafe
-class HazelcastJsonUpsertTarget extends JsonUpsertTarget {
+class HazelcastJsonUpsertTarget implements UpsertTarget {
 
     private JsonObject json;
 
@@ -32,26 +34,83 @@ class HazelcastJsonUpsertTarget extends JsonUpsertTarget {
     }
 
     @Override
-    public UpsertInjector createInjector(String path) {
-        return value -> {
-            if (value instanceof Boolean) {
-                json.add(path, (boolean) value);
-            } else if (value instanceof Byte) {
-                json.add(path, (byte) value);
-            } else if (value instanceof Short) {
-                json.add(path, (short) value);
-            } else if (value instanceof Integer) {
-                json.add(path, (int) value);
-            } else if (value instanceof Long) {
-                json.add(path, (long) value);
-            } else if (value instanceof Float) {
-                json.add(path, (float) value);
-            } else if (value instanceof Double) {
-                json.add(path, (double) value);
-            } else {
-                json.add(path, (String) QueryDataType.VARCHAR.convert(value));
-            }
-        };
+    @SuppressWarnings("checkstyle:ReturnCount")
+    public UpsertInjector createInjector(String path, QueryDataType type) {
+        switch (type.getTypeFamily()) {
+            case BOOLEAN:
+                return value -> {
+                    if (value == null) {
+                        json.add(path, (String) null);
+                    } else {
+                        json.add(path, (boolean) value);
+                    }
+                };
+            case TINYINT:
+                return value -> {
+                    if (value == null) {
+                        json.add(path, (String) null);
+                    } else {
+                        json.add(path, (byte) value);
+                    }
+                };
+            case SMALLINT:
+                return value -> {
+                    if (value == null) {
+                        json.add(path, (String) null);
+                    } else {
+                        json.add(path, (short) value);
+                    }
+                };
+            case INTEGER:
+                return value -> {
+                    if (value == null) {
+                        json.add(path, (String) null);
+                    } else {
+                        json.add(path, (int) value);
+                    }
+                };
+            case BIGINT:
+                return value -> {
+                    if (value == null) {
+                        json.add(path, (String) null);
+                    } else {
+                        json.add(path, (long) value);
+                    }
+                };
+            case REAL:
+                return value -> {
+                    if (value == null) {
+                        json.add(path, (String) null);
+                    } else {
+                        json.add(path, (float) value);
+                    }
+                };
+            case DOUBLE:
+                return value -> {
+                    if (value == null) {
+                        json.add(path, (String) null);
+                    } else {
+                        json.add(path, (double) value);
+                    }
+                };
+            case DECIMAL:
+            case TIME:
+            case DATE:
+            case TIMESTAMP:
+            case TIMESTAMP_WITH_TIME_ZONE:
+            case VARCHAR:
+                return value -> json.add(path, (String) QueryDataType.VARCHAR.convert(value));
+            default:
+                return value -> {
+                    if (value == null) {
+                        json.add(path, (String) null);
+                    } else if (value instanceof JsonValue) {
+                        json.add(path, (JsonValue) value);
+                    } else {
+                        throw QueryException.error("Cannot set field \"" + path + "\" of type " + type);
+                    }
+                };
+        }
     }
 
     @Override

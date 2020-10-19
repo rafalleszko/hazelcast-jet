@@ -16,9 +16,11 @@
 
 package com.hazelcast.jet.sql.impl.inject;
 
+import com.hazelcast.sql.impl.type.QueryDataType;
+
 public interface UpsertTarget {
 
-    UpsertInjector createInjector(String path);
+    UpsertInjector createInjector(String path, QueryDataType type);
 
     void init();
 

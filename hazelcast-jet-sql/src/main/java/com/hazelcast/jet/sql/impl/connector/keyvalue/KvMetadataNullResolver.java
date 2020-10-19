@@ -105,7 +105,7 @@ public class KvMetadataNullResolver implements KvMetadataResolver {
 
     private static class NullUpsertTarget implements UpsertTarget {
         @Override
-        public UpsertInjector createInjector(String path) {
+        public UpsertInjector createInjector(String path, QueryDataType type) {
             throw new IllegalStateException("NullQueryTarget doesn't support this operation");
         }
 

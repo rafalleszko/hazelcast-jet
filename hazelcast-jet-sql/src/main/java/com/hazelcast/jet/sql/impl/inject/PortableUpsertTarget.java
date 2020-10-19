@@ -20,10 +20,12 @@ import com.hazelcast.internal.serialization.InternalSerializationService;
 import com.hazelcast.nio.serialization.ClassDefinition;
 import com.hazelcast.nio.serialization.FieldDefinition;
 import com.hazelcast.nio.serialization.FieldType;
+import com.hazelcast.nio.serialization.Portable;
 import com.hazelcast.nio.serialization.PortableReader;
 import com.hazelcast.nio.serialization.PortableWriter;
 import com.hazelcast.nio.serialization.VersionedPortable;
 import com.hazelcast.sql.impl.QueryException;
+import com.hazelcast.sql.impl.type.QueryDataType;
 
 import javax.annotation.concurrent.NotThreadSafe;
 import java.io.IOException;
@@ -55,14 +57,14 @@ class PortableUpsertTarget implements UpsertTarget {
         if (classDefinition == null) {
             throw QueryException.error(
                     "Unable to find class definition for factoryId: " + factoryId
-                            + ", classId: " + classId + ", classVersion: " + classVersion
+                    + ", classId: " + classId + ", classVersion: " + classVersion
             );
         }
         return classDefinition;
     }
 
     @Override
-    public UpsertInjector createInjector(String path) {
+    public UpsertInjector createInjector(String path, QueryDataType type) {
         int fieldIndex = classDefinition.hasField(path) ? classDefinition.getField(path).getIndex() : -1;
         return value -> {
             if (fieldIndex == -1 && value != null) {
@@ -155,7 +157,13 @@ class PortableUpsertTarget implements UpsertTarget {
                     writer.writeUTF(name, (String) value);
                     break;
                 default:
-                    throw QueryException.error("Unsupported type - " + type.name());
+                    if (value == null) {
+                        writer.writePortable(name, null);
+                    } else if (value instanceof Portable) {
+                        writer.writePortable(name, (Portable) value);
+                    } else {
+                        throw QueryException.error("Cannot set field \"" + name + "\" of type " + type);
+                    }
             }
         }
 

@@ -43,6 +43,7 @@ public final class AllCanonicalTypesValue implements Serializable {
     private LocalDate date;
     private LocalDateTime timestamp;
     private OffsetDateTime timestampTz;
+    private Object object;
 
     public AllCanonicalTypesValue() {
     }
@@ -50,7 +51,7 @@ public final class AllCanonicalTypesValue implements Serializable {
     @SuppressWarnings({"checkstyle:ParameterNumber", "checkstyle:ExecutableStatementCount"})
     public AllCanonicalTypesValue(String string, boolean boolean0, byte byte0, short short0, int int0, long long0,
                                   float float0, double double0, BigDecimal decimal, LocalTime time,
-                                  LocalDate date, LocalDateTime timestamp, OffsetDateTime timestampTz
+                                  LocalDate date, LocalDateTime timestamp, OffsetDateTime timestampTz, Object object
     ) {
         this.string = string;
         this.boolean0 = boolean0;
@@ -65,6 +66,7 @@ public final class AllCanonicalTypesValue implements Serializable {
         this.date = date;
         this.timestamp = timestamp;
         this.timestampTz = timestampTz;
+        this.object = object;
     }
 
     public String getString() {
@@ -171,6 +173,14 @@ public final class AllCanonicalTypesValue implements Serializable {
         this.timestampTz = timestampTz;
     }
 
+    public Object getObject() {
+        return object;
+    }
+
+    public void setObject(Object object) {
+        this.object = object;
+    }
+
     @Override
     public String toString() {
         return "AllTypesValue{" +
@@ -187,6 +197,7 @@ public final class AllCanonicalTypesValue implements Serializable {
                 ", date=" + date +
                 ", timestamp=" + timestamp +
                 ", timestampTz=" + timestampTz +
+                ", object=" + object +
                 '}';
     }
 
@@ -211,7 +222,8 @@ public final class AllCanonicalTypesValue implements Serializable {
                 Objects.equals(time, that.time) &&
                 Objects.equals(date, that.date) &&
                 Objects.equals(timestamp, that.timestamp) &&
-                Objects.equals(timestampTz, that.timestampTz);
+                Objects.equals(timestampTz, that.timestampTz) &&
+                Objects.equals(object, that.object);
     }
 
     @Override
@@ -228,7 +240,8 @@ public final class AllCanonicalTypesValue implements Serializable {
                 time,
                 date,
                 timestamp,
-                timestampTz
+                timestampTz,
+                object
         );
     }
 }

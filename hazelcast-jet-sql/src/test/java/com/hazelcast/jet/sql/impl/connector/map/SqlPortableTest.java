@@ -113,6 +113,7 @@ public class SqlPortableTest extends SqlTestSupport {
                         .addLongField("long")
                         .addFloatField("float")
                         .addDoubleField("double")
+                        .addPortableField("object", personClassDefinition)
                         .build();
         serializationService.getPortableContext().registerClassDefinition(allTypesValueClassDefinition);
     }
@@ -377,6 +378,7 @@ public class SqlPortableTest extends SqlTestSupport {
                 + ", 9223372036854775806"
                 + ", 1234567890.1"
                 + ", 123451234567890.1"
+                + ", null"
                 + ")"
         );
 
@@ -391,20 +393,22 @@ public class SqlPortableTest extends SqlTestSupport {
         assertThat(allTypesReader.readLong("long")).isEqualTo(9223372036854775806L);
         assertThat(allTypesReader.readFloat("float")).isEqualTo(1234567890.1F);
         assertThat(allTypesReader.readDouble("double")).isEqualTo(123451234567890.1D);
+        assertThat(allTypesReader.readGenericRecord("object")).isNull();
 
         assertRowsAnyOrder(
                 "SELECT * FROM " + name,
                 singletonList(new Row(
-                        13,
-                        "string",
-                        "a",
-                        true,
-                        (byte) 126,
-                        (short) 32766,
-                        2147483646,
-                        9223372036854775806L,
-                        1234567890.1F,
-                        123451234567890.1D
+                       13
+                       , "string"
+                       , "a"
+                       , true
+                       , (byte) 126
+                       , (short) 32766
+                       , 2147483646
+                       , 9223372036854775806L
+                       , 1234567890.1F
+                       , 123451234567890.1D
+                       , null
                 ))
         );
     }

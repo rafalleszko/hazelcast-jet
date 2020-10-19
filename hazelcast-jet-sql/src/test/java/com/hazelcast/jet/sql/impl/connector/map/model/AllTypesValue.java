@@ -54,6 +54,7 @@ public final class AllTypesValue implements Serializable {
     private Instant instant;
     private ZonedDateTime zonedDateTime;
     private OffsetDateTime offsetDateTime;
+    private Object object;
 
     public AllTypesValue() {
     }
@@ -63,7 +64,7 @@ public final class AllTypesValue implements Serializable {
                          long long0, float float0, double double0, BigDecimal bigDecimal, BigInteger bigInteger,
                          LocalTime localTime, LocalDate localDate, LocalDateTime localDateTime, Date date,
                          GregorianCalendar calendar, Instant instant, ZonedDateTime zonedDateTime,
-                         OffsetDateTime offsetDateTime
+                         OffsetDateTime offsetDateTime, Object object
     ) {
         this.string = string;
         this.character0 = character0;
@@ -84,6 +85,7 @@ public final class AllTypesValue implements Serializable {
         this.instant = instant;
         this.zonedDateTime = zonedDateTime;
         this.offsetDateTime = offsetDateTime;
+        this.object = object;
     }
 
     public String getString() {
@@ -238,6 +240,14 @@ public final class AllTypesValue implements Serializable {
         this.offsetDateTime = offsetDateTime;
     }
 
+    public Object getObject() {
+        return object;
+    }
+
+    public void setObject(Object object) {
+        this.object = object;
+    }
+
     @Override
     public String toString() {
         return "AllTypesValue{" +
@@ -260,6 +270,7 @@ public final class AllTypesValue implements Serializable {
                 ", instant=" + instant +
                 ", zonedDateTime=" + zonedDateTime +
                 ", offsetDateTime=" + offsetDateTime +
+                ", object=" + object +
                 '}';
     }
 
@@ -290,7 +301,8 @@ public final class AllTypesValue implements Serializable {
                 Objects.equals(calendar, that.calendar) &&
                 Objects.equals(instant, that.instant) &&
                 Objects.equals(zonedDateTime, that.zonedDateTime) &&
-                Objects.equals(offsetDateTime, that.offsetDateTime);
+                Objects.equals(offsetDateTime, that.offsetDateTime) &&
+                Objects.equals(object, that.object);
     }
 
     @Override
@@ -313,7 +325,8 @@ public final class AllTypesValue implements Serializable {
                 calendar,
                 instant,
                 zonedDateTime,
-                offsetDateTime
+                offsetDateTime,
+                object
         );
     }
 }

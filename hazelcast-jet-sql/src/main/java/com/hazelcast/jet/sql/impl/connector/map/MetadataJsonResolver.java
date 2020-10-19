@@ -86,8 +86,7 @@ final class MetadataJsonResolver implements KvMetadataResolver {
             QueryDataType type = entry.getValue().type();
             String name = entry.getValue().name();
 
-            TableField field = new MapTableField(name, type, false, path);
-            fields.add(field);
+            fields.add(new MapTableField(name, type, false, path));
         }
         return new KvMetadata(
                 fields,

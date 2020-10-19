@@ -70,7 +70,7 @@ public class KvMetadataAvroResolverTest {
         );
         assertThat(metadata.getFields()).containsExactly(
                 key ? new MapTableField[0] :
-                        new MapTableField[] {
+                        new MapTableField[]{
                                 new MapTableField("field", QueryDataType.INT, false, new QueryPath("extField", false))
                         });
     }
@@ -110,7 +110,12 @@ public class KvMetadataAvroResolverTest {
                         field("long", QueryDataType.BIGINT, prefix + ".long"),
                         field("float", QueryDataType.REAL, prefix + ".float"),
                         field("double", QueryDataType.DOUBLE, prefix + ".double"),
-                        field("decimal", QueryDataType.DECIMAL, prefix + ".decimal")
+                        field("decimal", QueryDataType.DECIMAL, prefix + ".decimal"),
+                        field("time", QueryDataType.TIME, prefix + ".time"),
+                        field("date", QueryDataType.DATE, prefix + ".date"),
+                        field("timestamp", QueryDataType.TIMESTAMP, prefix + ".timestamp"),
+                        field("timestampTz", QueryDataType.TIMESTAMP_WITH_TZ_OFFSET_DATE_TIME, prefix + ".timestampTz"),
+                        field("object", QueryDataType.OBJECT, prefix + ".object")
                 ),
                 emptyMap(),
                 null
@@ -125,7 +130,13 @@ public class KvMetadataAvroResolverTest {
                 new MapTableField("long", QueryDataType.BIGINT, false, QueryPath.create(prefix + ".long")),
                 new MapTableField("float", QueryDataType.REAL, false, QueryPath.create(prefix + ".float")),
                 new MapTableField("double", QueryDataType.DOUBLE, false, QueryPath.create(prefix + ".double")),
-                new MapTableField("decimal", QueryDataType.DECIMAL, false, QueryPath.create(prefix + ".decimal"))
+                new MapTableField("decimal", QueryDataType.DECIMAL, false, QueryPath.create(prefix + ".decimal")),
+                new MapTableField("time", QueryDataType.TIME, false, QueryPath.create(prefix + ".time")),
+                new MapTableField("date", QueryDataType.DATE, false, QueryPath.create(prefix + ".date")),
+                new MapTableField("timestamp", QueryDataType.TIMESTAMP, false, QueryPath.create(prefix + ".timestamp")),
+                new MapTableField("timestampTz", QueryDataType.TIMESTAMP_WITH_TZ_OFFSET_DATE_TIME, false,
+                        QueryPath.create(prefix + ".timestampTz")),
+                new MapTableField("object", QueryDataType.OBJECT, false, QueryPath.create(prefix + ".object"))
         );
         assertThat(metadata.getQueryTargetDescriptor()).isEqualTo(AvroQueryTargetDescriptor.INSTANCE);
         assertThat(metadata.getUpsertTargetDescriptor())
@@ -144,6 +155,11 @@ public class KvMetadataAvroResolverTest {
                                         + ",{\"name\":\"float\",\"type\":[\"null\",\"float\"],\"default\":null}"
                                         + ",{\"name\":\"double\",\"type\":[\"null\",\"double\"],\"default\":null}"
                                         + ",{\"name\":\"decimal\",\"type\":[\"null\",\"string\"],\"default\":null}"
+                                        + ",{\"name\":\"time\",\"type\":[\"null\",\"string\"],\"default\":null}"
+                                        + ",{\"name\":\"date\",\"type\":[\"null\",\"string\"],\"default\":null}"
+                                        + ",{\"name\":\"timestamp\",\"type\":[\"null\",\"string\"],\"default\":null}"
+                                        + ",{\"name\":\"timestampTz\",\"type\":[\"null\",\"string\"],\"default\":null}"
+                                        + ",{\"name\":\"object\",\"type\":\"null\",\"default\":null}"
                                         + "]"
                                         + "}"
                         )

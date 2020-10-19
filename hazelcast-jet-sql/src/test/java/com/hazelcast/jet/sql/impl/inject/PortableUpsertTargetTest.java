@@ -21,7 +21,11 @@ import com.hazelcast.internal.serialization.impl.DefaultSerializationServiceBuil
 import com.hazelcast.internal.serialization.impl.InternalGenericRecord;
 import com.hazelcast.nio.serialization.ClassDefinition;
 import com.hazelcast.nio.serialization.ClassDefinitionBuilder;
+import com.hazelcast.nio.serialization.Portable;
+import com.hazelcast.nio.serialization.PortableReader;
+import com.hazelcast.nio.serialization.PortableWriter;
 import com.hazelcast.sql.impl.QueryException;
+import com.hazelcast.sql.impl.type.QueryDataType;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -34,8 +38,14 @@ public class PortableUpsertTargetTest {
     @Test
     public void test_set() throws IOException {
         InternalSerializationService ss = new DefaultSerializationServiceBuilder().build();
+
+        ClassDefinition innerClassDefinition = new ClassDefinitionBuilder(4, 5, 6).build();
+        ss.getPortableContext().registerClassDefinition(innerClassDefinition);
+
         ClassDefinition classDefinition =
                 new ClassDefinitionBuilder(1, 2, 3)
+                        .addPortableField("null", innerClassDefinition)
+                        .addPortableField("object", innerClassDefinition)
                         .addUTFField("string")
                         .addCharField("character")
                         .addBooleanField("boolean")
@@ -52,17 +62,21 @@ public class PortableUpsertTargetTest {
                 ss,
                 classDefinition.getFactoryId(), classDefinition.getClassId(), classDefinition.getVersion()
         );
-        UpsertInjector stringFieldInjector = target.createInjector("string");
-        UpsertInjector characterFieldInjector = target.createInjector("character");
-        UpsertInjector booleanFieldInjector = target.createInjector("boolean");
-        UpsertInjector byteFieldInjector = target.createInjector("byte");
-        UpsertInjector shortFieldInjector = target.createInjector("short");
-        UpsertInjector intFieldInjector = target.createInjector("int");
-        UpsertInjector longFieldInjector = target.createInjector("long");
-        UpsertInjector floatFieldInjector = target.createInjector("float");
-        UpsertInjector doubleFieldInjector = target.createInjector("double");
+        UpsertInjector nullFieldInjector = target.createInjector("null", QueryDataType.OBJECT);
+        UpsertInjector objectFieldInjector = target.createInjector("object", QueryDataType.OBJECT);
+        UpsertInjector stringFieldInjector = target.createInjector("string", QueryDataType.VARCHAR);
+        UpsertInjector characterFieldInjector = target.createInjector("character", QueryDataType.VARCHAR_CHARACTER);
+        UpsertInjector booleanFieldInjector = target.createInjector("boolean", QueryDataType.BOOLEAN);
+        UpsertInjector byteFieldInjector = target.createInjector("byte", QueryDataType.TINYINT);
+        UpsertInjector shortFieldInjector = target.createInjector("short", QueryDataType.SMALLINT);
+        UpsertInjector intFieldInjector = target.createInjector("int", QueryDataType.INT);
+        UpsertInjector longFieldInjector = target.createInjector("long", QueryDataType.BIGINT);
+        UpsertInjector floatFieldInjector = target.createInjector("float", QueryDataType.REAL);
+        UpsertInjector doubleFieldInjector = target.createInjector("double", QueryDataType.DOUBLE);
 
         target.init();
+        nullFieldInjector.set(null);
+        objectFieldInjector.set(new InnerPortable());
         stringFieldInjector.set("1");
         characterFieldInjector.set('2');
         booleanFieldInjector.set(true);
@@ -75,6 +89,8 @@ public class PortableUpsertTargetTest {
         Object portable = target.conclude();
 
         InternalGenericRecord record = ss.readAsInternalGenericRecord(ss.toData(portable));
+        assertThat(record.readGenericRecord("null")).isNull();
+        assertThat(record.readGenericRecord("object")).isNotNull();
         assertThat(record.readUTF("string")).isEqualTo("1");
         assertThat(record.readChar("character")).isEqualTo('2');
         assertThat(record.readBoolean("boolean")).isEqualTo(true);
@@ -99,7 +115,7 @@ public class PortableUpsertTargetTest {
                 ss,
                 classDefinition.getFactoryId(), classDefinition.getClassId(), classDefinition.getVersion()
         );
-        UpsertInjector injector = target.createInjector("field");
+        UpsertInjector injector = target.createInjector("field", QueryDataType.INT);
 
         target.init();
         assertThatThrownBy(() -> injector.set("1"))
@@ -120,7 +136,7 @@ public class PortableUpsertTargetTest {
                 ss,
                 classDefinition.getFactoryId(), classDefinition.getClassId(), classDefinition.getVersion()
         );
-        UpsertInjector injector = target.createInjector("field");
+        UpsertInjector injector = target.createInjector("field", QueryDataType.INT);
 
         target.init();
         injector.set(null);
@@ -128,5 +144,26 @@ public class PortableUpsertTargetTest {
 
         InternalGenericRecord record = ss.readAsInternalGenericRecord(ss.toData(portable));
         assertThat(record).isNotNull();
+    }
+
+    private static final class InnerPortable implements Portable {
+
+        @Override
+        public int getFactoryId() {
+            return 4;
+        }
+
+        @Override
+        public int getClassId() {
+            return 5;
+        }
+
+        @Override
+        public void writePortable(PortableWriter writer) {
+        }
+
+        @Override
+        public void readPortable(PortableReader reader) {
+        }
     }
 }

@@ -91,8 +91,7 @@ public final class KvMetadataAvroResolver implements KvMetadataResolver {
             QueryDataType type = entry.getValue().type();
             String name = entry.getValue().name();
 
-            TableField field = new MapTableField(name, type, false, path);
-            fields.add(field);
+            fields.add(new MapTableField(name, type, false, path));
         }
         return new KvMetadata(
                 fields,
@@ -135,11 +134,20 @@ public final class KvMetadataAvroResolver implements KvMetadataResolver {
                                    .unionOf().nullType().and().doubleType().endUnion()
                                    .nullDefault();
                     break;
-                default:
+                case DECIMAL:
+                case TIME:
+                case DATE:
+                case TIMESTAMP:
+                case TIMESTAMP_WITH_TIME_ZONE:
+                case VARCHAR:
                     schema = schema.name(paths[i].getPath()).type()
                                    .unionOf().nullType().and().stringType().endUnion()
                                    .nullDefault();
                     break;
+                default:
+                    schema = schema.name(paths[i].getPath()).type()
+                                   .nullType()
+                                   .nullDefault();
             }
         }
         return schema.endRecord();

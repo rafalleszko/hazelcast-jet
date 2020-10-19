@@ -18,6 +18,7 @@ package com.hazelcast.jet.sql.impl.inject;
 
 import com.hazelcast.jet.impl.util.ReflectionUtils;
 import com.hazelcast.sql.impl.QueryException;
+import com.hazelcast.sql.impl.type.QueryDataType;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.NotThreadSafe;
@@ -45,7 +46,7 @@ class PojoUpsertTarget implements UpsertTarget {
     }
 
     @Override
-    public UpsertInjector createInjector(String path) {
+    public UpsertInjector createInjector(String path, QueryDataType type) {
         Method method = ReflectionUtils.findSetter(clazz, path, typesByPaths.get(path));
         if (method != null) {
             return createMethodInjector(method);

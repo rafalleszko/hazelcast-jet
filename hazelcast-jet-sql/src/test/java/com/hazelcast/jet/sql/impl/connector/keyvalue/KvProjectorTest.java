@@ -73,7 +73,7 @@ public class KvProjectorTest {
         }
 
         @Override
-        public UpsertInjector createInjector(String path) {
+        public UpsertInjector createInjector(String path, QueryDataType type) {
             return value -> this.value = value;
         }
 

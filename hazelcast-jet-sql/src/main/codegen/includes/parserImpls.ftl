@@ -125,6 +125,8 @@ QueryDataType QueryDataType() :
         type = CharacterType()
     |
         type = DateTimeType()
+    |
+        type = ObjectType()
     )
     {
         return type;
@@ -187,6 +189,19 @@ QueryDataType DateTimeType() :
         |
             { type = QueryDataType.TIMESTAMP; }
         )
+    )
+    {
+        return type;
+    }
+}
+
+QueryDataType ObjectType() :
+{
+    QueryDataType type;
+}
+{
+    (
+        <OBJECT> { type = QueryDataType.OBJECT; }
     )
     {
         return type;

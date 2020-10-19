@@ -52,7 +52,8 @@ public class AllCanonicalTypesValueDeserializer implements Deserializer<AllCanon
                     LocalTime.parse(input.readUTF()),
                     LocalDate.parse(input.readUTF()),
                     LocalDateTime.parse(input.readUTF()),
-                    OffsetDateTime.parse(input.readUTF())
+                    OffsetDateTime.parse(input.readUTF()),
+                    null
             );
         } catch (IOException e) {
             throw sneakyThrow(e);

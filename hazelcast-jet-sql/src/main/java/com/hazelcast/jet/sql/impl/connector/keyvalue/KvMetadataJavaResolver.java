@@ -139,6 +139,7 @@ public final class KvMetadataJavaResolver implements KvMetadataResolver {
                 QueryPath path = new QueryPath(classField.getKey(), isKey);
                 QueryDataType type = QueryDataTypeUtils.resolveTypeForClass(classField.getValue());
                 String name = classField.getKey();
+
                 fields.add(new MappingField(name, type, path.toString()));
             }
             return fields;
@@ -200,8 +201,7 @@ public final class KvMetadataJavaResolver implements KvMetadataResolver {
             QueryDataType type = entry.getValue().type();
             String name = entry.getValue().name();
 
-            TableField field = new MapTableField(name, type, false, path);
-            fields.add(field);
+            fields.add(new MapTableField(name, type, false, path));
             if (typesByNames.get(path.getPath()) != null) {
                 typeNamesByPaths.put(path.getPath(), typesByNames.get(path.getPath()).getName());
             }

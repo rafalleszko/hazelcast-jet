@@ -49,25 +49,26 @@ class KvProjector {
         this.keyTarget = keyTarget;
         this.valueTarget = valueTarget;
 
-        this.injectors = createInjectors(paths, hiddenFields, keyTarget, valueTarget);
+        this.injectors = createInjectors(paths, types, hiddenFields, keyTarget, valueTarget);
     }
 
     private static UpsertInjector[] createInjectors(
             QueryPath[] paths,
+            QueryDataType[] types,
             Boolean[] hiddenFields,
             UpsertTarget keyTarget,
             UpsertTarget valueTarget
     ) {
         UpsertInjector[] injectors = new UpsertInjector[paths.length];
         for (int i = 0; i < paths.length; i++) {
-            // support for discovered maps inserts
             if (hiddenFields[i]) {
                 injectors[i] = DISCARDING_INJECTOR;
             } else {
                 QueryPath path = paths[i];
+                QueryDataType type = types[i];
                 injectors[i] = path.isKey()
-                        ? keyTarget.createInjector(path.getPath())
-                        : valueTarget.createInjector(path.getPath());
+                        ? keyTarget.createInjector(path.getPath(), type)
+                        : valueTarget.createInjector(path.getPath(), type);
             }
         }
         return injectors;

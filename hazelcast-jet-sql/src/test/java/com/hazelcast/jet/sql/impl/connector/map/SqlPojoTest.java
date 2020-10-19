@@ -243,6 +243,7 @@ public class SqlPojoTest extends SqlTestSupport {
                         + ", instant"
                         + ", zonedDateTime"
                         + ", offsetDateTime"
+                        + ", object"
                         + ") SELECT "
                         + "CAST(1 AS DECIMAL)"
                         + ", string"
@@ -264,6 +265,7 @@ public class SqlPojoTest extends SqlTestSupport {
                         + ", \"timestampTz\""
                         + ", \"timestampTz\""
                         + ", \"timestampTz\""
+                        + ", object"
                         + " FROM " + from,
                 createMap(BigInteger.valueOf(1), new AllTypesValue(
                         "string",
@@ -284,7 +286,8 @@ public class SqlPojoTest extends SqlTestSupport {
                         GregorianCalendar.from(ZonedDateTime.of(2020, 4, 15, 12, 23, 34, 200_000_000, UTC).withZoneSameInstant(localOffset())),
                         ofEpochMilli(1586953414200L),
                         ZonedDateTime.of(2020, 4, 15, 12, 23, 34, 200_000_000, UTC).withZoneSameInstant(localOffset()),
-                        ZonedDateTime.of(2020, 4, 15, 12, 23, 34, 200_000_000, UTC).withZoneSameInstant(systemDefault()).toOffsetDateTime()
+                        ZonedDateTime.of(2020, 4, 15, 12, 23, 34, 200_000_000, UTC).withZoneSameInstant(systemDefault()).toOffsetDateTime(),
+                        null
                 )));
 
         assertRowsAnyOrder(
@@ -309,6 +312,7 @@ public class SqlPojoTest extends SqlTestSupport {
                         + ", instant"
                         + ", zonedDateTime"
                         + ", offsetDateTime "
+                        + ", object "
                         + "FROM " + to,
                 singletonList(new Row(
                         BigDecimal.valueOf(1),
@@ -330,7 +334,8 @@ public class SqlPojoTest extends SqlTestSupport {
                         ZonedDateTime.of(2020, 4, 15, 12, 23, 34, 200_000_000, UTC).withZoneSameInstant(localOffset()).toOffsetDateTime(),
                         OffsetDateTime.ofInstant(ofEpochMilli(1586953414200L), systemDefault()),
                         ZonedDateTime.of(2020, 4, 15, 12, 23, 34, 200_000_000, UTC).withZoneSameInstant(localOffset()).toOffsetDateTime(),
-                        ZonedDateTime.of(2020, 4, 15, 12, 23, 34, 200_000_000, UTC).withZoneSameInstant(systemDefault()).toOffsetDateTime()
+                        ZonedDateTime.of(2020, 4, 15, 12, 23, 34, 200_000_000, UTC).withZoneSameInstant(systemDefault()).toOffsetDateTime(),
+                        null
                 )));
     }
 

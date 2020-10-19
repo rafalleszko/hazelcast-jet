@@ -71,7 +71,8 @@ public class AllTypesSqlConnector implements SqlConnector {
             new MappingField("time", QueryDataType.TIME),
             new MappingField("date", QueryDataType.DATE),
             new MappingField("timestamp", QueryDataType.TIMESTAMP),
-            new MappingField("timestampTz", QueryDataType.TIMESTAMP_WITH_TZ_OFFSET_DATE_TIME)
+            new MappingField("timestampTz", QueryDataType.TIMESTAMP_WITH_TZ_OFFSET_DATE_TIME),
+            new MappingField("object", QueryDataType.OBJECT)
 
     );
     private static final List<TableField> FIELD_LIST2 = toList(FIELD_LIST, f -> new TableField(f.name(), f.type(), false));
@@ -90,7 +91,8 @@ public class AllTypesSqlConnector implements SqlConnector {
             LocalTime.of(12, 23, 34),
             LocalDate.of(2020, 4, 15),
             LocalDateTime.of(2020, 4, 15, 12, 23, 34, 1_000_000),
-            ZonedDateTime.of(2020, 4, 15, 12, 23, 34, 200_000_000, UTC).withZoneSameInstant(systemDefault()).toOffsetDateTime()
+            ZonedDateTime.of(2020, 4, 15, 12, 23, 34, 200_000_000, UTC).withZoneSameInstant(systemDefault()).toOffsetDateTime(),
+            null
     };
 
     public static void create(SqlService sqlService, String tableName) {

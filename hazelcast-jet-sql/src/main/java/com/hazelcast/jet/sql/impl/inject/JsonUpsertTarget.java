@@ -16,8 +16,10 @@
 
 package com.hazelcast.jet.sql.impl.inject;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.hazelcast.sql.impl.QueryException;
 import com.hazelcast.sql.impl.type.QueryDataType;
 
 import javax.annotation.concurrent.NotThreadSafe;
@@ -33,28 +35,47 @@ class JsonUpsertTarget implements UpsertTarget {
     }
 
     @Override
-    public UpsertInjector createInjector(String path) {
-        return value -> {
-            if (value == null) {
-                json.putNull(path);
-            } else if (value instanceof Boolean) {
-                json.put(path, (boolean) value);
-            } else if (value instanceof Byte) {
-                json.put(path, (byte) value);
-            } else if (value instanceof Short) {
-                json.put(path, (short) value);
-            } else if (value instanceof Integer) {
-                json.put(path, (int) value);
-            } else if (value instanceof Long) {
-                json.put(path, (long) value);
-            } else if (value instanceof Float) {
-                json.put(path, (float) value);
-            } else if (value instanceof Double) {
-                json.put(path, (double) value);
-            } else {
-                json.put(path, (String) QueryDataType.VARCHAR.convert(value));
-            }
-        };
+    @SuppressWarnings("checkstyle:ReturnCount")
+    public UpsertInjector createInjector(String path, QueryDataType type) {
+        switch (type.getTypeFamily()) {
+            case BOOLEAN:
+                return value -> json.put(path, value == null ? null : (boolean) value);
+            case TINYINT:
+                return value -> {
+                    if (value == null) {
+                        json.putNull(path);
+                    } else {
+                        json.put(path, (byte) value);
+                    }
+                };
+            case SMALLINT:
+                return value -> json.put(path, value == null ? null : (short) value);
+            case INTEGER:
+                return value -> json.put(path, value == null ? null : (int) value);
+            case BIGINT:
+                return value -> json.put(path, value == null ? null : (long) value);
+            case REAL:
+                return value -> json.put(path, value == null ? null : (float) value);
+            case DOUBLE:
+                return value -> json.put(path, value == null ? null : (double) value);
+            case DECIMAL:
+            case TIME:
+            case DATE:
+            case TIMESTAMP:
+            case TIMESTAMP_WITH_TIME_ZONE:
+            case VARCHAR:
+                return value -> json.put(path, (String) QueryDataType.VARCHAR.convert(value));
+            default:
+                return value -> {
+                    if (value == null) {
+                        json.putNull(path);
+                    } else if (value instanceof JsonNode) {
+                        json.set(path, (JsonNode) value);
+                    } else {
+                        throw QueryException.error("Cannot set field \"" + path + "\" of type " + type);
+                    }
+                };
+        }
     }
 
     @Override

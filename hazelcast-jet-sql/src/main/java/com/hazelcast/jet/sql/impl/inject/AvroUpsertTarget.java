@@ -16,6 +16,7 @@
 
 package com.hazelcast.jet.sql.impl.inject;
 
+import com.hazelcast.sql.impl.QueryException;
 import com.hazelcast.sql.impl.type.QueryDataType;
 import org.apache.avro.Schema;
 import org.apache.avro.generic.GenericRecordBuilder;
@@ -34,25 +35,34 @@ class AvroUpsertTarget implements UpsertTarget {
     }
 
     @Override
-    public UpsertInjector createInjector(String path) {
-        return value -> {
-            if (value == null) {
-                record.set(path, null);
-            } else if (value instanceof Byte) {
-                record.set(path, ((Byte) value).intValue());
-            } else if (value instanceof Short) {
-                record.set(path, ((Short) value).intValue());
-            } else if (value instanceof Boolean
-                    || value instanceof Integer
-                    || value instanceof Long
-                    || value instanceof Float
-                    || value instanceof Double
-            ) {
-                record.set(path, value);
-            } else {
-                record.set(path, QueryDataType.VARCHAR.convert(value));
-            }
-        };
+    public UpsertInjector createInjector(String path, QueryDataType type) {
+        switch (type.getTypeFamily()) {
+            case TINYINT:
+                return value -> record.set(path, value == null ? null : ((Byte) value).intValue());
+            case SMALLINT:
+                return value -> record.set(path, value == null ? null : ((Short) value).intValue());
+            case BOOLEAN:
+            case INTEGER:
+            case BIGINT:
+            case REAL:
+            case DOUBLE:
+                return value -> record.set(path, value);
+            case DECIMAL:
+            case TIME:
+            case DATE:
+            case TIMESTAMP:
+            case TIMESTAMP_WITH_TIME_ZONE:
+            case VARCHAR:
+                return value -> record.set(path, QueryDataType.VARCHAR.convert(value));
+            default:
+                return value -> {
+                    if (value == null) {
+                        record.set(path, null);
+                    } else {
+                        throw QueryException.error("Cannot set field \"" + path + "\" of type " + type);
+                    }
+                };
+        }
     }
 
     @Override

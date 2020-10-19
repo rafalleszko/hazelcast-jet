@@ -16,6 +16,7 @@
 
 package com.hazelcast.jet.sql.impl.inject;
 
+import com.hazelcast.sql.impl.type.QueryDataType;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -25,7 +26,7 @@ public class PrimitiveUpsertTargetTest {
     @Test
     public void test_set() {
         UpsertTarget target = new PrimitiveUpsertTarget();
-        UpsertInjector injector = target.createInjector(null);
+        UpsertInjector injector = target.createInjector(null, QueryDataType.OBJECT);
 
         target.init();
         injector.set(1);
