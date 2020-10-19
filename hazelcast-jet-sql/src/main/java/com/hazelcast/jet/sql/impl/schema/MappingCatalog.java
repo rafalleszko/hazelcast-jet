@@ -90,6 +90,7 @@ public class MappingCatalog implements TableResolver {
         }
     }
 
+    @Nonnull
     @Override
     public List<List<String>> getDefaultSearchPaths() {
         return SEARCH_PATHS;
