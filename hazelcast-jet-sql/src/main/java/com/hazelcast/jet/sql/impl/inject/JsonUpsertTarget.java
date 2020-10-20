@@ -39,7 +39,7 @@ class JsonUpsertTarget implements UpsertTarget {
     public UpsertInjector createInjector(String path, QueryDataType type) {
         switch (type.getTypeFamily()) {
             case BOOLEAN:
-                return value -> json.put(path, value == null ? null : (boolean) value);
+                return value -> json.put(path, (Boolean) value);
             case TINYINT:
                 return value -> {
                     if (value == null) {
@@ -49,15 +49,15 @@ class JsonUpsertTarget implements UpsertTarget {
                     }
                 };
             case SMALLINT:
-                return value -> json.put(path, value == null ? null : (short) value);
+                return value -> json.put(path, (Short) value);
             case INTEGER:
-                return value -> json.put(path, value == null ? null : (int) value);
+                return value -> json.put(path, (Integer) value);
             case BIGINT:
-                return value -> json.put(path, value == null ? null : (long) value);
+                return value -> json.put(path, (Long) value);
             case REAL:
-                return value -> json.put(path, value == null ? null : (float) value);
+                return value -> json.put(path, (Float) value);
             case DOUBLE:
-                return value -> json.put(path, value == null ? null : (double) value);
+                return value -> json.put(path, (Double) value);
             case DECIMAL:
             case TIME:
             case DATE:
