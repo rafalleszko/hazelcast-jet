@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+
+
+<h1>XmlJetMemberConfigLocator.java</h1>
+
+<table class="src">
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_1'/>
+1
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_1'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>/*</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_2'/>
+2
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_2'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * Copyright (c) 2008-2020, Hazelcast, Inc. All Rights Reserved.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_3'/>
+3
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_3'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_4'/>
+4
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_4'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_5'/>
+5
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_5'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * you may not use this file except in compliance with the License.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_6'/>
+6
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_6'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * You may obtain a copy of the License at</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_7'/>
+7
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_7'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_8'/>
+8
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_8'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * http://www.apache.org/licenses/LICENSE-2.0</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_9'/>
+9
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_9'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_10'/>
+10
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_10'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * Unless required by applicable law or agreed to in writing, software</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_11'/>
+11
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_11'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * distributed under the License is distributed on an &#34;AS IS&#34; BASIS,</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_12'/>
+12
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_12'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_13'/>
+13
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_13'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * See the License for the specific language governing permissions and</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_14'/>
+14
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_14'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * limitations under the License.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_15'/>
+15
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_15'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_16'/>
+16
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_16'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_17'/>
+17
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_17'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>package com.hazelcast.jet.impl.config;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_18'/>
+18
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_18'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_19'/>
+19
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_19'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import com.hazelcast.internal.config.AbstractConfigLocator;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_20'/>
+20
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_20'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_21'/>
+21
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_21'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import static com.hazelcast.internal.config.DeclarativeConfigUtil.SYSPROP_MEMBER_CONFIG;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_22'/>
+22
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_22'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import static com.hazelcast.internal.config.DeclarativeConfigUtil.XML_ACCEPTED_SUFFIXES;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_23'/>
+23
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_23'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_24'/>
+24
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_24'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>/**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_25'/>
+25
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_25'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * A support class for the {@link XmlJetConfigBuilder} to locate the</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_26'/>
+26
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_26'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * xml configuration.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_27'/>
+27
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_27'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_28'/>
+28
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_28'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>public final class XmlJetMemberConfigLocator extends AbstractConfigLocator {</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_29'/>
+29
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_29'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_30'/>
+30
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_30'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    private static final String HAZELCAST_MEMBER_XML = &#34;hazelcast.xml&#34;;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_31'/>
+31
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_31'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    private static final String HAZELCAST_MEMBER_DEFAULT_XML = &#34;hazelcast-jet-member-default.xml&#34;;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_32'/>
+32
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_32'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    private static final String HAZELCAST_ENTERPRISE_MEMBER_DEFAULT_XML = &#34;hazelcast-jet-enterprise-member-default.xml&#34;;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_33'/>
+33
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_33'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_34'/>
+34
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_34'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    public XmlJetMemberConfigLocator() {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_35'/>
+35
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_35'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_36'/>
+36
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_36'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_37'/>
+37
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_37'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_38'/>
+38
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_38'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public boolean locateFromSystemProperty() {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_39'/>
+39
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_39'>2</a>
+<span>
+1. locateFromSystemProperty : All method instructions replaced by: return false &rarr; KILLED<br/>
+2. locateFromSystemProperty : All method instructions replaced by: return true &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return loadFromSystemProperty(SYSPROP_MEMBER_CONFIG, XML_ACCEPTED_SUFFIXES);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_40'/>
+40
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_40'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_41'/>
+41
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_41'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_42'/>
+42
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_42'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_43'/>
+43
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_43'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    protected boolean locateFromSystemPropertyOrFailOnUnacceptedSuffix() {</span></pre></td></tr>
+
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_44'/>
+44
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_44'>2</a>
+<span>
+1. locateFromSystemPropertyOrFailOnUnacceptedSuffix : All method instructions replaced by: return false &rarr; NO_COVERAGE<br/>
+2. locateFromSystemPropertyOrFailOnUnacceptedSuffix : All method instructions replaced by: return true &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>        return loadFromSystemPropertyOrFailOnUnacceptedSuffix(SYSPROP_MEMBER_CONFIG, XML_ACCEPTED_SUFFIXES);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_45'/>
+45
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_45'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_46'/>
+46
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_46'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_47'/>
+47
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_47'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_48'/>
+48
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_48'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    protected boolean locateInWorkDir() {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_49'/>
+49
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_49'>2</a>
+<span>
+1. locateInWorkDir : All method instructions replaced by: return false &rarr; SURVIVED<br/>
+2. locateInWorkDir : All method instructions replaced by: return true &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>        return loadFromWorkingDirectory(HAZELCAST_MEMBER_XML);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_50'/>
+50
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_50'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_51'/>
+51
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_51'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_52'/>
+52
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_52'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_53'/>
+53
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_53'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    protected boolean locateOnClasspath() {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_54'/>
+54
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_54'>2</a>
+<span>
+1. locateOnClasspath : All method instructions replaced by: return false &rarr; KILLED<br/>
+2. locateOnClasspath : All method instructions replaced by: return true &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return loadConfigurationFromClasspath(HAZELCAST_MEMBER_XML);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_55'/>
+55
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_55'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_56'/>
+56
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_56'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_57'/>
+57
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_57'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_58'/>
+58
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_58'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public boolean locateDefault() {</span></pre></td></tr>
+
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_59'/>
+59
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_59'>2</a>
+<span>
+1. locateDefault : All method instructions replaced by: return false &rarr; NO_COVERAGE<br/>
+2. locateDefault : All method instructions replaced by: return true &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>        if (!loadConfigurationFromClasspath(HAZELCAST_ENTERPRISE_MEMBER_DEFAULT_XML)) {</span></pre></td></tr>
+
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_60'/>
+60
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_60'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class=''>            loadDefaultConfigurationFromClasspath(HAZELCAST_MEMBER_DEFAULT_XML);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_61'/>
+61
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_61'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_62'/>
+62
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_62'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class=''>        return true;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_63'/>
+63
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_63'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@4f62d94e_64'/>
+64
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_64'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>}</span></pre></td></tr>
+
+
+
+<tr><td></td><td></td><td><h2>Mutations</h2></td></tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@4f62d94e_39'>39</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_39'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>locateFromSystemProperty<br/><b>Killed by : </b>com.hazelcast.jet.config.XmlJetConfigWithSystemPropertyTest.when_classpathMemberSpecifiedNonExistingFile_thenThrowsException(com.hazelcast.jet.config.XmlJetConfigWithSystemPropertyTest)</span></span> All method instructions replaced by: return false &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>locateFromSystemProperty<br/><b>Killed by : </b>com.hazelcast.jet.config.ConfigProviderPriorityTest.when_loadingMemberConfigFromWorkDir_yamlAndXmlFilesArePresent_then_pickYaml(com.hazelcast.jet.config.ConfigProviderPriorityTest)</span></span> All method instructions replaced by: return true &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@4f62d94e_44'>44</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_44'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>locateFromSystemPropertyOrFailOnUnacceptedSuffix<br/><b>Killed by : </b>none</span></span> All method instructions replaced by: return false &rarr; NO_COVERAGE</p> <p class='NO_COVERAGE'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>locateFromSystemPropertyOrFailOnUnacceptedSuffix<br/><b>Killed by : </b>none</span></span> All method instructions replaced by: return true &rarr; NO_COVERAGE</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@4f62d94e_49'>49</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_49'/> 
+
+<p class='SURVIVED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>locateInWorkDir<br/><b>Killed by : </b>none</span></span> All method instructions replaced by: return false &rarr; SURVIVED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>locateInWorkDir<br/><b>Killed by : </b>com.hazelcast.jet.config.YamlJetConfigResolutionTest.testResolveSystemProperty_classpath_yaml(com.hazelcast.jet.config.YamlJetConfigResolutionTest)</span></span> All method instructions replaced by: return true &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@4f62d94e_54'>54</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_54'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>locateOnClasspath<br/><b>Killed by : </b>com.hazelcast.jet.JetBootstrappedStandaloneTest</span></span> All method instructions replaced by: return false &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>locateOnClasspath<br/><b>Killed by : </b>com.hazelcast.jet.config.YamlJetConfigResolutionTest.testResolveSystemProperty_classpath_yaml(com.hazelcast.jet.config.YamlJetConfigResolutionTest)</span></span> All method instructions replaced by: return true &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@4f62d94e_59'>59</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@4f62d94e_59'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>locateDefault<br/><b>Killed by : </b>none</span></span> All method instructions replaced by: return false &rarr; NO_COVERAGE</p> <p class='NO_COVERAGE'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>locateDefault<br/><b>Killed by : </b>none</span></span> All method instructions replaced by: return true &rarr; NO_COVERAGE</p> 
+</td>
+</tr>
+
+</table>
+
+
+<h2>Active mutators</h2>
+<ul>
+<li class='mutator'>""</li>
+<li class='mutator'>"A"</li>
+<li class='mutator'>'A'</li>
+<li class='mutator'>'\40'</li>
+<li class='mutator'>(byte)0</li>
+<li class='mutator'>(byte)1</li>
+<li class='mutator'>(short)0</li>
+<li class='mutator'>(short)1</li>
+<li class='mutator'>0</li>
+<li class='mutator'>0.0</li>
+<li class='mutator'>0.0f</li>
+<li class='mutator'>0L</li>
+<li class='mutator'>1</li>
+<li class='mutator'>1.0</li>
+<li class='mutator'>1.0f</li>
+<li class='mutator'>1L</li>
+<li class='mutator'>empty</li>
+<li class='mutator'>false</li>
+<li class='mutator'>null</li>
+<li class='mutator'>true</li>
+<li class='mutator'>void</li>
+
+</ul>
+
+<h2>Tests examined</h2>
+<ul>
+<li>com.hazelcast.jet.config.JetConfigXmlGeneratorTest.instanceConfig(com.hazelcast.jet.config.JetConfigXmlGeneratorTest) (25 ms)</li><li>com.hazelcast.jet.config.JetConfigLoadFromClasspathOrderTest.when_YamlMemberConfigPresentInClasspathAlongWithDefaultConfig_usesMemberConfig(com.hazelcast.jet.config.JetConfigLoadFromClasspathOrderTest) (140 ms)</li><li>com.hazelcast.jet.config.YamlJetConfigImportVariableReplacementTest.testImportedConfigVariableReplacement(com.hazelcast.jet.config.YamlJetConfigImportVariableReplacementTest) (25 ms)</li><li>com.hazelcast.jet.config.YamlJetConfigResolutionTest.testResolveFromClasspathYamlAndYml(com.hazelcast.jet.config.YamlJetConfigResolutionTest) (3 ms)</li><li>com.hazelcast.jet.config.XmlJetConfigImportVariableReplacementTest.testImportConfigFromResourceVariables(com.hazelcast.jet.config.XmlJetConfigImportVariableReplacementTest) (26 ms)</li><li>com.hazelcast.jet.config.YamlJetConfigWithSystemPropertyTest.when_edgeDefaultsSpecified_usesSpecified(com.hazelcast.jet.config.YamlJetConfigWithSystemPropertyTest) (3 ms)</li><li>com.hazelcast.jet.config.YamlJetConfigImportVariableReplacementTest.testImportConfigFromResourceVariables(com.hazelcast.jet.config.YamlJetConfigImportVariableReplacementTest) (25 ms)</li><li>com.hazelcast.jet.config.XmlYamlJetConfigBuilderEqualsTest.testFullConfig(com.hazelcast.jet.config.XmlYamlJetConfigBuilderEqualsTest) (25 ms)</li><li>com.hazelcast.jet.config.XmlJetConfigImportVariableReplacementTest.testReplacerProperties(com.hazelcast.jet.config.XmlJetConfigImportVariableReplacementTest) (26 ms)</li><li>com.hazelcast.jet.config.XmlJetConfigWithSystemPropertyTest.when_classpathMemberSpecifiedNonExistingFile_thenThrowsException(com.hazelcast.jet.config.XmlJetConfigWithSystemPropertyTest) (7 ms)</li><li>com.hazelcast.jet.config.YamlJetConfigImportVariableReplacementTest.testImportEdgeConfigFromFile(com.hazelcast.jet.config.YamlJetConfigImportVariableReplacementTest) (26 ms)</li><li>com.hazelcast.jet.config.YamlJetConfigImportVariableReplacementTest.testReplaceVariablesUseSystemProperties(com.hazelcast.jet.config.YamlJetConfigImportVariableReplacementTest) (26 ms)</li><li>com.hazelcast.jet.config.XmlJetConfigWithSystemPropertyTest.when_filePathSpecified_usesSpecifiedFile(com.hazelcast.jet.config.XmlJetConfigWithSystemPropertyTest) (8 ms)</li><li>com.hazelcast.jet.config.YamlJetConfigImportVariableReplacementTest.readVariables(com.hazelcast.jet.config.YamlJetConfigImportVariableReplacementTest) (25 ms)</li><li>com.hazelcast.jet.config.YamlJetConfigBuilderTest.readEdgeDefaults(com.hazelcast.jet.config.YamlJetConfigBuilderTest) (26 ms)</li><li>com.hazelcast.jet.config.YamlJetConfigImportVariableReplacementTest.testNoConfigReplacersMissingProperties(com.hazelcast.jet.config.YamlJetConfigImportVariableReplacementTest) (25 ms)</li><li>com.hazelcast.jet.config.XmlJetConfigImportVariableReplacementTest.testReplaceVariablesWithUrlConfig(com.hazelcast.jet.config.XmlJetConfigImportVariableReplacementTest) (26 ms)</li><li>com.hazelcast.jet.config.YamlJetConfigLoadFromFileSystemOrClasspathTest.when_classpathSpecifiedWithClassloader_usesSpecifiedResource(com.hazelcast.jet.config.YamlJetConfigLoadFromFileSystemOrClasspathTest) (25 ms)</li><li>com.hazelcast.jet.config.YamlJetConfigResolutionTest.testResolveSystemProperty_classpath_yaml(com.hazelcast.jet.config.YamlJetConfigResolutionTest) (2 ms)</li><li>com.hazelcast.jet.config.XmlJetConfigWithSystemPropertyTest.when_classpathSpecified_usesSpecifiedResource(com.hazelcast.jet.config.XmlJetConfigWithSystemPropertyTest) (9 ms)</li><li>com.hazelcast.jet.JetBootstrappedStandaloneTest (1177 ms)</li><li>com.hazelcast.jet.config.YamlJetConfigResolutionTest.testResolveSystemProperty_classpath_yml(com.hazelcast.jet.config.YamlJetConfigResolutionTest) (2 ms)</li><li>com.hazelcast.jet.config.YamlJetConfigImportVariableReplacementTest.testReplaceVariablesWithFileSystemConfig(com.hazelcast.jet.config.YamlJetConfigImportVariableReplacementTest) (26 ms)</li><li>com.hazelcast.jet.config.YamlJetConfigResolutionTest.testResolveFromWorkDirYmlButNotYaml(com.hazelcast.jet.config.YamlJetConfigResolutionTest) (3 ms)</li><li>com.hazelcast.jet.config.YamlJetConfigWithSystemPropertyTest.when_configHasVariable_variablesAreReplaced(com.hazelcast.jet.config.YamlJetConfigWithSystemPropertyTest) (2 ms)</li><li>com.hazelcast.jet.config.YamlJetConfigWithSystemPropertyTest.loadingThroughSystemPropertyWithLocator_existingClasspathResource(com.hazelcast.jet.config.YamlJetConfigWithSystemPropertyTest) (2 ms)</li><li>com.hazelcast.jet.config.YamlJetConfigWithSystemPropertyTest.when_filePathSpecified_usesSpecifiedFile(com.hazelcast.jet.config.YamlJetConfigWithSystemPropertyTest) (3 ms)</li><li>com.hazelcast.jet.config.ConfigProviderPriorityTest.when_loadingJetConfigFromWorkDir_yamlAndXmlFilesArePresent_then_pickYaml(com.hazelcast.jet.config.ConfigProviderPriorityTest) (5 ms)</li><li>com.hazelcast.jet.config.ConfigProviderPriorityTest.when_loadingMemberConfigFromWorkDir_yamlAndXmlFilesArePresent_then_pickYaml(com.hazelcast.jet.config.ConfigProviderPriorityTest) (1 ms)</li><li>com.hazelcast.jet.config.YamlJetConfigResolutionTest.testResolveFromWorkDirYamlButNotYml(com.hazelcast.jet.config.YamlJetConfigResolutionTest) (2 ms)</li><li>com.hazelcast.jet.config.YamlJetMemberConfigResolutionTest.testResolveFromClasspathYamlButNotYml(com.hazelcast.jet.config.YamlJetMemberConfigResolutionTest) (2 ms)</li><li>com.hazelcast.jet.config.XmlJetConfigWithSystemPropertyTest.when_filePathMemberSpecifiedNonExistingFile_thenThrowsException(com.hazelcast.jet.config.XmlJetConfigWithSystemPropertyTest) (7 ms)</li><li>com.hazelcast.jet.config.JetConfigMixAndMatchTest.when_YamlJetConfig_and_XmlMemberConfigSet_thenLoadsConfigCorrectly(com.hazelcast.jet.config.JetConfigMixAndMatchTest) (29 ms)</li><li>com.hazelcast.jet.config.YamlJetConfigResolutionTest.testResolveSystemProperty_file_yml(com.hazelcast.jet.config.YamlJetConfigResolutionTest) (2 ms)</li><li>com.hazelcast.jet.config.XmlJetConfigImportVariableReplacementTest.readVariables(com.hazelcast.jet.config.XmlJetConfigImportVariableReplacementTest) (26 ms)</li><li>com.hazelcast.jet.config.YamlJetMemberConfigResolutionTest.testResolveFromWorkDirYamlButNotYml(com.hazelcast.jet.config.YamlJetMemberConfigResolutionTest) (2 ms)</li><li>com.hazelcast.jet.config.XmlJetConfigBuilderTest.readEdgeDefaults(com.hazelcast.jet.config.XmlJetConfigBuilderTest) (26 ms)</li><li>com.hazelcast.jet.config.XmlJetConfigImportVariableReplacementTest.testImportWithVariableReplacementAsSubstring(com.hazelcast.jet.config.XmlJetConfigImportVariableReplacementTest) (26 ms)</li><li>com.hazelcast.jet.config.XmlJetConfigImportVariableReplacementTest.testReplaceVariablesWithInMemoryConfig(com.hazelcast.jet.config.XmlJetConfigImportVariableReplacementTest) (26 ms)</li><li>com.hazelcast.jet.config.YamlJetConfigImportVariableReplacementTest.testVariableReplacementAsSubstring(com.hazelcast.jet.config.YamlJetConfigImportVariableReplacementTest) (26 ms)</li><li>com.hazelcast.jet.config.YamlJetConfigImportVariableReplacementTest.testImportNoHazelcastJetRootNode(com.hazelcast.jet.config.YamlJetConfigImportVariableReplacementTest) (25 ms)</li><li>com.hazelcast.jet.config.XmlYamlJetConfigBuilderEqualsTest.testDefaultConfig(com.hazelcast.jet.config.XmlYamlJetConfigBuilderEqualsTest) (25 ms)</li><li>com.hazelcast.jet.config.YamlJetConfigBuilderTest.testWithoutRootHazelcastJetNode(com.hazelcast.jet.config.YamlJetConfigBuilderTest) (26 ms)</li><li>com.hazelcast.jet.config.XmlJetConfigImportVariableReplacementTest.testReplacers(com.hazelcast.jet.config.XmlJetConfigImportVariableReplacementTest) (101 ms)</li><li>com.hazelcast.jet.config.XmlConfigTest.when_noConfigSpecified_usesDefaultConfig(com.hazelcast.jet.config.XmlConfigTest) (25 ms)</li><li>com.hazelcast.jet.config.JetConfigLoadFromClasspathOrderTest.when_XmlMemberConfigPresentInClasspathAlongWithDefaultConfig_usesMemberConfig(com.hazelcast.jet.config.JetConfigLoadFromClasspathOrderTest) (207 ms)</li><li>com.hazelcast.jet.config.XmlJetConfigLoadFromFileSystemOrClasspathTest.when_fileSystemFileSpecified_usesSpecifiedFile(com.hazelcast.jet.config.XmlJetConfigLoadFromFileSystemOrClasspathTest) (26 ms)</li><li>com.hazelcast.jet.config.XmlJetConfigWithSystemPropertyTest.when_edgeDefaultsSpecified_usesSpecified(com.hazelcast.jet.config.XmlJetConfigWithSystemPropertyTest) (8 ms)</li><li>com.hazelcast.jet.config.JetConfigXmlGeneratorTest.when_defaultJetConfig_thenGeneratesDefaultXml(com.hazelcast.jet.config.JetConfigXmlGeneratorTest) (26 ms)</li><li>com.hazelcast.jet.config.YamlJetConfigImportVariableReplacementTest.testBadVariableSyntaxIsIgnored(com.hazelcast.jet.config.YamlJetConfigImportVariableReplacementTest) (26 ms)</li><li>com.hazelcast.jet.config.XmlConfigTest.when_filePathSpecified_usesSpecifiedFile(com.hazelcast.jet.config.XmlConfigTest) (26 ms)</li><li>com.hazelcast.jet.config.XmlJetConfigWithSystemPropertyTest.when_filePathSpecifiedNonXml_then_loadedAsXml(com.hazelcast.jet.config.XmlJetConfigWithSystemPropertyTest) (7 ms)</li><li>com.hazelcast.jet.config.XmlJetConfigBuilderTest.readProperties(com.hazelcast.jet.config.XmlJetConfigBuilderTest) (26 ms)</li><li>com.hazelcast.jet.config.XmlJetConfigImportVariableReplacementTest.testImportedConfigVariableReplacement(com.hazelcast.jet.config.XmlJetConfigImportVariableReplacementTest) (26 ms)</li><li>com.hazelcast.jet.config.XmlJetConfigImportVariableReplacementTest.testImportEdgeConfigFromFile(com.hazelcast.jet.config.XmlJetConfigImportVariableReplacementTest) (26 ms)</li><li>com.hazelcast.jet.config.YamlJetConfigImportVariableReplacementTest.testImportInstanceConfigFromFile(com.hazelcast.jet.config.YamlJetConfigImportVariableReplacementTest) (26 ms)</li><li>com.hazelcast.jet.config.YamlJetConfigImportVariableReplacementTest.testReplaceVariablesWithInMemoryConfig(com.hazelcast.jet.config.YamlJetConfigImportVariableReplacementTest) (26 ms)</li><li>com.hazelcast.jet.config.XmlJetConfigImportVariableReplacementTest.testNoConfigReplacersMissingProperties(com.hazelcast.jet.config.XmlJetConfigImportVariableReplacementTest) (25 ms)</li><li>com.hazelcast.jet.config.YamlJetConfigResolutionTest.testResolveFromClasspathYamlButNotYml(com.hazelcast.jet.config.YamlJetConfigResolutionTest) (3 ms)</li><li>com.hazelcast.jet.config.YamlJetConfigImportVariableReplacementTest.testReplaceVariablesWithUrlConfig(com.hazelcast.jet.config.YamlJetConfigImportVariableReplacementTest) (25 ms)</li><li>com.hazelcast.jet.config.JetConfigMixAndMatchTest.when_XmlJetConfig_and_XmlMemberConfigSet_thenLoadsConfigCorrectly(com.hazelcast.jet.config.JetConfigMixAndMatchTest) (40 ms)</li><li>com.hazelcast.jet.config.YamlJetConfigLoadFromFileSystemOrClasspathTest.when_fileSystemFileSpecified_usesSpecifiedFile(com.hazelcast.jet.config.YamlJetConfigLoadFromFileSystemOrClasspathTest) (26 ms)</li><li>com.hazelcast.jet.config.XmlJetConfigImportVariableReplacementTest.testBadVariableSyntaxIsIgnored(com.hazelcast.jet.config.XmlJetConfigImportVariableReplacementTest) (26 ms)</li><li>com.hazelcast.jet.config.YamlJetMemberConfigResolutionTest.testResolveFromWorkDirYamlAndYml(com.hazelcast.jet.config.YamlJetMemberConfigResolutionTest) (2 ms)</li><li>com.hazelcast.jet.config.YamlJetConfigResolutionTest.testResolveFromWorkDirYamlAndYml(com.hazelcast.jet.config.YamlJetConfigResolutionTest) (2 ms)</li><li>com.hazelcast.jet.config.XmlJetConfigImportVariableReplacementTest.testReplaceVariablesUseSystemProperties(com.hazelcast.jet.config.XmlJetConfigImportVariableReplacementTest) (25 ms)</li><li>com.hazelcast.jet.core.Job_StaleInstanceTest (1522 ms)</li><li>com.hazelcast.jet.config.XmlJetConfigImportVariableReplacementTest.testVariableReplacementAsSubstring(com.hazelcast.jet.config.XmlJetConfigImportVariableReplacementTest) (25 ms)</li><li>com.hazelcast.jet.config.YamlJetConfigImportVariableReplacementTest.testImportWithVariableReplacementAsSubstring(com.hazelcast.jet.config.YamlJetConfigImportVariableReplacementTest) (25 ms)</li><li>com.hazelcast.jet.config.YamlJetConfigBuilderTest.readInstanceConfig(com.hazelcast.jet.config.YamlJetConfigBuilderTest) (25 ms)</li><li>com.hazelcast.jet.config.YamlJetMemberConfigResolutionTest.testResolveFromWorkDirYmlButNotYaml(com.hazelcast.jet.config.YamlJetMemberConfigResolutionTest) (2 ms)</li><li>com.hazelcast.jet.config.YamlJetMemberConfigResolutionTest.testResolveFromClasspathYmlButNotYaml(com.hazelcast.jet.config.YamlJetMemberConfigResolutionTest) (2 ms)</li><li>com.hazelcast.jet.config.XmlJetConfigLoadFromFileSystemOrClasspathTest.when_classpathSpecifiedWithClassloader_usesSpecifiedResource(com.hazelcast.jet.config.XmlJetConfigLoadFromFileSystemOrClasspathTest) (26 ms)</li><li>com.hazelcast.jet.config.XmlJetConfigWithSystemPropertyTest.when_classpathMemberSpecified_usesSpecifiedResource(com.hazelcast.jet.config.XmlJetConfigWithSystemPropertyTest) (25 ms)</li><li>com.hazelcast.jet.config.XmlConfigTest.when_edgeDefaultsSpecified_usesSpecified(com.hazelcast.jet.config.XmlConfigTest) (26 ms)</li><li>com.hazelcast.jet.config.JetConfigXmlGeneratorTest.properties(com.hazelcast.jet.config.JetConfigXmlGeneratorTest) (25 ms)</li><li>com.hazelcast.jet.config.YamlJetConfigResolutionTest.testResolveSystemProperty_file_yaml(com.hazelcast.jet.config.YamlJetConfigResolutionTest) (2 ms)</li><li>com.hazelcast.jet.config.XmlJetConfigImportVariableReplacementTest.testReplaceVariablesWithClasspathConfig(com.hazelcast.jet.config.XmlJetConfigImportVariableReplacementTest) (26 ms)</li><li>com.hazelcast.jet.config.YamlJetConfigImportVariableReplacementTest.testReplacers(com.hazelcast.jet.config.YamlJetConfigImportVariableReplacementTest) (51 ms)</li><li>com.hazelcast.jet.config.XmlJetConfigImportVariableReplacementTest.testImportInstanceConfigFromFile(com.hazelcast.jet.config.XmlJetConfigImportVariableReplacementTest) (26 ms)</li><li>com.hazelcast.jet.config.XmlConfigTest.when_classpathSpecified_usesSpecifiedResource(com.hazelcast.jet.config.XmlConfigTest) (26 ms)</li><li>com.hazelcast.jet.config.XmlJetConfigImportVariableReplacementTest.testReplaceVariablesWithFileSystemConfig(com.hazelcast.jet.config.XmlJetConfigImportVariableReplacementTest) (26 ms)</li><li>com.hazelcast.jet.config.JetConfigXmlGeneratorTest.edgeConfig(com.hazelcast.jet.config.JetConfigXmlGeneratorTest) (26 ms)</li><li>com.hazelcast.jet.config.YamlJetConfigResolutionTest.testResolveFromClasspathYmlButNotYaml(com.hazelcast.jet.config.YamlJetConfigResolutionTest) (2 ms)</li><li>com.hazelcast.jet.config.XmlJetConfigWithSystemPropertyTest.when_configMemberHasVariable_variablesAreReplaced(com.hazelcast.jet.config.XmlJetConfigWithSystemPropertyTest) (24 ms)</li><li>com.hazelcast.jet.config.XmlConfigTest.when_configHasVariable_variablesAreReplaced(com.hazelcast.jet.config.XmlConfigTest) (26 ms)</li><li>com.hazelcast.jet.config.YamlJetConfigWithSystemPropertyTest.when_classpathSpecified_usesSpecifiedResource(com.hazelcast.jet.config.YamlJetConfigWithSystemPropertyTest) (2 ms)</li><li>com.hazelcast.jet.config.XmlJetConfigWithSystemPropertyTest.when_filePathMemberSpecified_usesSpecifiedFile(com.hazelcast.jet.config.XmlJetConfigWithSystemPropertyTest) (23 ms)</li><li>com.hazelcast.jet.config.YamlJetMemberConfigResolutionTest.testResolveFromClasspathYamlAndYml(com.hazelcast.jet.config.YamlJetMemberConfigResolutionTest) (2 ms)</li><li>com.hazelcast.jet.config.XmlJetConfigWithSystemPropertyTest.when_configHasVariable_variablesAreReplaced(com.hazelcast.jet.config.XmlJetConfigWithSystemPropertyTest) (8 ms)</li><li>com.hazelcast.jet.config.YamlJetConfigBuilderTest.readProperties(com.hazelcast.jet.config.YamlJetConfigBuilderTest) (26 ms)</li><li>com.hazelcast.jet.config.XmlJetConfigBuilderTest.readInstanceConfig(com.hazelcast.jet.config.XmlJetConfigBuilderTest) (26 ms)</li><li>com.hazelcast.jet.config.YamlJetConfigImportVariableReplacementTest.testReplacerProperties(com.hazelcast.jet.config.YamlJetConfigImportVariableReplacementTest) (26 ms)</li><li>com.hazelcast.jet.config.YamlJetConfigImportVariableReplacementTest.testReplaceVariablesWithClasspathConfig(com.hazelcast.jet.config.YamlJetConfigImportVariableReplacementTest) (25 ms)</li>
+</ul>
+
+<br/>
+
+Report generated by <a href='http://pitest.org'>PIT</a> 1.5.2
+
+</body>
+</html>

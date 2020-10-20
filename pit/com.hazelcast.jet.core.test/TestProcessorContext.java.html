@@ -1,0 +1,1892 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+
+
+<h1>TestProcessorContext.java</h1>
+
+<table class="src">
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_1'/>
+1
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_1'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>/*</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_2'/>
+2
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_2'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * Copyright (c) 2008-2020, Hazelcast, Inc. All Rights Reserved.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_3'/>
+3
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_3'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_4'/>
+4
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_4'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_5'/>
+5
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_5'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * you may not use this file except in compliance with the License.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_6'/>
+6
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_6'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * You may obtain a copy of the License at</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_7'/>
+7
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_7'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_8'/>
+8
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_8'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * http://www.apache.org/licenses/LICENSE-2.0</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_9'/>
+9
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_9'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_10'/>
+10
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_10'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * Unless required by applicable law or agreed to in writing, software</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_11'/>
+11
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_11'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * distributed under the License is distributed on an &#34;AS IS&#34; BASIS,</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_12'/>
+12
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_12'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_13'/>
+13
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_13'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * See the License for the specific language governing permissions and</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_14'/>
+14
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_14'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * limitations under the License.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_15'/>
+15
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_15'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_16'/>
+16
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_16'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_17'/>
+17
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_17'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>package com.hazelcast.jet.core.test;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_18'/>
+18
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_18'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_19'/>
+19
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_19'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import com.hazelcast.core.ManagedContext;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_20'/>
+20
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_20'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import com.hazelcast.jet.JetInstance;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_21'/>
+21
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_21'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import com.hazelcast.jet.config.ProcessingGuarantee;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_22'/>
+22
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_22'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import com.hazelcast.jet.core.Processor;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_23'/>
+23
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_23'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import com.hazelcast.logging.ILogger;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_24'/>
+24
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_24'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_25'/>
+25
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_25'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import javax.annotation.Nonnull;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_26'/>
+26
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_26'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_27'/>
+27
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_27'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>/**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_28'/>
+28
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_28'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * {@link Processor.Context} implementation suitable to be used in tests.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_29'/>
+29
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_29'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_30'/>
+30
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_30'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * @since 3.0</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_31'/>
+31
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_31'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> */</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_32'/>
+32
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_32'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>public class TestProcessorContext extends TestProcessorSupplierContext implements Processor.Context {</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_33'/>
+33
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_33'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_34'/>
+34
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_34'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    private int localProcessorIndex;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_35'/>
+35
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_35'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    private int globalProcessorIndex;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_36'/>
+36
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_36'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_37'/>
+37
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_37'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_38'/>
+38
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_38'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * Constructor with default values.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_39'/>
+39
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_39'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     */</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_40'/>
+40
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_40'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    public TestProcessorContext() {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_41'/>
+41
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_41'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        localProcessorIndex = 0;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_42'/>
+42
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_42'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        globalProcessorIndex = 0;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_43'/>
+43
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_43'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_44'/>
+44
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_44'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_45'/>
+45
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_45'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_46'/>
+46
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_46'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public int localProcessorIndex() {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_47'/>
+47
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_47'>2</a>
+<span>
+1. localProcessorIndex : All method instructions replaced by: return 0 &rarr; SURVIVED<br/>
+2. localProcessorIndex : All method instructions replaced by: return 1 &rarr; TIMED_OUT<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>        assert localProcessorIndex &#62;= 0 &#38;&#38; localProcessorIndex &#60; localParallelism()</span></pre></td></tr>
+
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_48'/>
+48
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_48'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class=''>                : &#34;localProcessorIndex should be in range 0..&#34; + (localParallelism() - 1);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_49'/>
+49
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_49'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        return localProcessorIndex;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_50'/>
+50
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_50'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_51'/>
+51
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_51'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_52'/>
+52
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_52'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_53'/>
+53
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_53'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public int globalProcessorIndex() {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_54'/>
+54
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_54'>2</a>
+<span>
+1. globalProcessorIndex : All method instructions replaced by: return 0 &rarr; SURVIVED<br/>
+2. globalProcessorIndex : All method instructions replaced by: return 1 &rarr; SURVIVED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>        assert globalProcessorIndex &#62;= 0 &#38;&#38; globalProcessorIndex &#60; totalParallelism()</span></pre></td></tr>
+
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_55'/>
+55
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_55'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class=''>                : &#34;globalProcessorIndex should be in range 0..&#34; + (totalParallelism() - 1);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_56'/>
+56
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_56'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        return globalProcessorIndex;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_57'/>
+57
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_57'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_58'/>
+58
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_58'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_59'/>
+59
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_59'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_60'/>
+60
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_60'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * Set the local processor index</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_61'/>
+61
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_61'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_62'/>
+62
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_62'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public TestProcessorContext setLocalProcessorIndex(int localProcessorIndex) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_63'/>
+63
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_63'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        this.localProcessorIndex = localProcessorIndex;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_64'/>
+64
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_64'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        return this;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_65'/>
+65
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_65'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_66'/>
+66
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_66'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_67'/>
+67
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_67'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_68'/>
+68
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_68'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * Set the global processor index</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_69'/>
+69
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_69'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_70'/>
+70
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_70'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public TestProcessorContext setGlobalProcessorIndex(int globalProcessorIndex) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_71'/>
+71
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_71'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        this.globalProcessorIndex = globalProcessorIndex;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_72'/>
+72
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_72'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        return this;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_73'/>
+73
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_73'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_74'/>
+74
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_74'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_75'/>
+75
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_75'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Nonnull @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_76'/>
+76
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_76'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public TestProcessorContext setLogger(@Nonnull ILogger logger) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_77'/>
+77
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_77'>1</a>
+<span>
+1. setLogger : All method instructions replaced by: return null; &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return (TestProcessorContext) super.setLogger(logger);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_78'/>
+78
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_78'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_79'/>
+79
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_79'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_80'/>
+80
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_80'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Nonnull @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_81'/>
+81
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_81'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public TestProcessorContext setJetInstance(@Nonnull JetInstance jetInstance) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_82'/>
+82
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_82'>1</a>
+<span>
+1. setJetInstance : All method instructions replaced by: return null; &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return (TestProcessorContext) super.setJetInstance(jetInstance);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_83'/>
+83
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_83'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_84'/>
+84
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_84'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_85'/>
+85
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_85'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Nonnull @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_86'/>
+86
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_86'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public TestProcessorContext setTotalParallelism(int totalParallelism) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_87'/>
+87
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_87'>1</a>
+<span>
+1. setTotalParallelism : All method instructions replaced by: return null; &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return (TestProcessorContext) super.setTotalParallelism(totalParallelism);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_88'/>
+88
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_88'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_89'/>
+89
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_89'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_90'/>
+90
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_90'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Nonnull @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_91'/>
+91
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_91'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public TestProcessorContext setLocalParallelism(int localParallelism) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_92'/>
+92
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_92'>1</a>
+<span>
+1. setLocalParallelism : All method instructions replaced by: return null; &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return (TestProcessorContext) super.setLocalParallelism(localParallelism);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_93'/>
+93
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_93'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_94'/>
+94
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_94'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_95'/>
+95
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_95'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Nonnull @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_96'/>
+96
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_96'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public TestProcessorContext setVertexName(@Nonnull String vertexName) {</span></pre></td></tr>
+
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_97'/>
+97
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_97'>1</a>
+<span>
+1. setVertexName : All method instructions replaced by: return null; &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>        return (TestProcessorContext) super.setVertexName(vertexName);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_98'/>
+98
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_98'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_99'/>
+99
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_99'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_100'/>
+100
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_100'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Nonnull @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_101'/>
+101
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_101'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public TestProcessorContext setProcessingGuarantee(@Nonnull ProcessingGuarantee processingGuarantee) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_102'/>
+102
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_102'>1</a>
+<span>
+1. setProcessingGuarantee : All method instructions replaced by: return null; &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return (TestProcessorContext) super.setProcessingGuarantee(processingGuarantee);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_103'/>
+103
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_103'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_104'/>
+104
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_104'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_105'/>
+105
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_105'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Nonnull @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_106'/>
+106
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_106'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public TestProcessorContext setManagedContext(@Nonnull ManagedContext managedContext) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_107'/>
+107
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_107'>1</a>
+<span>
+1. setManagedContext : All method instructions replaced by: return null; &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return (TestProcessorContext) super.setManagedContext(managedContext);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_108'/>
+108
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_108'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_109'/>
+109
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_109'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_110'/>
+110
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_110'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_111'/>
+111
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_111'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    protected String loggerName() {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_112'/>
+112
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_112'>3</a>
+<span>
+1. loggerName : All method instructions replaced by: return &#34;&#34; &rarr; SURVIVED<br/>
+2. loggerName : All method instructions replaced by: return &#34;A&#34; &rarr; SURVIVED<br/>
+3. loggerName : All method instructions replaced by: return null; &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>        return vertexName() + &#34;#&#34; + globalProcessorIndex;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_113'/>
+113
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_113'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2b58a841_114'/>
+114
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_114'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>}</span></pre></td></tr>
+
+
+
+<tr><td></td><td></td><td><h2>Mutations</h2></td></tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@2b58a841_47'>47</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_47'/> 
+
+<p class='SURVIVED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>localProcessorIndex<br/><b>Killed by : </b>none</span></span> All method instructions replaced by: return 0 &rarr; SURVIVED</p> <p class='TIMED_OUT'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>localProcessorIndex<br/><b>Killed by : </b>none</span></span> All method instructions replaced by: return 1 &rarr; TIMED_OUT</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@2b58a841_54'>54</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_54'/> 
+
+<p class='SURVIVED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>globalProcessorIndex<br/><b>Killed by : </b>none</span></span> All method instructions replaced by: return 0 &rarr; SURVIVED</p> <p class='SURVIVED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>globalProcessorIndex<br/><b>Killed by : </b>none</span></span> All method instructions replaced by: return 1 &rarr; SURVIVED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@2b58a841_77'>77</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_77'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>setLogger<br/><b>Killed by : </b>com.hazelcast.jet.core.PeekingWrapperTest.when_peekInputWithPollingProcessorSupplier[mode=customFunctions](com.hazelcast.jet.core.PeekingWrapperTest)</span></span> All method instructions replaced by: return null; &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@2b58a841_82'>82</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_82'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>setJetInstance<br/><b>Killed by : </b>com.hazelcast.jet.impl.connector.ReadIListPTest</span></span> All method instructions replaced by: return null; &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@2b58a841_87'>87</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_87'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>setTotalParallelism<br/><b>Killed by : </b>com.hazelcast.jet.impl.connector.ConvenientSourcePTest.when_streamingSourceClosesBuffer_then_fails(com.hazelcast.jet.impl.connector.ConvenientSourcePTest)</span></span> All method instructions replaced by: return null; &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@2b58a841_92'>92</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_92'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>setLocalParallelism<br/><b>Killed by : </b>com.hazelcast.jet.impl.connector.ConvenientSourcePTest.when_streamingSourceClosesBuffer_then_fails(com.hazelcast.jet.impl.connector.ConvenientSourcePTest)</span></span> All method instructions replaced by: return null; &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@2b58a841_97'>97</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_97'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>setVertexName<br/><b>Killed by : </b>none</span></span> All method instructions replaced by: return null; &rarr; NO_COVERAGE</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@2b58a841_102'>102</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_102'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>setProcessingGuarantee<br/><b>Killed by : </b>com.hazelcast.jet.impl.execution.ProcessorTaskletTest_Snapshots.when_isCooperative_then_true(com.hazelcast.jet.impl.execution.ProcessorTaskletTest_Snapshots)</span></span> All method instructions replaced by: return null; &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@2b58a841_107'>107</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_107'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>setManagedContext<br/><b>Killed by : </b>com.hazelcast.jet.impl.connector.ConvenientSourcePTest.when_streamingSourceClosesBuffer_then_fails(com.hazelcast.jet.impl.connector.ConvenientSourcePTest)</span></span> All method instructions replaced by: return null; &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@2b58a841_112'>112</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@2b58a841_112'/> 
+
+<p class='SURVIVED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>loggerName<br/><b>Killed by : </b>none</span></span> All method instructions replaced by: return &#34;&#34; &rarr; SURVIVED</p> <p class='SURVIVED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>loggerName<br/><b>Killed by : </b>none</span></span> All method instructions replaced by: return &#34;A&#34; &rarr; SURVIVED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>loggerName<br/><b>Killed by : </b>com.hazelcast.jet.core.AbstractProcessorTest.when_init_then_customInitCalled(com.hazelcast.jet.core.AbstractProcessorTest)</span></span> All method instructions replaced by: return null; &rarr; KILLED</p> 
+</td>
+</tr>
+
+</table>
+
+
+<h2>Active mutators</h2>
+<ul>
+<li class='mutator'>""</li>
+<li class='mutator'>"A"</li>
+<li class='mutator'>'A'</li>
+<li class='mutator'>'\40'</li>
+<li class='mutator'>(byte)0</li>
+<li class='mutator'>(byte)1</li>
+<li class='mutator'>(short)0</li>
+<li class='mutator'>(short)1</li>
+<li class='mutator'>0</li>
+<li class='mutator'>0.0</li>
+<li class='mutator'>0.0f</li>
+<li class='mutator'>0L</li>
+<li class='mutator'>1</li>
+<li class='mutator'>1.0</li>
+<li class='mutator'>1.0f</li>
+<li class='mutator'>1L</li>
+<li class='mutator'>empty</li>
+<li class='mutator'>false</li>
+<li class='mutator'>null</li>
+<li class='mutator'>true</li>
+<li class='mutator'>void</li>
+
+</ul>
+
+<h2>Tests examined</h2>
+<ul>
+<li>com.hazelcast.jet.core.AbstractProcessorTest.when_tryProcess2_then_delegatesToTryProcess(com.hazelcast.jet.core.AbstractProcessorTest) (26 ms)</li><li>com.hazelcast.jet.impl.connector.WriteBufferedPTest (5235 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowP_CoGroupTest.test(com.hazelcast.jet.impl.processor.SlidingWindowP_CoGroupTest) (50 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowPTest.when_lateEvent_then_ignored[hasDeduct=true, singleStageProcessor=false](com.hazelcast.jet.impl.processor.SlidingWindowPTest) (51 ms)</li><li>com.hazelcast.jet.core.AbstractProcessorTest.when_tryProcess_then_unsupportedOperation(com.hazelcast.jet.core.AbstractProcessorTest) (26 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowP_stage1Test.smokeTest(com.hazelcast.jet.impl.processor.SlidingWindowP_stage1Test) (25 ms)</li><li>com.hazelcast.jet.impl.processor.InsertWatermarksPTest.emitByFrame_when_gapBetweenEvents_then_gapInWms[outboxCapacity=1](com.hazelcast.jet.impl.processor.InsertWatermarksPTest) (26 ms)</li><li>com.hazelcast.jet.impl.processor.AsyncTransformUsingServicePTest.test_completedFutures[ordered=false](com.hazelcast.jet.impl.processor.AsyncTransformUsingServicePTest) (64 ms)</li><li>com.hazelcast.jet.core.AbstractProcessorTest.when_processNThrows_then_processRethrows(com.hazelcast.jet.core.AbstractProcessorTest) (51 ms)</li><li>com.hazelcast.jet.core.PeekingWrapperTest.when_peekSnapshot_supplier[mode=customFunctions](com.hazelcast.jet.core.PeekingWrapperTest) (2 ms)</li><li>com.hazelcast.jet.impl.processor.TransformStatefulPTest.mapStateful_withTtl_surviveWm[flatMap=false](com.hazelcast.jet.impl.processor.TransformStatefulPTest) (25 ms)</li><li>com.hazelcast.jet.impl.execution.ProcessorTaskletTest_Snapshots.test_terminalSnapshot_source(com.hazelcast.jet.impl.execution.ProcessorTaskletTest_Snapshots) (2 ms)</li><li>com.hazelcast.jet.core.AbstractProcessorTest.when_flatMapperTryProcessTo1And2_then_emittedTo1And2(com.hazelcast.jet.core.AbstractProcessorTest) (26 ms)</li><li>com.hazelcast.jet.core.AbstractProcessorTest.when_tryProcess4_then_delegatesToTryProcess(com.hazelcast.jet.core.AbstractProcessorTest) (25 ms)</li><li>com.hazelcast.jet.core.PeekingWrapperTest.when_peekInputWithPeekingProcessorSupplier[mode=customFunctions](com.hazelcast.jet.core.PeekingWrapperTest) (1 ms)</li><li>com.hazelcast.jet.impl.connector.UpdateMapPTest.test_localMap[asyncLimit: 1, keyRange: 4](com.hazelcast.jet.impl.connector.UpdateMapPTest) (52 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.mapWithMerging_when_multipleValuesForSingleKeyInABatch[1: mode=client](com.hazelcast.jet.pipeline.SinksTest) (6325 ms)</li><li>com.hazelcast.jet.impl.processor.TransformStatefulPTest.mapStateful_lateEvent[flatMap=false](com.hazelcast.jet.impl.processor.TransformStatefulPTest) (51 ms)</li><li>com.hazelcast.jet.impl.execution.ProcessorTaskletTest_Snapshots.when_singleInbound_then_savesAllToSnapshotAndOutbound(com.hazelcast.jet.impl.execution.ProcessorTaskletTest_Snapshots) (2 ms)</li><li>com.hazelcast.jet.core.PeekingWrapperTest.when_peekOutput_supplier[mode=defaultFunctions](com.hazelcast.jet.core.PeekingWrapperTest) (4 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowPTest.when_wmNeverReceived_then_emitEverythingInComplete[hasDeduct=true, singleStageProcessor=true](com.hazelcast.jet.impl.processor.SlidingWindowPTest) (25 ms)</li><li>com.hazelcast.jet.core.PeekingWrapperTest.when_peekInputWithPeekingProcessorSupplier[mode=defaultFunctions](com.hazelcast.jet.core.PeekingWrapperTest) (2 ms)</li><li>com.hazelcast.jet.impl.processor.SessionWindowPTest.when_batchProcessing_then_flushEverything(com.hazelcast.jet.impl.processor.SessionWindowPTest) (75 ms)</li><li>com.hazelcast.jet.impl.execution.ProcessorTaskletTest_Snapshots.test_nullaryTryProcess_notInterruptedByPhase2(com.hazelcast.jet.impl.execution.ProcessorTaskletTest_Snapshots) (2 ms)</li><li>com.hazelcast.jet.core.PeekingWrapperTest.when_peekInput_metaSupplier[mode=customFunctions](com.hazelcast.jet.core.PeekingWrapperTest) (3 ms)</li><li>com.hazelcast.jet.core.AbstractProcessorTest.when_init_then_loggerAvailable(com.hazelcast.jet.core.AbstractProcessorTest) (25 ms)</li><li>com.hazelcast.jet.impl.processor.InsertWatermarksPTest.when_zeroLag[outboxCapacity=1](com.hazelcast.jet.impl.processor.InsertWatermarksPTest) (26 ms)</li><li>com.hazelcast.jet.impl.processor.InsertWatermarksPTest.when_idleTimeout_then_idleMessageAfterTimeout[outboxCapacity=1,024](com.hazelcast.jet.impl.processor.InsertWatermarksPTest) (126 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowP_twoStageSnapshotTest.test[simulateRestore=false](com.hazelcast.jet.impl.processor.SlidingWindowP_twoStageSnapshotTest) (25 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowPTest.when_receiveAscendingTimestamps_then_emitAscending[hasDeduct=true, singleStageProcessor=false](com.hazelcast.jet.impl.processor.SlidingWindowPTest) (76 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowPTest.when_receiveDescendingTimestamps_then_emitAscending[hasDeduct=true, singleStageProcessor=false](com.hazelcast.jet.impl.processor.SlidingWindowPTest) (76 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowP_changeWindowSizeTest.when_incompatibleSlidingWindowChange1_then_incorrectResultButNoLeakOrFailure(com.hazelcast.jet.impl.processor.SlidingWindowP_changeWindowSizeTest) (2 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowPTest.when_lateEvent_then_ignored[hasDeduct=false, singleStageProcessor=true](com.hazelcast.jet.impl.processor.SlidingWindowPTest) (51 ms)</li><li>com.hazelcast.jet.core.test.TestSupportTest.test_processorSupplierHasJetInstance(com.hazelcast.jet.core.test.TestSupportTest) (25 ms)</li><li>com.hazelcast.jet.core.PeekingWrapperTest.when_peekInputWithPollingProcessorSupplier[mode=defaultFunctions](com.hazelcast.jet.core.PeekingWrapperTest) (2 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowPTest.when_receiveDescendingTimestamps_then_emitAscending[hasDeduct=true, singleStageProcessor=true](com.hazelcast.jet.impl.processor.SlidingWindowPTest) (76 ms)</li><li>com.hazelcast.jet.impl.processor.SessionWindowPTest.when_disorderedEVentsWithThreeKeys(com.hazelcast.jet.impl.processor.SessionWindowPTest) (830 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowP_stage1Test.when_noEvents_then_wmsEmitted(com.hazelcast.jet.impl.processor.SlidingWindowP_stage1Test) (26 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowPTest.when_wmNeverReceived_then_emitEverythingInComplete[hasDeduct=false, singleStageProcessor=false](com.hazelcast.jet.impl.processor.SlidingWindowPTest) (25 ms)</li><li>com.hazelcast.jet.core.PeekingWrapperTest.when_peekOutput_metaSupplier[mode=defaultFunctions](com.hazelcast.jet.core.PeekingWrapperTest) (4 ms)</li><li>com.hazelcast.jet.core.PeekingWrapperTest.when_peekOutput_supplier[mode=customFunctions](com.hazelcast.jet.core.PeekingWrapperTest) (4 ms)</li><li>com.hazelcast.jet.impl.execution.ProcessorTaskletTest_Snapshots.when_exportOnly_then_commitMethodsNotCalled(com.hazelcast.jet.impl.execution.ProcessorTaskletTest_Snapshots) (2 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowPTest.simple_smokeTest[hasDeduct=false, singleStageProcessor=true](com.hazelcast.jet.impl.processor.SlidingWindowPTest) (26 ms)</li><li>com.hazelcast.jet.core.AbstractProcessorTest.when_processInbox3_then_tryProcess3Called(com.hazelcast.jet.core.AbstractProcessorTest) (26 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowP_stage1Test.when_wmNeverReceived_then_emitEverythingInComplete(com.hazelcast.jet.impl.processor.SlidingWindowP_stage1Test) (26 ms)</li><li>com.hazelcast.jet.impl.processor.AsyncTransformUsingServicePTest.when_futureReturnsNullTraverser_then_resultFilteredOut[ordered=false](com.hazelcast.jet.impl.processor.AsyncTransformUsingServicePTest) (38 ms)</li><li>com.hazelcast.jet.impl.processor.AsyncTransformUsingServicePTest.test_forwardWatermarksWithoutItems[ordered=true](com.hazelcast.jet.impl.processor.AsyncTransformUsingServicePTest) (60 ms)</li><li>com.hazelcast.jet.core.PeekingWrapperTest.when_peekSnapshot_procSupplier[mode=customFunctions](com.hazelcast.jet.core.PeekingWrapperTest) (2 ms)</li><li>com.hazelcast.jet.impl.execution.ProcessorTaskletTest_Snapshots.when_snapshotTriggered_then_saveSnapshot_prepare_emitBarrier(com.hazelcast.jet.impl.execution.ProcessorTaskletTest_Snapshots) (2 ms)</li><li>com.hazelcast.jet.impl.processor.TransformStatefulPTest.mapStateful_withTtl_manyKeys[flatMap=false](com.hazelcast.jet.impl.processor.TransformStatefulPTest) (813 ms)</li><li>com.hazelcast.jet.core.AbstractProcessorTest.when_tryProcess0_then_delegatesToTryProcess(com.hazelcast.jet.core.AbstractProcessorTest) (26 ms)</li><li>com.hazelcast.jet.core.test.TestSupportTest.when_processorSupplierTested_then_completeCalled(com.hazelcast.jet.core.test.TestSupportTest) (26 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowP_changeWindowSizeTest.when_incompatibleSlidingWindowChange2_then_incorrectResultButNoLeakOrFailure(com.hazelcast.jet.impl.processor.SlidingWindowP_changeWindowSizeTest) (2 ms)</li><li>com.hazelcast.jet.core.AbstractProcessorTest.when_emitFromTraverserTo1And2_then_emittedTo1And2(com.hazelcast.jet.core.AbstractProcessorTest) (25 ms)</li><li>com.hazelcast.jet.core.AbstractProcessorTest.when_emitFromTraverserToAll_then_emittedToAll(com.hazelcast.jet.core.AbstractProcessorTest) (26 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowPTest.when_receiveAscendingTimestamps_then_emitAscending[hasDeduct=true, singleStageProcessor=true](com.hazelcast.jet.impl.processor.SlidingWindowPTest) (76 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowPTest.when_noFramesReceived_then_onlyEmitWm[hasDeduct=false, singleStageProcessor=true](com.hazelcast.jet.impl.processor.SlidingWindowPTest) (26 ms)</li><li>com.hazelcast.jet.impl.connector.UpdateMapPTest.test_localMap_with_EP[asyncLimit: 1, keyRange: 1,024](com.hazelcast.jet.impl.connector.UpdateMapPTest) (6959 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowPTest.when_receiveRandomTimestamps_then_emitAscending[hasDeduct=false, singleStageProcessor=true](com.hazelcast.jet.impl.processor.SlidingWindowPTest) (836 ms)</li><li>com.hazelcast.jet.core.PeekingWrapperTest.when_peekSnapshot_supplier[mode=defaultFunctions](com.hazelcast.jet.core.PeekingWrapperTest) (3 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowPTest.when_receiveAscendingTimestamps_then_emitAscending[hasDeduct=false, singleStageProcessor=false](com.hazelcast.jet.impl.processor.SlidingWindowPTest) (76 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowPTest.when_receiveAscendingTimestamps_then_emitAscending[hasDeduct=false, singleStageProcessor=true](com.hazelcast.jet.impl.processor.SlidingWindowPTest) (76 ms)</li><li>com.hazelcast.jet.impl.processor.AsyncTransformUsingServicePTest.test_futuresCompletedInSeparateThread[ordered=true](com.hazelcast.jet.impl.processor.AsyncTransformUsingServicePTest) (65 ms)</li><li>com.hazelcast.jet.impl.processor.TransformStatefulPTest.mapStateful_withTtl[flatMap=false](com.hazelcast.jet.impl.processor.TransformStatefulPTest) (51 ms)</li><li>com.hazelcast.jet.impl.processor.InsertWatermarksPTest.when_eventsDecrease_then_oneWm[outboxCapacity=1,024](com.hazelcast.jet.impl.processor.InsertWatermarksPTest) (26 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowP_stage1Test.when_batch_then_emitEverything(com.hazelcast.jet.impl.processor.SlidingWindowP_stage1Test) (26 ms)</li><li>com.hazelcast.jet.impl.connector.WriteLoggerPTest.test(com.hazelcast.jet.impl.connector.WriteLoggerPTest) (27 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowPTest.simple_smokeTest[hasDeduct=true, singleStageProcessor=false](com.hazelcast.jet.impl.processor.SlidingWindowPTest) (26 ms)</li><li>com.hazelcast.jet.core.PeekingWrapperTest.when_peekInput_metaSupplier[mode=defaultFunctions](com.hazelcast.jet.core.PeekingWrapperTest) (1 ms)</li><li>com.hazelcast.jet.impl.execution.ProcessorTaskletTest_Snapshots.test_tryProcessWatermark_notInterruptedByPhase2(com.hazelcast.jet.impl.execution.ProcessorTaskletTest_Snapshots) (2 ms)</li><li>com.hazelcast.jet.core.AbstractProcessorTest.when_tryEmitToAll_then_emittedToAll(com.hazelcast.jet.core.AbstractProcessorTest) (25 ms)</li><li>com.hazelcast.jet.core.AbstractProcessorTest.when_emitFromTraverserTo1_then_emittedTo1(com.hazelcast.jet.core.AbstractProcessorTest) (25 ms)</li><li>com.hazelcast.jet.impl.connector.ReadMapOrCachePTest (260 ms)</li><li>com.hazelcast.jet.impl.processor.InsertWatermarksPTest.when_eventsIncrease_then_wmIncreases[outboxCapacity=1](com.hazelcast.jet.impl.processor.InsertWatermarksPTest) (26 ms)</li><li>com.hazelcast.jet.impl.processor.TransformStatefulPTest.mapStateful_noTtl[flatMap=true](com.hazelcast.jet.impl.processor.TransformStatefulPTest) (26 ms)</li><li>com.hazelcast.jet.impl.processor.TransformStatefulPTest.mapStateful_withTtlAndEvict[flatMap=true](com.hazelcast.jet.impl.processor.TransformStatefulPTest) (51 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.mapWithMerging_when_multipleValuesForSingleKeyInABatch[0: mode=member](com.hazelcast.jet.pipeline.SinksTest) (6071 ms)</li><li>com.hazelcast.jet.impl.processor.AsyncTransformUsingServicePTest.when_mapFnReturnsNullFuture_then_filteredOut[ordered=true](com.hazelcast.jet.impl.processor.AsyncTransformUsingServicePTest) (58 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowP_twoStageSnapshotTest.test[simulateRestore=true](com.hazelcast.jet.impl.processor.SlidingWindowP_twoStageSnapshotTest) (25 ms)</li><li>com.hazelcast.jet.impl.connector.UpdateMapPTest.test_remoteMap[asyncLimit: 1, keyRange: 4](com.hazelcast.jet.impl.connector.UpdateMapPTest) (52 ms)</li><li>com.hazelcast.jet.impl.processor.AsyncTransformUsingServicePTest.test_watermarksConflated[ordered=true](com.hazelcast.jet.impl.processor.AsyncTransformUsingServicePTest) (33 ms)</li><li>com.hazelcast.jet.core.ProcessorsTest (457 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowPTest.when_noFramesReceived_then_onlyEmitWm[hasDeduct=true, singleStageProcessor=false](com.hazelcast.jet.impl.processor.SlidingWindowPTest) (26 ms)</li><li>com.hazelcast.jet.core.PeekingWrapperTest.when_peekOutput_metaSupplier[mode=customFunctions](com.hazelcast.jet.core.PeekingWrapperTest) (4 ms)</li><li>com.hazelcast.jet.impl.connector.StreamEventJournalPTest (5461 ms)</li><li>com.hazelcast.jet.impl.connector.UpdateMapPTest.test_remoteMap_with_EP[asyncLimit: 1, keyRange: 1,024](com.hazelcast.jet.impl.connector.UpdateMapPTest) (7095 ms)</li><li>com.hazelcast.jet.impl.processor.InsertWatermarksPTest.emitByFrame_when_eventsNotAtTheVergeOfFrame_then_wmEmittedCorrectly[outboxCapacity=1,024](com.hazelcast.jet.impl.processor.InsertWatermarksPTest) (25 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowPTest.when_receiveRandomTimestamps_then_emitAscending[hasDeduct=true, singleStageProcessor=false](com.hazelcast.jet.impl.processor.SlidingWindowPTest) (881 ms)</li><li>com.hazelcast.jet.core.AbstractProcessorTest.when_tryEmitTo1And2_then_emittedTo1And2(com.hazelcast.jet.core.AbstractProcessorTest) (26 ms)</li><li>com.hazelcast.jet.impl.processor.TransformStatefulPTest.mapStateful_withTtl_surviveWm[flatMap=true](com.hazelcast.jet.impl.processor.TransformStatefulPTest) (25 ms)</li><li>com.hazelcast.jet.core.AbstractProcessorTest.when_init_then_customInitCalled(com.hazelcast.jet.core.AbstractProcessorTest) (25 ms)</li><li>com.hazelcast.jet.impl.processor.HashJoinPTest (52 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowPTest.when_noFramesReceived_then_onlyEmitWm[hasDeduct=false, singleStageProcessor=false](com.hazelcast.jet.impl.processor.SlidingWindowPTest) (26 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowPTest.when_receiveDescendingTimestamps_then_emitAscending[hasDeduct=false, singleStageProcessor=false](com.hazelcast.jet.impl.processor.SlidingWindowPTest) (76 ms)</li><li>com.hazelcast.jet.impl.processor.InsertWatermarksPTest.when_gapBetweenEvents_then_oneWm[outboxCapacity=1](com.hazelcast.jet.impl.processor.InsertWatermarksPTest) (26 ms)</li><li>com.hazelcast.jet.impl.connector.UpdateMapPTest.test_localMap[asyncLimit: 1, keyRange: 1,024](com.hazelcast.jet.impl.connector.UpdateMapPTest) (2640 ms)</li><li>com.hazelcast.jet.core.AbstractProcessorTest.when_tryProcess1_then_delegatesToTryProcess(com.hazelcast.jet.core.AbstractProcessorTest) (26 ms)</li><li>com.hazelcast.jet.core.PeekingWrapperTest.when_peekSnapshot_procSupplier[mode=defaultFunctions](com.hazelcast.jet.core.PeekingWrapperTest) (3 ms)</li><li>com.hazelcast.jet.impl.connector.UpdateMapPTest.test_localMap_with_EP[asyncLimit: 1,000, keyRange: 1,024](com.hazelcast.jet.impl.connector.UpdateMapPTest) (574 ms)</li><li>com.hazelcast.jet.impl.processor.SessionWindowPTest.when_disorderedEventsWithOneKey(com.hazelcast.jet.impl.processor.SessionWindowPTest) (377 ms)</li><li>com.hazelcast.jet.core.AbstractProcessorTest.when_customInitThrows_then_initRethrows(com.hazelcast.jet.core.AbstractProcessorTest) (427 ms)</li><li>com.hazelcast.jet.impl.execution.ProcessorTaskletTest_Snapshots.test_phase2(com.hazelcast.jet.impl.execution.ProcessorTaskletTest_Snapshots) (3 ms)</li><li>com.hazelcast.jet.impl.processor.InsertWatermarksPTest.emitByFrame_when_eventsIncrease_then_wmIncreases[outboxCapacity=1](com.hazelcast.jet.impl.processor.InsertWatermarksPTest) (25 ms)</li><li>com.hazelcast.jet.impl.processor.AsyncTransformUsingServicePTest.test_wmNotCountedToParallelOps[ordered=true](com.hazelcast.jet.impl.processor.AsyncTransformUsingServicePTest) (24 ms)</li><li>com.hazelcast.jet.impl.processor.AsyncTransformUsingServicePTest.test_completedFutures[ordered=true](com.hazelcast.jet.impl.processor.AsyncTransformUsingServicePTest) (61 ms)</li><li>com.hazelcast.jet.core.PeekingWrapperTest.when_peekSnapshot_metaSupplier[mode=customFunctions](com.hazelcast.jet.core.PeekingWrapperTest) (3 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowPTest.simple_smokeTest[hasDeduct=true, singleStageProcessor=true](com.hazelcast.jet.impl.processor.SlidingWindowPTest) (26 ms)</li><li>com.hazelcast.jet.impl.processor.AsyncTransformUsingServicePTest.when_futureCompletedExceptionally_then_jobFails[ordered=true](com.hazelcast.jet.impl.processor.AsyncTransformUsingServicePTest) (25 ms)</li><li>com.hazelcast.jet.core.AbstractProcessorTest.when_processInbox0_then_tryProcess0Called(com.hazelcast.jet.core.AbstractProcessorTest) (26 ms)</li><li>com.hazelcast.jet.impl.processor.InsertWatermarksPTest.emitByFrame_when_eventsIncreaseAndStartAtVergeOfFrame_then_wmIncreases[outboxCapacity=1](com.hazelcast.jet.impl.processor.InsertWatermarksPTest) (26 ms)</li><li>com.hazelcast.jet.impl.connector.UpdateMapPTest.test_localMap[asyncLimit: 1,000, keyRange: 1,024](com.hazelcast.jet.impl.connector.UpdateMapPTest) (1408 ms)</li><li>com.hazelcast.jet.core.AbstractProcessorTest.when_flatMapperToAll_then_emittedToAll(com.hazelcast.jet.core.AbstractProcessorTest) (26 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowP_changeWindowSizeTest.when_shrinkSlidingWindowSize_then_noLeak(com.hazelcast.jet.impl.processor.SlidingWindowP_changeWindowSizeTest) (1 ms)</li><li>com.hazelcast.jet.impl.processor.TransformStatefulPTest.mapStateful_toNull_inMapFn[flatMap=false](com.hazelcast.jet.impl.processor.TransformStatefulPTest) (26 ms)</li><li>com.hazelcast.jet.impl.processor.InsertWatermarksPTest.when_manyEvents_then_oneWm[outboxCapacity=1,024](com.hazelcast.jet.impl.processor.InsertWatermarksPTest) (26 ms)</li><li>com.hazelcast.jet.core.AbstractProcessorTest.when_processInbox5_then_tryProcessCalled(com.hazelcast.jet.core.AbstractProcessorTest) (26 ms)</li><li>com.hazelcast.jet.impl.processor.SessionWindowPTest.when_sessionsTouch_then_shouldNotBeMerged(com.hazelcast.jet.impl.processor.SessionWindowPTest) (26 ms)</li><li>com.hazelcast.jet.impl.processor.InsertWatermarksPTest.when_zeroLag[outboxCapacity=1,024](com.hazelcast.jet.impl.processor.InsertWatermarksPTest) (25 ms)</li><li>com.hazelcast.jet.impl.connector.UpdateMapPTest.test_localMap_with_EP[asyncLimit: 1, keyRange: 4](com.hazelcast.jet.impl.connector.UpdateMapPTest) (78 ms)</li><li>com.hazelcast.jet.core.AbstractProcessorTest.when_tryProcess3_then_delegatesToTryProcess(com.hazelcast.jet.core.AbstractProcessorTest) (25 ms)</li><li>com.hazelcast.jet.impl.execution.ProcessorTaskletTest_Snapshots.when_snapshotRestoreInput_then_restoreMethodsCalled(com.hazelcast.jet.impl.execution.ProcessorTaskletTest_Snapshots) (2 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowPTest.when_lateEvent_then_ignored[hasDeduct=true, singleStageProcessor=true](com.hazelcast.jet.impl.processor.SlidingWindowPTest) (51 ms)</li><li>com.hazelcast.jet.core.PeekingWrapperTest.when_peekOutput_processorSupplier[mode=customFunctions](com.hazelcast.jet.core.PeekingWrapperTest) (4 ms)</li><li>com.hazelcast.jet.impl.connector.StreamFilesPTest (6033 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowP_stage1Test.when_gapInWmAfterEvent_then_frameAndWmEmitted(com.hazelcast.jet.impl.processor.SlidingWindowP_stage1Test) (25 ms)</li><li>com.hazelcast.jet.impl.execution.ProcessorTaskletTest_Snapshots.when_isCooperative_then_true(com.hazelcast.jet.impl.execution.ProcessorTaskletTest_Snapshots) (2 ms)</li><li>com.hazelcast.jet.impl.connector.ConvenientSourcePTest.test_faultTolerance(com.hazelcast.jet.impl.connector.ConvenientSourcePTest) (24 ms)</li><li>com.hazelcast.jet.impl.processor.InsertWatermarksPTest.when_gapBetweenEvents_then_oneWm[outboxCapacity=1,024](com.hazelcast.jet.impl.processor.InsertWatermarksPTest) (26 ms)</li><li>com.hazelcast.jet.core.AbstractProcessorTest.when_processInbox2_then_tryProcess2Called(com.hazelcast.jet.core.AbstractProcessorTest) (26 ms)</li><li>com.hazelcast.jet.impl.execution.ProcessorTaskletTest_Snapshots.when_processorCompletesAfterPhase1_then_doneAfterPhase2(com.hazelcast.jet.impl.execution.ProcessorTaskletTest_Snapshots) (2 ms)</li><li>com.hazelcast.jet.impl.processor.TransformStatefulPTest.mapStateful_toNull_inMapFn[flatMap=true](com.hazelcast.jet.impl.processor.TransformStatefulPTest) (26 ms)</li><li>com.hazelcast.jet.impl.processor.SessionWindowPTest.when_orderedEventsWithOneKey(com.hazelcast.jet.impl.processor.SessionWindowPTest) (51 ms)</li><li>com.hazelcast.jet.impl.connector.UpdateMapPTest.test_localMap[asyncLimit: 1,000, keyRange: 4](com.hazelcast.jet.impl.connector.UpdateMapPTest) (52 ms)</li><li>com.hazelcast.jet.impl.processor.SessionWindowPTest.when_lateEvent_then_dropped(com.hazelcast.jet.impl.processor.SessionWindowPTest) (25 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowPTest.when_wmNeverReceived_then_emitEverythingInComplete[hasDeduct=false, singleStageProcessor=true](com.hazelcast.jet.impl.processor.SlidingWindowPTest) (25 ms)</li><li>com.hazelcast.jet.impl.processor.AsyncTransformUsingServiceBatchedPTest (117 ms)</li><li>com.hazelcast.jet.impl.connector.UpdateMapPTest.test_remoteMap[asyncLimit: 1, keyRange: 1,024](com.hazelcast.jet.impl.connector.UpdateMapPTest) (3067 ms)</li><li>com.hazelcast.jet.core.PeekingWrapperTest.when_peekOutput_processorSupplier[mode=defaultFunctions](com.hazelcast.jet.core.PeekingWrapperTest) (4 ms)</li><li>com.hazelcast.jet.impl.execution.ProcessorTaskletTest_Snapshots.test_terminalSnapshot_receivedInBarrier(com.hazelcast.jet.impl.execution.ProcessorTaskletTest_Snapshots) (2 ms)</li><li>com.hazelcast.jet.impl.processor.InsertWatermarksPTest.when_eventsIncrease_then_wmIncreases[outboxCapacity=1,024](com.hazelcast.jet.impl.processor.InsertWatermarksPTest) (25 ms)</li><li>com.hazelcast.jet.impl.processor.AsyncTransformUsingServicePTest.when_futureCompletedExceptionally_then_jobFails[ordered=false](com.hazelcast.jet.impl.processor.AsyncTransformUsingServicePTest) (26 ms)</li><li>com.hazelcast.jet.impl.execution.ProcessorTaskletTest_Snapshots.when_onSnapshotCompletedReturnsFalse_then_calledAgain(com.hazelcast.jet.impl.execution.ProcessorTaskletTest_Snapshots) (2 ms)</li><li>com.hazelcast.jet.impl.processor.InsertWatermarksPTest.emitByFrame_when_eventsIncreaseAndStartAtVergeOfFrame_then_wmIncreases[outboxCapacity=1,024](com.hazelcast.jet.impl.processor.InsertWatermarksPTest) (26 ms)</li><li>com.hazelcast.jet.impl.processor.InsertWatermarksPTest.when_idleTimeout_then_idleMessageAfterTimeout[outboxCapacity=1](com.hazelcast.jet.impl.processor.InsertWatermarksPTest) (126 ms)</li><li>com.hazelcast.jet.impl.processor.TransformStatefulPTest.mapStateful_lateEvent[flatMap=true](com.hazelcast.jet.impl.processor.TransformStatefulPTest) (26 ms)</li><li>com.hazelcast.jet.impl.connector.UpdateMapPTest.test_remoteMap_with_EP[asyncLimit: 1, keyRange: 4](com.hazelcast.jet.impl.connector.UpdateMapPTest) (77 ms)</li><li>com.hazelcast.jet.impl.connector.UpdateMapPTest.test_remoteMap_with_EP[asyncLimit: 1,000, keyRange: 1,024](com.hazelcast.jet.impl.connector.UpdateMapPTest) (454 ms)</li><li>com.hazelcast.jet.core.PeekingWrapperTest.when_peekInputWithIteratingProcessorSupplier[mode=customFunctions](com.hazelcast.jet.core.PeekingWrapperTest) (40 ms)</li><li>com.hazelcast.jet.impl.processor.TransformStatefulPTest.mapStateful_withTtl[flatMap=true](com.hazelcast.jet.impl.processor.TransformStatefulPTest) (51 ms)</li><li>com.hazelcast.jet.impl.processor.InsertWatermarksPTest.emitByFrame_when_gapBetweenEvents_then_gapInWms[outboxCapacity=1,024](com.hazelcast.jet.impl.processor.InsertWatermarksPTest) (25 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowPTest.when_noFramesReceived_then_onlyEmitWm[hasDeduct=true, singleStageProcessor=true](com.hazelcast.jet.impl.processor.SlidingWindowPTest) (26 ms)</li><li>com.hazelcast.jet.impl.processor.SessionWindowPTest.when_orderedEventsWithThreeKeys(com.hazelcast.jet.impl.processor.SessionWindowPTest) (101 ms)</li><li>com.hazelcast.jet.core.PeekingWrapperTest.when_peekInput_processorSupplier[mode=defaultFunctions](com.hazelcast.jet.core.PeekingWrapperTest) (2 ms)</li><li>com.hazelcast.jet.impl.connector.ReadIListPTest (252 ms)</li><li>com.hazelcast.jet.impl.processor.TransformStatefulPTest.mapStateful_withTtlAndEvict[flatMap=false](com.hazelcast.jet.impl.processor.TransformStatefulPTest) (51 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowPTest.when_receiveDescendingTimestamps_then_emitAscending[hasDeduct=false, singleStageProcessor=true](com.hazelcast.jet.impl.processor.SlidingWindowPTest) (80 ms)</li><li>com.hazelcast.jet.impl.processor.AsyncTransformUsingServicePTest.test_wmNotCountedToParallelOps[ordered=false](com.hazelcast.jet.impl.processor.AsyncTransformUsingServicePTest) (26 ms)</li><li>com.hazelcast.jet.impl.processor.AsyncTransformUsingServicePTest.when_futureReturnsNullTraverser_then_resultFilteredOut[ordered=true](com.hazelcast.jet.impl.processor.AsyncTransformUsingServicePTest) (56 ms)</li><li>com.hazelcast.jet.core.PeekingWrapperTest.when_peekSnapshot_metaSupplier[mode=defaultFunctions](com.hazelcast.jet.core.PeekingWrapperTest) (2 ms)</li><li>com.hazelcast.jet.impl.processor.TransformStatefulPTest.mapStateful_negativeWmTime[flatMap=false](com.hazelcast.jet.impl.processor.TransformStatefulPTest) (51 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowPTest.simple_smokeTest[hasDeduct=false, singleStageProcessor=false](com.hazelcast.jet.impl.processor.SlidingWindowPTest) (26 ms)</li><li>com.hazelcast.jet.impl.processor.InsertWatermarksPTest.when_manyEvents_then_oneWm[outboxCapacity=1](com.hazelcast.jet.impl.processor.InsertWatermarksPTest) (26 ms)</li><li>com.hazelcast.jet.core.AbstractProcessorTest.when_processInbox4_then_tryProcess4Called(com.hazelcast.jet.core.AbstractProcessorTest) (25 ms)</li><li>com.hazelcast.jet.impl.processor.AsyncTransformUsingServicePTest.when_mapFnReturnsNullFuture_then_filteredOut[ordered=false](com.hazelcast.jet.impl.processor.AsyncTransformUsingServicePTest) (39 ms)</li><li>com.hazelcast.jet.impl.processor.TransformStatefulPTest.mapStateful_negativeWmTime[flatMap=true](com.hazelcast.jet.impl.processor.TransformStatefulPTest) (51 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowPTest.when_receiveRandomTimestamps_then_emitAscending[hasDeduct=true, singleStageProcessor=true](com.hazelcast.jet.impl.processor.SlidingWindowPTest) (856 ms)</li><li>com.hazelcast.jet.impl.connector.UpdateMapPTest.test_remoteMap[asyncLimit: 1,000, keyRange: 4](com.hazelcast.jet.impl.connector.UpdateMapPTest) (77 ms)</li><li>com.hazelcast.jet.impl.connector.UpdateMapPTest.test_remoteMap[asyncLimit: 1,000, keyRange: 1,024](com.hazelcast.jet.impl.connector.UpdateMapPTest) (680 ms)</li><li>com.hazelcast.jet.core.AbstractProcessorTest.when_tryEmitTo1_then_emittedTo1(com.hazelcast.jet.core.AbstractProcessorTest) (25 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowP_changeWindowSizeTest.when_multipleFramesRestoredIntoSingleFrame_then_incorrectResultButNoLeakOrFailure(com.hazelcast.jet.impl.processor.SlidingWindowP_changeWindowSizeTest) (2 ms)</li><li>com.hazelcast.jet.impl.connector.UpdateMapPTest.test_localMap_with_EP[asyncLimit: 1,000, keyRange: 4](com.hazelcast.jet.impl.connector.UpdateMapPTest) (77 ms)</li><li>com.hazelcast.jet.impl.processor.TransformStatefulPTest.mapStateful_withTtl_evictOnlyExpired[flatMap=false](com.hazelcast.jet.impl.processor.TransformStatefulPTest) (51 ms)</li><li>com.hazelcast.jet.impl.connector.StreamJmsPTest (1055 ms)</li><li>com.hazelcast.jet.impl.processor.TransformStatefulPTest.mapStateful_withTtl_evictOnlyExpired[flatMap=true](com.hazelcast.jet.impl.processor.TransformStatefulPTest) (51 ms)</li><li>com.hazelcast.jet.impl.processor.AsyncTransformUsingServicePTest.test_watermarksConflated[ordered=false](com.hazelcast.jet.impl.processor.AsyncTransformUsingServicePTest) (31 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowPTest.when_wmNeverReceived_then_emitEverythingInComplete[hasDeduct=true, singleStageProcessor=false](com.hazelcast.jet.impl.processor.SlidingWindowPTest) (25 ms)</li><li>com.hazelcast.jet.impl.processor.TransformStatefulPTest.mapStateful_noTtl[flatMap=false](com.hazelcast.jet.impl.processor.TransformStatefulPTest) (51 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowP_stage1Test.when_lateEvent_then_ignore(com.hazelcast.jet.impl.processor.SlidingWindowP_stage1Test) (25 ms)</li><li>com.hazelcast.jet.impl.processor.TransformStatefulPTest.mapStateful_withTtl_manyKeys[flatMap=true](com.hazelcast.jet.impl.processor.TransformStatefulPTest) (779 ms)</li><li>com.hazelcast.jet.impl.connector.ConvenientSourcePTest.when_streamingSourceClosesBuffer_then_fails(com.hazelcast.jet.impl.connector.ConvenientSourcePTest) (3 ms)</li><li>com.hazelcast.jet.impl.connector.UpdateMapPTest.test_remoteMap_with_EP[asyncLimit: 1,000, keyRange: 4](com.hazelcast.jet.impl.connector.UpdateMapPTest) (52 ms)</li><li>com.hazelcast.jet.core.PeekingWrapperTest.when_peekInput_processorSupplier[mode=customFunctions](com.hazelcast.jet.core.PeekingWrapperTest) (2 ms)</li><li>com.hazelcast.jet.core.AbstractProcessorTest.when_processInbox1_then_tryProcess1Called(com.hazelcast.jet.core.AbstractProcessorTest) (26 ms)</li><li>com.hazelcast.jet.impl.processor.InsertWatermarksPTest.emitByFrame_when_eventsNotAtTheVergeOfFrame_then_wmEmittedCorrectly[outboxCapacity=1](com.hazelcast.jet.impl.processor.InsertWatermarksPTest) (25 ms)</li><li>com.hazelcast.jet.core.AbstractProcessorTest.when_flatMapperTo1_then_emittedTo1(com.hazelcast.jet.core.AbstractProcessorTest) (26 ms)</li><li>com.hazelcast.jet.impl.processor.InsertWatermarksPTest.when_lateEvent_then_notDropped[outboxCapacity=1](com.hazelcast.jet.impl.processor.InsertWatermarksPTest) (26 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowP_changeWindowSizeTest.test_extendSlidingWindowSize_leak(com.hazelcast.jet.impl.processor.SlidingWindowP_changeWindowSizeTest) (5 ms)</li><li>com.hazelcast.jet.impl.processor.AsyncTransformUsingServicePTest.test_forwardWatermarksWithoutItems[ordered=false](com.hazelcast.jet.impl.processor.AsyncTransformUsingServicePTest) (59 ms)</li><li>com.hazelcast.jet.impl.connector.ConvenientSourcePTest.test_nullState(com.hazelcast.jet.impl.connector.ConvenientSourcePTest) (22 ms)</li><li>com.hazelcast.jet.impl.processor.AsyncTransformUsingServicePTest.test_futuresCompletedInSeparateThread[ordered=false](com.hazelcast.jet.impl.processor.AsyncTransformUsingServicePTest) (68 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowPTest.when_lateEvent_then_ignored[hasDeduct=false, singleStageProcessor=false](com.hazelcast.jet.impl.processor.SlidingWindowPTest) (51 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowP_FrameCombiningTest.when_multipleFrames_then_combine(com.hazelcast.jet.impl.processor.SlidingWindowP_FrameCombiningTest) (51 ms)</li><li>com.hazelcast.jet.core.PeekingWrapperTest.when_peekInputWithPollingProcessorSupplier[mode=customFunctions](com.hazelcast.jet.core.PeekingWrapperTest) (2 ms)</li><li>com.hazelcast.jet.core.PeekingWrapperTest.when_peekInputWithIteratingProcessorSupplier[mode=defaultFunctions](com.hazelcast.jet.core.PeekingWrapperTest) (2 ms)</li><li>com.hazelcast.jet.impl.processor.InsertWatermarksPTest.when_eventsDecrease_then_oneWm[outboxCapacity=1](com.hazelcast.jet.impl.processor.InsertWatermarksPTest) (26 ms)</li><li>com.hazelcast.jet.impl.connector.WriteSocketTest (1783 ms)</li><li>com.hazelcast.jet.impl.processor.InsertWatermarksPTest.emitByFrame_when_eventsIncrease_then_wmIncreases[outboxCapacity=1,024](com.hazelcast.jet.impl.processor.InsertWatermarksPTest) (26 ms)</li><li>com.hazelcast.jet.impl.connector.StreamEventJournalP_WmCoalescingTest (5177 ms)</li><li>com.hazelcast.jet.impl.execution.ProcessorTaskletTest_Snapshots.when_multipleInbound_then_waitForBarrier(com.hazelcast.jet.impl.execution.ProcessorTaskletTest_Snapshots) (2 ms)</li><li>com.hazelcast.jet.impl.processor.InsertWatermarksPTest.when_lateEvent_then_notDropped[outboxCapacity=1,024](com.hazelcast.jet.impl.processor.InsertWatermarksPTest) (25 ms)</li><li>com.hazelcast.jet.core.test.TestSupportTest.test_processorMetaSupplierHasJetInstance(com.hazelcast.jet.core.test.TestSupportTest) (152 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowPTest.when_receiveRandomTimestamps_then_emitAscending[hasDeduct=false, singleStageProcessor=false](com.hazelcast.jet.impl.processor.SlidingWindowPTest) (855 ms)</li>
+</ul>
+
+<br/>
+
+Report generated by <a href='http://pitest.org'>PIT</a> 1.5.2
+
+</body>
+</html>

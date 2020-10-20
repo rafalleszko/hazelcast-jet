@@ -1,0 +1,4921 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+
+
+<h1>BatchStageImpl.java</h1>
+
+<table class="src">
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_1'/>
+1
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_1'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>/*</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_2'/>
+2
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_2'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * Copyright (c) 2008-2020, Hazelcast, Inc. All Rights Reserved.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_3'/>
+3
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_3'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_4'/>
+4
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_4'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_5'/>
+5
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_5'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * you may not use this file except in compliance with the License.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_6'/>
+6
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_6'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * You may obtain a copy of the License at</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_7'/>
+7
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_7'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_8'/>
+8
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_8'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * http://www.apache.org/licenses/LICENSE-2.0</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_9'/>
+9
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_9'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_10'/>
+10
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_10'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * Unless required by applicable law or agreed to in writing, software</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_11'/>
+11
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_11'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * distributed under the License is distributed on an &#34;AS IS&#34; BASIS,</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_12'/>
+12
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_12'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_13'/>
+13
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_13'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * See the License for the specific language governing permissions and</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_14'/>
+14
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_14'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * limitations under the License.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_15'/>
+15
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_15'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_16'/>
+16
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_16'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_17'/>
+17
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_17'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>package com.hazelcast.jet.impl.pipeline;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_18'/>
+18
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_18'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_19'/>
+19
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_19'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import com.hazelcast.function.BiFunctionEx;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_20'/>
+20
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_20'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import com.hazelcast.function.BiPredicateEx;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_21'/>
+21
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_21'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import com.hazelcast.function.ComparatorEx;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_22'/>
+22
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_22'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import com.hazelcast.function.FunctionEx;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_23'/>
+23
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_23'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import com.hazelcast.function.PredicateEx;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_24'/>
+24
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_24'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import com.hazelcast.function.SupplierEx;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_25'/>
+25
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_25'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import com.hazelcast.jet.Traverser;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_26'/>
+26
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_26'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import com.hazelcast.jet.Traversers;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_27'/>
+27
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_27'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import com.hazelcast.jet.aggregate.AggregateOperation1;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_28'/>
+28
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_28'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import com.hazelcast.jet.aggregate.AggregateOperation2;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_29'/>
+29
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_29'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import com.hazelcast.jet.aggregate.AggregateOperation3;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_30'/>
+30
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_30'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import com.hazelcast.jet.core.ProcessorMetaSupplier;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_31'/>
+31
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_31'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import com.hazelcast.jet.function.TriFunction;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_32'/>
+32
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_32'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import com.hazelcast.jet.impl.pipeline.transform.AbstractTransform;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_33'/>
+33
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_33'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import com.hazelcast.jet.impl.pipeline.transform.AggregateTransform;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_34'/>
+34
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_34'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import com.hazelcast.jet.impl.pipeline.transform.Transform;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_35'/>
+35
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_35'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import com.hazelcast.jet.pipeline.BatchStage;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_36'/>
+36
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_36'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import com.hazelcast.jet.pipeline.BatchStageWithKey;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_37'/>
+37
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_37'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import com.hazelcast.jet.pipeline.JoinClause;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_38'/>
+38
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_38'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import com.hazelcast.jet.pipeline.ServiceFactory;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_39'/>
+39
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_39'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_40'/>
+40
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_40'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import javax.annotation.Nonnull;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_41'/>
+41
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_41'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import java.util.List;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_42'/>
+42
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_42'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import java.util.concurrent.CompletableFuture;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_43'/>
+43
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_43'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_44'/>
+44
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_44'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import static com.hazelcast.jet.impl.util.Util.checkSerializable;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_45'/>
+45
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_45'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import static com.hazelcast.jet.impl.util.Util.toList;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_46'/>
+46
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_46'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import static java.util.Arrays.asList;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_47'/>
+47
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_47'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import static java.util.Collections.singletonList;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_48'/>
+48
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_48'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_49'/>
+49
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_49'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>public class BatchStageImpl&#60;T&#62; extends ComputeStageImplBase&#60;T&#62; implements BatchStage&#60;T&#62; {</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_50'/>
+50
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_50'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_51'/>
+51
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_51'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    BatchStageImpl(@Nonnull Transform transform, @Nonnull PipelineImpl pipeline) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_52'/>
+52
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_52'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        super(transform, DO_NOT_ADAPT, pipeline);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_53'/>
+53
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_53'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_54'/>
+54
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_54'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_55'/>
+55
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_55'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_56'/>
+56
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_56'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * This constructor exists just to match the shape of the functional interface</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_57'/>
+57
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_57'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * {@code GeneralHashJoinBuilder.CreateOutStageFn}</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_58'/>
+58
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_58'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_59'/>
+59
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_59'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public BatchStageImpl(@Nonnull Transform transform, FunctionAdapter ignored, @Nonnull PipelineImpl pipeline) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_60'/>
+60
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_60'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        this(transform, pipeline);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_61'/>
+61
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_61'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_62'/>
+62
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_62'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_63'/>
+63
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_63'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    BatchStageImpl(BatchStageImpl&#60;T&#62; toCopy, boolean rebalanceOutput) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_64'/>
+64
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_64'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        super(toCopy, rebalanceOutput);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_65'/>
+65
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_65'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_66'/>
+66
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_66'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_67'/>
+67
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_67'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    &#60;K&#62; BatchStageImpl(BatchStageImpl&#60;T&#62; toCopy, FunctionEx&#60;? super T, ? extends K&#62; keyFn) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_68'/>
+68
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_68'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        super(toCopy, keyFn);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_69'/>
+69
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_69'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_70'/>
+70
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_70'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_71'/>
+71
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_71'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Nonnull @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_72'/>
+72
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_72'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public &#60;K&#62; BatchStageWithKey&#60;T, K&#62; groupingKey(@Nonnull FunctionEx&#60;? super T, ? extends K&#62; keyFn) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_73'/>
+73
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_73'>1</a>
+<span>
+1. groupingKey : All method instructions replaced by: return null; &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        checkSerializable(keyFn, &#34;keyFn&#34;);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_74'/>
+74
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_74'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        return new BatchStageWithKeyImpl&#60;&#62;(this, keyFn);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_75'/>
+75
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_75'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_76'/>
+76
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_76'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_77'/>
+77
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_77'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Nonnull @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_78'/>
+78
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_78'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public &#60;K&#62; BatchStage&#60;T&#62; rebalance(@Nonnull FunctionEx&#60;? super T, ? extends K&#62; keyFn) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_79'/>
+79
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_79'>1</a>
+<span>
+1. rebalance : All method instructions replaced by: return null; &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        checkSerializable(keyFn, &#34;keyFn&#34;);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_80'/>
+80
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_80'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        return new BatchStageImpl&#60;&#62;(this, keyFn);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_81'/>
+81
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_81'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_82'/>
+82
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_82'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_83'/>
+83
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_83'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Nonnull @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_84'/>
+84
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_84'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public BatchStage&#60;T&#62; rebalance() {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_85'/>
+85
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_85'>1</a>
+<span>
+1. rebalance : All method instructions replaced by: return null; &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return new BatchStageImpl&#60;&#62;(this, true);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_86'/>
+86
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_86'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_87'/>
+87
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_87'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_88'/>
+88
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_88'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Nonnull @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_89'/>
+89
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_89'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public BatchStage&#60;T&#62; sort() {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_90'/>
+90
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_90'>1</a>
+<span>
+1. sort : All method instructions replaced by: return null; &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return attachSort(null);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_91'/>
+91
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_91'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_92'/>
+92
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_92'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_93'/>
+93
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_93'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Nonnull @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_94'/>
+94
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_94'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public BatchStage&#60;T&#62; sort(@Nonnull ComparatorEx&#60;? super T&#62; comparator) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_95'/>
+95
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_95'>1</a>
+<span>
+1. sort : All method instructions replaced by: return null; &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return attachSort(comparator);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_96'/>
+96
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_96'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_97'/>
+97
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_97'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_98'/>
+98
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_98'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Nonnull @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_99'/>
+99
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_99'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public &#60;R&#62; BatchStage&#60;R&#62; map(@Nonnull FunctionEx&#60;? super T, ? extends R&#62; mapFn) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_100'/>
+100
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_100'>1</a>
+<span>
+1. map : All method instructions replaced by: return null; &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return attachMap(mapFn);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_101'/>
+101
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_101'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_102'/>
+102
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_102'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_103'/>
+103
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_103'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Nonnull @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_104'/>
+104
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_104'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public BatchStage&#60;T&#62; filter(@Nonnull PredicateEx&#60;T&#62; filterFn) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_105'/>
+105
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_105'>1</a>
+<span>
+1. filter : All method instructions replaced by: return null; &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return attachFilter(filterFn);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_106'/>
+106
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_106'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_107'/>
+107
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_107'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_108'/>
+108
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_108'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Nonnull @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_109'/>
+109
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_109'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public &#60;R&#62; BatchStage&#60;R&#62; flatMap(</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_110'/>
+110
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_110'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            @Nonnull FunctionEx&#60;? super T, ? extends Traverser&#60;R&#62;&#62; flatMapFn</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_111'/>
+111
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_111'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    ) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_112'/>
+112
+</td>
+<td class='uncertain'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_112'>1</a>
+<span>
+1. flatMap : All method instructions replaced by: return null; &rarr; TIMED_OUT<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='uncertain'>        return attachFlatMap(flatMapFn);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_113'/>
+113
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_113'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_114'/>
+114
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_114'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_115'/>
+115
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_115'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Nonnull @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_116'/>
+116
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_116'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public &#60;S, R&#62; BatchStage&#60;R&#62; mapStateful(</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_117'/>
+117
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_117'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            @Nonnull SupplierEx&#60;? extends S&#62; createFn,</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_118'/>
+118
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_118'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            @Nonnull BiFunctionEx&#60;? super S, ? super T, ? extends R&#62; mapFn</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_119'/>
+119
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_119'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    ) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_120'/>
+120
+</td>
+<td class='uncertain'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_120'>1</a>
+<span>
+1. mapStateful : All method instructions replaced by: return null; &rarr; TIMED_OUT<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='uncertain'>        return attachGlobalMapStateful(createFn, mapFn);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_121'/>
+121
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_121'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_122'/>
+122
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_122'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_123'/>
+123
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_123'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Nonnull @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_124'/>
+124
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_124'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public &#60;S&#62; BatchStage&#60;T&#62; filterStateful(</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_125'/>
+125
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_125'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            @Nonnull SupplierEx&#60;? extends S&#62; createFn,</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_126'/>
+126
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_126'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            @Nonnull BiPredicateEx&#60;? super S, ? super T&#62; filterFn</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_127'/>
+127
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_127'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    ) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_128'/>
+128
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_128'>1</a>
+<span>
+1. filterStateful : All method instructions replaced by: return null; &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return attachGlobalMapStateful(createFn, (s, t) -&#62; filterFn.test(s, t) ? t : null);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_129'/>
+129
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_129'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_130'/>
+130
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_130'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_131'/>
+131
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_131'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Nonnull @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_132'/>
+132
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_132'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public &#60;S, R&#62; BatchStage&#60;R&#62; flatMapStateful(</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_133'/>
+133
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_133'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            @Nonnull SupplierEx&#60;? extends S&#62; createFn,</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_134'/>
+134
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_134'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            @Nonnull BiFunctionEx&#60;? super S, ? super T, ? extends Traverser&#60;R&#62;&#62; flatMapFn</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_135'/>
+135
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_135'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    ) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_136'/>
+136
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_136'>1</a>
+<span>
+1. flatMapStateful : All method instructions replaced by: return null; &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return attachGlobalFlatMapStateful(createFn, flatMapFn);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_137'/>
+137
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_137'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_138'/>
+138
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_138'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_139'/>
+139
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_139'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Nonnull @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_140'/>
+140
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_140'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public &#60;S, R&#62; BatchStage&#60;R&#62; mapUsingService(</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_141'/>
+141
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_141'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            @Nonnull ServiceFactory&#60;?, S&#62; serviceFactory,</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_142'/>
+142
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_142'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            @Nonnull BiFunctionEx&#60;? super S, ? super T, ? extends R&#62; mapFn</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_143'/>
+143
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_143'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    ) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_144'/>
+144
+</td>
+<td class='uncertain'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_144'>1</a>
+<span>
+1. mapUsingService : All method instructions replaced by: return null; &rarr; TIMED_OUT<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='uncertain'>        return attachMapUsingService(serviceFactory, mapFn);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_145'/>
+145
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_145'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_146'/>
+146
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_146'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_147'/>
+147
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_147'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Nonnull @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_148'/>
+148
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_148'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public &#60;S, R&#62; BatchStage&#60;R&#62; mapUsingServiceAsync(</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_149'/>
+149
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_149'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            @Nonnull ServiceFactory&#60;?, S&#62; serviceFactory,</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_150'/>
+150
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_150'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            int maxConcurrentOps,</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_151'/>
+151
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_151'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            boolean preserveOrder,</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_152'/>
+152
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_152'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            @Nonnull BiFunctionEx&#60;? super S, ? super T, ? extends CompletableFuture&#60;R&#62;&#62; mapAsyncFn</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_153'/>
+153
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_153'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    ) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_154'/>
+154
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_154'>1</a>
+<span>
+1. mapUsingServiceAsync : All method instructions replaced by: return null; &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return attachMapUsingServiceAsync(serviceFactory, maxConcurrentOps, preserveOrder,</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_155'/>
+155
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_155'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>                (s, t) -&#62; mapAsyncFn.apply(s, t).thenApply(Traversers::singleton));</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_156'/>
+156
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_156'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_157'/>
+157
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_157'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_158'/>
+158
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_158'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Nonnull @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_159'/>
+159
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_159'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public &#60;S, R&#62; BatchStage&#60;R&#62; mapUsingServiceAsyncBatched(</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_160'/>
+160
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_160'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            @Nonnull ServiceFactory&#60;?, S&#62; serviceFactory,</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_161'/>
+161
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_161'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            int maxBatchSize,</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_162'/>
+162
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_162'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            @Nonnull BiFunctionEx&#60;? super S, ? super List&#60;T&#62;, ? extends CompletableFuture&#60;List&#60;R&#62;&#62;&#62; mapAsyncFn</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_163'/>
+163
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_163'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    ) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_164'/>
+164
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_164'>1</a>
+<span>
+1. mapUsingServiceAsyncBatched : All method instructions replaced by: return null; &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return attachMapUsingServiceAsyncBatched(serviceFactory, maxBatchSize,</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_165'/>
+165
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_165'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>                (s, t) -&#62; mapAsyncFn.apply(s, t).thenApply(list -&#62; toList(list, Traversers::singleton)));</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_166'/>
+166
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_166'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_167'/>
+167
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_167'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_168'/>
+168
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_168'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Nonnull @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_169'/>
+169
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_169'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public &#60;S&#62; BatchStage&#60;T&#62; filterUsingService(</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_170'/>
+170
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_170'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            @Nonnull ServiceFactory&#60;?, S&#62; serviceFactory,</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_171'/>
+171
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_171'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            @Nonnull BiPredicateEx&#60;? super S, ? super T&#62; filterFn</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_172'/>
+172
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_172'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    ) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_173'/>
+173
+</td>
+<td class='uncertain'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_173'>1</a>
+<span>
+1. filterUsingService : All method instructions replaced by: return null; &rarr; TIMED_OUT<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='uncertain'>        return attachFilterUsingService(serviceFactory, filterFn);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_174'/>
+174
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_174'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_175'/>
+175
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_175'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_176'/>
+176
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_176'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Nonnull @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_177'/>
+177
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_177'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public &#60;S, R&#62; BatchStage&#60;R&#62; flatMapUsingService(</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_178'/>
+178
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_178'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            @Nonnull ServiceFactory&#60;?, S&#62; serviceFactory,</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_179'/>
+179
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_179'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            @Nonnull BiFunctionEx&#60;? super S, ? super T, ? extends Traverser&#60;R&#62;&#62; flatMapFn</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_180'/>
+180
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_180'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    ) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_181'/>
+181
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_181'>1</a>
+<span>
+1. flatMapUsingService : All method instructions replaced by: return null; &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return attachFlatMapUsingService(serviceFactory, flatMapFn);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_182'/>
+182
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_182'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_183'/>
+183
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_183'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_184'/>
+184
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_184'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Nonnull @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_185'/>
+185
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_185'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public BatchStage&#60;T&#62; merge(@Nonnull BatchStage&#60;? extends T&#62; other) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_186'/>
+186
+</td>
+<td class='uncertain'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_186'>1</a>
+<span>
+1. merge : All method instructions replaced by: return null; &rarr; TIMED_OUT<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='uncertain'>        return attachMerge(other);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_187'/>
+187
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_187'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_188'/>
+188
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_188'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_189'/>
+189
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_189'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Nonnull @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_190'/>
+190
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_190'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public &#60;K, T1_IN, T1, R&#62; BatchStage&#60;R&#62; hashJoin(</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_191'/>
+191
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_191'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            @Nonnull BatchStage&#60;T1_IN&#62; stage1,</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_192'/>
+192
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_192'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            @Nonnull JoinClause&#60;K, ? super T, ? super T1_IN, ? extends T1&#62; joinClause1,</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_193'/>
+193
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_193'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            @Nonnull BiFunctionEx&#60;T, T1, R&#62; mapToOutputFn</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_194'/>
+194
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_194'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    ) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_195'/>
+195
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_195'>1</a>
+<span>
+1. hashJoin : All method instructions replaced by: return null; &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return attachHashJoin(stage1, joinClause1, mapToOutputFn);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_196'/>
+196
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_196'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_197'/>
+197
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_197'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_198'/>
+198
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_198'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Nonnull @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_199'/>
+199
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_199'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public &#60;K, T1_IN, T1, R&#62; BatchStage&#60;R&#62; innerHashJoin(</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_200'/>
+200
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_200'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            @Nonnull BatchStage&#60;T1_IN&#62; stage1,</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_201'/>
+201
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_201'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            @Nonnull JoinClause&#60;K, ? super T, ? super T1_IN, ? extends T1&#62; joinClause1,</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_202'/>
+202
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_202'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            @Nonnull BiFunctionEx&#60;T, T1, R&#62; mapToOutputFn</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_203'/>
+203
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_203'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    ) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_204'/>
+204
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_204'>1</a>
+<span>
+1. innerHashJoin : All method instructions replaced by: return null; &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        BiFunctionEx&#60;T, T1, R&#62; finalOutputFn = (leftSide, rightSide) -&#62; {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_205'/>
+205
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_205'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>            if (leftSide == null || rightSide == null) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_206'/>
+206
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_206'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>                return null;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_207'/>
+207
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_207'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_208'/>
+208
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_208'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>            return mapToOutputFn.apply(leftSide, rightSide);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_209'/>
+209
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_209'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        };</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_210'/>
+210
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_210'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        return attachHashJoin(stage1, joinClause1, finalOutputFn);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_211'/>
+211
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_211'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_212'/>
+212
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_212'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_213'/>
+213
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_213'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Nonnull @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_214'/>
+214
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_214'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public &#60;K1, K2, T1_IN, T2_IN, T1, T2, R&#62; BatchStage&#60;R&#62; hashJoin2(</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_215'/>
+215
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_215'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            @Nonnull BatchStage&#60;T1_IN&#62; stage1,</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_216'/>
+216
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_216'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            @Nonnull JoinClause&#60;K1, ? super T, ? super T1_IN, ? extends T1&#62; joinClause1,</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_217'/>
+217
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_217'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            @Nonnull BatchStage&#60;T2_IN&#62; stage2,</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_218'/>
+218
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_218'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            @Nonnull JoinClause&#60;K2, ? super T, ? super T2_IN, ? extends T2&#62; joinClause2,</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_219'/>
+219
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_219'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            @Nonnull TriFunction&#60;T, T1, T2, R&#62; mapToOutputFn</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_220'/>
+220
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_220'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    ) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_221'/>
+221
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_221'>1</a>
+<span>
+1. hashJoin2 : All method instructions replaced by: return null; &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return attachHashJoin2(stage1, joinClause1, stage2, joinClause2, mapToOutputFn);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_222'/>
+222
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_222'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_223'/>
+223
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_223'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_224'/>
+224
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_224'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Nonnull @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_225'/>
+225
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_225'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public &#60;K1, K2, T1_IN, T2_IN, T1, T2, R&#62; BatchStage&#60;R&#62; innerHashJoin2(</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_226'/>
+226
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_226'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            @Nonnull BatchStage&#60;T1_IN&#62; stage1,</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_227'/>
+227
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_227'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            @Nonnull JoinClause&#60;K1, ? super T, ? super T1_IN, ? extends T1&#62; joinClause1,</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_228'/>
+228
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_228'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            @Nonnull BatchStage&#60;T2_IN&#62; stage2,</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_229'/>
+229
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_229'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            @Nonnull JoinClause&#60;K2, ? super T, ? super T2_IN, ? extends T2&#62; joinClause2,</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_230'/>
+230
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_230'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            @Nonnull TriFunction&#60;T, T1, T2, R&#62; mapToOutputFn</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_231'/>
+231
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_231'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    ) {</span></pre></td></tr>
+
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_232'/>
+232
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_232'>1</a>
+<span>
+1. innerHashJoin2 : All method instructions replaced by: return null; &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>        TriFunction&#60;T, T1, T2, R&#62; finalOutputFn = (leftSide, middle, rightSide) -&#62; {</span></pre></td></tr>
+
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_233'/>
+233
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_233'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class=''>            if (leftSide == null || middle == null || rightSide == null) {</span></pre></td></tr>
+
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_234'/>
+234
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_234'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class=''>                return null;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_235'/>
+235
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_235'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            }</span></pre></td></tr>
+
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_236'/>
+236
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_236'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class=''>            return mapToOutputFn.apply(leftSide, middle, rightSide);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_237'/>
+237
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_237'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        };</span></pre></td></tr>
+
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_238'/>
+238
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_238'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class=''>        return attachHashJoin2(stage1, joinClause1, stage2, joinClause2, finalOutputFn);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_239'/>
+239
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_239'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_240'/>
+240
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_240'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_241'/>
+241
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_241'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Nonnull @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_242'/>
+242
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_242'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public &#60;R&#62; BatchStage&#60;R&#62; aggregate(@Nonnull AggregateOperation1&#60;? super T, ?, ? extends R&#62; aggrOp) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_243'/>
+243
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_243'>1</a>
+<span>
+1. aggregate : All method instructions replaced by: return null; &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return attach(new AggregateTransform&#60;&#62;(singletonList(transform), aggrOp), fnAdapter);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_244'/>
+244
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_244'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_245'/>
+245
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_245'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_246'/>
+246
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_246'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Nonnull @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_247'/>
+247
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_247'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public &#60;T1, R&#62; BatchStage&#60;R&#62; aggregate2(</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_248'/>
+248
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_248'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            @Nonnull BatchStage&#60;T1&#62; stage1,</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_249'/>
+249
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_249'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            @Nonnull AggregateOperation2&#60;? super T, ? super T1, ?, ? extends R&#62; aggrOp</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_250'/>
+250
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_250'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    ) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_251'/>
+251
+</td>
+<td class='uncertain'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_251'>1</a>
+<span>
+1. aggregate2 : All method instructions replaced by: return null; &rarr; TIMED_OUT<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='uncertain'>        return attach(</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_252'/>
+252
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_252'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>                new AggregateTransform&#60;&#62;(asList(transform, transformOf(stage1)), aggrOp),</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_253'/>
+253
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_253'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>                singletonList(stage1),</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_254'/>
+254
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_254'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>                DO_NOT_ADAPT);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_255'/>
+255
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_255'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_256'/>
+256
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_256'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_257'/>
+257
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_257'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Nonnull @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_258'/>
+258
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_258'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public &#60;T1, T2, R&#62; BatchStage&#60;R&#62; aggregate3(</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_259'/>
+259
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_259'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            @Nonnull BatchStage&#60;T1&#62; stage1,</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_260'/>
+260
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_260'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            @Nonnull BatchStage&#60;T2&#62; stage2,</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_261'/>
+261
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_261'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            @Nonnull AggregateOperation3&#60;? super T, ? super T1, ? super T2, ?, ? extends R&#62; aggrOp</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_262'/>
+262
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_262'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    ) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_263'/>
+263
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_263'>1</a>
+<span>
+1. aggregate3 : All method instructions replaced by: return null; &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return attach(new AggregateTransform&#60;&#62;(asList(transform, transformOf(stage1), transformOf(stage2)), aggrOp),</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_264'/>
+264
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_264'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>                asList(stage1, stage2),</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_265'/>
+265
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_265'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>                DO_NOT_ADAPT);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_266'/>
+266
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_266'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_267'/>
+267
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_267'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_268'/>
+268
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_268'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Nonnull @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_269'/>
+269
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_269'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public BatchStage&#60;T&#62; peek(</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_270'/>
+270
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_270'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            @Nonnull PredicateEx&#60;? super T&#62; shouldLogFn,</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_271'/>
+271
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_271'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            @Nonnull FunctionEx&#60;? super T, ? extends CharSequence&#62; toStringFn</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_272'/>
+272
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_272'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    ) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_273'/>
+273
+</td>
+<td class='uncertain'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_273'>1</a>
+<span>
+1. peek : All method instructions replaced by: return null; &rarr; TIMED_OUT<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='uncertain'>        return attachPeek(shouldLogFn, toStringFn);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_274'/>
+274
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_274'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_275'/>
+275
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_275'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_276'/>
+276
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_276'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Nonnull @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_277'/>
+277
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_277'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public &#60;R&#62; BatchStage&#60;R&#62; customTransform(</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_278'/>
+278
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_278'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            @Nonnull String stageName,</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_279'/>
+279
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_279'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            @Nonnull ProcessorMetaSupplier procSupplier</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_280'/>
+280
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_280'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    ) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_281'/>
+281
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_281'>1</a>
+<span>
+1. customTransform : All method instructions replaced by: return null; &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return attachCustomTransform(stageName, procSupplier);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_282'/>
+282
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_282'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_283'/>
+283
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_283'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_284'/>
+284
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_284'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Nonnull @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_285'/>
+285
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_285'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public BatchStage&#60;T&#62; setLocalParallelism(int localParallelism) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_286'/>
+286
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_286'>1</a>
+<span>
+1. setLocalParallelism : All method instructions replaced by: return null; &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        super.setLocalParallelism(localParallelism);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_287'/>
+287
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_287'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        return this;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_288'/>
+288
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_288'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_289'/>
+289
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_289'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_290'/>
+290
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_290'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Nonnull @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_291'/>
+291
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_291'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public BatchStage&#60;T&#62; setName(@Nonnull String name) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_292'/>
+292
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_292'>1</a>
+<span>
+1. setName : All method instructions replaced by: return null; &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        super.setName(name);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_293'/>
+293
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_293'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        return this;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_294'/>
+294
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_294'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_295'/>
+295
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_295'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_296'/>
+296
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_296'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_297'/>
+297
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_297'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @SuppressWarnings(&#34;unchecked&#34;)</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_298'/>
+298
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_298'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    &#60;RET&#62; RET newStage(@Nonnull AbstractTransform transform, @Nonnull FunctionAdapter fnAdapter) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_299'/>
+299
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_299'>1</a>
+<span>
+1. newStage : All method instructions replaced by: return null; &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return (RET) new BatchStageImpl&#60;&#62;(transform, pipelineImpl);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_300'/>
+300
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_300'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@22126146_301'/>
+301
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@22126146_301'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>}</span></pre></td></tr>
+
+
+
+<tr><td></td><td></td><td><h2>Mutations</h2></td></tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@22126146_73'>73</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@22126146_73'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>groupingKey<br/><b>Killed by : </b>com.hazelcast.jet.core.DotTest.assertedTest(com.hazelcast.jet.core.DotTest)</span></span> All method instructions replaced by: return null; &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@22126146_79'>79</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@22126146_79'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>rebalance<br/><b>Killed by : </b>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_rebalanceByKeyAndMap_then_dagEdgePartitionedDistributed[1: mode=client](com.hazelcast.jet.pipeline.RebalanceBatchStageTest)</span></span> All method instructions replaced by: return null; &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@22126146_85'>85</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@22126146_85'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>rebalance<br/><b>Killed by : </b>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_rebalanceAndGroupAggregate_then_singleStageAggregation[0: mode=member](com.hazelcast.jet.pipeline.RebalanceBatchStageTest)</span></span> All method instructions replaced by: return null; &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@22126146_90'>90</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@22126146_90'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>sort<br/><b>Killed by : </b>com.hazelcast.jet.pipeline.SortBatchStageTest.sort_lessItemsThanProcessors[0: mode=member](com.hazelcast.jet.pipeline.SortBatchStageTest)</span></span> All method instructions replaced by: return null; &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@22126146_95'>95</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@22126146_95'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>sort<br/><b>Killed by : </b>com.hazelcast.jet.pipeline.SortBatchStageTest.sort_withComparator[0: mode=member](com.hazelcast.jet.pipeline.SortBatchStageTest)</span></span> All method instructions replaced by: return null; &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@22126146_100'>100</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@22126146_100'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>map<br/><b>Killed by : </b>com.hazelcast.jet.pipeline.LoggerSinkTest</span></span> All method instructions replaced by: return null; &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@22126146_105'>105</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@22126146_105'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>filter<br/><b>Killed by : </b>com.hazelcast.jet.core.DotTest.when_pipelineToDotString(com.hazelcast.jet.core.DotTest)</span></span> All method instructions replaced by: return null; &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@22126146_112'>112</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@22126146_112'/> 
+
+<p class='TIMED_OUT'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>flatMap<br/><b>Killed by : </b>none</span></span> All method instructions replaced by: return null; &rarr; TIMED_OUT</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@22126146_120'>120</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@22126146_120'/> 
+
+<p class='TIMED_OUT'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>mapStateful<br/><b>Killed by : </b>none</span></span> All method instructions replaced by: return null; &rarr; TIMED_OUT</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@22126146_128'>128</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@22126146_128'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>filterStateful<br/><b>Killed by : </b>com.hazelcast.jet.pipeline.BatchStageTest.filterStateful_global[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest)</span></span> All method instructions replaced by: return null; &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@22126146_136'>136</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@22126146_136'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>flatMapStateful<br/><b>Killed by : </b>com.hazelcast.jet.pipeline.BatchStageTest.flatMapStateful_global[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest)</span></span> All method instructions replaced by: return null; &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@22126146_144'>144</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@22126146_144'/> 
+
+<p class='TIMED_OUT'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>mapUsingService<br/><b>Killed by : </b>none</span></span> All method instructions replaced by: return null; &rarr; TIMED_OUT</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@22126146_154'>154</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@22126146_154'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>mapUsingServiceAsync<br/><b>Killed by : </b>com.hazelcast.jet.pipeline.BatchStageTest.mapUsingIMap[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest)</span></span> All method instructions replaced by: return null; &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@22126146_164'>164</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@22126146_164'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>mapUsingServiceAsyncBatched<br/><b>Killed by : </b>com.hazelcast.jet.pipeline.BatchStageTest.mapUsingServiceAsyncBatched_withFiltering[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest)</span></span> All method instructions replaced by: return null; &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@22126146_173'>173</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@22126146_173'/> 
+
+<p class='TIMED_OUT'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>filterUsingService<br/><b>Killed by : </b>none</span></span> All method instructions replaced by: return null; &rarr; TIMED_OUT</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@22126146_181'>181</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@22126146_181'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>flatMapUsingService<br/><b>Killed by : </b>com.hazelcast.jet.pipeline.BatchStageTest.flatMapUsingService[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest)</span></span> All method instructions replaced by: return null; &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@22126146_186'>186</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@22126146_186'/> 
+
+<p class='TIMED_OUT'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>merge<br/><b>Killed by : </b>none</span></span> All method instructions replaced by: return null; &rarr; TIMED_OUT</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@22126146_195'>195</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@22126146_195'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>hashJoin<br/><b>Killed by : </b>com.hazelcast.jet.pipeline.BatchStageTest.hashJoin_when_outputFnReturnsNull_then_filteredOut[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest)</span></span> All method instructions replaced by: return null; &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@22126146_204'>204</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@22126146_204'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>innerHashJoin<br/><b>Killed by : </b>com.hazelcast.jet.pipeline.BatchStageTest.when_innerHashJoin_then_filterOutNulls[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest)</span></span> All method instructions replaced by: return null; &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@22126146_221'>221</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@22126146_221'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>hashJoin2<br/><b>Killed by : </b>com.hazelcast.jet.pipeline.BatchStageTest.hashJoin2[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest)</span></span> All method instructions replaced by: return null; &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@22126146_232'>232</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@22126146_232'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>innerHashJoin2<br/><b>Killed by : </b>none</span></span> All method instructions replaced by: return null; &rarr; NO_COVERAGE</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@22126146_243'>243</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@22126146_243'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>aggregate<br/><b>Killed by : </b>com.hazelcast.jet.pipeline.BatchAggregateTest.when_maxOfZeroItems_then_producesNoOutput[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest)</span></span> All method instructions replaced by: return null; &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@22126146_251'>251</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@22126146_251'/> 
+
+<p class='TIMED_OUT'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>aggregate2<br/><b>Killed by : </b>none</span></span> All method instructions replaced by: return null; &rarr; TIMED_OUT</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@22126146_263'>263</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@22126146_263'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>aggregate3<br/><b>Killed by : </b>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregate3_withAggrOp3_withOutputFn[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest)</span></span> All method instructions replaced by: return null; &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@22126146_273'>273</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@22126146_273'/> 
+
+<p class='TIMED_OUT'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>peek<br/><b>Killed by : </b>none</span></span> All method instructions replaced by: return null; &rarr; TIMED_OUT</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@22126146_281'>281</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@22126146_281'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>customTransform<br/><b>Killed by : </b>com.hazelcast.jet.pipeline.BatchStageTest.customTransform[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest)</span></span> All method instructions replaced by: return null; &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@22126146_286'>286</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@22126146_286'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>setLocalParallelism<br/><b>Killed by : </b>com.hazelcast.jet.pipeline.BatchStageTest.setLocalParallelism[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest)</span></span> All method instructions replaced by: return null; &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@22126146_292'>292</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@22126146_292'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>setName<br/><b>Killed by : </b>com.hazelcast.jet.core.DotTest.assertedTest(com.hazelcast.jet.core.DotTest)</span></span> All method instructions replaced by: return null; &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@22126146_299'>299</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@22126146_299'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>newStage<br/><b>Killed by : </b>com.hazelcast.jet.core.DotTest.assertedTest(com.hazelcast.jet.core.DotTest)</span></span> All method instructions replaced by: return null; &rarr; KILLED</p> 
+</td>
+</tr>
+
+</table>
+
+
+<h2>Active mutators</h2>
+<ul>
+<li class='mutator'>""</li>
+<li class='mutator'>"A"</li>
+<li class='mutator'>'A'</li>
+<li class='mutator'>'\40'</li>
+<li class='mutator'>(byte)0</li>
+<li class='mutator'>(byte)1</li>
+<li class='mutator'>(short)0</li>
+<li class='mutator'>(short)1</li>
+<li class='mutator'>0</li>
+<li class='mutator'>0.0</li>
+<li class='mutator'>0.0f</li>
+<li class='mutator'>0L</li>
+<li class='mutator'>1</li>
+<li class='mutator'>1.0</li>
+<li class='mutator'>1.0f</li>
+<li class='mutator'>1L</li>
+<li class='mutator'>empty</li>
+<li class='mutator'>false</li>
+<li class='mutator'>null</li>
+<li class='mutator'>true</li>
+<li class='mutator'>void</li>
+
+</ul>
+
+<h2>Tests examined</h2>
+<ul>
+<li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_rebalanceAndGroupAggregateBuilderWithComplexAggrOp_then_singleStageAggregation[1: mode=client](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (602 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.flatMap[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (597 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.hashJoin[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (647 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_hashJoinRebalanceEnrichingStage_then_noEffect[1: mode=client](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (638 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapStateful_global[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (657 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapUsingServiceAsyncBatched_keyed_keysHidden[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (962 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapUsingServiceAsyncBatched_keyed_keysExposed[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (957 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapStateful_keyed[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (657 ms)</li><li>com.hazelcast.jet.pipeline.SortBatchStageTest.sort_withComparator[1: mode=client](com.hazelcast.jet.pipeline.SortBatchStageTest) (649 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapUsingServiceAsync_keyed[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (1315 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_mergeWithRebalancedByKey_thenOnlyRebalancedEdgePartitionedDistributed[0: mode=member](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (657 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_rebalanceAndGroupAggregate2_then_singleStageAggregation[1: mode=client](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (595 ms)</li><li>com.hazelcast.jet.core.JobSerializerTest (402 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.when_innerHashJoin_then_filterOutNulls[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (608 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.mapWithMerging_when_targetHasPartitionStrategy[1: mode=client](com.hazelcast.jet.pipeline.SinksTest) (5957 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregate2_withAggrOp2[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest) (575 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregate3_withAggrOp3[1: mode=client](com.hazelcast.jet.pipeline.BatchAggregateTest) (589 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_BatchTest.when_storeMetricsAfterJobCompletionDisabled_then_metricsEmpty[1: mode=client](com.hazelcast.jet.core.metrics.JobMetrics_BatchTest) (577 ms)</li><li>com.hazelcast.jet.pipeline.test.AssertionsTest.test_multiple_assertions_in_pipeline[1: mode=client](com.hazelcast.jet.pipeline.test.AssertionsTest) (613 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregate2_withAggrOp2_with_finishFn[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest) (589 ms)</li><li>com.hazelcast.jet.core.metrics.MetricsTest (12241 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.filterUsingService_keyed[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (586 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.groupAggregateBuilder_withComplexAggrOp_withOutputFn[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest) (598 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregate3_withAggrOp3[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest) (602 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.setLocalParallelism[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (570 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_rebalanceByKeyAndMap_then_dagEdgePartitionedDistributed[1: mode=client](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (585 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregate2_withAggrOp2[1: mode=client](com.hazelcast.jet.pipeline.BatchAggregateTest) (588 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.rollingAggregate_keyed[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (613 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapUsingServiceAsync[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (1928 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.filter[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (586 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_rebalanceAndGroupAggregate_then_singleStageAggregation[0: mode=member](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (582 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregate2_withAggrOp2_with_finishFn[1: mode=client](com.hazelcast.jet.pipeline.BatchAggregateTest) (587 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregateBuilder_withSeparateAggrOps[1: mode=client](com.hazelcast.jet.pipeline.BatchAggregateTest) (604 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_hashJoinBuilderRebalanceMainStage_then_distributedEdge[0: mode=member](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (637 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.filterUsingService[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (588 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.hashJoin_when_outputFnReturnsNull_then_filteredOut[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (661 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.groupAggregateBuilder_withComplexAggrOp[1: mode=client](com.hazelcast.jet.pipeline.BatchAggregateTest) (617 ms)</li><li>com.hazelcast.jet.pipeline.test.AssertionsTest.test_multiple_assertions_in_pipeline[0: mode=member](com.hazelcast.jet.pipeline.test.AssertionsTest) (587 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.distinct[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (656 ms)</li><li>com.hazelcast.jet.pipeline.SortBatchStageTest.sort_withComparator[0: mode=member](com.hazelcast.jet.pipeline.SortBatchStageTest) (589 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_aggregate3WithRebalancedStage_then_twoStageAggregation[1: mode=client](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (594 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_BatchTest.when_storeMetricsAfterJobCompletionDisabled_then_metricsEmpty[0: mode=member](com.hazelcast.jet.core.metrics.JobMetrics_BatchTest) (586 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregateBuilder_withSeparateAggrOps[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest) (603 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_rebalanceAndMap_then_dagEdgeDistributed[0: mode=member](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (627 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapUsingService[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (592 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapStateful_global_usedAsFilter[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (590 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.hashJoinBuilder[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (782 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapStateful_keyed_returningNull[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (585 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_BatchTest.when_twoDifferentPipelines_then_haveDifferentMetrics[0: mode=member](com.hazelcast.jet.core.metrics.JobMetrics_BatchTest) (598 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapUsingReplicatedMap[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (761 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_mergeWithRebalanced_thenOnlyRebalancedEdgeDistributed[0: mode=member](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (628 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregate3_withAggrOp3_withOutputFn[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest) (597 ms)</li><li>com.hazelcast.jet.pipeline.SortBatchStageTest.sort_lessItemsThanProcessors[0: mode=member](com.hazelcast.jet.pipeline.SortBatchStageTest) (583 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregate3_withAggrOp3_withOutputFn[1: mode=client](com.hazelcast.jet.pipeline.BatchAggregateTest) (626 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.mapWithMerging_when_sameKey_then_valuesMerged[1: mode=client](com.hazelcast.jet.pipeline.SinksTest) (5938 ms)</li><li>com.hazelcast.jet.impl.deployment.ClientDeploymentTest (1537 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.when_hashJoinBuilderAddInner_then_filterOutNulls[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (607 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.groupAggregateBuilder_withComplexAggrOp[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest) (590 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapStateful_keyed_usedAsFilter[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (658 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.sort[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (575 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.distinct_keyed[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (601 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.filterUsingService[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (592 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapUsingServiceAsyncBatched_withFiltering[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (1273 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_BatchTest.when_twoDifferentPipelines_then_haveDifferentMetrics[1: mode=client](com.hazelcast.jet.core.metrics.JobMetrics_BatchTest) (603 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.flatMapUsingService[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (600 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.groupAggregate3_withSeparateAggrOps[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest) (596 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.addTimestamps_when_upstreamHasExplicitLocalParallelism_then_lpMatchUpstream[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (546 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_mergeRebalancedWithNonRebalanced_thenOnlyRebalancedEdgeDistributed[0: mode=member](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (671 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapUsingIMap_when_functionThrows_then_jobFails[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (585 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.flatMapUsingService_keyed[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (599 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapStateful_global_usedAsFilter[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (666 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_BatchTest.when_twoDifferentJobsForTheSamePipeline_then_haveDifferentMetrics[0: mode=member](com.hazelcast.jet.core.metrics.JobMetrics_BatchTest) (597 ms)</li><li>com.hazelcast.jet.pipeline.SourcesTest.remoteCacheWithUnknownValueClass[0: mode=member](com.hazelcast.jet.pipeline.SourcesTest) (5887 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.filterUsingService_keyed[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (585 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapUsingIMap_when_functionThrows_then_jobFails[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (589 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_hashJoinRebalanceMainStage_then_distributedEdge[0: mode=member](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (646 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.filterStateful_global[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (670 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.when_maxOfZeroItems_then_producesNoOutput[1: mode=client](com.hazelcast.jet.pipeline.BatchAggregateTest) (597 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_mergeRebalancedWithNonRebalanced_thenOnlyRebalancedEdgeDistributed[1: mode=client](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (653 ms)</li><li>com.hazelcast.jet.pipeline.SortBatchStageTest.sort_exceptionDuringComparing[0: mode=member](com.hazelcast.jet.pipeline.SortBatchStageTest) (585 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapStateful_keyed_usedAsFilter[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (589 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.sort[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (626 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregate[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest) (593 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.distinct_keyed[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (601 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapUsingServiceAsyncBatched_keyed_withFiltering[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (653 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.when_maxOfZeroItems_then_producesNoOutput[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest) (567 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_rebalanceAndAggregate_then_unicastDistributedEdgeAndTwoStageAggregation[1: mode=client](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (588 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.filterStateful_global[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (591 ms)</li><li>com.hazelcast.jet.core.DotTest.assertedTest(com.hazelcast.jet.core.DotTest) (26 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.setName[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (547 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregate2_withSeparateAggrOps[1: mode=client](com.hazelcast.jet.pipeline.BatchAggregateTest) (599 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.groupAggregate[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest) (583 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapUsingService_keyed[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (585 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapUsingServiceAsync_keyed[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (1309 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregate[1: mode=client](com.hazelcast.jet.pipeline.BatchAggregateTest) (587 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapUsingServiceAsyncBatched_keyed_withFiltering[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (663 ms)</li><li>com.hazelcast.jet.pipeline.SortBatchStageTest.sort_exceptionDuringComparing[1: mode=client](com.hazelcast.jet.pipeline.SortBatchStageTest) (589 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_aggregate2WithRebalancedStage_then_twoStageAggregation[1: mode=client](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (568 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapUsingIMap[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (744 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.setName[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (574 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.flatMapStateful_keyed[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (664 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.distinct[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (595 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_rebalanceByKeyAndAggregate_then_distributedPartitionedEdgeAndTwoStageAggregation[0: mode=member](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (574 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_rebalanceAndGroupAggregate3_then_singleStageAggregation[0: mode=member](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (593 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.mapWithMerging_when_sameKey_then_valuesMerged[0: mode=member](com.hazelcast.jet.pipeline.SinksTest) (5811 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapStateful_keyed[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (599 ms)</li><li>com.hazelcast.jet.pipeline.SortBatchStageTest.sort_withRepeatingItems[1: mode=client](com.hazelcast.jet.pipeline.SortBatchStageTest) (663 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.merge[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (596 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.filter[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (588 ms)</li><li>com.hazelcast.jet.core.ObservableResultsTest.multipleObservables[0: mode=member](com.hazelcast.jet.core.ObservableResultsTest) (582 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapUsingReplicatedMap[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (735 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapUsingServiceAsyncBatched[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (1282 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_BatchTest.when_memberRemovedAfterJobFinished_then_metricsNotAffected[1: mode=client](com.hazelcast.jet.core.metrics.JobMetrics_BatchTest) (1286 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_rebalanceAndGroupAggregateBuilder_then_singleStageAggregation[1: mode=client](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (587 ms)</li><li>com.hazelcast.jet.pipeline.SortBatchStageTest.sort_withRepeatingItems[0: mode=member](com.hazelcast.jet.pipeline.SortBatchStageTest) (633 ms)</li><li>com.hazelcast.jet.impl.connector.ReadMapOrCacheP_ConsistencyTest (37835 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.hashJoin2[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (671 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_rebalanceAndGroupAggregateBuilderWithComplexAggrOp_then_singleStageAggregation[0: mode=member](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (608 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.customTransform_keyed[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (581 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_rebalanceByKeyAndMap_then_dagEdgePartitionedDistributed[0: mode=member](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (614 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapStateful_global_returningNull[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (579 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.peekWithToStringFunctionIsTransparent[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (598 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.map[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (589 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregate3_withSeparateAggrOps[1: mode=client](com.hazelcast.jet.pipeline.BatchAggregateTest) (590 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.hashJoin_when_outputFnReturnsNull_then_filteredOut[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (635 ms)</li><li>com.hazelcast.jet.pipeline.SourcesTest.remoteCacheWithUnknownValueClass[1: mode=client](com.hazelcast.jet.pipeline.SourcesTest) (5746 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.mapWithMerging_when_targetHasPartitionStrategy[0: mode=member](com.hazelcast.jet.pipeline.SinksTest) (5776 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.when_innerHashJoin_then_filterOutNulls[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (601 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapUsingServiceAsync[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (1928 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapUsingService[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (588 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapStateful_keyed_returningNull[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (653 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.hashJoinBuilder[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (706 ms)</li><li>com.hazelcast.jet.core.ObservableResultsTest.multipleObservables[1: mode=client](com.hazelcast.jet.core.ObservableResultsTest) (783 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.customTransform[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (594 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregate2_withSeparateAggrOps[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest) (585 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_rebalanceAndGroupAggregate3_then_singleStageAggregation[1: mode=client](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (597 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.groupAggregate[1: mode=client](com.hazelcast.jet.pipeline.BatchAggregateTest) (580 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.groupAggregateBuilder_withSeparateAggrOps[1: mode=client](com.hazelcast.jet.pipeline.BatchAggregateTest) (610 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_BatchTest.when_jobCompleted_then_metricsExist[0: mode=member](com.hazelcast.jet.core.metrics.JobMetrics_BatchTest) (594 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_rebalanceAndGroupAggregate2_then_singleStageAggregation[0: mode=member](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (600 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_mergeWithRebalancedByKey_thenOnlyRebalancedEdgePartitionedDistributed[1: mode=client](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (633 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapStateful_global[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (660 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_hashJoinRebalanceEnrichingStage_then_noEffect[0: mode=member](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (637 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapUsingIMap[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (761 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.groupAggregate3_withSeparateAggrOps[1: mode=client](com.hazelcast.jet.pipeline.BatchAggregateTest) (601 ms)</li><li>com.hazelcast.jet.pipeline.SourcesTest.remoteMapWithUnknownValueClass_whenQueryingIsNotNecessary[1: mode=client](com.hazelcast.jet.pipeline.SourcesTest) (5902 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.flatMapUsingService_keyed[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (597 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.flatMapUsingService[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (603 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.rollingAggregate_keyed[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (595 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.rollingAggregate_global[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (643 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapUsingServiceAsyncBatched[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (1258 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregate3_withSeparateAggrOps[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest) (597 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapUsingServiceAsyncBatched_keyed_keysExposed[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (949 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_BatchTest.when_memberAddedAfterJobFinished_then_metricsNotAffected[0: mode=member](com.hazelcast.jet.core.metrics.JobMetrics_BatchTest) (1127 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_BatchTest.when_memberRemovedAfterJobFinished_then_metricsNotAffected[0: mode=member](com.hazelcast.jet.core.metrics.JobMetrics_BatchTest) (1292 ms)</li><li>com.hazelcast.jet.core.DotTest.when_pipelineToDotString(com.hazelcast.jet.core.DotTest) (26 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapUsingServiceAsyncBatched_keyed_keysHidden[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (966 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.customTransform_keyed[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (584 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.flatMapStateful_keyed[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (596 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.groupAggregate3_withAggrOp3[1: mode=client](com.hazelcast.jet.pipeline.BatchAggregateTest) (588 ms)</li><li>com.hazelcast.jet.pipeline.SortBatchStageTest.sort_lessItemsThanProcessors[1: mode=client](com.hazelcast.jet.pipeline.SortBatchStageTest) (583 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.groupAggregate2_withAggrOp2[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest) (602 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.filterStateful_keyed[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (617 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.hashJoin2[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (676 ms)</li><li>com.hazelcast.jet.pipeline.SourcesTest.remoteMapWithUnknownValueClass_whenQueryingIsNotNecessary[0: mode=member](com.hazelcast.jet.pipeline.SourcesTest) (5837 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.flatMap[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (600 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_rebalanceByKeyAndAggregate_then_distributedPartitionedEdgeAndTwoStageAggregation[1: mode=client](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (587 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.merge[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (592 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.groupAggregate2_withAggrOp2[1: mode=client](com.hazelcast.jet.pipeline.BatchAggregateTest) (613 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapUsingService_keyed[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (588 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.groupAggregate3_withAggrOp3[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest) (673 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.peekIsTransparent[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (594 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_rebalanceAndAggregate_then_unicastDistributedEdgeAndTwoStageAggregation[0: mode=member](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (599 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.groupAggregateBuilder_withComplexAggrOp_withOutputFn[1: mode=client](com.hazelcast.jet.pipeline.BatchAggregateTest) (606 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_rebalanceAndGroupAggregateBuilder_then_singleStageAggregation[0: mode=member](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (599 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_BatchTest.when_memberAddedAfterJobFinished_then_metricsNotAffected[1: mode=client](com.hazelcast.jet.core.metrics.JobMetrics_BatchTest) (1136 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.peekIsTransparent[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (592 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_mergeWithRebalanced_thenOnlyRebalancedEdgeDistributed[1: mode=client](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (648 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.setLocalParallelism[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (574 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapUsingIMap_keyed[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (719 ms)</li><li>com.hazelcast.jet.impl.deployment.DeploymentTest (1331 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.flatMapStateful_global[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (645 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_hashJoinBuilderRebalanceMainStage_then_distributedEdge[1: mode=client](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (643 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.groupAggregateBuilder_withSeparateAggrOps[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest) (608 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_rebalanceAndMap_then_dagEdgeDistributed[1: mode=client](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (619 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.apply[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (595 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.flatMapStateful_global[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (645 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_BatchTest.when_jobCompleted_then_metricsExist[1: mode=client](com.hazelcast.jet.core.metrics.JobMetrics_BatchTest) (592 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.addTimestamps_when_upstreamHasExplicitLocalParallelism_then_lpMatchUpstream[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (547 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_rebalanceAndGroupAggregate_then_singleStageAggregation[1: mode=client](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (576 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_aggregate3WithRebalancedStage_then_twoStageAggregation[0: mode=member](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (601 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.apply[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (562 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregateBuilder_withComplexAggrOp[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest) (606 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.customTransform[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (600 ms)</li><li>com.hazelcast.jet.core.ManagedContextTest (243 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_aggregate2WithRebalancedStage_then_twoStageAggregation[0: mode=member](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (592 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapStateful_global_returningNull[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (585 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapUsingIMap_keyed[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (726 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.map[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (616 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.groupAggregate2_withSeparateAggrOps[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest) (600 ms)</li><li>com.hazelcast.jet.pipeline.LoggerSinkTest (29 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.filterStateful_keyed[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (589 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapUsingServiceAsyncBatched_withFiltering[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (1263 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.when_aggregateZeroItems_then_producesOutput[1: mode=client](com.hazelcast.jet.pipeline.BatchAggregateTest) (583 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.when_hashJoinBuilderAddInner_then_filterOutNulls[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (602 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.rollingAggregate_global[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (591 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_BatchTest.when_twoDifferentJobsForTheSamePipeline_then_haveDifferentMetrics[1: mode=client](com.hazelcast.jet.core.metrics.JobMetrics_BatchTest) (621 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.groupAggregate2_withSeparateAggrOps[1: mode=client](com.hazelcast.jet.pipeline.BatchAggregateTest) (626 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregateBuilder_withComplexAggrOp[1: mode=client](com.hazelcast.jet.pipeline.BatchAggregateTest) (603 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.hashJoin[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (664 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.when_aggregateZeroItems_then_producesOutput[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest) (584 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.peekWithToStringFunctionIsTransparent[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (591 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_hashJoinRebalanceMainStage_then_distributedEdge[1: mode=client](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (645 ms)</li>
+</ul>
+
+<br/>
+
+Report generated by <a href='http://pitest.org'>PIT</a> 1.5.2
+
+</body>
+</html>

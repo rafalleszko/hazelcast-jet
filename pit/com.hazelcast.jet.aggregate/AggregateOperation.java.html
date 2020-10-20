@@ -1,0 +1,4969 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+
+
+<h1>AggregateOperation.java</h1>
+
+<table class="src">
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_1'/>
+1
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_1'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>/*</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_2'/>
+2
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_2'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * Copyright (c) 2008-2020, Hazelcast, Inc. All Rights Reserved.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_3'/>
+3
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_3'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_4'/>
+4
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_4'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_5'/>
+5
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_5'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * you may not use this file except in compliance with the License.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_6'/>
+6
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_6'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * You may obtain a copy of the License at</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_7'/>
+7
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_7'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_8'/>
+8
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_8'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * http://www.apache.org/licenses/LICENSE-2.0</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_9'/>
+9
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_9'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_10'/>
+10
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_10'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * Unless required by applicable law or agreed to in writing, software</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_11'/>
+11
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_11'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * distributed under the License is distributed on an &#34;AS IS&#34; BASIS,</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_12'/>
+12
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_12'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_13'/>
+13
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_13'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * See the License for the specific language governing permissions and</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_14'/>
+14
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_14'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * limitations under the License.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_15'/>
+15
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_15'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_16'/>
+16
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_16'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_17'/>
+17
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_17'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>package com.hazelcast.jet.aggregate;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_18'/>
+18
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_18'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_19'/>
+19
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_19'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import com.hazelcast.function.BiConsumerEx;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_20'/>
+20
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_20'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import com.hazelcast.function.FunctionEx;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_21'/>
+21
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_21'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import com.hazelcast.function.SupplierEx;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_22'/>
+22
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_22'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import com.hazelcast.jet.datamodel.Tag;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_23'/>
+23
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_23'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import com.hazelcast.jet.impl.aggregate.AggregateOperation1Impl;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_24'/>
+24
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_24'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import com.hazelcast.jet.pipeline.StageWithKeyAndWindow;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_25'/>
+25
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_25'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_26'/>
+26
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_26'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import javax.annotation.Nonnull;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_27'/>
+27
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_27'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import javax.annotation.Nullable;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_28'/>
+28
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_28'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import java.io.Serializable;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_29'/>
+29
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_29'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import java.util.Objects;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_30'/>
+30
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_30'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_31'/>
+31
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_31'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import static com.hazelcast.jet.impl.util.Util.checkSerializable;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_32'/>
+32
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_32'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_33'/>
+33
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_33'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>/**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_34'/>
+34
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_34'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * Contains primitives needed to compute an aggregated result of data</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_35'/>
+35
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_35'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * processing. Check out {@link AggregateOperations} to find the one</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_36'/>
+36
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_36'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * you need and, if you don&#39;t find it there, construct one by using the</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_37'/>
+37
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_37'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * {@link #withCreate aggregate operation builder} and reading the</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_38'/>
+38
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_38'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * description below.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_39'/>
+39
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_39'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * &#60;p&#62;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_40'/>
+40
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_40'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * Jet aggregates the data by updating a mutable container,</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_41'/>
+41
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_41'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * called the &#60;em&#62;accumulator&#60;/em&#62;, with the data from each stream item.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_42'/>
+42
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_42'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * It does this by applying the {@link #accumulateFn accumulate} primitive</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_43'/>
+43
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_43'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * to the the accumulator and a given item. Jet provides some accumulator</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_44'/>
+44
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_44'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * objects in the {@link com.hazelcast.jet.accumulator accumulator} package</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_45'/>
+45
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_45'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * that you can reuse, and you can also write your own if needed. The</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_46'/>
+46
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_46'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * accumulator must be serializable because Jet may need to send it to</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_47'/>
+47
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_47'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * another member to be combined with other accumulators or store it in state</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_48'/>
+48
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_48'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * snapshot.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_49'/>
+49
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_49'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * &#60;p&#62;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_50'/>
+50
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_50'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * After it processes all the items in a batch/window, Jet transforms the</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_51'/>
+51
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_51'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * accumulator into the final result by applying the {@link #finishFn()</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_52'/>
+52
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_52'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * finish} primitive.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_53'/>
+53
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_53'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * &#60;p&#62;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_54'/>
+54
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_54'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * Since it is a distributed/parallel computation engine, Jet will create</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_55'/>
+55
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_55'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * several independent processing units to perform the same aggregation,</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_56'/>
+56
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_56'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * and it must combine their partial results before applying the {@code</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_57'/>
+57
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_57'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * finish} primitive and emitting the final result. This is the role of the</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_58'/>
+58
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_58'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * {@link #combineFn combine} primitive.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_59'/>
+59
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_59'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * &#60;p&#62;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_60'/>
+60
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_60'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * Finally, {@code AggregateOperation} also defines the {@link #deductFn()</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_61'/>
+61
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_61'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * deduct} primitive, which allows Jet to efficiently aggregate infinite</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_62'/>
+62
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_62'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * stream data into a &#60;em&#62;sliding window&#60;/em&#62; by evicting old data from the</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_63'/>
+63
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_63'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * existing accumulator instead of building a new one from scratch each time</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_64'/>
+64
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_64'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * the window slides forward. Providing a {@code deduct} primitive that makes</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_65'/>
+65
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_65'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * the computation more efficient than rebuilding the accumulator from scratch</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_66'/>
+66
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_66'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * isn&#39;t always possible. Therefore it is optional.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_67'/>
+67
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_67'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * &#60;p&#62;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_68'/>
+68
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_68'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * Depending on usage, the data items may come from one or more inbound</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_69'/>
+69
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_69'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * streams, and the {@code AggregateOperation} must provide a separate</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_70'/>
+70
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_70'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * {@code accumulate} primitive for each of them. If you are creating the</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_71'/>
+71
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_71'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * aggregating pipeline stage using the {@link StageWithKeyAndWindow#aggregateBuilder</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_72'/>
+72
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_72'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * builder object}, then you&#39;ll identify each contributing stream to the</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_73'/>
+73
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_73'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * {@code AggregateOperation} using the &#60;em&#62;tags&#60;/em&#62; you got from the</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_74'/>
+74
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_74'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * builder.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_75'/>
+75
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_75'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * &#60;p&#62;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_76'/>
+76
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_76'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * If, on the other hand, you are calling one of the direct methods such</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_77'/>
+77
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_77'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * as {@link StageWithKeyAndWindow#aggregate2</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_78'/>
+78
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_78'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * stage.aggregate2()}, then you&#39;ll deal with specializations of this interface</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_79'/>
+79
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_79'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * such as {@link AggregateOperation2} and you&#39;ll identify the input stages by</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_80'/>
+80
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_80'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * their index; zero index corresponds to the stage you&#39;re calling the</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_81'/>
+81
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_81'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * method on and the higher indices correspond to the stages you pass in as</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_82'/>
+82
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_82'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * arguments.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_83'/>
+83
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_83'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * &#60;p&#62;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_84'/>
+84
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_84'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * This is a summary of all the primitives involved:</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_85'/>
+85
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_85'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * &#60;ol&#62;&#60;li&#62;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_86'/>
+86
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_86'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> *     {@link #createFn() create} a new accumulator object</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_87'/>
+87
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_87'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * &#60;/li&#62;&#60;li&#62;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_88'/>
+88
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_88'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> *     {@link #accumulateFn(Tag) accumulate} the data of an item by mutating</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_89'/>
+89
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_89'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> *     the accumulator</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_90'/>
+90
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_90'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * &#60;/li&#62;&#60;li&#62;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_91'/>
+91
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_91'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> *     {@link #combineFn() combine} the contents of the right-hand</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_92'/>
+92
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_92'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> *     accumulator into the left-hand one, optional</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_93'/>
+93
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_93'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * &#60;/li&#62;&#60;li&#62;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_94'/>
+94
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_94'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> *     {@link #deductFn() deduct} the contents of the right-hand accumulator</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_95'/>
+95
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_95'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> *     from the left-hand one (undo the effects of {@code combine}), optional</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_96'/>
+96
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_96'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * &#60;/li&#62;&#60;li&#62;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_97'/>
+97
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_97'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> *     {@link #exportFn() export}: calculate the result value from an</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_98'/>
+98
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_98'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> *     accumulator while preserving the accumulator state for further</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_99'/>
+99
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_99'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> *     accumulation. Used for aggregations with speculative results or for</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_100'/>
+100
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_100'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> *     rolling aggregations</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_101'/>
+101
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_101'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * &#60;/li&#62;&#60;li&#62;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_102'/>
+102
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_102'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> *     {@link #finishFn() finish}: calculate the result value from an</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_103'/>
+103
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_103'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> *     accumulator. After this conversion the accumulator will no longer be</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_104'/>
+104
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_104'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> *     used, it&#39;s allowed, for example, to use the {@code identity()} function</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_105'/>
+105
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_105'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * &#60;/li&#62;&#60;/ol&#62;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_106'/>
+106
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_106'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_107'/>
+107
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_107'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * @param &#60;A&#62; the type of the accumulator</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_108'/>
+108
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_108'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * @param &#60;R&#62; the type of the final result</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_109'/>
+109
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_109'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_110'/>
+110
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_110'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * @since 3.0</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_111'/>
+111
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_111'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> */</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_112'/>
+112
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_112'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>public interface AggregateOperation&#60;A, R&#62; extends Serializable {</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_113'/>
+113
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_113'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_114'/>
+114
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_114'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_115'/>
+115
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_115'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * Returns the number of contributing streams this operation is set up to</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_116'/>
+116
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_116'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * handle. The index passed to {@link #accumulateFn(int)} must be less than</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_117'/>
+117
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_117'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * this number.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_118'/>
+118
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_118'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_119'/>
+119
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_119'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    int arity();</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_120'/>
+120
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_120'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_121'/>
+121
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_121'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_122'/>
+122
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_122'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * A primitive that returns a new accumulator. If the {@code deduct}</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_123'/>
+123
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_123'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * primitive is defined, the accumulator object &#60;strong&#62;must&#60;/strong&#62;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_124'/>
+124
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_124'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * properly implement {@code equals()}. See {@link #deductFn()} for an</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_125'/>
+125
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_125'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * explanation.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_126'/>
+126
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_126'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * &#60;p&#62;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_127'/>
+127
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_127'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * The returned accumulator must be serializable. For performance, you</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_128'/>
+128
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_128'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * should prefer Hazelcast custom serialization.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_129'/>
+129
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_129'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_130'/>
+130
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_130'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Nonnull</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_131'/>
+131
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_131'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    SupplierEx&#60;A&#62; createFn();</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_132'/>
+132
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_132'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_133'/>
+133
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_133'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_134'/>
+134
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_134'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * A primitive that updates the accumulator state to account for a new</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_135'/>
+135
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_135'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * item. The tag argument identifies which of the contributing streams</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_136'/>
+136
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_136'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * the returned function will handle. If asked for a tag that isn&#39;t</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_137'/>
+137
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_137'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * registered with it, it will throw an exception.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_138'/>
+138
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_138'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_139'/>
+139
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_139'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Nonnull</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_140'/>
+140
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_140'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    default &#60;T&#62; BiConsumerEx&#60;? super A, ? super T&#62; accumulateFn(@Nonnull Tag&#60;T&#62; tag) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_141'/>
+141
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_141'>1</a>
+<span>
+1. accumulateFn : All method instructions replaced by: return null; &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return accumulateFn(tag.index());</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_142'/>
+142
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_142'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_143'/>
+143
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_143'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_144'/>
+144
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_144'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_145'/>
+145
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_145'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * A primitive that updates the accumulator state to account for a new</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_146'/>
+146
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_146'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * item. The argument identifies the index of the contributing stream</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_147'/>
+147
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_147'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * the returned function will handle. If asked for an index that isn&#39;t</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_148'/>
+148
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_148'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * registered with it, it will throw an exception.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_149'/>
+149
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_149'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_150'/>
+150
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_150'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Nonnull</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_151'/>
+151
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_151'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    &#60;T&#62; BiConsumerEx&#60;? super A, ? super T&#62; accumulateFn(int index);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_152'/>
+152
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_152'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_153'/>
+153
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_153'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_154'/>
+154
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_154'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * A primitive that accepts two accumulators and updates the state of the</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_155'/>
+155
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_155'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * left-hand one by combining it with the state of the right-hand one.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_156'/>
+156
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_156'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * The right-hand accumulator remains unchanged. In some cases, such as</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_157'/>
+157
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_157'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * for single-stage batch or tumbling window aggregation it is not needed</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_158'/>
+158
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_158'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * and may be {@code null}.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_159'/>
+159
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_159'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_160'/>
+160
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_160'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Nullable</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_161'/>
+161
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_161'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    BiConsumerEx&#60;? super A, ? super A&#62; combineFn();</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_162'/>
+162
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_162'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_163'/>
+163
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_163'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_164'/>
+164
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_164'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * A primitive that accepts two accumulators and updates the state of the</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_165'/>
+165
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_165'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * left-hand one by deducting the state of the right-hand one from it. The</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_166'/>
+166
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_166'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * right-hand accumulator remains unchanged.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_167'/>
+167
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_167'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * &#60;p&#62;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_168'/>
+168
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_168'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * The effect of this primitive must be the opposite of {@link</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_169'/>
+169
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_169'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * #combineFn() combine} so that</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_170'/>
+170
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_170'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * &#60;pre&#62;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_171'/>
+171
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_171'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     *     combine(acc, x);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_172'/>
+172
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_172'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     *     deduct(acc, x);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_173'/>
+173
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_173'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * &#60;/pre&#62;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_174'/>
+174
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_174'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * leaves {@code acc} in the same state as it was before the two</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_175'/>
+175
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_175'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * operations.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_176'/>
+176
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_176'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * &#60;p&#62;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_177'/>
+177
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_177'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * This primitive is only used in sliding window aggregation and even in</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_178'/>
+178
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_178'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * that case it is optional, but its presence may significantly reduce the</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_179'/>
+179
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_179'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * computational cost. With it, the current sliding window can be obtained</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_180'/>
+180
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_180'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * from the previous one by deducting the trailing frame and combining the</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_181'/>
+181
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_181'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * leading frame; without it, each window must be recomputed from all its</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_182'/>
+182
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_182'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * constituent frames. The finer the sliding step, the more pronounced the</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_183'/>
+183
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_183'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * difference in computation effort will be.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_184'/>
+184
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_184'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * &#60;p&#62;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_185'/>
+185
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_185'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * If this method returns non-null, then {@link #createFn()} &#60;strong&#62;must</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_186'/>
+186
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_186'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * &#60;/strong&#62; return an accumulator which properly implements {@code</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_187'/>
+187
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_187'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * equals()}. After calling {@code deductFn}, Jet will use {@code equals()}</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_188'/>
+188
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_188'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * to determine whether the accumulator is now &#34;empty&#34; (i.e., equal to a</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_189'/>
+189
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_189'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * fresh instance), which signals that the current window contains no more</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_190'/>
+190
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_190'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * items with the associated grouping key and the entry must be removed</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_191'/>
+191
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_191'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * from the results.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_192'/>
+192
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_192'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_193'/>
+193
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_193'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Nullable</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_194'/>
+194
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_194'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    BiConsumerEx&#60;? super A, ? super A&#62; deductFn();</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_195'/>
+195
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_195'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_196'/>
+196
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_196'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_197'/>
+197
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_197'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * A primitive that transforms the accumulator into a result of the</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_198'/>
+198
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_198'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * aggregation. Unlike {@link #finishFn() finish} primitive, this operation</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_199'/>
+199
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_199'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * must not:</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_200'/>
+200
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_200'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * &#60;ul&#62;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_201'/>
+201
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_201'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     *     &#60;li&#62;mutate the accumulator: it must remain ready to accumulate more</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_202'/>
+202
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_202'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     *     items</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_203'/>
+203
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_203'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     *     &#60;li&#62;share mutable data with the accumulator: accumulating more items</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_204'/>
+204
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_204'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     *     to the accumulator must not change the result</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_205'/>
+205
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_205'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * &#60;/ul&#62;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_206'/>
+206
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_206'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * For example, when accumulating into an {@code ArrayList}, you must copy</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_207'/>
+207
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_207'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * it before returning it. If the elements of the list are mutated, they</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_208'/>
+208
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_208'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * must be copied as well.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_209'/>
+209
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_209'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * &#60;p&#62;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_210'/>
+210
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_210'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * The returned function must never return {@code null}. In other words,</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_211'/>
+211
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_211'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * for any accumulator it must return a non-null exported value.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_212'/>
+212
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_212'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_213'/>
+213
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_213'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Nonnull</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_214'/>
+214
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_214'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    FunctionEx&#60;? super A, ? extends R&#62; exportFn();</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_215'/>
+215
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_215'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_216'/>
+216
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_216'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_217'/>
+217
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_217'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * A primitive that transforms the accumulator into a result of the</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_218'/>
+218
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_218'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * aggregation. This is a relaxed version of {@link #exportFn() export}</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_219'/>
+219
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_219'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * primitive: the accumulator is guaranteed to be no longer used after this</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_220'/>
+220
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_220'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * operation. For example, when accumulating into an {@code ArrayList}, you</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_221'/>
+221
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_221'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * can return the accumulator list directly without copying it.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_222'/>
+222
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_222'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * &#60;p&#62;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_223'/>
+223
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_223'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * The returned function must never return {@code null}. In other words,</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_224'/>
+224
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_224'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * for any accumulator it must return a non-null finished value.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_225'/>
+225
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_225'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_226'/>
+226
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_226'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Nonnull</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_227'/>
+227
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_227'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    default FunctionEx&#60;? super A, ? extends R&#62; finishFn() {</span></pre></td></tr>
+
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_228'/>
+228
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_228'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class=''>        return exportFn();</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_229'/>
+229
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_229'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_230'/>
+230
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_230'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_231'/>
+231
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_231'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_232'/>
+232
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_232'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * Returns a copy of this aggregate operation, but with all the {@code</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_233'/>
+233
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_233'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * accumulate} primitives replaced with the ones supplied here. The</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_234'/>
+234
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_234'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * argument at position {@code i} replaces the primitive at index {@code</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_235'/>
+235
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_235'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * i}, as returned by {@link #accumulateFn(int)}.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_236'/>
+236
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_236'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_237'/>
+237
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_237'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Nonnull</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_238'/>
+238
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_238'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @SuppressWarnings(&#34;rawtypes&#34;)</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_239'/>
+239
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_239'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    AggregateOperation&#60;A, R&#62; withAccumulateFns(BiConsumerEx... accumulateFns);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_240'/>
+240
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_240'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_241'/>
+241
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_241'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_242'/>
+242
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_242'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * Returns a copy of this aggregate operation, but with the {@code finish}</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_243'/>
+243
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_243'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * primitive replaced with the identity function. It will return the</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_244'/>
+244
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_244'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * accumulator object as-is. The returned aggregate operation does not</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_245'/>
+245
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_245'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * support the {@code export} primitive.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_246'/>
+246
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_246'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_247'/>
+247
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_247'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Nonnull</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_248'/>
+248
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_248'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    AggregateOperation&#60;A, A&#62; withIdentityFinish();</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_249'/>
+249
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_249'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_250'/>
+250
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_250'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_251'/>
+251
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_251'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * Returns a copy of this aggregate operation, but with the {@code</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_252'/>
+252
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_252'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * accumulate} primitive replaced with one that expects to find accumulator</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_253'/>
+253
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_253'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * objects in the input items and combines them all into a single</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_254'/>
+254
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_254'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * accumulator of the same type. It&#39;s used in the second aggregation stage</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_255'/>
+255
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_255'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * of a two-stage aggregation setup. The first stage emits its accumulators</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_256'/>
+256
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_256'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * to the second stage.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_257'/>
+257
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_257'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_258'/>
+258
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_258'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param getAccFn the function that extracts the accumulator from the stream item</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_259'/>
+259
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_259'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param &#60;T&#62; the type of stream item</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_260'/>
+260
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_260'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_261'/>
+261
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_261'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Nonnull</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_262'/>
+262
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_262'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    default &#60;T&#62; AggregateOperation1&#60;T, A, R&#62; withCombiningAccumulateFn(</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_263'/>
+263
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_263'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            @Nonnull FunctionEx&#60;T, A&#62; getAccFn</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_264'/>
+264
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_264'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    ) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_265'/>
+265
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_265'>1</a>
+<span>
+1. withCombiningAccumulateFn : All method instructions replaced by: return null; &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        BiConsumerEx&#60;? super A, ? super A&#62; combineFn =</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_266'/>
+266
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_266'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>                Objects.requireNonNull(combineFn(), &#34;The &#39;combine&#39; primitive is missing&#34;);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_267'/>
+267
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_267'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        return new AggregateOperation1Impl&#60;&#62;(</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_268'/>
+268
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_268'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>                createFn(),</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_269'/>
+269
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_269'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>                (A acc, T item) -&#62; combineFn.accept(acc, getAccFn.apply(item)),</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_270'/>
+270
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_270'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>                combineFn,</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_271'/>
+271
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_271'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>                deductFn(),</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_272'/>
+272
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_272'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>                exportFn(),</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_273'/>
+273
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_273'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>                finishFn());</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_274'/>
+274
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_274'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_275'/>
+275
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_275'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_276'/>
+276
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_276'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_277'/>
+277
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_277'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * Returns a copy of this aggregate operation, but with the {@code export}</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_278'/>
+278
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_278'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * and {@code finish} primitives composed with the supplied {@code thenFn}.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_279'/>
+279
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_279'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * This replaces {@code exportFn} with {@code exportFn.andThen(thenFn)},</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_280'/>
+280
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_280'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * same for {@code finishFn}. The main use case is to transform the result</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_281'/>
+281
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_281'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * of an existing (library-provided) aggregate operation.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_282'/>
+282
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_282'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_283'/>
+283
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_283'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param thenFn the function to apply to the results of {@code export} and {@code finish}</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_284'/>
+284
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_284'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     *               primitives</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_285'/>
+285
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_285'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param &#60;R_NEW&#62; the type of the returned aggregate operation&#39;s result</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_286'/>
+286
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_286'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_287'/>
+287
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_287'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Nonnull</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_288'/>
+288
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_288'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    &#60;R_NEW&#62; AggregateOperation&#60;A, R_NEW&#62; andThen(FunctionEx&#60;? super R, ? extends R_NEW&#62; thenFn);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_289'/>
+289
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_289'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_290'/>
+290
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_290'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_291'/>
+291
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_291'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * Returns a builder object, initialized with the supplied {@link #createFn()</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_292'/>
+292
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_292'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * create} primitive, that can be used to construct the definition of an</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_293'/>
+293
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_293'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * aggregate operation in a step-by-step manner.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_294'/>
+294
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_294'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * &#60;p&#62;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_295'/>
+295
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_295'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * The same builder is used to construct both fixed- and variable-arity</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_296'/>
+296
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_296'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * aggregate operations:</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_297'/>
+297
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_297'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * &#60;ul&#62;&#60;li&#62;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_298'/>
+298
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_298'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     *     For fixed arity use {@link</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_299'/>
+299
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_299'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     *     AggregateOperationBuilder#andAccumulate0(BiConsumerEx)</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_300'/>
+300
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_300'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     *     andAccumulate0()}, optionally followed by {@code .andAccumulate1()},</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_301'/>
+301
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_301'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     *     {@code .andAccumulate2()}. The return type of these methods changes as the</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_302'/>
+302
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_302'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     *     static types of the contributing streams are captured.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_303'/>
+303
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_303'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * &#60;/li&#62;&#60;li&#62;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_304'/>
+304
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_304'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     *     For variable arity use {@link AggregateOperationBuilder#andAccumulate(Tag,</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_305'/>
+305
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_305'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     *     BiConsumerEx) andAccumulate(tag)}.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_306'/>
+306
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_306'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * &#60;/li&#62;&#60;/ul&#62;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_307'/>
+307
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_307'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * The {@link AggregateOperationBuilder.Arity1#andExportFinish</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_308'/>
+308
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_308'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * andExportFinish()} method returns the constructed aggregate operation.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_309'/>
+309
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_309'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * Its static type receives all the type parameters captured in the above</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_310'/>
+310
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_310'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * method calls. For optimization purposes you may want to specify a {@code</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_311'/>
+311
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_311'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * finish} primitive that is different from {@code export}, for example</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_312'/>
+312
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_312'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * return the accumulator itself without copying. In that case you&#39;ll use</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_313'/>
+313
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_313'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * {@code builder.andExport(exportFn).andFinish(finishFn)}.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_314'/>
+314
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_314'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_315'/>
+315
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_315'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param createFn the {@code create} primitive</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_316'/>
+316
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_316'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param &#60;A&#62; the type of the accumulator</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_317'/>
+317
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_317'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @return the builder object whose static type represents the fact that it</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_318'/>
+318
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_318'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     *         has just the {@code create} primitive defined</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_319'/>
+319
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_319'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_320'/>
+320
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_320'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Nonnull</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_321'/>
+321
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_321'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    static &#60;A&#62; AggregateOperationBuilder&#60;A&#62; withCreate(@Nonnull SupplierEx&#60;A&#62; createFn) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_322'/>
+322
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_322'>1</a>
+<span>
+1. withCreate : All method instructions replaced by: return null; &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        checkSerializable(createFn, &#34;createFn&#34;);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_323'/>
+323
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_323'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        return new AggregateOperationBuilder&#60;&#62;(createFn);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_324'/>
+324
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_324'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@5a598730_325'/>
+325
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_325'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>}</span></pre></td></tr>
+
+
+
+<tr><td></td><td></td><td><h2>Mutations</h2></td></tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@5a598730_141'>141</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_141'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>accumulateFn<br/><b>Killed by : </b>com.hazelcast.jet.aggregate.AggregateOperationTest.when_askForNonexistentTag_then_exception(com.hazelcast.jet.aggregate.AggregateOperationTest)</span></span> All method instructions replaced by: return null; &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@5a598730_265'>265</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_265'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>withCombiningAccumulateFn<br/><b>Killed by : </b>com.hazelcast.jet.aggregate.AggregateOperationTest.when_withCombiningAccumulateFn_then_accumulateFnCombines(com.hazelcast.jet.aggregate.AggregateOperationTest)</span></span> All method instructions replaced by: return null; &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@5a598730_322'>322</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@5a598730_322'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>withCreate<br/><b>Killed by : </b>com.hazelcast.jet.aggregate.AggregateOperationTest.when_duplicateTag_then_exception(com.hazelcast.jet.aggregate.AggregateOperationTest)</span></span> All method instructions replaced by: return null; &rarr; KILLED</p> 
+</td>
+</tr>
+
+</table>
+
+
+<h2>Active mutators</h2>
+<ul>
+<li class='mutator'>""</li>
+<li class='mutator'>"A"</li>
+<li class='mutator'>'A'</li>
+<li class='mutator'>'\40'</li>
+<li class='mutator'>(byte)0</li>
+<li class='mutator'>(byte)1</li>
+<li class='mutator'>(short)0</li>
+<li class='mutator'>(short)1</li>
+<li class='mutator'>0</li>
+<li class='mutator'>0.0</li>
+<li class='mutator'>0.0f</li>
+<li class='mutator'>0L</li>
+<li class='mutator'>1</li>
+<li class='mutator'>1.0</li>
+<li class='mutator'>1.0f</li>
+<li class='mutator'>1L</li>
+<li class='mutator'>empty</li>
+<li class='mutator'>false</li>
+<li class='mutator'>null</li>
+<li class='mutator'>true</li>
+<li class='mutator'>void</li>
+
+</ul>
+
+<h2>Tests examined</h2>
+<ul>
+<li>com.hazelcast.jet.pipeline.SourceBuilderTest.test_faultTolerance[1: mode=client](com.hazelcast.jet.pipeline.SourceBuilderTest) (1194 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_rebalanceAndGroupAggregateBuilderWithComplexAggrOp_then_singleStageAggregation[1: mode=client](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (602 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperation3Test.when_withCombiningAccumulateFn_then_accumulateFnCombines(com.hazelcast.jet.aggregate.AggregateOperation3Test) (26 ms)</li><li>com.hazelcast.jet.pipeline.WindowAggregateTest.sessionWindow_withEarlyResults[1: mode=client](com.hazelcast.jet.pipeline.WindowAggregateTest) (1018 ms)</li><li>com.hazelcast.jet.pipeline.WindowAggregateTest.distinct[1: mode=client](com.hazelcast.jet.pipeline.WindowAggregateTest) (615 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowPTest.when_lateEvent_then_ignored[hasDeduct=true, singleStageProcessor=false](com.hazelcast.jet.impl.processor.SlidingWindowPTest) (51 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowP_CoGroupTest.test(com.hazelcast.jet.impl.processor.SlidingWindowP_CoGroupTest) (50 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperationsTest.when_sorting(com.hazelcast.jet.aggregate.AggregateOperationsTest) (25 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowP_stage1Test.smokeTest(com.hazelcast.jet.impl.processor.SlidingWindowP_stage1Test) (25 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperationsTest.when_counting(com.hazelcast.jet.aggregate.AggregateOperationsTest) (25 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.rollingAggregate[1: mode=client](com.hazelcast.jet.pipeline.StreamStageTest) (590 ms)</li><li>com.hazelcast.jet.pipeline.WindowGroupAggregateTest.tumblingWindow[1: mode=client](com.hazelcast.jet.pipeline.WindowGroupAggregateTest) (685 ms)</li><li>com.hazelcast.jet.core.Processors_slidingWindowingIntegrationTest.smokeTest[singleStageProcessor=true, isBatch=true](com.hazelcast.jet.core.Processors_slidingWindowingIntegrationTest) (1057 ms)</li><li>com.hazelcast.jet.pipeline.SourceBuilderTest.stream_socketSource_withTimestamps_andLateness[0: mode=member](com.hazelcast.jet.pipeline.SourceBuilderTest) (995 ms)</li><li>com.hazelcast.jet.pipeline.WindowGroupAggregateTest.aggregateBuilder_withComplexAggrOp[1: mode=client](com.hazelcast.jet.pipeline.WindowGroupAggregateTest) (691 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperationsTest.when_groupingBy_withDownstreamOperationAndMapSupplier(com.hazelcast.jet.aggregate.AggregateOperationsTest) (26 ms)</li><li>com.hazelcast.jet.pipeline.WindowAggregateTest.aggregateBuilder_withComplexAggrOp[0: mode=member](com.hazelcast.jet.pipeline.WindowAggregateTest) (716 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperationTest.when_withIdentityFinish(com.hazelcast.jet.aggregate.AggregateOperationTest) (25 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_rebalanceAndGroupAggregate2_then_singleStageAggregation[1: mode=client](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (595 ms)</li><li>com.hazelcast.jet.pipeline.WindowAggregateTest.sessionWindow[1: mode=client](com.hazelcast.jet.pipeline.WindowAggregateTest) (810 ms)</li><li>com.hazelcast.jet.pipeline.WindowAggregateTest.when_sessionWinWithEarlyResults_then_emitRepeatedly[1: mode=client](com.hazelcast.jet.pipeline.WindowAggregateTest) (1189 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregate2_withAggrOp2[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest) (575 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperationsTest.when_filtering(com.hazelcast.jet.aggregate.AggregateOperationsTest) (25 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperationsTest.when_bottomN(com.hazelcast.jet.aggregate.AggregateOperationsTest) (26 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregate3_withAggrOp3[1: mode=client](com.hazelcast.jet.pipeline.BatchAggregateTest) (589 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperationsTest.when_reducing(com.hazelcast.jet.aggregate.AggregateOperationsTest) (26 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperationsTest.when_mappingWithoutDeduct(com.hazelcast.jet.aggregate.AggregateOperationsTest) (25 ms)</li><li>com.hazelcast.jet.pipeline.WindowAggregateTest.slidingWindow_withEarlyResults[0: mode=member](com.hazelcast.jet.pipeline.WindowAggregateTest) (984 ms)</li><li>com.hazelcast.jet.pipeline.SourceBuilderTest.test_faultTolerance_restartTwice[0: mode=member](com.hazelcast.jet.pipeline.SourceBuilderTest) (1599 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperation2Test.when_withCombiningAccumulateFn_then_accumulateFnCombines(com.hazelcast.jet.aggregate.AggregateOperation2Test) (25 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_BatchTest.when_storeMetricsAfterJobCompletionDisabled_then_metricsEmpty[1: mode=client](com.hazelcast.jet.core.metrics.JobMetrics_BatchTest) (577 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperationToAggregatorTest.test_toAggregator[1: mode=client](com.hazelcast.jet.aggregate.AggregateOperationToAggregatorTest) (2254 ms)</li><li>com.hazelcast.jet.pipeline.test.AssertionsTest.test_multiple_assertions_in_pipeline[1: mode=client](com.hazelcast.jet.pipeline.test.AssertionsTest) (613 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregate2_withAggrOp2_with_finishFn[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest) (589 ms)</li><li>com.hazelcast.jet.core.metrics.MetricsTest (12241 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.when_rollingAggregateWithTimestamps_then_timestampsPropagated[0: mode=member](com.hazelcast.jet.pipeline.StreamStageTest) (891 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.groupAggregateBuilder_withComplexAggrOp_withOutputFn[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest) (598 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregate3_withAggrOp3[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest) (602 ms)</li><li>com.hazelcast.jet.pipeline.WindowAggregateTest.aggregate3_withSeparateAggrOps[0: mode=member](com.hazelcast.jet.pipeline.WindowAggregateTest) (693 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperation1Test.when_askForNonexistentTag_then_exception(com.hazelcast.jet.aggregate.AggregateOperation1Test) (26 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowPTest.when_wmNeverReceived_then_emitEverythingInComplete[hasDeduct=true, singleStageProcessor=true](com.hazelcast.jet.impl.processor.SlidingWindowPTest) (25 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperationsTest.when_concatenating_withDelimiterPrefixSuffix(com.hazelcast.jet.aggregate.AggregateOperationsTest) (26 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperationsTest.when_aggregateOpAsParallelCollector(com.hazelcast.jet.aggregate.AggregateOperationsTest) (26 ms)</li><li>com.hazelcast.jet.impl.processor.SessionWindowPTest.when_batchProcessing_then_flushEverything(com.hazelcast.jet.impl.processor.SessionWindowPTest) (75 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperationToAggregatorTest.test_missingCombineFn[1: mode=client](com.hazelcast.jet.aggregate.AggregateOperationToAggregatorTest) (633 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregate2_withAggrOp2[1: mode=client](com.hazelcast.jet.pipeline.BatchAggregateTest) (588 ms)</li><li>com.hazelcast.jet.pipeline.WindowGroupAggregateTest.when_noTimestamps_then_error[0: mode=member](com.hazelcast.jet.pipeline.WindowGroupAggregateTest) (573 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.rollingAggregate_keyed[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (613 ms)</li><li>com.hazelcast.jet.pipeline.SourceBuilderTest.test_faultTolerance_snapshotWithUserDefinedObject[1: mode=client](com.hazelcast.jet.pipeline.SourceBuilderTest) (1414 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperationsTest.when_mappingWithDeduct(com.hazelcast.jet.aggregate.AggregateOperationsTest) (26 ms)</li><li>com.hazelcast.jet.pipeline.WindowGroupAggregateTest.aggregateBuilder_withComplexAggrOp[0: mode=member](com.hazelcast.jet.pipeline.WindowGroupAggregateTest) (692 ms)</li><li>com.hazelcast.jet.pipeline.SourceBuilderTest.test_faultTolerance[0: mode=member](com.hazelcast.jet.pipeline.SourceBuilderTest) (1198 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowP_twoStageSnapshotTest.test[simulateRestore=false](com.hazelcast.jet.impl.processor.SlidingWindowP_twoStageSnapshotTest) (25 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowPTest.when_receiveAscendingTimestamps_then_emitAscending[hasDeduct=true, singleStageProcessor=false](com.hazelcast.jet.impl.processor.SlidingWindowPTest) (76 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowPTest.when_receiveDescendingTimestamps_then_emitAscending[hasDeduct=true, singleStageProcessor=false](com.hazelcast.jet.impl.processor.SlidingWindowPTest) (76 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregate2_withAggrOp2_with_finishFn[1: mode=client](com.hazelcast.jet.pipeline.BatchAggregateTest) (587 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowP_changeWindowSizeTest.when_incompatibleSlidingWindowChange1_then_incorrectResultButNoLeakOrFailure(com.hazelcast.jet.impl.processor.SlidingWindowP_changeWindowSizeTest) (2 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowPTest.when_lateEvent_then_ignored[hasDeduct=false, singleStageProcessor=true](com.hazelcast.jet.impl.processor.SlidingWindowPTest) (51 ms)</li><li>com.hazelcast.jet.pipeline.test.TestSourcesTest.test_itemStream_in_expected_range[1: mode=client](com.hazelcast.jet.pipeline.test.TestSourcesTest) (2005 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregateBuilder_withSeparateAggrOps[1: mode=client](com.hazelcast.jet.pipeline.BatchAggregateTest) (604 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowPTest.when_receiveDescendingTimestamps_then_emitAscending[hasDeduct=true, singleStageProcessor=true](com.hazelcast.jet.impl.processor.SlidingWindowPTest) (76 ms)</li><li>com.hazelcast.jet.pipeline.WindowGroupAggregateTest.slidingWindow_cascadingAggregations[0: mode=member](com.hazelcast.jet.pipeline.WindowGroupAggregateTest) (628 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperation1Test.when_withCombiningAccumulateFn_then_accumulateFnCombines(com.hazelcast.jet.aggregate.AggregateOperation1Test) (25 ms)</li><li>com.hazelcast.jet.impl.processor.SessionWindowPTest.when_disorderedEVentsWithThreeKeys(com.hazelcast.jet.impl.processor.SessionWindowPTest) (830 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.groupAggregateBuilder_withComplexAggrOp[1: mode=client](com.hazelcast.jet.pipeline.BatchAggregateTest) (617 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowPTest.when_wmNeverReceived_then_emitEverythingInComplete[hasDeduct=false, singleStageProcessor=false](com.hazelcast.jet.impl.processor.SlidingWindowPTest) (25 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowP_stage1Test.when_noEvents_then_wmsEmitted(com.hazelcast.jet.impl.processor.SlidingWindowP_stage1Test) (26 ms)</li><li>com.hazelcast.jet.pipeline.test.AssertionsTest.test_multiple_assertions_in_pipeline[0: mode=member](com.hazelcast.jet.pipeline.test.AssertionsTest) (587 ms)</li><li>com.hazelcast.jet.pipeline.WindowAggregateTest.distinct[0: mode=member](com.hazelcast.jet.pipeline.WindowAggregateTest) (613 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperationsTest.when_maxBy(com.hazelcast.jet.aggregate.AggregateOperationsTest) (25 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperationsTest.when_flatMapping(com.hazelcast.jet.aggregate.AggregateOperationsTest) (26 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_aggregate3WithRebalancedStage_then_twoStageAggregation[1: mode=client](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (594 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperationsTest.when_toList(com.hazelcast.jet.aggregate.AggregateOperationsTest) (25 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowPTest.simple_smokeTest[hasDeduct=false, singleStageProcessor=true](com.hazelcast.jet.impl.processor.SlidingWindowPTest) (26 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_BatchTest.when_storeMetricsAfterJobCompletionDisabled_then_metricsEmpty[0: mode=member](com.hazelcast.jet.core.metrics.JobMetrics_BatchTest) (586 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregateBuilder_withSeparateAggrOps[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest) (603 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperationsTest.when_groupingBy_withDifferentKey(com.hazelcast.jet.aggregate.AggregateOperationsTest) (26 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowP_stage1Test.when_wmNeverReceived_then_emitEverythingInComplete(com.hazelcast.jet.impl.processor.SlidingWindowP_stage1Test) (26 ms)</li><li>com.hazelcast.jet.pipeline.test.TestSourcesTest.test_longStream[1: mode=client](com.hazelcast.jet.pipeline.test.TestSourcesTest) (1984 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperation2Test.when_askForNonexistentTag_then_exception(com.hazelcast.jet.aggregate.AggregateOperation2Test) (26 ms)</li><li>com.hazelcast.jet.pipeline.WindowAggregateTest.when_sessionWinWithEarlyResults_then_emitRepeatedly[0: mode=member](com.hazelcast.jet.pipeline.WindowAggregateTest) (1191 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_BatchTest.when_twoDifferentPipelines_then_haveDifferentMetrics[0: mode=member](com.hazelcast.jet.core.metrics.JobMetrics_BatchTest) (598 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperationToAggregatorTest.test_toAggregator[0: mode=member](com.hazelcast.jet.aggregate.AggregateOperationToAggregatorTest) (2309 ms)</li><li>com.hazelcast.jet.pipeline.WindowAggregateTest.sessionWindow[0: mode=member](com.hazelcast.jet.pipeline.WindowAggregateTest) (809 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregate3_withAggrOp3_withOutputFn[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest) (597 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperationsTest.when_allOf2(com.hazelcast.jet.aggregate.AggregateOperationsTest) (26 ms)</li><li>com.hazelcast.jet.pipeline.StreamSourceTest.test_defaultIdle[1: mode=client](com.hazelcast.jet.pipeline.StreamSourceTest) (5582 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceStreamStageTest.when_rebalanceByKeyAndWindowAggregate_then_distributedPartitionedEdgeAndTwoStageAggregation[1: mode=client](com.hazelcast.jet.pipeline.RebalanceStreamStageTest) (560 ms)</li><li>com.hazelcast.jet.impl.processor.Processors_globalAggregationIntegrationTest.smokeTest[singleStageProcessor=true](com.hazelcast.jet.impl.processor.Processors_globalAggregationIntegrationTest) (1057 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceStreamStageTest.when_rebalanceAndWindowAggregate_then_unicastDistributedEdgeAndTwoStageAggregation[1: mode=client](com.hazelcast.jet.pipeline.RebalanceStreamStageTest) (581 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregate3_withAggrOp3_withOutputFn[1: mode=client](com.hazelcast.jet.pipeline.BatchAggregateTest) (626 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowP_changeWindowSizeTest.when_incompatibleSlidingWindowChange2_then_incorrectResultButNoLeakOrFailure(com.hazelcast.jet.impl.processor.SlidingWindowP_changeWindowSizeTest) (2 ms)</li><li>com.hazelcast.jet.pipeline.WindowAggregateTest.when_tumblingWinWithEarlyResults_then_emitRepeatedly[1: mode=client](com.hazelcast.jet.pipeline.WindowAggregateTest) (1165 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.groupAggregateBuilder_withComplexAggrOp[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest) (590 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperationTest.when_duplicateTag_then_exception(com.hazelcast.jet.aggregate.AggregateOperationTest) (26 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowPTest.when_receiveAscendingTimestamps_then_emitAscending[hasDeduct=true, singleStageProcessor=true](com.hazelcast.jet.impl.processor.SlidingWindowPTest) (76 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowPTest.when_noFramesReceived_then_onlyEmitWm[hasDeduct=false, singleStageProcessor=true](com.hazelcast.jet.impl.processor.SlidingWindowPTest) (26 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.rollingAggregate[0: mode=member](com.hazelcast.jet.pipeline.StreamStageTest) (600 ms)</li><li>com.hazelcast.jet.pipeline.SourceBuilderTest.test_nonFaultTolerantSource_processingGuaranteeNone[0: mode=member](com.hazelcast.jet.pipeline.SourceBuilderTest) (1186 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowPTest.when_receiveRandomTimestamps_then_emitAscending[hasDeduct=false, singleStageProcessor=true](com.hazelcast.jet.impl.processor.SlidingWindowPTest) (836 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_BatchTest.when_twoDifferentPipelines_then_haveDifferentMetrics[1: mode=client](com.hazelcast.jet.core.metrics.JobMetrics_BatchTest) (603 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperationsTest.when_maxBy_noInput_then_nullResult(com.hazelcast.jet.aggregate.AggregateOperationsTest) (26 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperation1Test.when_withIdentityFinish(com.hazelcast.jet.aggregate.AggregateOperation1Test) (25 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowPTest.when_receiveAscendingTimestamps_then_emitAscending[hasDeduct=false, singleStageProcessor=false](com.hazelcast.jet.impl.processor.SlidingWindowPTest) (76 ms)</li><li>com.hazelcast.jet.benchmark.WordCountTest (36321 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.groupAggregate3_withSeparateAggrOps[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest) (596 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperation2Test.when_build_then_allPartsThere(com.hazelcast.jet.aggregate.AggregateOperation2Test) (25 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowPTest.when_receiveAscendingTimestamps_then_emitAscending[hasDeduct=false, singleStageProcessor=true](com.hazelcast.jet.impl.processor.SlidingWindowPTest) (76 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperations_accEqualityTest.testTwoAccumulatorsEqual[5](com.hazelcast.jet.aggregate.AggregateOperations_accEqualityTest) (26 ms)</li><li>com.hazelcast.jet.JetBootstrappedStandaloneTest (1177 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowP_stage1Test.when_batch_then_emitEverything(com.hazelcast.jet.impl.processor.SlidingWindowP_stage1Test) (26 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_BatchTest.when_twoDifferentJobsForTheSamePipeline_then_haveDifferentMetrics[0: mode=member](com.hazelcast.jet.core.metrics.JobMetrics_BatchTest) (597 ms)</li><li>com.hazelcast.jet.pipeline.WindowGroupAggregateTest.when_noTimestamps_then_error[1: mode=client](com.hazelcast.jet.pipeline.WindowGroupAggregateTest) (559 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowPTest.simple_smokeTest[hasDeduct=true, singleStageProcessor=false](com.hazelcast.jet.impl.processor.SlidingWindowPTest) (26 ms)</li><li>com.hazelcast.jet.pipeline.WindowAggregateTest.when_tumblingWinWithEarlyResults_then_emitRepeatedly[0: mode=member](com.hazelcast.jet.pipeline.WindowAggregateTest) (1155 ms)</li><li>com.hazelcast.jet.pipeline.test.TestSourcesTest.test_itemStream_withWindowing[0: mode=member](com.hazelcast.jet.pipeline.test.TestSourcesTest) (1989 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperationsTest.when_linearTrend(com.hazelcast.jet.aggregate.AggregateOperationsTest) (25 ms)</li><li>com.hazelcast.jet.pipeline.WindowGroupAggregateTest.aggregate2_withAggrOp2[0: mode=member](com.hazelcast.jet.pipeline.WindowGroupAggregateTest) (697 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.when_maxOfZeroItems_then_producesNoOutput[1: mode=client](com.hazelcast.jet.pipeline.BatchAggregateTest) (597 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperationsTest.when_averagingLong(com.hazelcast.jet.aggregate.AggregateOperationsTest) (26 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregate[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest) (593 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.when_maxOfZeroItems_then_producesNoOutput[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest) (567 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperation3Test.when_withIdentityFinish(com.hazelcast.jet.aggregate.AggregateOperation3Test) (26 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_rebalanceAndAggregate_then_unicastDistributedEdgeAndTwoStageAggregation[1: mode=client](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (588 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperations_accEqualityTest.testTwoAccumulatorsEqual[3](com.hazelcast.jet.aggregate.AggregateOperations_accEqualityTest) (26 ms)</li><li>com.hazelcast.jet.core.DotTest.assertedTest(com.hazelcast.jet.core.DotTest) (26 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.groupAggregate[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest) (583 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregate2_withSeparateAggrOps[1: mode=client](com.hazelcast.jet.pipeline.BatchAggregateTest) (599 ms)</li><li>com.hazelcast.jet.pipeline.WindowGroupAggregateTest.tumblingWindow[0: mode=member](com.hazelcast.jet.pipeline.WindowGroupAggregateTest) (677 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperationsTest.when_summingLong(com.hazelcast.jet.aggregate.AggregateOperationsTest) (26 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregate[1: mode=client](com.hazelcast.jet.pipeline.BatchAggregateTest) (587 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperationToAggregatorTest.test_missingCombineFn[0: mode=member](com.hazelcast.jet.aggregate.AggregateOperationToAggregatorTest) (664 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperation3Test.when_build_then_allPartsThere(com.hazelcast.jet.aggregate.AggregateOperation3Test) (25 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowP_twoStageSnapshotTest.test[simulateRestore=true](com.hazelcast.jet.impl.processor.SlidingWindowP_twoStageSnapshotTest) (25 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_aggregate2WithRebalancedStage_then_twoStageAggregation[1: mode=client](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (568 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowPTest.when_noFramesReceived_then_onlyEmitWm[hasDeduct=true, singleStageProcessor=false](com.hazelcast.jet.impl.processor.SlidingWindowPTest) (26 ms)</li><li>com.hazelcast.jet.core.ProcessorsTest (457 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceStreamStageTest.when_rebalanceByKeyAndWindowAggregate_then_distributedPartitionedEdgeAndTwoStageAggregation[0: mode=member](com.hazelcast.jet.pipeline.RebalanceStreamStageTest) (548 ms)</li><li>com.hazelcast.jet.pipeline.SourceBuilderTest.test_nonFaultTolerantSource_processingGuaranteeNone[1: mode=client](com.hazelcast.jet.pipeline.SourceBuilderTest) (1178 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperationsTest.when_topN(com.hazelcast.jet.aggregate.AggregateOperationsTest) (26 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowPTest.when_receiveRandomTimestamps_then_emitAscending[hasDeduct=true, singleStageProcessor=false](com.hazelcast.jet.impl.processor.SlidingWindowPTest) (881 ms)</li><li>com.hazelcast.jet.pipeline.SourceBuilderTest.test_faultTolerance_restartTwice[1: mode=client](com.hazelcast.jet.pipeline.SourceBuilderTest) (1591 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_rebalanceByKeyAndAggregate_then_distributedPartitionedEdgeAndTwoStageAggregation[0: mode=member](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (574 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperation3Test.when_andThen_then_exportAndFinishChanged(com.hazelcast.jet.aggregate.AggregateOperation3Test) (26 ms)</li><li>com.hazelcast.jet.pipeline.WindowAggregateTest.aggregate2_withAggrOp2[0: mode=member](com.hazelcast.jet.pipeline.WindowAggregateTest) (680 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_rebalanceAndGroupAggregate3_then_singleStageAggregation[0: mode=member](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (593 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowPTest.when_noFramesReceived_then_onlyEmitWm[hasDeduct=false, singleStageProcessor=false](com.hazelcast.jet.impl.processor.SlidingWindowPTest) (26 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperationsTest.when_averagingDouble(com.hazelcast.jet.aggregate.AggregateOperationsTest) (25 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowPTest.when_receiveDescendingTimestamps_then_emitAscending[hasDeduct=false, singleStageProcessor=false](com.hazelcast.jet.impl.processor.SlidingWindowPTest) (76 ms)</li><li>com.hazelcast.jet.impl.processor.SessionWindowPTest.when_disorderedEventsWithOneKey(com.hazelcast.jet.impl.processor.SessionWindowPTest) (377 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperationTest.when_build_then_allPartsThere(com.hazelcast.jet.aggregate.AggregateOperationTest) (25 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_BatchTest.when_memberRemovedAfterJobFinished_then_metricsNotAffected[1: mode=client](com.hazelcast.jet.core.metrics.JobMetrics_BatchTest) (1286 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperationsTest.when_summingDouble(com.hazelcast.jet.aggregate.AggregateOperationsTest) (26 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_rebalanceAndGroupAggregateBuilder_then_singleStageAggregation[1: mode=client](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (587 ms)</li><li>com.hazelcast.jet.pipeline.SourceBuilderTest.stream_socketSource_withTimestamps_andLateness[1: mode=client](com.hazelcast.jet.pipeline.SourceBuilderTest) (1003 ms)</li><li>com.hazelcast.jet.pipeline.WindowAggregateTest.tumblingWindow_withEarlyResults[0: mode=member](com.hazelcast.jet.pipeline.WindowAggregateTest) (982 ms)</li><li>com.hazelcast.jet.pipeline.WindowGroupAggregateTest.aggregate3_withAggrOp3[0: mode=member](com.hazelcast.jet.pipeline.WindowGroupAggregateTest) (686 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowPTest.simple_smokeTest[hasDeduct=true, singleStageProcessor=true](com.hazelcast.jet.impl.processor.SlidingWindowPTest) (26 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_rebalanceAndGroupAggregateBuilderWithComplexAggrOp_then_singleStageAggregation[0: mode=member](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (608 ms)</li><li>com.hazelcast.jet.pipeline.WindowGroupAggregateTest.aggregate2_withSeparateAggrOps[0: mode=member](com.hazelcast.jet.pipeline.WindowGroupAggregateTest) (782 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperationTest.when_withCombiningAccumulateFn_then_accumulateFnCombines(com.hazelcast.jet.aggregate.AggregateOperationTest) (25 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperationsTest.when_allOfWithoutDeduct_then_noDeduct(com.hazelcast.jet.aggregate.AggregateOperationsTest) (25 ms)</li><li>com.hazelcast.jet.pipeline.WindowGroupAggregateTest.aggregateBuilder_withSeparateAggrOps[1: mode=client](com.hazelcast.jet.pipeline.WindowGroupAggregateTest) (704 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.rollingAggregate_keyed[0: mode=member](com.hazelcast.jet.pipeline.StreamStageTest) (939 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregate3_withSeparateAggrOps[1: mode=client](com.hazelcast.jet.pipeline.BatchAggregateTest) (590 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperationsTest.when_concatenatingEmptyItems_withDelimiterPrefixSuffix(com.hazelcast.jet.aggregate.AggregateOperationsTest) (26 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowP_changeWindowSizeTest.when_shrinkSlidingWindowSize_then_noLeak(com.hazelcast.jet.impl.processor.SlidingWindowP_changeWindowSizeTest) (1 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregateBuilder_with_complexAggrOp_withOutputFn[1: mode=client](com.hazelcast.jet.pipeline.BatchAggregateTest) (589 ms)</li><li>com.hazelcast.jet.pipeline.WindowGroupAggregateTest.slidingWindow[0: mode=member](com.hazelcast.jet.pipeline.WindowGroupAggregateTest) (747 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperationsTest.when_toMapDuplicateAccumulate_then_exception(com.hazelcast.jet.aggregate.AggregateOperationsTest) (26 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperation1Test.when_andThen_then_exportAndFinishChanged(com.hazelcast.jet.aggregate.AggregateOperation1Test) (25 ms)</li><li>com.hazelcast.jet.pipeline.WindowAggregateTest.tumblingWindow[1: mode=client](com.hazelcast.jet.pipeline.WindowAggregateTest) (669 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperations_accEqualityTest.testTwoAccumulatorsEqual[0](com.hazelcast.jet.aggregate.AggregateOperations_accEqualityTest) (26 ms)</li><li>com.hazelcast.jet.pipeline.WindowAggregateTest.tumblingWindow_withEarlyResults[1: mode=client](com.hazelcast.jet.pipeline.WindowAggregateTest) (997 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregate2_withSeparateAggrOps[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest) (585 ms)</li><li>com.hazelcast.jet.pipeline.WindowGroupAggregateTest.slidingWindow[1: mode=client](com.hazelcast.jet.pipeline.WindowGroupAggregateTest) (759 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperationsTest.when_minBy(com.hazelcast.jet.aggregate.AggregateOperationsTest) (26 ms)</li><li>com.hazelcast.jet.impl.processor.SessionWindowPTest.when_sessionsTouch_then_shouldNotBeMerged(com.hazelcast.jet.impl.processor.SessionWindowPTest) (26 ms)</li><li>com.hazelcast.jet.core.Processors_slidingWindowingIntegrationTest.smokeTest[singleStageProcessor=false, isBatch=true](com.hazelcast.jet.core.Processors_slidingWindowingIntegrationTest) (1057 ms)</li><li>com.hazelcast.jet.pipeline.StreamSourceStageTest (24341 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_rebalanceAndGroupAggregate3_then_singleStageAggregation[1: mode=client](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (597 ms)</li><li>com.hazelcast.jet.pipeline.WindowGroupAggregateTest.distinct[1: mode=client](com.hazelcast.jet.pipeline.WindowGroupAggregateTest) (596 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.groupAggregate[1: mode=client](com.hazelcast.jet.pipeline.BatchAggregateTest) (580 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.groupAggregateBuilder_withSeparateAggrOps[1: mode=client](com.hazelcast.jet.pipeline.BatchAggregateTest) (610 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_BatchTest.when_jobCompleted_then_metricsExist[0: mode=member](com.hazelcast.jet.core.metrics.JobMetrics_BatchTest) (594 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_rebalanceAndGroupAggregate2_then_singleStageAggregation[0: mode=member](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (600 ms)</li><li>com.hazelcast.jet.pipeline.WindowGroupAggregateTest.aggregateBuilder_withSeparateAggrOps[0: mode=member](com.hazelcast.jet.pipeline.WindowGroupAggregateTest) (685 ms)</li><li>com.hazelcast.jet.pipeline.StreamSourceTest.test_shortIdle[0: mode=member](com.hazelcast.jet.pipeline.StreamSourceTest) (1190 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowPTest.when_lateEvent_then_ignored[hasDeduct=true, singleStageProcessor=true](com.hazelcast.jet.impl.processor.SlidingWindowPTest) (51 ms)</li><li>com.hazelcast.jet.pipeline.WindowAggregateTest.aggregateBuilder_withSeparateAggrOps[0: mode=member](com.hazelcast.jet.pipeline.WindowAggregateTest) (674 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowP_stage1Test.when_gapInWmAfterEvent_then_frameAndWmEmitted(com.hazelcast.jet.impl.processor.SlidingWindowP_stage1Test) (25 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.groupAggregate3_withSeparateAggrOps[1: mode=client](com.hazelcast.jet.pipeline.BatchAggregateTest) (601 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperationsTest.when_averagingLong_tooManyItems_then_exception(com.hazelcast.jet.aggregate.AggregateOperationsTest) (25 ms)</li><li>com.hazelcast.jet.pipeline.SourceBuilderTest.stream_distributed_socketSource_withTimestamps[1: mode=client](com.hazelcast.jet.pipeline.SourceBuilderTest) (789 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.rollingAggregate_keyed[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (595 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperationsTest.when_pickAny_noInput_then_nullResult(com.hazelcast.jet.aggregate.AggregateOperationsTest) (26 ms)</li><li>com.hazelcast.jet.pipeline.StreamSourceTest.test_shortIdle[1: mode=client](com.hazelcast.jet.pipeline.StreamSourceTest) (1203 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperations_accEqualityTest.testTwoAccumulatorsEqual[2](com.hazelcast.jet.aggregate.AggregateOperations_accEqualityTest) (26 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperationTest.when_andThen_then_exportAndFinishChanged(com.hazelcast.jet.aggregate.AggregateOperationTest) (25 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.rollingAggregate_global[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (643 ms)</li><li>com.hazelcast.jet.core.Processors_slidingWindowingIntegrationTest.smokeTest[singleStageProcessor=false, isBatch=false](com.hazelcast.jet.core.Processors_slidingWindowingIntegrationTest) (1258 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregateBuilder_withSeparateAggrOps_withOutputFn[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest) (588 ms)</li><li>com.hazelcast.jet.pipeline.SourceBuilder_TopologyChangeTest (9094 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregate3_withSeparateAggrOps[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest) (597 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperation1Test.when_build_then_allPartsThere(com.hazelcast.jet.aggregate.AggregateOperation1Test) (26 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperations_accEqualityTest.testTwoAccumulatorsEqual[1](com.hazelcast.jet.aggregate.AggregateOperations_accEqualityTest) (27 ms)</li><li>com.hazelcast.jet.impl.processor.SessionWindowPTest.when_orderedEventsWithOneKey(com.hazelcast.jet.impl.processor.SessionWindowPTest) (51 ms)</li><li>com.hazelcast.jet.pipeline.WindowGroupAggregateTest.aggregate2_withSeparateAggrOps[1: mode=client](com.hazelcast.jet.pipeline.WindowGroupAggregateTest) (693 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_BatchTest.when_memberAddedAfterJobFinished_then_metricsNotAffected[0: mode=member](com.hazelcast.jet.core.metrics.JobMetrics_BatchTest) (1127 ms)</li><li>com.hazelcast.jet.pipeline.WindowAggregateTest.aggregate3_withAggrOp3[1: mode=client](com.hazelcast.jet.pipeline.WindowAggregateTest) (682 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_BatchTest.when_memberRemovedAfterJobFinished_then_metricsNotAffected[0: mode=member](com.hazelcast.jet.core.metrics.JobMetrics_BatchTest) (1292 ms)</li><li>com.hazelcast.jet.impl.processor.SessionWindowPTest.when_lateEvent_then_dropped(com.hazelcast.jet.impl.processor.SessionWindowPTest) (25 ms)</li><li>com.hazelcast.jet.pipeline.WindowAggregateTest.slidingWindow[1: mode=client](com.hazelcast.jet.pipeline.WindowAggregateTest) (741 ms)</li><li>com.hazelcast.jet.impl.processor.Processors_globalAggregationIntegrationTest.smokeTest[singleStageProcessor=false](com.hazelcast.jet.impl.processor.Processors_globalAggregationIntegrationTest) (1056 ms)</li><li>com.hazelcast.jet.core.DotTest.when_pipelineToDotString(com.hazelcast.jet.core.DotTest) (26 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowPTest.when_wmNeverReceived_then_emitEverythingInComplete[hasDeduct=false, singleStageProcessor=true](com.hazelcast.jet.impl.processor.SlidingWindowPTest) (25 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.groupAggregate3_withAggrOp3[1: mode=client](com.hazelcast.jet.pipeline.BatchAggregateTest) (588 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperationsTest.when_averagingDouble_noInput_then_NaN(com.hazelcast.jet.aggregate.AggregateOperationsTest) (26 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.test_adaptingPartitionFunction[0: mode=member](com.hazelcast.jet.pipeline.SinksTest) (5838 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregateBuilder_withSeparateAggrOps_withOutputFn[1: mode=client](com.hazelcast.jet.pipeline.BatchAggregateTest) (592 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.groupAggregate2_withAggrOp2[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest) (602 ms)</li><li>com.hazelcast.jet.core.JobRestartWithSnapshotTest (61362 ms)</li><li>com.hazelcast.jet.pipeline.WindowAggregateTest.aggregate2_withAggrOp2[1: mode=client](com.hazelcast.jet.pipeline.WindowAggregateTest) (682 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperationsTest.when_concatenating_withDelimiter(com.hazelcast.jet.aggregate.AggregateOperationsTest) (26 ms)</li><li>com.hazelcast.jet.pipeline.WindowAggregateTest.tumblingWindow[0: mode=member](com.hazelcast.jet.pipeline.WindowAggregateTest) (687 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_rebalanceByKeyAndAggregate_then_distributedPartitionedEdgeAndTwoStageAggregation[1: mode=client](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (587 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.groupAggregate2_withAggrOp2[1: mode=client](com.hazelcast.jet.pipeline.BatchAggregateTest) (613 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperationTest.when_askForNonexistentTag_then_exception(com.hazelcast.jet.aggregate.AggregateOperationTest) (25 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.groupAggregate3_withAggrOp3[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest) (673 ms)</li><li>com.hazelcast.jet.pipeline.WindowAggregateTest.aggregate2_withSeparateAggrOps[0: mode=member](com.hazelcast.jet.pipeline.WindowAggregateTest) (675 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperationsTest.when_groupingBy_withSameKey(com.hazelcast.jet.aggregate.AggregateOperationsTest) (25 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.when_rollingAggregateWithTimestamps_then_timestampsPropagated[1: mode=client](com.hazelcast.jet.pipeline.StreamStageTest) (916 ms)</li><li>com.hazelcast.jet.pipeline.WindowGroupAggregateTest.aggregate3_withSeparateAggrOps[1: mode=client](com.hazelcast.jet.pipeline.WindowGroupAggregateTest) (700 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowPTest.when_noFramesReceived_then_onlyEmitWm[hasDeduct=true, singleStageProcessor=true](com.hazelcast.jet.impl.processor.SlidingWindowPTest) (26 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperation2Test.when_andThen_then_exportAndFinishChanged(com.hazelcast.jet.aggregate.AggregateOperation2Test) (26 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperationsTest.when_toMapCombinesDuplicates_then_exception(com.hazelcast.jet.aggregate.AggregateOperationsTest) (26 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_rebalanceAndAggregate_then_unicastDistributedEdgeAndTwoStageAggregation[0: mode=member](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (599 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.groupAggregateBuilder_withComplexAggrOp_withOutputFn[1: mode=client](com.hazelcast.jet.pipeline.BatchAggregateTest) (606 ms)</li><li>com.hazelcast.jet.pipeline.WindowGroupAggregateTest.aggregate3_withAggrOp3[1: mode=client](com.hazelcast.jet.pipeline.WindowGroupAggregateTest) (683 ms)</li><li>com.hazelcast.jet.impl.processor.SessionWindowPTest.when_orderedEventsWithThreeKeys(com.hazelcast.jet.impl.processor.SessionWindowPTest) (101 ms)</li><li>com.hazelcast.jet.pipeline.SourceBuilderTest.stream_distributed_socketSource_withTimestamps[0: mode=member](com.hazelcast.jet.pipeline.SourceBuilderTest) (784 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperationsTest.when_groupingBy_withDownstreamOperation(com.hazelcast.jet.aggregate.AggregateOperationsTest) (26 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_rebalanceAndGroupAggregateBuilder_then_singleStageAggregation[0: mode=member](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (599 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperations_accEqualityTest.testTwoAccumulatorsEqual[7](com.hazelcast.jet.aggregate.AggregateOperations_accEqualityTest) (27 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperationsTest.when_aggregateOpAsCollector(com.hazelcast.jet.aggregate.AggregateOperationsTest) (26 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowPTest.when_receiveDescendingTimestamps_then_emitAscending[hasDeduct=false, singleStageProcessor=true](com.hazelcast.jet.impl.processor.SlidingWindowPTest) (80 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperations_accEqualityTest.testTwoAccumulatorsEqual[6](com.hazelcast.jet.aggregate.AggregateOperations_accEqualityTest) (27 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_BatchTest.when_memberAddedAfterJobFinished_then_metricsNotAffected[1: mode=client](com.hazelcast.jet.core.metrics.JobMetrics_BatchTest) (1136 ms)</li><li>com.hazelcast.jet.pipeline.WindowAggregateTest.aggregateBuilder_withSeparateAggrOps[1: mode=client](com.hazelcast.jet.pipeline.WindowAggregateTest) (676 ms)</li><li>com.hazelcast.jet.pipeline.WindowGroupAggregateTest.aggregate3_withSeparateAggrOps[0: mode=member](com.hazelcast.jet.pipeline.WindowGroupAggregateTest) (686 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperation2Test.when_withIdentityFinish(com.hazelcast.jet.aggregate.AggregateOperation2Test) (26 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowPTest.simple_smokeTest[hasDeduct=false, singleStageProcessor=false](com.hazelcast.jet.impl.processor.SlidingWindowPTest) (26 ms)</li><li>com.hazelcast.jet.pipeline.WindowAggregateTest.aggregate3_withSeparateAggrOps[1: mode=client](com.hazelcast.jet.pipeline.WindowAggregateTest) (729 ms)</li><li>com.hazelcast.jet.pipeline.WindowAggregateTest.aggregate2_withSeparateAggrOps[1: mode=client](com.hazelcast.jet.pipeline.WindowAggregateTest) (696 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowPTest.when_receiveRandomTimestamps_then_emitAscending[hasDeduct=true, singleStageProcessor=true](com.hazelcast.jet.impl.processor.SlidingWindowPTest) (856 ms)</li><li>com.hazelcast.jet.pipeline.SourceBuilderTest.test_faultTolerance_snapshotWithUserDefinedObject[0: mode=member](com.hazelcast.jet.pipeline.SourceBuilderTest) (1407 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperationsTest.when_averagingDouble_tooManyItems_then_exception(com.hazelcast.jet.aggregate.AggregateOperationsTest) (26 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowP_changeWindowSizeTest.when_multipleFramesRestoredIntoSingleFrame_then_incorrectResultButNoLeakOrFailure(com.hazelcast.jet.impl.processor.SlidingWindowP_changeWindowSizeTest) (2 ms)</li><li>com.hazelcast.jet.pipeline.test.TestSourcesTest.test_longStream[0: mode=member](com.hazelcast.jet.pipeline.test.TestSourcesTest) (6823 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.rollingAggregate_keyed[1: mode=client](com.hazelcast.jet.pipeline.StreamStageTest) (911 ms)</li><li>com.hazelcast.jet.pipeline.test.TestSourcesTest.test_itemStream_withWindowing[1: mode=client](com.hazelcast.jet.pipeline.test.TestSourcesTest) (2091 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperationsTest.when_toMap(com.hazelcast.jet.aggregate.AggregateOperationsTest) (25 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowPTest.when_wmNeverReceived_then_emitEverythingInComplete[hasDeduct=true, singleStageProcessor=false](com.hazelcast.jet.impl.processor.SlidingWindowPTest) (25 ms)</li><li>com.hazelcast.jet.pipeline.WindowAggregateTest.slidingWindow[0: mode=member](com.hazelcast.jet.pipeline.WindowAggregateTest) (759 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperationsTest.when_allOfN(com.hazelcast.jet.aggregate.AggregateOperationsTest) (26 ms)</li><li>com.hazelcast.jet.pipeline.WindowGroupAggregateTest.distinct[0: mode=member](com.hazelcast.jet.pipeline.WindowGroupAggregateTest) (589 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.groupAggregateBuilder_withSeparateAggrOps[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest) (608 ms)</li><li>com.hazelcast.jet.pipeline.WindowGroupAggregateTest.slidingWindow_cascadingAggregations[1: mode=client](com.hazelcast.jet.pipeline.WindowGroupAggregateTest) (595 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowP_stage1Test.when_lateEvent_then_ignore(com.hazelcast.jet.impl.processor.SlidingWindowP_stage1Test) (25 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperationTest.when_tagsNonContiguous_then_exception(com.hazelcast.jet.aggregate.AggregateOperationTest) (26 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregateBuilder_with_complexAggrOp_withOutputFn[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest) (589 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperationsTest.when_mappingToNull_then_doNotAggregate(com.hazelcast.jet.aggregate.AggregateOperationsTest) (26 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_BatchTest.when_jobCompleted_then_metricsExist[1: mode=client](com.hazelcast.jet.core.metrics.JobMetrics_BatchTest) (592 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperation1Test.accumulate0_synonymFor_accumulate(com.hazelcast.jet.aggregate.AggregateOperation1Test) (25 ms)</li><li>com.hazelcast.jet.pipeline.WindowAggregateTest.aggregateBuilder_withComplexAggrOp[1: mode=client](com.hazelcast.jet.pipeline.WindowAggregateTest) (689 ms)</li><li>com.hazelcast.jet.pipeline.WindowAggregateTest.sessionWindow_withEarlyResults[0: mode=member](com.hazelcast.jet.pipeline.WindowAggregateTest) (987 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_aggregate3WithRebalancedStage_then_twoStageAggregation[0: mode=member](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (601 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperation3Test.when_askForNonexistentTag_then_exception(com.hazelcast.jet.aggregate.AggregateOperation3Test) (26 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperationsTest.when_averagingLong_sumTooLarge_then_exception(com.hazelcast.jet.aggregate.AggregateOperationsTest) (26 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceStreamStageTest.when_rebalanceAndWindowAggregate_then_unicastDistributedEdgeAndTwoStageAggregation[0: mode=member](com.hazelcast.jet.pipeline.RebalanceStreamStageTest) (569 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregateBuilder_withComplexAggrOp[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest) (606 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.test_adaptingPartitionFunction[1: mode=client](com.hazelcast.jet.pipeline.SinksTest) (5601 ms)</li><li>com.hazelcast.jet.pipeline.test.TestSourcesTest.test_itemStream_in_expected_range[0: mode=member](com.hazelcast.jet.pipeline.test.TestSourcesTest) (2459 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_aggregate2WithRebalancedStage_then_twoStageAggregation[0: mode=member](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (592 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperationsTest.when_toMapWithMerge_then_merged(com.hazelcast.jet.aggregate.AggregateOperationsTest) (25 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.groupAggregate2_withSeparateAggrOps[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest) (600 ms)</li><li>com.hazelcast.jet.pipeline.SourceBuilderTest.stream_socketSource_withTimestamps[0: mode=member](com.hazelcast.jet.pipeline.SourceBuilderTest) (901 ms)</li><li>com.hazelcast.jet.pipeline.WindowGroupAggregateTest.aggregate2_withAggrOp2[1: mode=client](com.hazelcast.jet.pipeline.WindowGroupAggregateTest) (730 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperationsTest.when_allOfWithoutCombine_then_noCombine(com.hazelcast.jet.aggregate.AggregateOperationsTest) (25 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowP_changeWindowSizeTest.test_extendSlidingWindowSize_leak(com.hazelcast.jet.impl.processor.SlidingWindowP_changeWindowSizeTest) (5 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperationsTest.when_averagingLong_noInput_then_NaN(com.hazelcast.jet.aggregate.AggregateOperationsTest) (26 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.when_aggregateZeroItems_then_producesOutput[1: mode=client](com.hazelcast.jet.pipeline.BatchAggregateTest) (583 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperationsTest.when_allOf3(com.hazelcast.jet.aggregate.AggregateOperationsTest) (26 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.rollingAggregate_global[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (591 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperationsTest.when_pickAny(com.hazelcast.jet.aggregate.AggregateOperationsTest) (25 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperations_accEqualityTest.testTwoAccumulatorsEqual[4](com.hazelcast.jet.aggregate.AggregateOperations_accEqualityTest) (27 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_BatchTest.when_twoDifferentJobsForTheSamePipeline_then_haveDifferentMetrics[1: mode=client](com.hazelcast.jet.core.metrics.JobMetrics_BatchTest) (621 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowPTest.when_lateEvent_then_ignored[hasDeduct=false, singleStageProcessor=false](com.hazelcast.jet.impl.processor.SlidingWindowPTest) (51 ms)</li><li>com.hazelcast.jet.impl.execution.WatermarkCoalescer_TerminalSnapshotTest (20063 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowP_FrameCombiningTest.when_multipleFrames_then_combine(com.hazelcast.jet.impl.processor.SlidingWindowP_FrameCombiningTest) (51 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.groupAggregate2_withSeparateAggrOps[1: mode=client](com.hazelcast.jet.pipeline.BatchAggregateTest) (626 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperationsTest.when_concatenating_withoutDelimiter(com.hazelcast.jet.aggregate.AggregateOperationsTest) (26 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregateBuilder_withComplexAggrOp[1: mode=client](com.hazelcast.jet.pipeline.BatchAggregateTest) (603 ms)</li><li>com.hazelcast.jet.pipeline.StreamSourceTest.test_defaultIdle[0: mode=member](com.hazelcast.jet.pipeline.StreamSourceTest) (5597 ms)</li><li>com.hazelcast.jet.core.Processors_slidingWindowingIntegrationTest.smokeTest[singleStageProcessor=true, isBatch=false](com.hazelcast.jet.core.Processors_slidingWindowingIntegrationTest) (1258 ms)</li><li>com.hazelcast.jet.pipeline.WindowAggregateTest.aggregate3_withAggrOp3[0: mode=member](com.hazelcast.jet.pipeline.WindowAggregateTest) (672 ms)</li><li>com.hazelcast.jet.pipeline.WindowAggregateTest.slidingWindow_withEarlyResults[1: mode=client](com.hazelcast.jet.pipeline.WindowAggregateTest) (982 ms)</li><li>com.hazelcast.jet.aggregate.AggregateOperationsTest.when_toSet(com.hazelcast.jet.aggregate.AggregateOperationsTest) (26 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.when_aggregateZeroItems_then_producesOutput[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest) (584 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceStreamStageTest.when_rebalanceAndMap_then_dagEdgeDistributed[0: mode=member](com.hazelcast.jet.pipeline.RebalanceStreamStageTest) (590 ms)</li><li>com.hazelcast.jet.pipeline.SourceBuilderTest.stream_socketSource_withTimestamps[1: mode=client](com.hazelcast.jet.pipeline.SourceBuilderTest) (895 ms)</li><li>com.hazelcast.jet.impl.processor.SlidingWindowPTest.when_receiveRandomTimestamps_then_emitAscending[hasDeduct=false, singleStageProcessor=false](com.hazelcast.jet.impl.processor.SlidingWindowPTest) (855 ms)</li>
+</ul>
+
+<br/>
+
+Report generated by <a href='http://pitest.org'>PIT</a> 1.5.2
+
+</body>
+</html>

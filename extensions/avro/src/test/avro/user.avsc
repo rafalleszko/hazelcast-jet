@@ -1,9 +1,0 @@
-{
-"namespace": "com.hazelcast.jet.avro.generated",
-  "type": "record",
-  "name": "SpecificUser",
-  "fields": [
-    {"name": "name", "type": "string"},
-    {"name": "favorite_number",  "type": ["int", "null"]}
-  ]
-}

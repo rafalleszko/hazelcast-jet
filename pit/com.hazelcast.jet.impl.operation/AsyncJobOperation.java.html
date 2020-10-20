@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+
+
+<h1>AsyncJobOperation.java</h1>
+
+<table class="src">
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@27f18fea_1'/>
+1
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@27f18fea_1'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>/*</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@27f18fea_2'/>
+2
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@27f18fea_2'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * Copyright (c) 2008-2020, Hazelcast, Inc. All Rights Reserved.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@27f18fea_3'/>
+3
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@27f18fea_3'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@27f18fea_4'/>
+4
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@27f18fea_4'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@27f18fea_5'/>
+5
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@27f18fea_5'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * you may not use this file except in compliance with the License.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@27f18fea_6'/>
+6
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@27f18fea_6'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * You may obtain a copy of the License at</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@27f18fea_7'/>
+7
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@27f18fea_7'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@27f18fea_8'/>
+8
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@27f18fea_8'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * http://www.apache.org/licenses/LICENSE-2.0</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@27f18fea_9'/>
+9
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@27f18fea_9'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@27f18fea_10'/>
+10
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@27f18fea_10'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * Unless required by applicable law or agreed to in writing, software</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@27f18fea_11'/>
+11
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@27f18fea_11'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * distributed under the License is distributed on an &#34;AS IS&#34; BASIS,</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@27f18fea_12'/>
+12
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@27f18fea_12'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@27f18fea_13'/>
+13
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@27f18fea_13'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * See the License for the specific language governing permissions and</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@27f18fea_14'/>
+14
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@27f18fea_14'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * limitations under the License.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@27f18fea_15'/>
+15
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@27f18fea_15'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@27f18fea_16'/>
+16
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@27f18fea_16'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@27f18fea_17'/>
+17
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@27f18fea_17'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>package com.hazelcast.jet.impl.operation;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@27f18fea_18'/>
+18
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@27f18fea_18'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@27f18fea_19'/>
+19
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@27f18fea_19'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import com.hazelcast.nio.ObjectDataInput;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@27f18fea_20'/>
+20
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@27f18fea_20'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import com.hazelcast.nio.ObjectDataOutput;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@27f18fea_21'/>
+21
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@27f18fea_21'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@27f18fea_22'/>
+22
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@27f18fea_22'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import java.io.IOException;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@27f18fea_23'/>
+23
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@27f18fea_23'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@27f18fea_24'/>
+24
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@27f18fea_24'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>public abstract class AsyncJobOperation extends AsyncOperation {</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@27f18fea_25'/>
+25
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@27f18fea_25'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@27f18fea_26'/>
+26
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@27f18fea_26'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    private long jobId;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@27f18fea_27'/>
+27
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@27f18fea_27'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@27f18fea_28'/>
+28
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@27f18fea_28'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    protected AsyncJobOperation() {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@27f18fea_29'/>
+29
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@27f18fea_29'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@27f18fea_30'/>
+30
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@27f18fea_30'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@27f18fea_31'/>
+31
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@27f18fea_31'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    protected AsyncJobOperation(long jobId) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@27f18fea_32'/>
+32
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@27f18fea_32'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        this.jobId = jobId;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@27f18fea_33'/>
+33
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@27f18fea_33'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@27f18fea_34'/>
+34
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@27f18fea_34'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@27f18fea_35'/>
+35
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@27f18fea_35'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    protected final long jobId() {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@27f18fea_36'/>
+36
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@27f18fea_36'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        return jobId;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@27f18fea_37'/>
+37
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@27f18fea_37'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@27f18fea_38'/>
+38
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@27f18fea_38'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@27f18fea_39'/>
+39
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@27f18fea_39'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@27f18fea_40'/>
+40
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@27f18fea_40'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    protected void writeInternal(ObjectDataOutput out) throws IOException {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@27f18fea_41'/>
+41
+</td>
+<td class='uncertain'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@27f18fea_41'>1</a>
+<span>
+1. writeInternal : All method instructions removed &rarr; TIMED_OUT<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='uncertain'>        super.writeInternal(out);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@27f18fea_42'/>
+42
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@27f18fea_42'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        out.writeLong(jobId);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@27f18fea_43'/>
+43
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@27f18fea_43'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@27f18fea_44'/>
+44
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@27f18fea_44'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@27f18fea_45'/>
+45
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@27f18fea_45'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@27f18fea_46'/>
+46
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@27f18fea_46'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    protected void readInternal(ObjectDataInput in) throws IOException {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@27f18fea_47'/>
+47
+</td>
+<td class='uncertain'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@27f18fea_47'>1</a>
+<span>
+1. readInternal : All method instructions removed &rarr; TIMED_OUT<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='uncertain'>        super.readInternal(in);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@27f18fea_48'/>
+48
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@27f18fea_48'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        jobId = in.readLong();</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@27f18fea_49'/>
+49
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@27f18fea_49'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@27f18fea_50'/>
+50
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@27f18fea_50'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>}</span></pre></td></tr>
+
+
+
+<tr><td></td><td></td><td><h2>Mutations</h2></td></tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@27f18fea_41'>41</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@27f18fea_41'/> 
+
+<p class='TIMED_OUT'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>writeInternal<br/><b>Killed by : </b>none</span></span> All method instructions removed &rarr; TIMED_OUT</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@27f18fea_47'>47</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@27f18fea_47'/> 
+
+<p class='TIMED_OUT'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>readInternal<br/><b>Killed by : </b>none</span></span> All method instructions removed &rarr; TIMED_OUT</p> 
+</td>
+</tr>
+
+</table>
+
+
+<h2>Active mutators</h2>
+<ul>
+<li class='mutator'>""</li>
+<li class='mutator'>"A"</li>
+<li class='mutator'>'A'</li>
+<li class='mutator'>'\40'</li>
+<li class='mutator'>(byte)0</li>
+<li class='mutator'>(byte)1</li>
+<li class='mutator'>(short)0</li>
+<li class='mutator'>(short)1</li>
+<li class='mutator'>0</li>
+<li class='mutator'>0.0</li>
+<li class='mutator'>0.0f</li>
+<li class='mutator'>0L</li>
+<li class='mutator'>1</li>
+<li class='mutator'>1.0</li>
+<li class='mutator'>1.0f</li>
+<li class='mutator'>1L</li>
+<li class='mutator'>empty</li>
+<li class='mutator'>false</li>
+<li class='mutator'>null</li>
+<li class='mutator'>true</li>
+<li class='mutator'>void</li>
+
+</ul>
+
+<h2>Tests examined</h2>
+<ul>
+<li>com.hazelcast.jet.pipeline.StreamStageTest.fusing_testWithBranch[0: mode=member](com.hazelcast.jet.pipeline.StreamStageTest) (592 ms)</li><li>com.hazelcast.jet.pipeline.test.AssertionsTest.test_assertContains_not_terminal_should_fail[1: mode=client](com.hazelcast.jet.pipeline.test.AssertionsTest) (596 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_hashJoinRebalanceEnrichingStage_then_noEffect[1: mode=client](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (638 ms)</li><li>com.hazelcast.jet.core.TopologyChangeTest.when_coordinatorLeavesDuringExecution_then_jobCompletes[liteMemberFlags(1)](com.hazelcast.jet.core.TopologyChangeTest) (5712 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.mapUsingService_keyed[0: mode=member](com.hazelcast.jet.pipeline.StreamStageTest) (633 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.map_withJsonKeyValue[1: mode=client](com.hazelcast.jet.pipeline.SinksTest) (5734 ms)</li><li>com.hazelcast.jet.pipeline.test.AssertionsTest.test_assertCollected_not_terminal[1: mode=client](com.hazelcast.jet.pipeline.test.AssertionsTest) (644 ms)</li><li>com.hazelcast.jet.pipeline.Sources_withEventJournalTest.mapJournal_withDefaultFilter[0: mode=member](com.hazelcast.jet.pipeline.Sources_withEventJournalTest) (6040 ms)</li><li>com.hazelcast.jet.core.TopologyChangeTest.when_jobParticipantReceivesStaleInitOperation_then_jobRestarts[liteMemberFlags(2)](com.hazelcast.jet.core.TopologyChangeTest) (3859 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.remoteMapWithEntryProcessor[1: mode=client](com.hazelcast.jet.pipeline.SinksTest) (6463 ms)</li><li>com.hazelcast.jet.impl.connector.HazelcastRemoteConnectorTest (7807 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapStateful_keyed[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (657 ms)</li><li>com.hazelcast.jet.pipeline.WindowGroupAggregateTest.tumblingWindow[1: mode=client](com.hazelcast.jet.pipeline.WindowGroupAggregateTest) (685 ms)</li><li>com.hazelcast.jet.pipeline.SourceBuilderTest.stream_socketSource_withTimestamps_andLateness[0: mode=member](com.hazelcast.jet.pipeline.SourceBuilderTest) (995 ms)</li><li>com.hazelcast.jet.pipeline.SortBatchStageTest.sort_withComparator[1: mode=client](com.hazelcast.jet.pipeline.SortBatchStageTest) (649 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.mapWithUpdating_when_functionReturnsNull_then_keyIsRemoved[1: mode=client](com.hazelcast.jet.pipeline.SinksTest) (6066 ms)</li><li>com.hazelcast.jet.pipeline.SourcesTest.remoteList[1: mode=client](com.hazelcast.jet.pipeline.SourcesTest) (6068 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.mapWithEntryProcessor_byRef[1: mode=client](com.hazelcast.jet.pipeline.SinksTest) (6277 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapUsingServiceAsync_keyed[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (1315 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_rebalanceAndGroupAggregate2_then_singleStageAggregation[1: mode=client](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (595 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.mapStateful_withEvictFnReturningNull[1: mode=client](com.hazelcast.jet.pipeline.StreamStageTest) (819 ms)</li><li>com.hazelcast.jet.pipeline.WindowAggregateTest.sessionWindow[1: mode=client](com.hazelcast.jet.pipeline.WindowAggregateTest) (810 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.hashJoinBuilder[1: mode=client](com.hazelcast.jet.pipeline.StreamStageTest) (669 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.mapWithMerging_when_targetHasPartitionStrategy[1: mode=client](com.hazelcast.jet.pipeline.SinksTest) (5957 ms)</li><li>com.hazelcast.jet.pipeline.SourcesTest.list_byName[0: mode=member](com.hazelcast.jet.pipeline.SourcesTest) (5840 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.mapUsingServiceAsyncBatched_keyed_keysExposed[1: mode=client](com.hazelcast.jet.pipeline.StreamStageTest) (972 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.mapWithMerging_byName[1: mode=client](com.hazelcast.jet.pipeline.SinksTest) (6147 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregate3_withAggrOp3[1: mode=client](com.hazelcast.jet.pipeline.BatchAggregateTest) (589 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.map[1: mode=client](com.hazelcast.jet.pipeline.StreamStageTest) (606 ms)</li><li>com.hazelcast.jet.pipeline.WindowGroupAggregateTest.sessionWindow_withEarlyResults[1: mode=client](com.hazelcast.jet.pipeline.WindowGroupAggregateTest) (1005 ms)</li><li>com.hazelcast.jet.pipeline.SourceBuilderTest.test_faultTolerance_restartTwice[0: mode=member](com.hazelcast.jet.pipeline.SourceBuilderTest) (1599 ms)</li><li>com.hazelcast.jet.pipeline.Sources_withEventJournalTest.mapJournalByName_withProjectionToNull_then_nullsSkipped[1: mode=client](com.hazelcast.jet.pipeline.Sources_withEventJournalTest) (6183 ms)</li><li>com.hazelcast.jet.core.metrics.JobLifecycleMetricsTest (20363 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_MiscTest.when_jobMetricsDisabled_then_emptyMetrics[0: mode=member](com.hazelcast.jet.core.metrics.JobMetrics_MiscTest) (1178 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.filterStateful_global[0: mode=member](com.hazelcast.jet.pipeline.StreamStageTest) (603 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.when_rollingAggregateWithTimestamps_then_timestampsPropagated[0: mode=member](com.hazelcast.jet.pipeline.StreamStageTest) (891 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.groupAggregateBuilder_withComplexAggrOp_withOutputFn[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest) (598 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_rebalanceByKeyAndMap_then_dagEdgePartitionedDistributed[1: mode=client](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (585 ms)</li><li>com.hazelcast.jet.pipeline.Sources_withEventJournalTest.mapJournalByName_withProjectionToNull_then_nullsSkipped[0: mode=member](com.hazelcast.jet.pipeline.Sources_withEventJournalTest) (6096 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.rollingAggregate_keyed[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (613 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregate2_withAggrOp2[1: mode=client](com.hazelcast.jet.pipeline.BatchAggregateTest) (588 ms)</li><li>com.hazelcast.jet.core.ObservableResultsTest.batchJobFails[0: mode=member](com.hazelcast.jet.core.ObservableResultsTest) (775 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.mapUsingServiceAsync_keyed[0: mode=member](com.hazelcast.jet.pipeline.StreamStageTest) (1325 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.remoteMapWithUpdating_when_functionReturnsNull_then_keyIsRemoved[1: mode=client](com.hazelcast.jet.pipeline.SinksTest) (6382 ms)</li><li>com.hazelcast.jet.core.ObservableResultsTest.iterable[0: mode=member](com.hazelcast.jet.core.ObservableResultsTest) (555 ms)</li><li>com.hazelcast.jet.core.ObservableResultsTest.createAndDestroyObservableRepeatedly[0: mode=member](com.hazelcast.jet.core.ObservableResultsTest) (4543 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.filterUsingService[0: mode=member](com.hazelcast.jet.pipeline.StreamStageTest) (606 ms)</li><li>com.hazelcast.jet.pipeline.SourceBuilderTest.test_faultTolerance[0: mode=member](com.hazelcast.jet.pipeline.SourceBuilderTest) (1198 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_MiscTest.when_jobSuspended_then_lastExecutionMetricsReturned[1: mode=client](com.hazelcast.jet.core.metrics.JobMetrics_MiscTest) (2194 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.mapWithUpdating_withKeyFn_byRef[1: mode=client](com.hazelcast.jet.pipeline.SinksTest) (6028 ms)</li><li>com.hazelcast.jet.core.OperationTimeoutTest (16620 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.filter[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (586 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_rebalanceAndGroupAggregate_then_singleStageAggregation[0: mode=member](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (582 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregate2_withAggrOp2_with_finishFn[1: mode=client](com.hazelcast.jet.pipeline.BatchAggregateTest) (587 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.peek_when_addedTimestamp_then_unwrapsJetEvent[0: mode=member](com.hazelcast.jet.pipeline.StreamStageTest) (602 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.batchAddTimestampPreserveOrderTest[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (579 ms)</li><li>com.hazelcast.jet.pipeline.test.TestSourcesTest.test_itemStream_in_expected_range[1: mode=client](com.hazelcast.jet.pipeline.test.TestSourcesTest) (2005 ms)</li><li>com.hazelcast.jet.core.ObservableResultsTest.streamJobRestart[0: mode=member](com.hazelcast.jet.core.ObservableResultsTest) (979 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_hashJoinBuilderRebalanceMainStage_then_distributedEdge[0: mode=member](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (637 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.filterStateful_keyed[1: mode=client](com.hazelcast.jet.pipeline.StreamStageTest) (880 ms)</li><li>com.hazelcast.jet.pipeline.SourceBuilderTest.batch_fileSource_distributed[1: mode=client](com.hazelcast.jet.pipeline.SourceBuilderTest) (593 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.filterUsingService[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (588 ms)</li><li>com.hazelcast.jet.pipeline.Sources_withEventJournalTest.cacheJournalByName_withPredicateAndProjectionFn[0: mode=member](com.hazelcast.jet.pipeline.Sources_withEventJournalTest) (6553 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.flatMapUsingService_keyed[1: mode=client](com.hazelcast.jet.pipeline.StreamStageTest) (602 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.hashJoin_when_outputFnReturnsNull_then_filteredOut[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (661 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.groupAggregateBuilder_withComplexAggrOp[1: mode=client](com.hazelcast.jet.pipeline.BatchAggregateTest) (617 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.filterStateful_keyed[0: mode=member](com.hazelcast.jet.pipeline.StreamStageTest) (888 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_StreamTest.when_suspendAndResume_then_metricsReset[0: mode=member](com.hazelcast.jet.core.metrics.JobMetrics_StreamTest) (8448 ms)</li><li>com.hazelcast.jet.core.ObservableResultsTest.multipleJobExecutions[1: mode=client](com.hazelcast.jet.core.ObservableResultsTest) (789 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.apply[1: mode=client](com.hazelcast.jet.pipeline.StreamStageTest) (592 ms)</li><li>com.hazelcast.jet.core.TopologyChangeTest.when_coordinatorLeavesDuringExecution_then_clientStillGetsJobResult[liteMemberFlags(0)](com.hazelcast.jet.core.TopologyChangeTest) (3170 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregateBuilder_withSeparateAggrOps[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest) (603 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapUsingService[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (592 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_rebalanceAndMap_then_dagEdgeDistributed[0: mode=member](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (627 ms)</li><li>com.hazelcast.jet.pipeline.test.TestSourcesTest.test_longStream[1: mode=client](com.hazelcast.jet.pipeline.test.TestSourcesTest) (1984 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapStateful_global_usedAsFilter[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (590 ms)</li><li>com.hazelcast.jet.core.TopologyChangeTest.when_coordinatorLeaves_AutoScalingOff_SnapshottingOff_then_jobFails[liteMemberFlags(1)](com.hazelcast.jet.core.TopologyChangeTest) (1287 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.mapWithUpdating_when_entryIsLocked_then_entryIsUpdatedRegardlessTheLock[1: mode=client](com.hazelcast.jet.pipeline.SinksTest) (5852 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_BatchTest.when_twoDifferentPipelines_then_haveDifferentMetrics[0: mode=member](com.hazelcast.jet.core.metrics.JobMetrics_BatchTest) (598 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapUsingReplicatedMap[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (761 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_mergeWithRebalanced_thenOnlyRebalancedEdgeDistributed[0: mode=member](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (628 ms)</li><li>com.hazelcast.jet.pipeline.WindowAggregateTest.sessionWindow[0: mode=member](com.hazelcast.jet.pipeline.WindowAggregateTest) (809 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.filterUsingService[1: mode=client](com.hazelcast.jet.pipeline.StreamStageTest) (595 ms)</li><li>com.hazelcast.jet.core.TopologyChangeTest.when_nonCoordinatorLeavesDuringExecution_then_jobRestarts[liteMemberFlags(2)](com.hazelcast.jet.core.TopologyChangeTest) (3083 ms)</li><li>com.hazelcast.jet.pipeline.SourcesTest.map_byName[0: mode=member](com.hazelcast.jet.pipeline.SourcesTest) (5934 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregate3_withAggrOp3_withOutputFn[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest) (597 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.hashJoinBuilder[0: mode=member](com.hazelcast.jet.pipeline.StreamStageTest) (682 ms)</li><li>com.hazelcast.jet.pipeline.SourcesTest.map_byRef[1: mode=client](com.hazelcast.jet.pipeline.SourcesTest) (6248 ms)</li><li>com.hazelcast.jet.pipeline.SortBatchStageTest.sort_lessItemsThanProcessors[0: mode=member](com.hazelcast.jet.pipeline.SortBatchStageTest) (583 ms)</li><li>com.hazelcast.jet.pipeline.Sources_withEventJournalTest.mapJournal_withDefaultFilter[1: mode=client](com.hazelcast.jet.pipeline.Sources_withEventJournalTest) (6077 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.mapWithMerging_when_sameKey_then_valuesMerged[1: mode=client](com.hazelcast.jet.pipeline.SinksTest) (5938 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.mapUsingServiceAsyncBatched_withFiltering[1: mode=client](com.hazelcast.jet.pipeline.StreamStageTest) (1314 ms)</li><li>com.hazelcast.jet.impl.deployment.ClientDeploymentTest (1537 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.when_hashJoinBuilderAddInner_then_filterOutNulls[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (607 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.mapWithMerging_when_functionReturnsNull_then_keyIsRemoved[1: mode=client](com.hazelcast.jet.pipeline.SinksTest) (6244 ms)</li><li>com.hazelcast.jet.core.TopologyChangeTest.when_coordinatorLeaves_AutoScalingOff_SnapshottingOn_then_jobSuspends[liteMemberFlags(0)](com.hazelcast.jet.core.TopologyChangeTest) (1296 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.sort[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (575 ms)</li><li>com.hazelcast.jet.pipeline.test.AssertionsTest.test_assertOrdered_should_fail[1: mode=client](com.hazelcast.jet.pipeline.test.AssertionsTest) (597 ms)</li><li>com.hazelcast.jet.core.TopologyChangeTest.when_addNodeDuringExecution_then_completeSuccessfully[liteMemberFlags(2)](com.hazelcast.jet.core.TopologyChangeTest) (1647 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.mapStateful_withEvictFnReturningNull[0: mode=member](com.hazelcast.jet.pipeline.StreamStageTest) (792 ms)</li><li>com.hazelcast.jet.pipeline.SourceBuilderTest.test_nonFaultTolerantSource_processingGuaranteeNone[0: mode=member](com.hazelcast.jet.pipeline.SourceBuilderTest) (1186 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapUsingServiceAsyncBatched_withFiltering[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (1273 ms)</li><li>com.hazelcast.jet.pipeline.SourcesTest.mapWithFilterAndProjectionFn_byRef[1: mode=client](com.hazelcast.jet.pipeline.SourcesTest) (6130 ms)</li><li>com.hazelcast.jet.pipeline.test.AssertionsTest.test_assertAnyOrder[0: mode=member](com.hazelcast.jet.pipeline.test.AssertionsTest) (551 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.mapUsingServiceAsyncBatched_keyed_keysExposed[0: mode=member](com.hazelcast.jet.pipeline.StreamStageTest) (962 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_BatchTest.when_twoDifferentPipelines_then_haveDifferentMetrics[1: mode=client](com.hazelcast.jet.core.metrics.JobMetrics_BatchTest) (603 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_MiscTest.when_jobRunning_then_nonEmptyMetrics[0: mode=member](com.hazelcast.jet.core.metrics.JobMetrics_MiscTest) (1177 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_MiscTest.when_metricsForJobDisabled_then_emptyMetrics[0: mode=member](com.hazelcast.jet.core.metrics.JobMetrics_MiscTest) (2580 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.flatMapUsingService_keyed[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (599 ms)</li><li>com.hazelcast.jet.core.ObservableResultsTest.removedObserverDoesNotGetFurtherEvents[1: mode=client](com.hazelcast.jet.core.ObservableResultsTest) (2780 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.flatMapUsingService_keyed[0: mode=member](com.hazelcast.jet.pipeline.StreamStageTest) (598 ms)</li><li>com.hazelcast.jet.core.TopologyChangeTest.when_jobParticipantHasStaleMemberList_then_jobInitRetries[liteMemberFlags(1)](com.hazelcast.jet.core.TopologyChangeTest) (16560 ms)</li><li>com.hazelcast.jet.pipeline.WindowGroupAggregateTest.sessionWindow[1: mode=client](com.hazelcast.jet.pipeline.WindowGroupAggregateTest) (819 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.remoteReliableTopic[0: mode=member](com.hazelcast.jet.pipeline.SinksTest) (6181 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.fusing_mapToNull_trailing[0: mode=member](com.hazelcast.jet.pipeline.StreamStageTest) (579 ms)</li><li>com.hazelcast.jet.pipeline.test.AssertionsTest.test_assertCollected[0: mode=member](com.hazelcast.jet.pipeline.test.AssertionsTest) (574 ms)</li><li>com.hazelcast.jet.pipeline.SourcesTest.remoteCacheWithUnknownValueClass[0: mode=member](com.hazelcast.jet.pipeline.SourcesTest) (5887 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.filterUsingService_keyed[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (585 ms)</li><li>com.hazelcast.jet.pipeline.test.TestSourcesTest.test_itemStream_withWindowing[0: mode=member](com.hazelcast.jet.pipeline.test.TestSourcesTest) (1989 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_MiscTest.when_jobRestarted_then_metricsRepopulate[0: mode=member](com.hazelcast.jet.core.metrics.JobMetrics_MiscTest) (1198 ms)</li><li>com.hazelcast.jet.pipeline.WindowGroupAggregateTest.aggregate2_withAggrOp2[0: mode=member](com.hazelcast.jet.pipeline.WindowGroupAggregateTest) (697 ms)</li><li>com.hazelcast.jet.core.SnapshotFailureTest (5564 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.when_maxOfZeroItems_then_producesNoOutput[1: mode=client](com.hazelcast.jet.pipeline.BatchAggregateTest) (597 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.fusing_flatMapComplex[0: mode=member](com.hazelcast.jet.pipeline.StreamStageTest) (599 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_mergeRebalancedWithNonRebalanced_thenOnlyRebalancedEdgeDistributed[1: mode=client](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (653 ms)</li><li>com.hazelcast.jet.core.TopologyChangeTest.when_coordinatorLeaves_AutoScalingOff_SnapshottingOff_then_jobFails[liteMemberFlags(0)](com.hazelcast.jet.core.TopologyChangeTest) (1288 ms)</li><li>com.hazelcast.jet.pipeline.SortBatchStageTest.sort_exceptionDuringComparing[0: mode=member](com.hazelcast.jet.pipeline.SortBatchStageTest) (585 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.sort[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (626 ms)</li><li>com.hazelcast.jet.core.ObservableResultsTest.observableRegisteredAfterJobFailedGetError[0: mode=member](com.hazelcast.jet.core.ObservableResultsTest) (786 ms)</li><li>com.hazelcast.jet.pipeline.WindowGroupAggregateTest.sessionWindow[0: mode=member](com.hazelcast.jet.pipeline.WindowGroupAggregateTest) (820 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregate[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest) (593 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.mapWithMerging_when_entryIsLocked_then_entryIsUpdatedRegardlessTheLock[1: mode=client](com.hazelcast.jet.pipeline.SinksTest) (5589 ms)</li><li>com.hazelcast.jet.pipeline.SourceBuilderTest.stream_socketSource[0: mode=member](com.hazelcast.jet.pipeline.SourceBuilderTest) (620 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.fusing_filter[0: mode=member](com.hazelcast.jet.pipeline.StreamStageTest) (591 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.filterStateful_global[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (591 ms)</li><li>com.hazelcast.jet.core.SuspendExecutionOnFailureTest.when_jobSuspendedDueToFailure_then_suspensionCauseDescribeProblem[0: mode=member](com.hazelcast.jet.core.SuspendExecutionOnFailureTest) (766 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.mapWithUpdating_byRef[1: mode=client](com.hazelcast.jet.pipeline.SinksTest) (6169 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.remoteCache[0: mode=member](com.hazelcast.jet.pipeline.SinksTest) (6242 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.mapWithUpdating_byRef[0: mode=member](com.hazelcast.jet.pipeline.SinksTest) (6047 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregate2_withSeparateAggrOps[1: mode=client](com.hazelcast.jet.pipeline.BatchAggregateTest) (599 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapUsingService_keyed[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (585 ms)</li><li>com.hazelcast.jet.pipeline.WindowGroupAggregateTest.tumblingWindow[0: mode=member](com.hazelcast.jet.pipeline.WindowGroupAggregateTest) (677 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.mapWithMerging_byRef[1: mode=client](com.hazelcast.jet.pipeline.SinksTest) (6106 ms)</li><li>com.hazelcast.jet.core.ObservableResultsTest.configureCapacity[1: mode=client](com.hazelcast.jet.core.ObservableResultsTest) (809 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapUsingServiceAsyncBatched_keyed_withFiltering[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (663 ms)</li><li>com.hazelcast.jet.core.TopologyChangeTest.when_addNodeDuringExecution_then_completeSuccessfully[liteMemberFlags(1)](com.hazelcast.jet.core.TopologyChangeTest) (1621 ms)</li><li>com.hazelcast.jet.core.SuspendExecutionOnFailureTest.when_jobCompleted_then_suspensionCauseThrows[0: mode=member](com.hazelcast.jet.core.SuspendExecutionOnFailureTest) (578 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_aggregate2WithRebalancedStage_then_twoStageAggregation[1: mode=client](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (568 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapUsingIMap[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (744 ms)</li><li>com.hazelcast.jet.pipeline.test.AssertionsTest.test_assertContains_not_terminal_should_fail[0: mode=member](com.hazelcast.jet.pipeline.test.AssertionsTest) (585 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.mapUsingServiceAsyncBatched_keyed_keysHidden[0: mode=member](com.hazelcast.jet.pipeline.StreamStageTest) (974 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.flatMapStateful_keyed[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (664 ms)</li><li>com.hazelcast.jet.impl.connector.ReadJdbcPTest (888 ms)</li><li>com.hazelcast.jet.pipeline.test.AssertionsTest.test_assertCollected_should_fail[0: mode=member](com.hazelcast.jet.pipeline.test.AssertionsTest) (593 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_MiscTest.when_jobSuspended_then_lastExecutionMetricsReturned[0: mode=member](com.hazelcast.jet.core.metrics.JobMetrics_MiscTest) (2226 ms)</li><li>com.hazelcast.jet.core.TopologyChangeTest.when_jobParticipantHasStaleMemberList_then_jobInitRetries[liteMemberFlags(2)](com.hazelcast.jet.core.TopologyChangeTest) (7631 ms)</li><li>com.hazelcast.jet.core.ObservableResultsTest.observableRegisteredAfterJobFinishedGetAllEventsStillInRingbuffer[1: mode=client](com.hazelcast.jet.core.ObservableResultsTest) (772 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_rebalanceByKeyAndAggregate_then_distributedPartitionedEdgeAndTwoStageAggregation[0: mode=member](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (574 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.reliableTopic_byRef[1: mode=client](com.hazelcast.jet.pipeline.SinksTest) (6008 ms)</li><li>com.hazelcast.jet.core.ObservableResultsTest.streamJob[1: mode=client](com.hazelcast.jet.core.ObservableResultsTest) (976 ms)</li><li>com.hazelcast.jet.pipeline.test.AssertionsTest.test_assertContains_should_fail[0: mode=member](com.hazelcast.jet.pipeline.test.AssertionsTest) (601 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.mapWithEntryProcessor_testBackpressure[0: mode=member](com.hazelcast.jet.pipeline.SinksTest) (19263 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.fusing_filter[1: mode=client](com.hazelcast.jet.pipeline.StreamStageTest) (600 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.mapUsingServiceAsyncBatched_keyed_keysHidden[1: mode=client](com.hazelcast.jet.pipeline.StreamStageTest) (964 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.mapWithMerging_when_sameKey_then_valuesMerged[0: mode=member](com.hazelcast.jet.pipeline.SinksTest) (5811 ms)</li><li>com.hazelcast.jet.pipeline.SortBatchStageTest.sort_withRepeatingItems[1: mode=client](com.hazelcast.jet.pipeline.SortBatchStageTest) (663 ms)</li><li>com.hazelcast.jet.core.TopologyChangeTest.when_nonCoordinatorLeavesDuringExecution_then_clientStillGetsJobResult[liteMemberFlags(1)](com.hazelcast.jet.core.TopologyChangeTest) (3110 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_MiscTest.test_duplicateMetricsFromMembers[1: mode=client](com.hazelcast.jet.core.metrics.JobMetrics_MiscTest) (576 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.merge[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (596 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapUsingReplicatedMap[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (735 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapUsingServiceAsyncBatched[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (1282 ms)</li><li>com.hazelcast.jet.pipeline.test.AssertionsTest.test_assertCollected_not_terminal[0: mode=member](com.hazelcast.jet.pipeline.test.AssertionsTest) (584 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_rebalanceAndGroupAggregateBuilder_then_singleStageAggregation[1: mode=client](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (587 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_BatchTest.when_memberRemovedAfterJobFinished_then_metricsNotAffected[1: mode=client](com.hazelcast.jet.core.metrics.JobMetrics_BatchTest) (1286 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.filterStateful_global[1: mode=client](com.hazelcast.jet.pipeline.StreamStageTest) (591 ms)</li><li>com.hazelcast.jet.core.SplitBrainTest (134028 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_rebalanceAndGroupAggregateBuilderWithComplexAggrOp_then_singleStageAggregation[0: mode=member](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (608 ms)</li><li>com.hazelcast.jet.core.TopologyChangeTest.when_nonCoordinatorLeaves_AutoScalingOff_SnapshottingOn_then_jobSuspends[liteMemberFlags(2)](com.hazelcast.jet.core.TopologyChangeTest) (1075 ms)</li><li>com.hazelcast.jet.core.SuspendExecutionOnFailureTest.when_jobCompleted_then_suspensionCauseThrows[1: mode=client](com.hazelcast.jet.core.SuspendExecutionOnFailureTest) (564 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.mapStateful_global[0: mode=member](com.hazelcast.jet.pipeline.StreamStageTest) (635 ms)</li><li>com.hazelcast.jet.core.JobRestartStressTest (24270 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.flatMapUsingService[0: mode=member](com.hazelcast.jet.pipeline.StreamStageTest) (591 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.peekWithToStringFunctionIsTransparent[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (598 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_MiscTest.when_jobNotYetRunning_then_emptyMetrics[0: mode=member](com.hazelcast.jet.core.metrics.JobMetrics_MiscTest) (3170 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.map[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (589 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.flatMapStateful_global[1: mode=client](com.hazelcast.jet.pipeline.StreamStageTest) (638 ms)</li><li>com.hazelcast.jet.pipeline.WindowGroupAggregateTest.aggregateBuilder_withSeparateAggrOps[1: mode=client](com.hazelcast.jet.pipeline.WindowGroupAggregateTest) (704 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.rollingAggregate_keyed[0: mode=member](com.hazelcast.jet.pipeline.StreamStageTest) (939 ms)</li><li>com.hazelcast.jet.core.ObservableResultsTest.observableRegisteredAfterJobFinishedGetAllEventsStillInRingbuffer[0: mode=member](com.hazelcast.jet.core.ObservableResultsTest) (768 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.cache_byName[0: mode=member](com.hazelcast.jet.pipeline.SinksTest) (6251 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregate3_withSeparateAggrOps[1: mode=client](com.hazelcast.jet.pipeline.BatchAggregateTest) (590 ms)</li><li>com.hazelcast.jet.pipeline.test.AssertionsTest.test_assertCollected_not_terminal_should_fail[0: mode=member](com.hazelcast.jet.pipeline.test.AssertionsTest) (617 ms)</li><li>com.hazelcast.jet.pipeline.Sources_withEventJournalTest.remoteMapJournal_withUnknownValueClass[0: mode=member](com.hazelcast.jet.pipeline.Sources_withEventJournalTest) (6058 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.mapWithMerging_when_targetHasPartitionStrategy[0: mode=member](com.hazelcast.jet.pipeline.SinksTest) (5776 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregateBuilder_with_complexAggrOp_withOutputFn[1: mode=client](com.hazelcast.jet.pipeline.BatchAggregateTest) (589 ms)</li><li>com.hazelcast.jet.core.TopologyChangeTest.when_addNodeDuringExecution_then_completeSuccessfully[liteMemberFlags(0)](com.hazelcast.jet.core.TopologyChangeTest) (1601 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.when_innerHashJoin_then_filterOutNulls[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (601 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.mapUsingServiceAsyncBatched_keyed_withFiltering[0: mode=member](com.hazelcast.jet.pipeline.StreamStageTest) (685 ms)</li><li>com.hazelcast.jet.pipeline.WindowGroupAggregateTest.slidingWindow[0: mode=member](com.hazelcast.jet.pipeline.WindowGroupAggregateTest) (747 ms)</li><li>com.hazelcast.jet.pipeline.WindowGroupAggregateTest.tumblingWindow_withEarlyResults[1: mode=client](com.hazelcast.jet.pipeline.WindowGroupAggregateTest) (1003 ms)</li><li>com.hazelcast.jet.pipeline.test.AssertionsTest.test_assertCollectedEventually_should_fail[0: mode=member](com.hazelcast.jet.pipeline.test.AssertionsTest) (5590 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_StreamTest.when_jobRunning_then_metricsEventuallyExist[0: mode=member](com.hazelcast.jet.core.metrics.JobMetrics_StreamTest) (2200 ms)</li><li>com.hazelcast.jet.core.TerminalSnapshotSynchronizationTest (6919 ms)</li><li>com.hazelcast.jet.core.ObservableResultsTest.fastResultsDoNotGetLost_moreThanBatchSize[0: mode=member](com.hazelcast.jet.core.ObservableResultsTest) (609 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapUsingServiceAsync[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (1928 ms)</li><li>com.hazelcast.jet.pipeline.SourcesTest.mapWithFilterAndProjection_byRef[1: mode=client](com.hazelcast.jet.pipeline.SourcesTest) (6026 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapStateful_keyed_returningNull[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (653 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.hashJoinBuilder[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (706 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.reliableTopic_byName[0: mode=member](com.hazelcast.jet.pipeline.SinksTest) (5914 ms)</li><li>com.hazelcast.jet.pipeline.WindowAggregateTest.tumblingWindow[1: mode=client](com.hazelcast.jet.pipeline.WindowAggregateTest) (669 ms)</li><li>com.hazelcast.jet.core.ObservableResultsTest.multipleObservables[1: mode=client](com.hazelcast.jet.core.ObservableResultsTest) (783 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.customTransform[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (594 ms)</li><li>com.hazelcast.jet.core.TopologyChangeTest.when_nonCoordinatorLeavesDuringExecution_then_clientStillGetsJobResult[liteMemberFlags(0)](com.hazelcast.jet.core.TopologyChangeTest) (3125 ms)</li><li>com.hazelcast.jet.core.TopologyChangeTest.when_coordinatorLeaves_AutoScalingOff_SnapshottingOff_then_jobFails[liteMemberFlags(2)](com.hazelcast.jet.core.TopologyChangeTest) (1326 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregate2_withSeparateAggrOps[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest) (585 ms)</li><li>com.hazelcast.jet.pipeline.WindowGroupAggregateTest.slidingWindow[1: mode=client](com.hazelcast.jet.pipeline.WindowGroupAggregateTest) (759 ms)</li><li>com.hazelcast.jet.pipeline.test.AssertionsTest.test_assertAnyOrder[1: mode=client](com.hazelcast.jet.pipeline.test.AssertionsTest) (556 ms)</li><li>com.hazelcast.jet.pipeline.Sources_withEventJournalTest.remoteMapJournal_withPredicateAndProjectionFn[1: mode=client](com.hazelcast.jet.pipeline.Sources_withEventJournalTest) (6640 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_rebalanceAndGroupAggregate3_then_singleStageAggregation[1: mode=client](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (597 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.mapWithMerging_byRef[0: mode=member](com.hazelcast.jet.pipeline.SinksTest) (6157 ms)</li><li>com.hazelcast.jet.core.ManualRestartTest (22300 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.mapUsingService[1: mode=client](com.hazelcast.jet.pipeline.StreamStageTest) (586 ms)</li><li>com.hazelcast.jet.core.TopologyChangeTest.when_coordinatorLeavesDuringExecution_then_clientStillGetsJobResult[liteMemberFlags(1)](com.hazelcast.jet.core.TopologyChangeTest) (3182 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.customTransform[0: mode=member](com.hazelcast.jet.pipeline.StreamStageTest) (598 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.groupAggregate[1: mode=client](com.hazelcast.jet.pipeline.BatchAggregateTest) (580 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.groupAggregateBuilder_withSeparateAggrOps[1: mode=client](com.hazelcast.jet.pipeline.BatchAggregateTest) (610 ms)</li><li>com.hazelcast.jet.core.TopologyChangeTest.when_coordinatorLeavesDuringExecution_then_jobCompletes[liteMemberFlags(0)](com.hazelcast.jet.core.TopologyChangeTest) (5692 ms)</li><li>com.hazelcast.jet.core.ObservableResultsTest.unnamedObservable[0: mode=member](com.hazelcast.jet.core.ObservableResultsTest) (785 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_mergeWithRebalancedByKey_thenOnlyRebalancedEdgePartitionedDistributed[1: mode=client](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (633 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.mapWithMerging_byName[0: mode=member](com.hazelcast.jet.pipeline.SinksTest) (6390 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapStateful_global[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (660 ms)</li><li>com.hazelcast.jet.core.TopologyChangeTest.when_coordinatorLeaves_AutoScalingOff_SnapshottingOn_then_jobSuspends[liteMemberFlags(1)](com.hazelcast.jet.core.TopologyChangeTest) (1296 ms)</li><li>com.hazelcast.jet.pipeline.test.AssertionsTest.test_assertContains[0: mode=member](com.hazelcast.jet.pipeline.test.AssertionsTest) (589 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_StreamTest.when_jobCancelled_then_terminalMetricsExist[0: mode=member](com.hazelcast.jet.core.metrics.JobMetrics_StreamTest) (980 ms)</li><li>com.hazelcast.jet.core.TopologyChangeTest.when_nonCoordinatorLeaves_AutoScalingOff_SnapshottingOn_then_jobSuspends[liteMemberFlags(1)](com.hazelcast.jet.core.TopologyChangeTest) (1072 ms)</li><li>com.hazelcast.jet.pipeline.SourcesTest.remoteMapWithUnknownValueClass_whenQueryingIsNotNecessary[1: mode=client](com.hazelcast.jet.pipeline.SourcesTest) (5902 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.peekWithToStringFunctionIsTransparent[1: mode=client](com.hazelcast.jet.pipeline.StreamStageTest) (591 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.flatMapUsingService_keyed[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (597 ms)</li><li>com.hazelcast.jet.pipeline.SourceBuilderTest.stream_distributed_socketSource_withTimestamps[1: mode=client](com.hazelcast.jet.pipeline.SourceBuilderTest) (789 ms)</li><li>com.hazelcast.jet.pipeline.Sources_withEventJournalTest.remoteMapJournal[0: mode=member](com.hazelcast.jet.pipeline.Sources_withEventJournalTest) (8783 ms)</li><li>com.hazelcast.jet.pipeline.StreamSourceTest.test_shortIdle[1: mode=client](com.hazelcast.jet.pipeline.StreamSourceTest) (1203 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.rollingAggregate_global[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (643 ms)</li><li>com.hazelcast.jet.core.SuspendExecutionOnFailureTest.when_jobRunning_then_suspensionCauseThrows[0: mode=member](com.hazelcast.jet.core.SuspendExecutionOnFailureTest) (764 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapUsingServiceAsyncBatched[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (1258 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregateBuilder_withSeparateAggrOps_withOutputFn[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest) (588 ms)</li><li>com.hazelcast.jet.pipeline.SourceBuilder_TopologyChangeTest (9094 ms)</li><li>com.hazelcast.jet.core.TopologyChangeTest.when_coordinatorLeavesDuringExecution_then_jobCompletes[liteMemberFlags(2)](com.hazelcast.jet.core.TopologyChangeTest) (5689 ms)</li><li>com.hazelcast.jet.core.ExecutionLifecycle_RestartableExceptionTest (44751 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregate3_withSeparateAggrOps[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest) (597 ms)</li><li>com.hazelcast.jet.core.SuspendExecutionOnFailureTest.when_jobSuspendedByUser_then_suspensionCauseSaysSo[0: mode=member](com.hazelcast.jet.core.SuspendExecutionOnFailureTest) (964 ms)</li><li>com.hazelcast.jet.core.TopologyChangeTest.when_coordinatorLeavesDuringExecution_then_nonCoordinatorJobSubmitterStillGetsJobResult[liteMemberFlags(0)](com.hazelcast.jet.core.TopologyChangeTest) (3104 ms)</li><li>com.hazelcast.jet.pipeline.SourcesTest.files[0: mode=member](com.hazelcast.jet.pipeline.SourcesTest) (6176 ms)</li><li>com.hazelcast.jet.core.ObservableResultsTest.multipleJobsWithTheSameSink[0: mode=member](com.hazelcast.jet.core.ObservableResultsTest) (773 ms)</li><li>com.hazelcast.jet.pipeline.WindowGroupAggregateTest.aggregate2_withSeparateAggrOps[1: mode=client](com.hazelcast.jet.pipeline.WindowGroupAggregateTest) (693 ms)</li><li>com.hazelcast.jet.core.TopologyChangeTest.when_jobParticipantHasStaleMemberList_then_jobInitRetries[liteMemberFlags(0)](com.hazelcast.jet.core.TopologyChangeTest) (11106 ms)</li><li>com.hazelcast.jet.pipeline.WindowAggregateTest.aggregate3_withAggrOp3[1: mode=client](com.hazelcast.jet.pipeline.WindowAggregateTest) (682 ms)</li><li>com.hazelcast.jet.pipeline.SourceBuilderTest.batch_fileSource[0: mode=member](com.hazelcast.jet.pipeline.SourceBuilderTest) (588 ms)</li><li>com.hazelcast.jet.pipeline.SourcesTest.socket[0: mode=member](com.hazelcast.jet.pipeline.SourcesTest) (5967 ms)</li><li>com.hazelcast.jet.core.MemberReconnectionTest (9081 ms)</li><li>com.hazelcast.jet.core.SuspendExecutionOnFailureTest.when_jobFailed_then_suspensionCauseThrows[0: mode=member](com.hazelcast.jet.core.SuspendExecutionOnFailureTest) (962 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.customTransform_keyed[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (584 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.flatMapStateful_keyed[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (596 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.groupAggregate3_withAggrOp3[1: mode=client](com.hazelcast.jet.pipeline.BatchAggregateTest) (588 ms)</li><li>com.hazelcast.jet.pipeline.SortBatchStageTest.sort_lessItemsThanProcessors[1: mode=client](com.hazelcast.jet.pipeline.SortBatchStageTest) (583 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_MiscTest.when_jobRestarted_then_metricsRepopulate[1: mode=client](com.hazelcast.jet.core.metrics.JobMetrics_MiscTest) (1227 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.test_adaptingPartitionFunction[0: mode=member](com.hazelcast.jet.pipeline.SinksTest) (5838 ms)</li><li>com.hazelcast.jet.pipeline.SinkBuilderTest.socketSink[1: mode=client](com.hazelcast.jet.pipeline.SinkBuilderTest) (610 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregateBuilder_withSeparateAggrOps_withOutputFn[1: mode=client](com.hazelcast.jet.pipeline.BatchAggregateTest) (592 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_StreamTest.when_jobRunning_then_metricsEventuallyExist[1: mode=client](com.hazelcast.jet.core.metrics.JobMetrics_StreamTest) (2207 ms)</li><li>com.hazelcast.jet.core.TopologyChangeTest.when_nonCoordinatorLeaves_AutoScalingOff_SnapshottingOff_then_jobFails[liteMemberFlags(0)](com.hazelcast.jet.core.TopologyChangeTest) (1084 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.fusing_testWithBranch[1: mode=client](com.hazelcast.jet.pipeline.StreamStageTest) (607 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.flatMap[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (600 ms)</li><li>com.hazelcast.jet.pipeline.WindowAggregateTest.tumblingWindow[0: mode=member](com.hazelcast.jet.pipeline.WindowAggregateTest) (687 ms)</li><li>com.hazelcast.jet.pipeline.SourcesTest.mapWithFilterAndProjectionFn_byName[0: mode=member](com.hazelcast.jet.pipeline.SourcesTest) (5921 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.when_mergeToItself_then_doubleOutput[0: mode=member](com.hazelcast.jet.pipeline.StreamStageTest) (564 ms)</li><li>com.hazelcast.jet.core.SuspendExecutionOnFailureTest.when_jobRunning_then_suspensionCauseThrows[1: mode=client](com.hazelcast.jet.core.SuspendExecutionOnFailureTest) (781 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.map_byRef[0: mode=member](com.hazelcast.jet.pipeline.SinksTest) (6055 ms)</li><li>com.hazelcast.jet.impl.connector.JmsSinkIntegrationTest (31552 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.filterUsingService_keyed[1: mode=client](com.hazelcast.jet.pipeline.StreamStageTest) (591 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapUsingService_keyed[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (588 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.groupAggregate3_withAggrOp3[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest) (673 ms)</li><li>com.hazelcast.jet.pipeline.WindowGroupAggregateTest.slidingWindow_withEarlyResults[0: mode=member](com.hazelcast.jet.pipeline.WindowGroupAggregateTest) (999 ms)</li><li>com.hazelcast.jet.core.ObservableResultsTest.fastResultsDoNotGetLost_moreThanBatchSize[1: mode=client](com.hazelcast.jet.core.ObservableResultsTest) (798 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.mapUsingServiceAsync_keyed[1: mode=client](com.hazelcast.jet.pipeline.StreamStageTest) (1312 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_MiscTest.when_jobFailed_then_MetricsReturned[1: mode=client](com.hazelcast.jet.core.metrics.JobMetrics_MiscTest) (582 ms)</li><li>com.hazelcast.jet.pipeline.WindowGroupAggregateTest.tumblingWindow_withEarlyResults[0: mode=member](com.hazelcast.jet.pipeline.WindowGroupAggregateTest) (1008 ms)</li><li>com.hazelcast.jet.pipeline.test.AssertionsTest.test_assertAnyOrder_duplicate_entry_only_in_assert_should_fail[1: mode=client](com.hazelcast.jet.pipeline.test.AssertionsTest) (603 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_StreamTest.when_jobRestarted_then_metricsReset[1: mode=client](com.hazelcast.jet.core.metrics.JobMetrics_StreamTest) (4420 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.mapWithUpdating_byName[0: mode=member](com.hazelcast.jet.pipeline.SinksTest) (6174 ms)</li><li>com.hazelcast.jet.impl.connector.HazelcastConnectorTest (2274 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.groupAggregateBuilder_withComplexAggrOp_withOutputFn[1: mode=client](com.hazelcast.jet.pipeline.BatchAggregateTest) (606 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.flatMapStateful_keyed[1: mode=client](com.hazelcast.jet.pipeline.StreamStageTest) (904 ms)</li><li>com.hazelcast.jet.pipeline.SourcesTest.mapWithFilterAndProjection_byName[0: mode=member](com.hazelcast.jet.pipeline.SourcesTest) (5932 ms)</li><li>com.hazelcast.jet.pipeline.Sources_withEventJournalTest.mapJournal_withPredicateAndProjection[1: mode=client](com.hazelcast.jet.pipeline.Sources_withEventJournalTest) (6755 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.mapStateful_global_returningNull[1: mode=client](com.hazelcast.jet.pipeline.StreamStageTest) (632 ms)</li><li>com.hazelcast.jet.pipeline.SourceBuilderTest.stream_distributed_socketSource_withTimestamps[0: mode=member](com.hazelcast.jet.pipeline.SourceBuilderTest) (784 ms)</li><li>com.hazelcast.jet.pipeline.Sources_withEventJournalTest.cacheJournalByName_withPredicateAndProjectionFn[1: mode=client](com.hazelcast.jet.pipeline.Sources_withEventJournalTest) (6684 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.flatMap[0: mode=member](com.hazelcast.jet.pipeline.StreamStageTest) (604 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.fusing_flatMap[0: mode=member](com.hazelcast.jet.pipeline.StreamStageTest) (611 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_rebalanceAndGroupAggregateBuilder_then_singleStageAggregation[0: mode=member](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (599 ms)</li><li>com.hazelcast.jet.pipeline.SourcesTest.remoteMapWithFilterAndProjectionFn[0: mode=member](com.hazelcast.jet.pipeline.SourcesTest) (5613 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_BatchTest.when_memberAddedAfterJobFinished_then_metricsNotAffected[1: mode=client](com.hazelcast.jet.core.metrics.JobMetrics_BatchTest) (1136 ms)</li><li>com.hazelcast.jet.pipeline.WindowAggregateTest.aggregateBuilder_withSeparateAggrOps[1: mode=client](com.hazelcast.jet.pipeline.WindowAggregateTest) (676 ms)</li><li>com.hazelcast.jet.pipeline.WindowGroupAggregateTest.aggregate3_withSeparateAggrOps[0: mode=member](com.hazelcast.jet.pipeline.WindowGroupAggregateTest) (686 ms)</li><li>com.hazelcast.jet.pipeline.StatefulMappingStressTest (41435 ms)</li><li>com.hazelcast.jet.core.ObservableResultsTest.unnamedObservable[1: mode=client](com.hazelcast.jet.core.ObservableResultsTest) (578 ms)</li><li>com.hazelcast.jet.pipeline.test.AssertionsTest.test_assertOrdered_not_terminal[1: mode=client](com.hazelcast.jet.pipeline.test.AssertionsTest) (584 ms)</li><li>com.hazelcast.jet.core.TopologyChangeTest.when_nonCoordinatorLeavesDuringExecution_then_jobRestarts[liteMemberFlags(0)](com.hazelcast.jet.core.TopologyChangeTest) (3088 ms)</li><li>com.hazelcast.jet.pipeline.test.TestSourcesTest.test_itemStream[1: mode=client](com.hazelcast.jet.pipeline.test.TestSourcesTest) (2621 ms)</li><li>com.hazelcast.jet.core.TopologyChangeTest.when_coordinatorLeavesDuringExecution_then_nonCoordinatorJobSubmitterStillGetsJobResult[liteMemberFlags(1)](com.hazelcast.jet.core.TopologyChangeTest) (3085 ms)</li><li>com.hazelcast.jet.pipeline.Sources_withEventJournalTest.cacheJournal_withDefaultFilter[0: mode=member](com.hazelcast.jet.pipeline.Sources_withEventJournalTest) (5796 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.fusing_flatMap_with_inputMap[1: mode=client](com.hazelcast.jet.pipeline.StreamStageTest) (588 ms)</li><li>com.hazelcast.jet.pipeline.WindowAggregateTest.aggregate3_withSeparateAggrOps[1: mode=client](com.hazelcast.jet.pipeline.WindowAggregateTest) (729 ms)</li><li>com.hazelcast.jet.pipeline.WindowAggregateTest.aggregate2_withSeparateAggrOps[1: mode=client](com.hazelcast.jet.pipeline.WindowAggregateTest) (696 ms)</li><li>com.hazelcast.jet.pipeline.SourceBuilderTest.test_faultTolerance_snapshotWithUserDefinedObject[0: mode=member](com.hazelcast.jet.pipeline.SourceBuilderTest) (1407 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.mapAsFilter[1: mode=client](com.hazelcast.jet.pipeline.StreamStageTest) (590 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapUsingIMap_keyed[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (719 ms)</li><li>com.hazelcast.jet.pipeline.Sources_withEventJournalTest.mapJournalByRef_withProjectionToNull_then_nullsSkipped[0: mode=member](com.hazelcast.jet.pipeline.Sources_withEventJournalTest) (6317 ms)</li><li>com.hazelcast.jet.core.Job_SeparateClusterTest (41610 ms)</li><li>com.hazelcast.jet.pipeline.SourcesTest.remoteMapWithFilterAndProjection[0: mode=member](com.hazelcast.jet.pipeline.SourcesTest) (5923 ms)</li><li>com.hazelcast.jet.pipeline.SourcesTest.socket[1: mode=client](com.hazelcast.jet.pipeline.SourcesTest) (6145 ms)</li><li>com.hazelcast.jet.core.TopologyChangeTest.when_nonCoordinatorLeaves_AutoScalingOff_SnapshottingOff_then_jobFails[liteMemberFlags(1)](com.hazelcast.jet.core.TopologyChangeTest) (1337 ms)</li><li>com.hazelcast.jet.pipeline.SourcesTest.cache_byName[0: mode=member](com.hazelcast.jet.pipeline.SourcesTest) (5686 ms)</li><li>com.hazelcast.jet.pipeline.test.TestSourcesTest.test_longStream[0: mode=member](com.hazelcast.jet.pipeline.test.TestSourcesTest) (6823 ms)</li><li>com.hazelcast.jet.pipeline.Sources_withEventJournalTest.remoteCacheJournal_withUnknownValueClass[0: mode=member](com.hazelcast.jet.pipeline.Sources_withEventJournalTest) (6166 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.mapWithEntryProcessor_when_entryIsLocked_then_entryIsNotUpdated[0: mode=member](com.hazelcast.jet.pipeline.SinksTest) (5805 ms)</li><li>com.hazelcast.jet.pipeline.Sources_withEventJournalTest.mapJournal_byRef[1: mode=client](com.hazelcast.jet.pipeline.Sources_withEventJournalTest) (8708 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.flatMapStateful_global[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (645 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.remoteMap[0: mode=member](com.hazelcast.jet.pipeline.SinksTest) (6414 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.mapStateful_keyed[0: mode=member](com.hazelcast.jet.pipeline.StreamStageTest) (905 ms)</li><li>com.hazelcast.jet.pipeline.WindowAggregateTest.slidingWindow[0: mode=member](com.hazelcast.jet.pipeline.WindowAggregateTest) (759 ms)</li><li>com.hazelcast.jet.pipeline.test.AssertionsTest.test_assertCollectedEventuallynot_terminal[0: mode=member](com.hazelcast.jet.pipeline.test.AssertionsTest) (591 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_hashJoinBuilderRebalanceMainStage_then_distributedEdge[1: mode=client](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (643 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_StreamTest.when_jobCancelled_then_terminalMetricsExist[1: mode=client](com.hazelcast.jet.core.metrics.JobMetrics_StreamTest) (989 ms)</li><li>com.hazelcast.jet.pipeline.test.AssertionsTest.test_assertContains_should_fail[1: mode=client](com.hazelcast.jet.pipeline.test.AssertionsTest) (580 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.fusing_mapToNull_inside[0: mode=member](com.hazelcast.jet.pipeline.StreamStageTest) (595 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.fusing_map[0: mode=member](com.hazelcast.jet.pipeline.StreamStageTest) (632 ms)</li><li>com.hazelcast.jet.pipeline.WindowGroupAggregateTest.distinct[0: mode=member](com.hazelcast.jet.pipeline.WindowGroupAggregateTest) (589 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.groupAggregateBuilder_withSeparateAggrOps[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest) (608 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_MiscTest.test_duplicateMetricsFromMembers[0: mode=member](com.hazelcast.jet.core.metrics.JobMetrics_MiscTest) (609 ms)</li><li>com.hazelcast.jet.pipeline.Sources_withEventJournalTest.remoteCacheJournal_withPredicateAndProjectionFn[0: mode=member](com.hazelcast.jet.pipeline.Sources_withEventJournalTest) (6543 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.remoteMap[1: mode=client](com.hazelcast.jet.pipeline.SinksTest) (6565 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregateBuilder_with_complexAggrOp_withOutputFn[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest) (589 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.apply[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (595 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.flatMapStateful_global[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (645 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.when_writeToMultipleStagesToSingleSink_then_allItemsInSink[1: mode=client](com.hazelcast.jet.pipeline.SinksTest) (5579 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.map[0: mode=member](com.hazelcast.jet.pipeline.StreamStageTest) (648 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_BatchTest.when_jobCompleted_then_metricsExist[1: mode=client](com.hazelcast.jet.core.metrics.JobMetrics_BatchTest) (592 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.innerHashJoin[1: mode=client](com.hazelcast.jet.pipeline.StreamStageTest) (637 ms)</li><li>com.hazelcast.jet.pipeline.SourcesTest.map_byName[1: mode=client](com.hazelcast.jet.pipeline.SourcesTest) (6097 ms)</li><li>com.hazelcast.jet.pipeline.WindowAggregateTest.aggregateBuilder_withComplexAggrOp[1: mode=client](com.hazelcast.jet.pipeline.WindowAggregateTest) (689 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_rebalanceAndGroupAggregate_then_singleStageAggregation[1: mode=client](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (576 ms)</li><li>com.hazelcast.jet.pipeline.test.AssertionsTest.test_assertContains_not_terminal[1: mode=client](com.hazelcast.jet.pipeline.test.AssertionsTest) (587 ms)</li><li>com.hazelcast.jet.core.OperationLossTest (36047 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.apply[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (562 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregateBuilder_withComplexAggrOp[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest) (606 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.test_adaptingPartitionFunction[1: mode=client](com.hazelcast.jet.pipeline.SinksTest) (5601 ms)</li><li>com.hazelcast.jet.pipeline.test.TestSourcesTest.test_itemStream_in_expected_range[0: mode=member](com.hazelcast.jet.pipeline.test.TestSourcesTest) (2459 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.customTransform[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (600 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.mapStateful_withEvictFn[0: mode=member](com.hazelcast.jet.pipeline.StreamStageTest) (838 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.mapStateful_keyed_returningNull[1: mode=client](com.hazelcast.jet.pipeline.StreamStageTest) (653 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_StreamTest.when_jobRestarted_then_metricsReset_withJournal[1: mode=client](com.hazelcast.jet.core.metrics.JobMetrics_StreamTest) (3406 ms)</li><li>com.hazelcast.jet.core.TopologyChangeTest.when_nonCoordinatorLeavesDuringExecution_then_jobRestarts[liteMemberFlags(1)](com.hazelcast.jet.core.TopologyChangeTest) (3091 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.list_byRef[1: mode=client](com.hazelcast.jet.pipeline.SinksTest) (5704 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_aggregate2WithRebalancedStage_then_twoStageAggregation[0: mode=member](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (592 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapUsingIMap_keyed[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (726 ms)</li><li>com.hazelcast.jet.core.SuspendExecutionOnFailureTest.when_jobSuspendedDueToFailure_then_canBeResumed[0: mode=member](com.hazelcast.jet.core.SuspendExecutionOnFailureTest) (1392 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.reliableTopic_byName[1: mode=client](com.hazelcast.jet.pipeline.SinksTest) (5785 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.map[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (616 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.groupAggregate2_withSeparateAggrOps[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest) (600 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_StreamTest.when_jobRestarted_then_metricsReset_withJournal[0: mode=member](com.hazelcast.jet.core.metrics.JobMetrics_StreamTest) (3401 ms)</li><li>com.hazelcast.jet.pipeline.Sources_withEventJournalTest.mapJournal_byName[0: mode=member](com.hazelcast.jet.pipeline.Sources_withEventJournalTest) (8355 ms)</li><li>com.hazelcast.jet.core.SuspendExecutionOnFailureTest.when_jobSuspendedDueToFailure_then_canBeResumed[1: mode=client](com.hazelcast.jet.core.SuspendExecutionOnFailureTest) (1395 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.when_hashJoinBuilderAddInner_then_filterOutNulls[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (602 ms)</li><li>com.hazelcast.jet.core.TopologyChangeTest.when_nonCoordinatorLeaves_AutoScalingOff_SnapshottingOff_then_jobFails[liteMemberFlags(2)](com.hazelcast.jet.core.TopologyChangeTest) (1356 ms)</li><li>com.hazelcast.jet.core.TopologyChangeTest.when_coordinatorLeavesDuringExecution_then_nonCoordinatorJobSubmitterStillGetsJobResult[liteMemberFlags(2)](com.hazelcast.jet.core.TopologyChangeTest) (3078 ms)</li><li>com.hazelcast.jet.pipeline.WindowGroupAggregateTest.sessionWindow_withEarlyResults[0: mode=member](com.hazelcast.jet.pipeline.WindowGroupAggregateTest) (993 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.mapWithUpdating_byName[1: mode=client](com.hazelcast.jet.pipeline.SinksTest) (6241 ms)</li><li>com.hazelcast.jet.pipeline.Sources_withEventJournalTest.remoteCacheJournal[0: mode=member](com.hazelcast.jet.pipeline.Sources_withEventJournalTest) (8721 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.rollingAggregate_global[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (591 ms)</li><li>com.hazelcast.jet.pipeline.SourcesTest.remoteList[0: mode=member](com.hazelcast.jet.pipeline.SourcesTest) (5691 ms)</li><li>com.hazelcast.jet.pipeline.SourcesTest.mapWithFilterAndProjectionFn_byRef[0: mode=member](com.hazelcast.jet.pipeline.SourcesTest) (6242 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.mapUsingServiceAsyncBatched[1: mode=client](com.hazelcast.jet.pipeline.StreamStageTest) (1258 ms)</li><li>com.hazelcast.jet.pipeline.test.AssertionsTest.test_assertCollected[1: mode=client](com.hazelcast.jet.pipeline.test.AssertionsTest) (605 ms)</li><li>com.hazelcast.jet.pipeline.SourcesTest.files[1: mode=client](com.hazelcast.jet.pipeline.SourcesTest) (5808 ms)</li><li>com.hazelcast.jet.pipeline.test.AssertionsTest.test_assertAnyOrder_not_terminal[1: mode=client](com.hazelcast.jet.pipeline.test.AssertionsTest) (595 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_BatchTest.when_twoDifferentJobsForTheSamePipeline_then_haveDifferentMetrics[1: mode=client](com.hazelcast.jet.core.metrics.JobMetrics_BatchTest) (621 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.groupAggregate2_withSeparateAggrOps[1: mode=client](com.hazelcast.jet.pipeline.BatchAggregateTest) (626 ms)</li><li>com.hazelcast.jet.pipeline.test.AssertionsTest.test_assertAnyOrder_not_terminal_should_fail[0: mode=member](com.hazelcast.jet.pipeline.test.AssertionsTest) (574 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregateBuilder_withComplexAggrOp[1: mode=client](com.hazelcast.jet.pipeline.BatchAggregateTest) (603 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.hashJoin[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (664 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.mapUsingIMap[0: mode=member](com.hazelcast.jet.pipeline.StreamStageTest) (743 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.map_byRef[1: mode=client](com.hazelcast.jet.pipeline.SinksTest) (6278 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceStreamStageTest.when_rebalanceAndMap_then_dagEdgeDistributed[0: mode=member](com.hazelcast.jet.pipeline.RebalanceStreamStageTest) (590 ms)</li><li>com.hazelcast.jet.pipeline.SourcesTest.list_byName[1: mode=client](com.hazelcast.jet.pipeline.SourcesTest) (5491 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.mapWithEntryProcessor_byName[1: mode=client](com.hazelcast.jet.pipeline.SinksTest) (6348 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.peekWithToStringFunctionIsTransparent[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (591 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_hashJoinRebalanceMainStage_then_distributedEdge[1: mode=client](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (645 ms)</li><li>com.hazelcast.jet.pipeline.Sources_withEventJournalTest.cacheJournal_byName[1: mode=client](com.hazelcast.jet.pipeline.Sources_withEventJournalTest) (8745 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_rebalanceAndGroupAggregateBuilderWithComplexAggrOp_then_singleStageAggregation[1: mode=client](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (602 ms)</li><li>com.hazelcast.jet.pipeline.SourceBuilderTest.test_faultTolerance[1: mode=client](com.hazelcast.jet.pipeline.SourceBuilderTest) (1194 ms)</li><li>com.hazelcast.jet.pipeline.SourcesTest.map_byRef[0: mode=member](com.hazelcast.jet.pipeline.SourcesTest) (5999 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.remoteMapWithUpdating[0: mode=member](com.hazelcast.jet.pipeline.SinksTest) (6493 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.flatMap[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (597 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.customTransform_keyed[0: mode=member](com.hazelcast.jet.pipeline.StreamStageTest) (593 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.hashJoin[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (647 ms)</li><li>com.hazelcast.jet.core.ObservableResultsTest.configureCapacity[0: mode=member](com.hazelcast.jet.core.ObservableResultsTest) (766 ms)</li><li>com.hazelcast.jet.pipeline.WindowAggregateTest.sessionWindow_withEarlyResults[1: mode=client](com.hazelcast.jet.pipeline.WindowAggregateTest) (1018 ms)</li><li>com.hazelcast.jet.pipeline.WindowAggregateTest.distinct[1: mode=client](com.hazelcast.jet.pipeline.WindowAggregateTest) (615 ms)</li><li>com.hazelcast.jet.pipeline.test.AssertionsTest.test_assertOrdered[0: mode=member](com.hazelcast.jet.pipeline.test.AssertionsTest) (577 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.fusing_mapToNull_leading[1: mode=client](com.hazelcast.jet.pipeline.StreamStageTest) (598 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapStateful_global[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (657 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapUsingServiceAsyncBatched_keyed_keysHidden[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (962 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapUsingServiceAsyncBatched_keyed_keysExposed[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (957 ms)</li><li>com.hazelcast.jet.core.ObservableResultsTest.streamJobRestart[1: mode=client](com.hazelcast.jet.core.ObservableResultsTest) (978 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.flatMap[1: mode=client](com.hazelcast.jet.pipeline.StreamStageTest) (593 ms)</li><li>com.hazelcast.jet.pipeline.SourcesTest.remoteMapWithFilterAndProjection[1: mode=client](com.hazelcast.jet.pipeline.SourcesTest) (6171 ms)</li><li>com.hazelcast.jet.pipeline.test.AssertionsTest.test_assertCollectedEventually[0: mode=member](com.hazelcast.jet.pipeline.test.AssertionsTest) (598 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.rollingAggregate[1: mode=client](com.hazelcast.jet.pipeline.StreamStageTest) (590 ms)</li><li>com.hazelcast.jet.pipeline.WindowGroupAggregateTest.aggregateBuilder_withComplexAggrOp[1: mode=client](com.hazelcast.jet.pipeline.WindowGroupAggregateTest) (691 ms)</li><li>com.hazelcast.jet.pipeline.test.AssertionsTest.test_assertCollectedEventuallynot_terminal_should_fail[0: mode=member](com.hazelcast.jet.pipeline.test.AssertionsTest) (5595 ms)</li><li>com.hazelcast.jet.pipeline.test.AssertionsTest.test_assertAnyOrder_should_fail[0: mode=member](com.hazelcast.jet.pipeline.test.AssertionsTest) (580 ms)</li><li>com.hazelcast.jet.pipeline.WindowAggregateTest.aggregateBuilder_withComplexAggrOp[0: mode=member](com.hazelcast.jet.pipeline.WindowAggregateTest) (716 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_mergeWithRebalancedByKey_thenOnlyRebalancedEdgePartitionedDistributed[0: mode=member](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (657 ms)</li><li>com.hazelcast.jet.core.TopologyChangeTest.when_nodeIsShuttingDownDuringInit_then_jobRestarts[liteMemberFlags(0)](com.hazelcast.jet.core.TopologyChangeTest) (9263 ms)</li><li>com.hazelcast.jet.core.TopologyChangeTest.when_nodeIsShuttingDownAfterInit_then_jobRestarts[liteMemberFlags(2)](com.hazelcast.jet.core.TopologyChangeTest) (3421 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.when_innerHashJoin_then_filterOutNulls[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (608 ms)</li><li>com.hazelcast.jet.pipeline.WindowAggregateTest.when_sessionWinWithEarlyResults_then_emitRepeatedly[1: mode=client](com.hazelcast.jet.pipeline.WindowAggregateTest) (1189 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.when_mergeToItself_then_doubleOutput[1: mode=client](com.hazelcast.jet.pipeline.StreamStageTest) (569 ms)</li><li>com.hazelcast.jet.pipeline.SourceBuilderTest.test_nonFaultTolerantSource_processingGuaranteeOn[1: mode=client](com.hazelcast.jet.pipeline.SourceBuilderTest) (1433 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregate2_withAggrOp2[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest) (575 ms)</li><li>com.hazelcast.jet.pipeline.Sources_withEventJournalTest.remoteCacheJournal_withPredicateAndProjectionFn[1: mode=client](com.hazelcast.jet.pipeline.Sources_withEventJournalTest) (6882 ms)</li><li>com.hazelcast.jet.pipeline.WindowAggregateTest.slidingWindow_withEarlyResults[0: mode=member](com.hazelcast.jet.pipeline.WindowAggregateTest) (984 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_BatchTest.when_storeMetricsAfterJobCompletionDisabled_then_metricsEmpty[1: mode=client](com.hazelcast.jet.core.metrics.JobMetrics_BatchTest) (577 ms)</li><li>com.hazelcast.jet.pipeline.test.AssertionsTest.test_assertOrdered_not_terminal[0: mode=member](com.hazelcast.jet.pipeline.test.AssertionsTest) (592 ms)</li><li>com.hazelcast.jet.core.ObservableResultsTest.observersGetAllEventsStillInRingbuffer[1: mode=client](com.hazelcast.jet.core.ObservableResultsTest) (972 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.fusing_when_localParallelismDifferent_then_notFused[0: mode=member](com.hazelcast.jet.pipeline.StreamStageTest) (598 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.mapWithMerging2_byRef[1: mode=client](com.hazelcast.jet.pipeline.SinksTest) (6168 ms)</li><li>com.hazelcast.jet.pipeline.Sources_withEventJournalTest.mapJournal_withPredicateAndProjection[0: mode=member](com.hazelcast.jet.pipeline.Sources_withEventJournalTest) (5922 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.remoteMapWithMerging_when_functionReturnsNull_then_keyIsRemoved[0: mode=member](com.hazelcast.jet.pipeline.SinksTest) (6177 ms)</li><li>com.hazelcast.jet.pipeline.test.AssertionsTest.test_multiple_assertions_in_pipeline[1: mode=client](com.hazelcast.jet.pipeline.test.AssertionsTest) (613 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregate2_withAggrOp2_with_finishFn[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest) (589 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.hashJoin[0: mode=member](com.hazelcast.jet.pipeline.StreamStageTest) (673 ms)</li><li>com.hazelcast.jet.pipeline.test.AssertionsTest.test_assertCollectedEventuallynot_terminal_should_fail[1: mode=client](com.hazelcast.jet.pipeline.test.AssertionsTest) (5608 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.filterUsingService_keyed[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (586 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregate3_withAggrOp3[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest) (602 ms)</li><li>com.hazelcast.jet.pipeline.test.AssertionsTest.test_assertAnyOrder_should_fail[1: mode=client](com.hazelcast.jet.pipeline.test.AssertionsTest) (598 ms)</li><li>com.hazelcast.jet.pipeline.WindowAggregateTest.aggregate3_withSeparateAggrOps[0: mode=member](com.hazelcast.jet.pipeline.WindowAggregateTest) (693 ms)</li><li>com.hazelcast.jet.pipeline.test.AssertionsTest.test_assertAnyOrder_duplicate_entry_only_in_source_should_fail[0: mode=member](com.hazelcast.jet.pipeline.test.AssertionsTest) (582 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.flatMapStateful_keyed[0: mode=member](com.hazelcast.jet.pipeline.StreamStageTest) (933 ms)</li><li>com.hazelcast.jet.pipeline.SourceBuilderTest.test_faultTolerance_snapshotWithUserDefinedObject[1: mode=client](com.hazelcast.jet.pipeline.SourceBuilderTest) (1414 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.mapUsingReplicatedMap[0: mode=member](com.hazelcast.jet.pipeline.StreamStageTest) (696 ms)</li><li>com.hazelcast.jet.pipeline.WindowGroupAggregateTest.aggregateBuilder_withComplexAggrOp[0: mode=member](com.hazelcast.jet.pipeline.WindowGroupAggregateTest) (692 ms)</li><li>com.hazelcast.jet.core.TopologyChangeTest.when_addAndRemoveNodeDuringExecution_then_completeSuccessfully[liteMemberFlags(2)](com.hazelcast.jet.core.TopologyChangeTest) (1772 ms)</li><li>com.hazelcast.jet.core.ScaleUpTest (40666 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_StreamTest.when_jobRestarted_then_metricsReset[0: mode=member](com.hazelcast.jet.core.metrics.JobMetrics_StreamTest) (4409 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapUsingServiceAsync[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (1928 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.mapWithEntryProcessor_testBackpressure[1: mode=client](com.hazelcast.jet.pipeline.SinksTest) (19447 ms)</li><li>com.hazelcast.jet.core.RoutingPolicyDistributedTest (808 ms)</li><li>com.hazelcast.jet.core.SuspendExecutionOnFailureTest.when_jobFailed_then_suspensionCauseThrows[1: mode=client](com.hazelcast.jet.core.SuspendExecutionOnFailureTest) (962 ms)</li><li>com.hazelcast.jet.pipeline.Sources_withEventJournalTest.cacheJournal_withDefaultFilter[1: mode=client](com.hazelcast.jet.pipeline.Sources_withEventJournalTest) (6329 ms)</li><li>com.hazelcast.jet.core.SuspendResumeTest (48307 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.list_byRef[0: mode=member](com.hazelcast.jet.pipeline.SinksTest) (5594 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregateBuilder_withSeparateAggrOps[1: mode=client](com.hazelcast.jet.pipeline.BatchAggregateTest) (604 ms)</li><li>com.hazelcast.jet.pipeline.WindowGroupAggregateTest.slidingWindow_cascadingAggregations[0: mode=member](com.hazelcast.jet.pipeline.WindowGroupAggregateTest) (628 ms)</li><li>com.hazelcast.jet.pipeline.test.AssertionsTest.test_assertAnyOrder_not_terminal[0: mode=member](com.hazelcast.jet.pipeline.test.AssertionsTest) (583 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceStreamStageTest.when_rebalanceAndMap_then_dagEdgeDistributed[1: mode=client](com.hazelcast.jet.pipeline.RebalanceStreamStageTest) (588 ms)</li><li>com.hazelcast.jet.core.ObservableResultsTest.observableRegisteredAfterJobFailedGetError[1: mode=client](com.hazelcast.jet.core.ObservableResultsTest) (767 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.distinct[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (656 ms)</li><li>com.hazelcast.jet.pipeline.test.AssertionsTest.test_multiple_assertions_in_pipeline[0: mode=member](com.hazelcast.jet.pipeline.test.AssertionsTest) (587 ms)</li><li>com.hazelcast.jet.pipeline.WindowAggregateTest.distinct[0: mode=member](com.hazelcast.jet.pipeline.WindowAggregateTest) (613 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.remoteMapWithMerging[1: mode=client](com.hazelcast.jet.pipeline.SinksTest) (6194 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.mapUsingServiceAsync[0: mode=member](com.hazelcast.jet.pipeline.StreamStageTest) (1956 ms)</li><li>com.hazelcast.jet.pipeline.SortBatchStageTest.sort_withComparator[0: mode=member](com.hazelcast.jet.pipeline.SortBatchStageTest) (589 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_aggregate3WithRebalancedStage_then_twoStageAggregation[1: mode=client](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (594 ms)</li><li>com.hazelcast.jet.core.ObservableResultsTest.batchJobFails[1: mode=client](com.hazelcast.jet.core.ObservableResultsTest) (764 ms)</li><li>com.hazelcast.jet.pipeline.test.AssertionsTest.test_assertAnyOrder_distributedSource[1: mode=client](com.hazelcast.jet.pipeline.test.AssertionsTest) (756 ms)</li><li>com.hazelcast.jet.pipeline.test.AssertionsTest.test_assertAnyOrder_duplicate_entry_only_in_source_should_fail[1: mode=client](com.hazelcast.jet.pipeline.test.AssertionsTest) (591 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_BatchTest.when_storeMetricsAfterJobCompletionDisabled_then_metricsEmpty[0: mode=member](com.hazelcast.jet.core.metrics.JobMetrics_BatchTest) (586 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.hashJoin[1: mode=client](com.hazelcast.jet.pipeline.StreamStageTest) (653 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.map_byName[0: mode=member](com.hazelcast.jet.pipeline.SinksTest) (6192 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.cache_byName[1: mode=client](com.hazelcast.jet.pipeline.SinksTest) (6040 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.hashJoinBuilder[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (782 ms)</li><li>com.hazelcast.jet.pipeline.WindowAggregateTest.when_sessionWinWithEarlyResults_then_emitRepeatedly[0: mode=member](com.hazelcast.jet.pipeline.WindowAggregateTest) (1191 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.mapUsingIMap_keyed[0: mode=member](com.hazelcast.jet.pipeline.StreamStageTest) (734 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapStateful_keyed_returningNull[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (585 ms)</li><li>com.hazelcast.jet.pipeline.StreamSourceTest.test_defaultIdle[1: mode=client](com.hazelcast.jet.pipeline.StreamSourceTest) (5582 ms)</li><li>com.hazelcast.jet.core.TopologyChangeTest.when_nonCoordinatorLeaves_AutoScalingOff_SnapshottingOn_then_jobSuspends[liteMemberFlags(0)](com.hazelcast.jet.core.TopologyChangeTest) (1075 ms)</li><li>com.hazelcast.jet.core.ObservableResultsTest.multipleJobsWithTheSameSink[1: mode=client](com.hazelcast.jet.core.ObservableResultsTest) (781 ms)</li><li>com.hazelcast.jet.pipeline.SourceBuilderTest.batch_fileSource_distributed[0: mode=member](com.hazelcast.jet.pipeline.SourceBuilderTest) (596 ms)</li><li>com.hazelcast.jet.pipeline.SourcesTest.mapWithFilterAndProjection_byName[1: mode=client](com.hazelcast.jet.pipeline.SourcesTest) (6249 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregate3_withAggrOp3_withOutputFn[1: mode=client](com.hazelcast.jet.pipeline.BatchAggregateTest) (626 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.mapWithEntryProcessor_byName[0: mode=member](com.hazelcast.jet.pipeline.SinksTest) (6072 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.customTransform[1: mode=client](com.hazelcast.jet.pipeline.StreamStageTest) (583 ms)</li><li>com.hazelcast.jet.pipeline.WindowAggregateTest.when_tumblingWinWithEarlyResults_then_emitRepeatedly[1: mode=client](com.hazelcast.jet.pipeline.WindowAggregateTest) (1165 ms)</li><li>com.hazelcast.jet.core.ObservableResultsTest.iterable[1: mode=client](com.hazelcast.jet.core.ObservableResultsTest) (564 ms)</li><li>com.hazelcast.jet.core.ObservableResultsTest.createAndDestroyObservableRepeatedly[1: mode=client](com.hazelcast.jet.core.ObservableResultsTest) (1748 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.groupAggregateBuilder_withComplexAggrOp[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest) (590 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapStateful_keyed_usedAsFilter[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (658 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.distinct_keyed[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (601 ms)</li><li>com.hazelcast.jet.core.TopologyChangeTest.when_jobParticipantReceivesStaleInitOperation_then_jobRestarts[liteMemberFlags(0)](com.hazelcast.jet.core.TopologyChangeTest) (3866 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.fusing_when_localParallelismDifferent_then_notFused[1: mode=client](com.hazelcast.jet.pipeline.StreamStageTest) (586 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.rollingAggregate[0: mode=member](com.hazelcast.jet.pipeline.StreamStageTest) (600 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.mapWithEntryProcessor_when_entryIsLocked_then_entryIsNotUpdated[1: mode=client](com.hazelcast.jet.pipeline.SinksTest) (6076 ms)</li><li>com.hazelcast.jet.pipeline.test.AssertionsTest.test_assertContains[1: mode=client](com.hazelcast.jet.pipeline.test.AssertionsTest) (580 ms)</li><li>com.hazelcast.jet.pipeline.test.AssertionsTest.test_assertOrdered_not_terminal_should_fail[0: mode=member](com.hazelcast.jet.pipeline.test.AssertionsTest) (580 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.filterUsingService[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (592 ms)</li><li>com.hazelcast.jet.core.MultigraphTest (2395 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.flatMapUsingService[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (600 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.reliableTopic_byRef[0: mode=member](com.hazelcast.jet.pipeline.SinksTest) (5725 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.groupAggregate3_withSeparateAggrOps[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest) (596 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_mergeRebalancedWithNonRebalanced_thenOnlyRebalancedEdgeDistributed[0: mode=member](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (671 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.remoteReliableTopic[1: mode=client](com.hazelcast.jet.pipeline.SinksTest) (6224 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapUsingIMap_when_functionThrows_then_jobFails[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (585 ms)</li><li>com.hazelcast.jet.core.SuspendExecutionOnFailureTest.when_jobSuspendedByUser_then_suspensionCauseSaysSo[1: mode=client](com.hazelcast.jet.core.SuspendExecutionOnFailureTest) (963 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.batchAddTimestampPreserveOrderTest[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (581 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.remoteMapWithUpdating_when_itemDataSerializable[0: mode=member](com.hazelcast.jet.pipeline.SinksTest) (6739 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapStateful_global_usedAsFilter[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (666 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_BatchTest.when_twoDifferentJobsForTheSamePipeline_then_haveDifferentMetrics[0: mode=member](com.hazelcast.jet.core.metrics.JobMetrics_BatchTest) (597 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.mapStateful_global[1: mode=client](com.hazelcast.jet.pipeline.StreamStageTest) (637 ms)</li><li>com.hazelcast.jet.pipeline.SourcesTest.mapWithFilterAndProjection_byRef[0: mode=member](com.hazelcast.jet.pipeline.SourcesTest) (5834 ms)</li><li>com.hazelcast.jet.pipeline.WindowAggregateTest.when_tumblingWinWithEarlyResults_then_emitRepeatedly[0: mode=member](com.hazelcast.jet.pipeline.WindowAggregateTest) (1155 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.list_byName[0: mode=member](com.hazelcast.jet.pipeline.SinksTest) (5588 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapUsingIMap_when_functionThrows_then_jobFails[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (589 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.customTransform_keyed[1: mode=client](com.hazelcast.jet.pipeline.StreamStageTest) (595 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_hashJoinRebalanceMainStage_then_distributedEdge[0: mode=member](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (646 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.filterStateful_global[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (670 ms)</li><li>com.hazelcast.jet.pipeline.test.TestSourcesTest.test_items[0: mode=member](com.hazelcast.jet.pipeline.test.TestSourcesTest) (629 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapStateful_keyed_usedAsFilter[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (589 ms)</li><li>com.hazelcast.jet.impl.JobSummaryTest (1489 ms)</li><li>com.hazelcast.jet.benchmark.BackpressureTest (57212 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.distinct_keyed[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (601 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapUsingServiceAsyncBatched_keyed_withFiltering[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (653 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.when_maxOfZeroItems_then_producesNoOutput[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest) (567 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.when_writeToMultipleStagesToSingleSink_then_allItemsInSink[0: mode=member](com.hazelcast.jet.pipeline.SinksTest) (5836 ms)</li><li>com.hazelcast.jet.core.ObservableResultsTest.batchJobCompletesSuccessfully[0: mode=member](com.hazelcast.jet.core.ObservableResultsTest) (614 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_rebalanceAndAggregate_then_unicastDistributedEdgeAndTwoStageAggregation[1: mode=client](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (588 ms)</li><li>com.hazelcast.jet.pipeline.test.AssertionsTest.test_assertAnyOrder_not_terminal_should_fail[1: mode=client](com.hazelcast.jet.pipeline.test.AssertionsTest) (580 ms)</li><li>com.hazelcast.jet.pipeline.SourcesTest.fromProcessor[1: mode=client](com.hazelcast.jet.pipeline.SourcesTest) (5767 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.mapUsingIMap_keyed[1: mode=client](com.hazelcast.jet.pipeline.StreamStageTest) (721 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.mapWithUpdating_withKeyFn_byRef[0: mode=member](com.hazelcast.jet.pipeline.SinksTest) (6264 ms)</li><li>com.hazelcast.jet.pipeline.SourceBuilderTest.batch_fileSource[1: mode=client](com.hazelcast.jet.pipeline.SourceBuilderTest) (590 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.groupAggregate[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest) (583 ms)</li><li>com.hazelcast.jet.impl.deployment.NonSmartClientTest (4842 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapUsingServiceAsync_keyed[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (1309 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.aggregate[1: mode=client](com.hazelcast.jet.pipeline.BatchAggregateTest) (587 ms)</li><li>com.hazelcast.jet.pipeline.SortBatchStageTest.sort_exceptionDuringComparing[1: mode=client](com.hazelcast.jet.pipeline.SortBatchStageTest) (589 ms)</li><li>com.hazelcast.jet.core.TopologyChangeTest.when_coordinatorLeaves_AutoScalingOff_SnapshottingOn_then_jobSuspends[liteMemberFlags(2)](com.hazelcast.jet.core.TopologyChangeTest) (1286 ms)</li><li>com.hazelcast.jet.pipeline.SinkBuilderTest.fileSink[0: mode=member](com.hazelcast.jet.pipeline.SinkBuilderTest) (573 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.fusing_mapToNull_trailing[1: mode=client](com.hazelcast.jet.pipeline.StreamStageTest) (641 ms)</li><li>com.hazelcast.jet.pipeline.SourceBuilderTest.test_nonFaultTolerantSource_processingGuaranteeNone[1: mode=client](com.hazelcast.jet.pipeline.SourceBuilderTest) (1178 ms)</li><li>com.hazelcast.jet.pipeline.SourcesTest.remoteMapWithFilterAndProjectionFn[1: mode=client](com.hazelcast.jet.pipeline.SourcesTest) (6193 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.hashJoin2[0: mode=member](com.hazelcast.jet.pipeline.StreamStageTest) (670 ms)</li><li>com.hazelcast.jet.pipeline.SourceBuilderTest.test_faultTolerance_restartTwice[1: mode=client](com.hazelcast.jet.pipeline.SourceBuilderTest) (1591 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.merge[1: mode=client](com.hazelcast.jet.pipeline.StreamStageTest) (605 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.filter[0: mode=member](com.hazelcast.jet.pipeline.StreamStageTest) (587 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.distinct[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (595 ms)</li><li>com.hazelcast.jet.pipeline.Sources_withEventJournalTest.remoteMapJournal_withPredicateAndProjectionFn[0: mode=member](com.hazelcast.jet.pipeline.Sources_withEventJournalTest) (6253 ms)</li><li>com.hazelcast.jet.pipeline.SourcesTest.map_withProjectionToNull_then_nullsSkipped[0: mode=member](com.hazelcast.jet.pipeline.SourcesTest) (5941 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.filter[1: mode=client](com.hazelcast.jet.pipeline.StreamStageTest) (620 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.hashJoin2[1: mode=client](com.hazelcast.jet.pipeline.StreamStageTest) (640 ms)</li><li>com.hazelcast.jet.core.GracefulShutdown_LiteMasterTest (4003 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.mapWithUpdating_when_functionReturnsNull_then_keyIsRemoved[0: mode=member](com.hazelcast.jet.pipeline.SinksTest) (6072 ms)</li><li>com.hazelcast.jet.pipeline.WindowAggregateTest.aggregate2_withAggrOp2[0: mode=member](com.hazelcast.jet.pipeline.WindowAggregateTest) (680 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_rebalanceAndGroupAggregate3_then_singleStageAggregation[0: mode=member](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (593 ms)</li><li>com.hazelcast.jet.pipeline.test.AssertionsTest.test_assertAnyOrder_distributedSource[0: mode=member](com.hazelcast.jet.pipeline.test.AssertionsTest) (699 ms)</li><li>com.hazelcast.jet.pipeline.SinkBuilderTest.fileSink[1: mode=client](com.hazelcast.jet.pipeline.SinkBuilderTest) (585 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapStateful_keyed[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (599 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.mapUsingReplicatedMap[1: mode=client](com.hazelcast.jet.pipeline.StreamStageTest) (700 ms)</li><li>com.hazelcast.jet.pipeline.WindowGroupAggregateTest.slidingWindow_withEarlyResults[1: mode=client](com.hazelcast.jet.pipeline.WindowGroupAggregateTest) (989 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.map_withToKeyValueFunctions[1: mode=client](com.hazelcast.jet.pipeline.SinksTest) (5912 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.filter[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (588 ms)</li><li>com.hazelcast.jet.core.GracefulShutdownTest (60521 ms)</li><li>com.hazelcast.jet.core.ObservableResultsTest.multipleObservables[0: mode=member](com.hazelcast.jet.core.ObservableResultsTest) (582 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.mapWithUpdating_when_entryIsLocked_then_entryIsUpdatedRegardlessTheLock[0: mode=member](com.hazelcast.jet.pipeline.SinksTest) (5959 ms)</li><li>com.hazelcast.jet.pipeline.SourcesTest.cache_byName[1: mode=client](com.hazelcast.jet.pipeline.SourcesTest) (5711 ms)</li><li>com.hazelcast.jet.pipeline.SortBatchStageTest.sort_withRepeatingItems[0: mode=member](com.hazelcast.jet.pipeline.SortBatchStageTest) (633 ms)</li><li>com.hazelcast.jet.core.TopologyChangeTest.when_coordinatorLeavesDuringExecution_then_clientStillGetsJobResult[liteMemberFlags(2)](com.hazelcast.jet.core.TopologyChangeTest) (3175 ms)</li><li>com.hazelcast.jet.pipeline.WindowAggregateTest.tumblingWindow_withEarlyResults[0: mode=member](com.hazelcast.jet.pipeline.WindowAggregateTest) (982 ms)</li><li>com.hazelcast.jet.pipeline.SourceBuilderTest.stream_socketSource_withTimestamps_andLateness[1: mode=client](com.hazelcast.jet.pipeline.SourceBuilderTest) (1003 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.fusing_flatMap_with_outputMap[1: mode=client](com.hazelcast.jet.pipeline.StreamStageTest) (592 ms)</li><li>com.hazelcast.jet.pipeline.WindowGroupAggregateTest.aggregate3_withAggrOp3[0: mode=member](com.hazelcast.jet.pipeline.WindowGroupAggregateTest) (686 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_MiscTest.when_jobMetricsDisabled_then_emptyMetrics[1: mode=client](com.hazelcast.jet.core.metrics.JobMetrics_MiscTest) (1177 ms)</li><li>com.hazelcast.jet.core.ObservableResultsTest.streamJob[0: mode=member](com.hazelcast.jet.core.ObservableResultsTest) (967 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.hashJoin2[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (671 ms)</li><li>com.hazelcast.jet.pipeline.WindowGroupAggregateTest.aggregate2_withSeparateAggrOps[0: mode=member](com.hazelcast.jet.pipeline.WindowGroupAggregateTest) (782 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_MiscTest.when_jobSuspended_andMetricsNotStored_then_onlyPeriodicMetricsReturned[1: mode=client](com.hazelcast.jet.core.metrics.JobMetrics_MiscTest) (2192 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.customTransform_keyed[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (581 ms)</li><li>com.hazelcast.jet.pipeline.test.AssertionsTest.test_assertAnyOrder_duplicate_entry[0: mode=member](com.hazelcast.jet.pipeline.test.AssertionsTest) (584 ms)</li><li>com.hazelcast.jet.pipeline.SourcesTest.remoteMap[0: mode=member](com.hazelcast.jet.pipeline.SourcesTest) (6310 ms)</li><li>com.hazelcast.jet.core.CancellationTest (16437 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapStateful_global_returningNull[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (579 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_rebalanceByKeyAndMap_then_dagEdgePartitionedDistributed[0: mode=member](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (614 ms)</li><li>com.hazelcast.jet.pipeline.test.AssertionsTest.test_assertContains_not_terminal[0: mode=member](com.hazelcast.jet.pipeline.test.AssertionsTest) (599 ms)</li><li>com.hazelcast.jet.core.ObservableResultsTest.multipleIdenticalSinks[1: mode=client](com.hazelcast.jet.core.ObservableResultsTest) (772 ms)</li><li>com.hazelcast.jet.pipeline.Sources_withEventJournalTest.mapJournal_byName[1: mode=client](com.hazelcast.jet.pipeline.Sources_withEventJournalTest) (8597 ms)</li><li>com.hazelcast.jet.pipeline.test.AssertionsTest.test_assertCollectedEventuallynot_terminal[1: mode=client](com.hazelcast.jet.pipeline.test.AssertionsTest) (600 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.hashJoin_when_outputFnReturnsNull_then_filteredOut[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (635 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.mapAsFilter[0: mode=member](com.hazelcast.jet.pipeline.StreamStageTest) (579 ms)</li><li>com.hazelcast.jet.pipeline.SourcesTest.remoteCacheWithUnknownValueClass[1: mode=client](com.hazelcast.jet.pipeline.SourcesTest) (5746 ms)</li><li>com.hazelcast.jet.pipeline.test.AssertionsTest.test_assertAnyOrder_duplicate_entry[1: mode=client](com.hazelcast.jet.pipeline.test.AssertionsTest) (584 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.fusing_flatMapComplex[1: mode=client](com.hazelcast.jet.pipeline.StreamStageTest) (598 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.mapUsingServiceAsync[1: mode=client](com.hazelcast.jet.pipeline.StreamStageTest) (1941 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_MiscTest.when_jobSuspended_andMetricsNotStored_then_onlyPeriodicMetricsReturned[0: mode=member](com.hazelcast.jet.core.metrics.JobMetrics_MiscTest) (2183 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapUsingService[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (588 ms)</li><li>com.hazelcast.jet.core.ObservableResultsTest.batchJobCompletesSuccessfully[1: mode=client](com.hazelcast.jet.core.ObservableResultsTest) (797 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.fusing_flatMap[1: mode=client](com.hazelcast.jet.pipeline.StreamStageTest) (619 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.fusing_flatMap_with_outputMap[0: mode=member](com.hazelcast.jet.pipeline.StreamStageTest) (615 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.mapStateful_withEvictFn[1: mode=client](com.hazelcast.jet.pipeline.StreamStageTest) (772 ms)</li><li>com.hazelcast.jet.pipeline.WindowAggregateTest.tumblingWindow_withEarlyResults[1: mode=client](com.hazelcast.jet.pipeline.WindowAggregateTest) (997 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.mapWithUpdating_when_itemDataSerializable_then_exceptionShouldNotThrown[1: mode=client](com.hazelcast.jet.pipeline.SinksTest) (6052 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.mapWithEntryProcessor_byRef[0: mode=member](com.hazelcast.jet.pipeline.SinksTest) (6250 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.remoteMapWithUpdating[1: mode=client](com.hazelcast.jet.pipeline.SinksTest) (6137 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.remoteMapWithMerging_when_functionReturnsNull_then_keyIsRemoved[1: mode=client](com.hazelcast.jet.pipeline.SinksTest) (6399 ms)</li><li>com.hazelcast.jet.pipeline.WindowGroupAggregateTest.distinct[1: mode=client](com.hazelcast.jet.pipeline.WindowGroupAggregateTest) (596 ms)</li><li>com.hazelcast.jet.pipeline.SourceBuilderTest.stream_socketSource_distributed[1: mode=client](com.hazelcast.jet.pipeline.SourceBuilderTest) (590 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.remoteCache[1: mode=client](com.hazelcast.jet.pipeline.SinksTest) (6364 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.map_withJsonKeyValue[0: mode=member](com.hazelcast.jet.pipeline.SinksTest) (5931 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.remoteMapWithEntryProcessor[0: mode=member](com.hazelcast.jet.pipeline.SinksTest) (5991 ms)</li><li>com.hazelcast.jet.core.SuspendExecutionOnFailureTest.when_jobSuspendedDueToFailure_then_suspensionCauseDescribeProblem[1: mode=client](com.hazelcast.jet.core.SuspendExecutionOnFailureTest) (769 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.remoteMapWithUpdating_when_functionReturnsNull_then_keyIsRemoved[0: mode=member](com.hazelcast.jet.pipeline.SinksTest) (6320 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_rebalanceAndGroupAggregate2_then_singleStageAggregation[0: mode=member](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (600 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_BatchTest.when_jobCompleted_then_metricsExist[0: mode=member](com.hazelcast.jet.core.metrics.JobMetrics_BatchTest) (594 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.mapUsingServiceAsyncBatched_withFiltering[0: mode=member](com.hazelcast.jet.pipeline.StreamStageTest) (1270 ms)</li><li>com.hazelcast.jet.pipeline.test.AssertionsTest.test_assertOrdered_should_fail[0: mode=member](com.hazelcast.jet.pipeline.test.AssertionsTest) (572 ms)</li><li>com.hazelcast.jet.pipeline.WindowGroupAggregateTest.aggregateBuilder_withSeparateAggrOps[0: mode=member](com.hazelcast.jet.pipeline.WindowGroupAggregateTest) (685 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.mapWithMerging2_byRef[0: mode=member](com.hazelcast.jet.pipeline.SinksTest) (6364 ms)</li><li>com.hazelcast.jet.pipeline.SourcesTest.mapWithFilterAndProjectionFn_byName[1: mode=client](com.hazelcast.jet.pipeline.SourcesTest) (5562 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_hashJoinRebalanceEnrichingStage_then_noEffect[0: mode=member](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (637 ms)</li><li>com.hazelcast.jet.pipeline.StreamSourceTest.test_shortIdle[0: mode=member](com.hazelcast.jet.pipeline.StreamSourceTest) (1190 ms)</li><li>com.hazelcast.jet.core.HzSerializableProcessorSuppliersTest (646 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapUsingIMap[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (761 ms)</li><li>com.hazelcast.jet.pipeline.WindowAggregateTest.aggregateBuilder_withSeparateAggrOps[0: mode=member](com.hazelcast.jet.pipeline.WindowAggregateTest) (674 ms)</li><li>com.hazelcast.jet.core.ObservableResultsTest.removedObserverDoesNotGetFurtherEvents[0: mode=member](com.hazelcast.jet.core.ObservableResultsTest) (2753 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.groupAggregate3_withSeparateAggrOps[1: mode=client](com.hazelcast.jet.pipeline.BatchAggregateTest) (601 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.flatMapUsingService[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (603 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.rollingAggregate_keyed[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (595 ms)</li><li>com.hazelcast.jet.core.TopologyChangeTest.when_jobParticipantReceivesStaleInitOperation_then_jobRestarts[liteMemberFlags(1)](com.hazelcast.jet.core.TopologyChangeTest) (3859 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.map_withToKeyValueFunctions[0: mode=member](com.hazelcast.jet.pipeline.SinksTest) (5584 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.mapStateful_keyed_returningNull[0: mode=member](com.hazelcast.jet.pipeline.StreamStageTest) (654 ms)</li><li>com.hazelcast.jet.core.ObservableResultsTest.multipleIdenticalSinks[0: mode=member](com.hazelcast.jet.core.ObservableResultsTest) (778 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.merge[0: mode=member](com.hazelcast.jet.pipeline.StreamStageTest) (592 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.list_byName[1: mode=client](com.hazelcast.jet.pipeline.SinksTest) (5753 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_StreamTest.when_suspendAndResume_then_metricsReset[1: mode=client](com.hazelcast.jet.core.metrics.JobMetrics_StreamTest) (8434 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.noop[0: mode=member](com.hazelcast.jet.pipeline.SinksTest) (6233 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapUsingServiceAsyncBatched_keyed_keysExposed[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (949 ms)</li><li>com.hazelcast.jet.impl.util.ImdgUtilTest (1105 ms)</li><li>com.hazelcast.jet.core.TopologyChangeTest.when_nonCoordinatorLeavesDuringExecution_then_clientStillGetsJobResult[liteMemberFlags(2)](com.hazelcast.jet.core.TopologyChangeTest) (3123 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.peekWithToStringFunctionIsTransparent[0: mode=member](com.hazelcast.jet.pipeline.StreamStageTest) (595 ms)</li><li>com.hazelcast.jet.pipeline.SourcesTest.list_byRef[0: mode=member](com.hazelcast.jet.pipeline.SourcesTest) (5827 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_BatchTest.when_memberAddedAfterJobFinished_then_metricsNotAffected[0: mode=member](com.hazelcast.jet.core.metrics.JobMetrics_BatchTest) (1127 ms)</li><li>com.hazelcast.jet.pipeline.SourcesTest.remoteCache[0: mode=member](com.hazelcast.jet.pipeline.SourcesTest) (5943 ms)</li><li>com.hazelcast.jet.pipeline.Sources_withEventJournalTest.remoteMapJournal_withUnknownValueClass[1: mode=client](com.hazelcast.jet.pipeline.Sources_withEventJournalTest) (5607 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_BatchTest.when_memberRemovedAfterJobFinished_then_metricsNotAffected[0: mode=member](com.hazelcast.jet.core.metrics.JobMetrics_BatchTest) (1292 ms)</li><li>com.hazelcast.jet.pipeline.WindowAggregateTest.slidingWindow[1: mode=client](com.hazelcast.jet.pipeline.WindowAggregateTest) (741 ms)</li><li>com.hazelcast.jet.pipeline.SourceBuilderTest.stream_socketSource[1: mode=client](com.hazelcast.jet.pipeline.SourceBuilderTest) (627 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapUsingServiceAsyncBatched_keyed_keysHidden[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (966 ms)</li><li>com.hazelcast.jet.core.JobTest (4812 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.groupAggregate2_withAggrOp2[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest) (602 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.mapStateful_keyed[1: mode=client](com.hazelcast.jet.pipeline.StreamStageTest) (902 ms)</li><li>com.hazelcast.jet.core.TopologyChangeTest.when_nodeIsShuttingDownDuringInit_then_jobRestarts[liteMemberFlags(1)](com.hazelcast.jet.core.TopologyChangeTest) (9238 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.filterStateful_keyed[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (617 ms)</li><li>com.hazelcast.jet.core.JobRestartWithSnapshotTest (61362 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.hashJoin2[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (676 ms)</li><li>com.hazelcast.jet.pipeline.WindowAggregateTest.aggregate2_withAggrOp2[1: mode=client](com.hazelcast.jet.pipeline.WindowAggregateTest) (682 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.mapStateful_global_returningNull[0: mode=member](com.hazelcast.jet.pipeline.StreamStageTest) (665 ms)</li><li>com.hazelcast.jet.pipeline.SourcesTest.remoteMapWithUnknownValueClass_whenQueryingIsNotNecessary[0: mode=member](com.hazelcast.jet.pipeline.SourcesTest) (5837 ms)</li><li>com.hazelcast.jet.pipeline.SourceBuilderTest.stream_socketSource_distributed[0: mode=member](com.hazelcast.jet.pipeline.SourceBuilderTest) (627 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.merge[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (592 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_rebalanceByKeyAndAggregate_then_distributedPartitionedEdgeAndTwoStageAggregation[1: mode=client](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (587 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.groupAggregate2_withAggrOp2[1: mode=client](com.hazelcast.jet.pipeline.BatchAggregateTest) (613 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_MiscTest.when_metricsForJobDisabled_then_emptyMetrics[1: mode=client](com.hazelcast.jet.core.metrics.JobMetrics_MiscTest) (2580 ms)</li><li>com.hazelcast.jet.core.TopologyChangeDuringJobSubmissionTest (3197 ms)</li><li>com.hazelcast.jet.pipeline.WindowAggregateTest.aggregate2_withSeparateAggrOps[0: mode=member](com.hazelcast.jet.pipeline.WindowAggregateTest) (675 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.when_rollingAggregateWithTimestamps_then_timestampsPropagated[1: mode=client](com.hazelcast.jet.pipeline.StreamStageTest) (916 ms)</li><li>com.hazelcast.jet.pipeline.WindowGroupAggregateTest.aggregate3_withSeparateAggrOps[1: mode=client](com.hazelcast.jet.pipeline.WindowGroupAggregateTest) (700 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.fusing_mapToNull_inside[1: mode=client](com.hazelcast.jet.pipeline.StreamStageTest) (592 ms)</li><li>com.hazelcast.jet.core.ObservableResultsTest.multipleJobExecutions[0: mode=member](com.hazelcast.jet.core.ObservableResultsTest) (791 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.peekIsTransparent[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (594 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.remoteList[0: mode=member](com.hazelcast.jet.pipeline.SinksTest) (5850 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_rebalanceAndAggregate_then_unicastDistributedEdgeAndTwoStageAggregation[0: mode=member](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (599 ms)</li><li>com.hazelcast.jet.core.ObservableResultsTest.destroyedObservableDoesNotGetFurtherEvents[1: mode=client](com.hazelcast.jet.core.ObservableResultsTest) (2785 ms)</li><li>com.hazelcast.jet.pipeline.WindowGroupAggregateTest.aggregate3_withAggrOp3[1: mode=client](com.hazelcast.jet.pipeline.WindowGroupAggregateTest) (683 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.mapUsingService[0: mode=member](com.hazelcast.jet.pipeline.StreamStageTest) (601 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.remoteList[1: mode=client](com.hazelcast.jet.pipeline.SinksTest) (5995 ms)</li><li>com.hazelcast.jet.pipeline.SourcesTest.map_withProjectionToNull_then_nullsSkipped[1: mode=client](com.hazelcast.jet.pipeline.SourcesTest) (6357 ms)</li><li>com.hazelcast.jet.pipeline.test.AssertionsTest.test_assertCollected_should_fail[1: mode=client](com.hazelcast.jet.pipeline.test.AssertionsTest) (585 ms)</li><li>com.hazelcast.jet.core.ObservableResultsTest.sinkConsumesThrowables[0: mode=member](com.hazelcast.jet.core.ObservableResultsTest) (575 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.peekIsTransparent[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (592 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.filterUsingService_keyed[0: mode=member](com.hazelcast.jet.pipeline.StreamStageTest) (590 ms)</li><li>com.hazelcast.jet.pipeline.SourcesTest.list_byRef[1: mode=client](com.hazelcast.jet.pipeline.SourcesTest) (5837 ms)</li><li>com.hazelcast.jet.core.ObservableResultsTest.observersGetAllEventsStillInRingbuffer[0: mode=member](com.hazelcast.jet.core.ObservableResultsTest) (969 ms)</li><li>com.hazelcast.jet.pipeline.test.AssertionsTest.test_assertAnyOrder_duplicate_entry_only_in_assert_should_fail[0: mode=member](com.hazelcast.jet.pipeline.test.AssertionsTest) (598 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.fusing_mapToNull_leading[0: mode=member](com.hazelcast.jet.pipeline.StreamStageTest) (594 ms)</li><li>com.hazelcast.jet.pipeline.Sources_withEventJournalTest.remoteMapJournal[1: mode=client](com.hazelcast.jet.pipeline.Sources_withEventJournalTest) (9063 ms)</li><li>com.hazelcast.jet.core.TopologyChangeTest.when_addAndRemoveNodeDuringExecution_then_completeSuccessfully[liteMemberFlags(1)](com.hazelcast.jet.core.TopologyChangeTest) (1757 ms)</li><li>com.hazelcast.jet.pipeline.SinkBuilderTest.socketSink[0: mode=member](com.hazelcast.jet.pipeline.SinkBuilderTest) (578 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_mergeWithRebalanced_thenOnlyRebalancedEdgeDistributed[1: mode=client](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (648 ms)</li><li>com.hazelcast.jet.impl.connector.JmsSourceIntegration_NonSharedClusterTest (14420 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.peek_when_addedTimestamp_then_unwrapsJetEvent[1: mode=client](com.hazelcast.jet.pipeline.StreamStageTest) (629 ms)</li><li>com.hazelcast.jet.pipeline.SourceBuilderTest.test_nonFaultTolerantSource_processingGuaranteeOn[0: mode=member](com.hazelcast.jet.pipeline.SourceBuilderTest) (1411 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.mapUsingServiceAsyncBatched_keyed_withFiltering[1: mode=client](com.hazelcast.jet.pipeline.StreamStageTest) (656 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.apply[0: mode=member](com.hazelcast.jet.pipeline.StreamStageTest) (603 ms)</li><li>com.hazelcast.jet.pipeline.test.TestSourcesTest.test_items[1: mode=client](com.hazelcast.jet.pipeline.test.TestSourcesTest) (662 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.mapWithMerging_when_entryIsLocked_then_entryIsUpdatedRegardlessTheLock[0: mode=member](com.hazelcast.jet.pipeline.SinksTest) (5876 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.rollingAggregate_keyed[1: mode=client](com.hazelcast.jet.pipeline.StreamStageTest) (911 ms)</li><li>com.hazelcast.jet.impl.deployment.DeploymentTest (1331 ms)</li><li>com.hazelcast.jet.pipeline.test.TestSourcesTest.test_itemStream_withWindowing[1: mode=client](com.hazelcast.jet.pipeline.test.TestSourcesTest) (2091 ms)</li><li>com.hazelcast.jet.core.TopologyChangeTest.when_nodeIsShuttingDownAfterInit_then_jobRestarts[liteMemberFlags(0)](com.hazelcast.jet.core.TopologyChangeTest) (3475 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.flatMapStateful_global[0: mode=member](com.hazelcast.jet.pipeline.StreamStageTest) (654 ms)</li><li>com.hazelcast.jet.pipeline.SourcesTest.remoteMap[1: mode=client](com.hazelcast.jet.pipeline.SourcesTest) (6308 ms)</li><li>com.hazelcast.jet.pipeline.test.TestSourcesTest.test_itemStream[0: mode=member](com.hazelcast.jet.pipeline.test.TestSourcesTest) (2590 ms)</li><li>com.hazelcast.jet.pipeline.WindowGroupAggregateTest.slidingWindow_cascadingAggregations[1: mode=client](com.hazelcast.jet.pipeline.WindowGroupAggregateTest) (595 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.mapUsingIMap[1: mode=client](com.hazelcast.jet.pipeline.StreamStageTest) (746 ms)</li><li>com.hazelcast.jet.pipeline.Sources_withEventJournalTest.remoteCacheJournal_withUnknownValueClass[1: mode=client](com.hazelcast.jet.pipeline.Sources_withEventJournalTest) (5989 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_rebalanceAndMap_then_dagEdgeDistributed[1: mode=client](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (619 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.mapUsingServiceAsyncBatched[0: mode=member](com.hazelcast.jet.pipeline.StreamStageTest) (1269 ms)</li><li>com.hazelcast.jet.core.ExecutionLifecycleTest (13813 ms)</li><li>com.hazelcast.jet.pipeline.WindowAggregateTest.sessionWindow_withEarlyResults[0: mode=member](com.hazelcast.jet.pipeline.WindowAggregateTest) (987 ms)</li><li>com.hazelcast.jet.pipeline.RebalanceBatchStageTest.when_aggregate3WithRebalancedStage_then_twoStageAggregation[0: mode=member](com.hazelcast.jet.pipeline.RebalanceBatchStageTest) (601 ms)</li><li>com.hazelcast.jet.core.ObservableResultsTest.sinkConsumesThrowables[1: mode=client](com.hazelcast.jet.core.ObservableResultsTest) (577 ms)</li><li>com.hazelcast.jet.core.ObservableShutdownTest (7375 ms)</li><li>com.hazelcast.jet.core.ObservableResultsTest.destroyedObservableDoesNotGetFurtherEvents[0: mode=member](com.hazelcast.jet.core.ObservableResultsTest) (2776 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.map_byName[1: mode=client](com.hazelcast.jet.pipeline.SinksTest) (6071 ms)</li><li>com.hazelcast.jet.core.TopologyChangeTest.when_addAndRemoveNodeDuringExecution_then_completeSuccessfully[liteMemberFlags(0)](com.hazelcast.jet.core.TopologyChangeTest) (1763 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapStateful_global_returningNull[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (585 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_MiscTest.when_jobFailed_then_MetricsReturned[0: mode=member](com.hazelcast.jet.core.metrics.JobMetrics_MiscTest) (582 ms)</li><li>com.hazelcast.jet.pipeline.Sources_withEventJournalTest.mapJournalByRef_withProjectionToNull_then_nullsSkipped[1: mode=client](com.hazelcast.jet.pipeline.Sources_withEventJournalTest) (6339 ms)</li><li>com.hazelcast.jet.pipeline.Sources_withEventJournalTest.remoteCacheJournal[1: mode=client](com.hazelcast.jet.pipeline.Sources_withEventJournalTest) (8576 ms)</li><li>com.hazelcast.jet.pipeline.test.AssertionsTest.test_assertOrdered_not_terminal_should_fail[1: mode=client](com.hazelcast.jet.pipeline.test.AssertionsTest) (598 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.remoteMapWithMerging[0: mode=member](com.hazelcast.jet.pipeline.SinksTest) (6337 ms)</li><li>com.hazelcast.jet.pipeline.SourceBuilderTest.stream_socketSource_withTimestamps[0: mode=member](com.hazelcast.jet.pipeline.SourceBuilderTest) (901 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.remoteMapWithUpdating_when_itemDataSerializable[1: mode=client](com.hazelcast.jet.pipeline.SinksTest) (6226 ms)</li><li>com.hazelcast.jet.pipeline.WindowGroupAggregateTest.aggregate2_withAggrOp2[1: mode=client](com.hazelcast.jet.pipeline.WindowGroupAggregateTest) (730 ms)</li><li>com.hazelcast.jet.core.ObservableResultsTest.errorInOneJobIsNotTerminalForOthers[0: mode=member](com.hazelcast.jet.core.ObservableResultsTest) (1182 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.mapWithUpdating_when_itemDataSerializable_then_exceptionShouldNotThrown[0: mode=member](com.hazelcast.jet.pipeline.SinksTest) (6123 ms)</li><li>com.hazelcast.jet.pipeline.test.AssertionsTest.test_assertOrdered[1: mode=client](com.hazelcast.jet.pipeline.test.AssertionsTest) (578 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.filterStateful_keyed[1: mode=client](com.hazelcast.jet.pipeline.BatchStageTest) (589 ms)</li><li>com.hazelcast.jet.pipeline.test.AssertionsTest.test_assertCollected_not_terminal_should_fail[1: mode=client](com.hazelcast.jet.pipeline.test.AssertionsTest) (618 ms)</li><li>com.hazelcast.jet.pipeline.Sources_withEventJournalTest.mapJournal_byRef[0: mode=member](com.hazelcast.jet.pipeline.Sources_withEventJournalTest) (8933 ms)</li><li>com.hazelcast.jet.pipeline.BatchStageTest.mapUsingServiceAsyncBatched_withFiltering[0: mode=member](com.hazelcast.jet.pipeline.BatchStageTest) (1263 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.when_aggregateZeroItems_then_producesOutput[1: mode=client](com.hazelcast.jet.pipeline.BatchAggregateTest) (583 ms)</li><li>com.hazelcast.jet.pipeline.SourcesTest.fromProcessor[0: mode=member](com.hazelcast.jet.pipeline.SourcesTest) (6092 ms)</li><li>com.hazelcast.jet.pipeline.SourcesTest.remoteCache[1: mode=client](com.hazelcast.jet.pipeline.SourcesTest) (6121 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.noop[1: mode=client](com.hazelcast.jet.pipeline.SinksTest) (5762 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.mapUsingService_keyed[1: mode=client](com.hazelcast.jet.pipeline.StreamStageTest) (642 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.fusing_flatMap_with_inputMap[0: mode=member](com.hazelcast.jet.pipeline.StreamStageTest) (614 ms)</li><li>com.hazelcast.jet.pipeline.Sources_withEventJournalTest.cacheJournal_byName[0: mode=member](com.hazelcast.jet.pipeline.Sources_withEventJournalTest) (8740 ms)</li><li>com.hazelcast.jet.pipeline.StreamSourceTest.test_defaultIdle[0: mode=member](com.hazelcast.jet.pipeline.StreamSourceTest) (5597 ms)</li><li>com.hazelcast.jet.pipeline.WindowAggregateTest.aggregate3_withAggrOp3[0: mode=member](com.hazelcast.jet.pipeline.WindowAggregateTest) (672 ms)</li><li>com.hazelcast.jet.pipeline.WindowAggregateTest.slidingWindow_withEarlyResults[1: mode=client](com.hazelcast.jet.pipeline.WindowAggregateTest) (982 ms)</li><li>com.hazelcast.jet.impl.connector.WriteSocketTest (1783 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_MiscTest.when_jobNotYetRunning_then_emptyMetrics[1: mode=client](com.hazelcast.jet.core.metrics.JobMetrics_MiscTest) (3177 ms)</li><li>com.hazelcast.jet.pipeline.SinksTest.mapWithMerging_when_functionReturnsNull_then_keyIsRemoved[0: mode=member](com.hazelcast.jet.pipeline.SinksTest) (5914 ms)</li><li>com.hazelcast.jet.pipeline.BatchAggregateTest.when_aggregateZeroItems_then_producesOutput[0: mode=member](com.hazelcast.jet.pipeline.BatchAggregateTest) (584 ms)</li><li>com.hazelcast.jet.core.TopologyChangeTest.when_nodeIsShuttingDownAfterInit_then_jobRestarts[liteMemberFlags(1)](com.hazelcast.jet.core.TopologyChangeTest) (3433 ms)</li><li>com.hazelcast.jet.pipeline.test.AssertionsTest.test_assertCollectedEventually[1: mode=client](com.hazelcast.jet.pipeline.test.AssertionsTest) (610 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.fusing_map[1: mode=client](com.hazelcast.jet.pipeline.StreamStageTest) (640 ms)</li><li>com.hazelcast.jet.core.metrics.JobMetrics_MiscTest.when_jobRunning_then_nonEmptyMetrics[1: mode=client](com.hazelcast.jet.core.metrics.JobMetrics_MiscTest) (1183 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.flatMapUsingService[1: mode=client](com.hazelcast.jet.pipeline.StreamStageTest) (606 ms)</li><li>com.hazelcast.jet.pipeline.SourceBuilderTest.stream_socketSource_withTimestamps[1: mode=client](com.hazelcast.jet.pipeline.SourceBuilderTest) (895 ms)</li><li>com.hazelcast.jet.core.ClusterStateChangeTest (5463 ms)</li><li>com.hazelcast.jet.pipeline.test.AssertionsTest.test_assertCollectedEventually_should_fail[1: mode=client](com.hazelcast.jet.pipeline.test.AssertionsTest) (5597 ms)</li><li>com.hazelcast.jet.pipeline.StreamStageTest.innerHashJoin[0: mode=member](com.hazelcast.jet.pipeline.StreamStageTest) (594 ms)</li><li>com.hazelcast.jet.core.ObservableResultsTest.errorInOneJobIsNotTerminalForOthers[1: mode=client](com.hazelcast.jet.core.ObservableResultsTest) (1202 ms)</li>
+</ul>
+
+<br/>
+
+Report generated by <a href='http://pitest.org'>PIT</a> 1.5.2
+
+</body>
+</html>
