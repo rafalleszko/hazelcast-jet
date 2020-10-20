@@ -843,6 +843,7 @@
                                 <excludedTestClass>com.hazelcast.jet.impl.execution.WatermarkCoalescerTest</excludedTestClass>
                                 <excludedTestClass>com.hazelcast.jet.impl.processor.SessionWindowP_failoverTest</excludedTestClass>
                                 <excludedTestClass>com.hazelcast.jet.impl.processor.SlidingWindowP_failoverTest</excludedTestClass>
+                                <excludedTestClass>com.hazelcast.jet.core.SplitBrainTest</excludedTestClass>
                             </excludedTestClasses>
                         </configuration>
                     </plugin>
